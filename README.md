@@ -6,7 +6,6 @@
 
 * Arthur Alexi Moreira Menzes
 * Arthur Rodrigues Lanza Avelar
-* Fabrício Frade Sousa
 * Marcos Felipe Batista Muniz
 * Yghor Ribas Gomes
 
