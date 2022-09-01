@@ -5,7 +5,7 @@
 ## Alunos integrantes da equipe
 
 * Arthur Alexi Moreira Menzes
-* Arthur Rodrigues Lanza Avelar
+* Arthur Rodrigues Lanza Avela
 * Marcos Felipe Batista Muniz
 * Yghor Ribas Gomes
 
