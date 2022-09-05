@@ -1,0 +1,35 @@
+<form action="" id="form_login" class="form mt-4 p-4" #loginForm>
+
+
+  <div class="form-group">
+
+
+    <label>
+      <p> Usuário </p>
+    </label>
+    <input type="email" class="form-control" name="usuario" required [(ngModel)]="usuario" #campoUsuario="ngModel"
+      placeholder="Informe o seu  email">
+
+    <label for="" class="mt-2">
+      <p> Senha </p>
+    </label>
+    <input type="password" class="form-control" name="senha" [(ngModel)]="senha" #campoSenha="ngModel"
+      placeholder="Informe a sua senha">
+
+    <label for="origem" class="mt-2">
+      <p>Origem</p>
+    </label>
+    <select name="origem" class="form-control" id="">
+      <option value="aluno">Aluno</option>
+      <option value="administrador">Administrador</option>
+      <option value="nutricionista">Nutricionista</option>
+    </select>
+
+    <div class="mt-4 offset-5">
+      <button type="button" class="btn btn-warning"> Logar </button>
+    </div>
+
+  </div>
+
+
+</form>

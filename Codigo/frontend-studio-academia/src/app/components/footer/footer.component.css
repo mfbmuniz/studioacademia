@@ -19,12 +19,9 @@ footer {
 p{
   font-family: Arial, Helvetica, sans-serif;
   font-size: 80%;
-  margin-top: 7px;
 }
 
 a{
   color: black;
-  font-size: 80%;
-  margin-top: 10px;
-  padding: 5px;
+  font-size: 100%;
 }
