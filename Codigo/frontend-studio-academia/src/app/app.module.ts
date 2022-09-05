@@ -9,6 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './pages/login/login.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,13 +18,14 @@ import { LoginComponent } from './pages/login/login.component';
     HeaderComponent,
     HomepageComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
