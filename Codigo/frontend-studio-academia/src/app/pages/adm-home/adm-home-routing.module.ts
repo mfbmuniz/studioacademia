@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdmHomeComponent } from './adm-home.component';
+import { CadastroAlunoComponent } from './cadastro-aluno/cadastro-aluno.component';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 
 const routes: Routes = [
@@ -9,9 +10,19 @@ const routes: Routes = [
     component: AdmHomeComponent,
     children:[
       {
-        path: 'CadastrarUsuario',
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'adm/cadastrarUsuario'
+      },
+      {
+        path: 'cadastrarUsuario',
         component: CadastroUsuarioComponent
-      }
+      },
+      {
+        path: 'cadastrarAluno',
+        component: CadastroAlunoComponent
+      },
+
     ]
   },
 ];

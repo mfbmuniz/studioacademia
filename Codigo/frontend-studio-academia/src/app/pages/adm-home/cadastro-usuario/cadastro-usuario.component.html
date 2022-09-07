@@ -1,1 +1,54 @@
-<h2>Cadastro de Usuário</h2>
+<div class="formulario">
+
+
+<div class="row">
+
+  <div class="col-3 offset-5">
+    <h1>Cadastro de Usuário</h1>
+  </div>
+
+</div>
+
+<form action="" class="mt-4" [formGroup]="novoUsuarioForm" (ngSubmit)="cadastrar()">
+  <div class="row">
+
+    <div class="col-sm-4 form-group offset-1 mt-1">
+      <label for="email"><p>E-mail</p></label>
+      <input type="email" class="form-control" formControlName="email" placeholder="Informe o E-mail">
+    </div>
+
+    <div class="col-4 form-group mt-1" >
+      <label for="senha"><p>Senha</p></label>
+      <input type="password" class="form-control" formControlName="senha" placeholder="Informe a senha">
+    </div>
+
+    <div class="col-2 mt-1">
+      <label for=""><p>Origem</p></label>
+      <select name="" id="" class="form-control" formControlName="origem">
+        <option value="professor">Professor</option>
+        <option value="nutricionista">Nutricionista</option>
+      </select>
+    </div>
+
+    <div class="col-4 form-group offset-1 mt-1">
+      <label for="nome"><p>Nome</p></label>
+      <input type="text" class="form-control" formControlName="nome" placeholder="Informe o nome completo" >
+    </div>
+
+    <div class="col-3 form-group mt-1" >
+      <label for="cpf"><p>CPF</p></label>
+      <input type="text" class="form-control" formControlName="cpf" placeholder="Informe o CPF">
+    </div>
+
+    <div class="col-3 form-group mt-1" >
+      <label for="tel"><p>Telefone</p></label>
+      <input type="tel" class="form-control" formControlName="telefone" placeholder="Informe o teledone de contato">
+    </div>
+
+    <div class="col-4 offset-10">
+      <br>
+      <button type="submit" class="btn btn-warning mt-2">Cadastrar</button>
+    </div>
+  </div>
+</form>
+</div>

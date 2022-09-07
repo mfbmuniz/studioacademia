@@ -5,13 +5,15 @@ import { AdmHomeRoutingModule } from './adm-home-routing.module';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdmHomeComponent } from './adm-home.component';
+import { CadastroAlunoComponent } from './cadastro-aluno/cadastro-aluno.component';
 
 
 
 @NgModule({
   declarations: [
     AdmHomeComponent,
-    CadastroUsuarioComponent
+    CadastroUsuarioComponent,
+    CadastroAlunoComponent
   ],
   imports: [
     CommonModule,
