@@ -1,1 +1,82 @@
-<p>cadastro-aluno works!</p>
+<div class="formulario">
+
+
+  <div class="row">
+
+    <div class="col-3 offset-5">
+      <h1>Cadastro de Aluno</h1>
+    </div>
+
+  </div>
+
+  <form action="" class="mt-4" [formGroup]="novoAlunoForm" (ngSubmit)="cadastrar()">
+    <div class="row">
+
+      <div class="col-sm-4 form-group offset-1 mt-1">
+        <label for="email"><p>E-mail</p></label>
+        <input type="email" class="form-control" formControlName="email" placeholder="Informe o E-mail">
+      </div>
+
+      <div class="col-4 form-group mt-1" >
+        <label for="senha"><p>Senha</p></label>
+        <input type="password" class="form-control" formControlName="senha" placeholder="Informe a senha">
+      </div>
+
+      <div class="col-2 mt-1">
+        <label for="dataNascimento"><p>Data de Nascimento</p></label>
+        <input type="date" name=""  class="form-control" formControlName="dataNascimento">
+      </div>
+
+      <div class="col-4 form-group offset-1 mt-1">
+        <label for="nome"><p>Nome</p></label>
+        <input type="text" class="form-control" formControlName="nome" placeholder="Informe o nome completo" >
+      </div>
+
+      <div class="col-3 form-group mt-1" >
+        <label for="cpf"><p>CPF</p></label>
+        <input type="text" class="form-control" formControlName="cpf" placeholder="Informe o CPF">
+      </div>
+
+      <div class="col-3 form-group mt-1" >
+        <label for="tel"><p>Telefone</p></label>
+        <input type="tel" class="form-control" formControlName="telefone" placeholder="Informe o teledone de contato">
+      </div>
+
+      <div class="col-sm-2 form-group offset-1 mt-1">
+        <label for="cep"><p>CEP</p></label>
+        <input type="tel" class="form-control" formControlName="cep" placeholder="Informe o CEP">
+      </div>
+
+      <div class="col-4 form-group mt-1" >
+        <label for="logradouro"><p>Logradouro</p></label>
+        <input type="text" class="form-control" formControlName="logradouro" placeholder="Informe a rua">
+      </div>
+
+      <div class="col-1 mt-1">
+        <label for="Numero"><p>Nº</p></label>
+        <input type="text" name=""  class="form-control" formControlName="numero">
+      </div>
+
+      <div class="col-2 mt-1">
+        <label for="complemento"><p>Complemento</p></label>
+        <input type="text" name=""  class="form-control" formControlName="complemento">
+      </div>
+
+      <div class="col-4 mt-1 offset-1">
+        <label for="estado"><p>Estado</p></label>
+        <input type="text" name=""  class="form-control" formControlName="estado">
+      </div>
+
+      <div class="col-4 mt-1">
+        <label for="cidade"><p>Cidade</p></label>
+        <input type="text" name=""  class="form-control" formControlName="cidade">
+      </div>
+
+      <div class="col-4 offset-10">
+        <br>
+        <button type="submit" class="btn btn-warning mt-2">Cadastrar</button>
+      </div>
+    </div>
+  </form>
+  </div>
+
