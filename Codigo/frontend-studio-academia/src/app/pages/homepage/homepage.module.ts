@@ -7,6 +7,7 @@ import { HomepageComponent } from './homepage.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { CarrosselComponent } from './carrossel/carrossel.component';
+import { MensagemModule } from 'src/app/components/mensagem/mensagem.module';
 
 
 
@@ -16,6 +17,7 @@ import { CarrosselComponent } from './carrossel/carrossel.component';
     CommonModule,
     HomepageRoutingModule,
     FormsModule,
+    MensagemModule
   ],
   exports : [HomepageComponent]
 })
