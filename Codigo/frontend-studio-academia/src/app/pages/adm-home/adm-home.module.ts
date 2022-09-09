@@ -6,6 +6,7 @@ import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdmHomeComponent } from './adm-home.component';
 import { CadastroAlunoComponent } from './cadastro-aluno/cadastro-aluno.component';
+import { AdmSidebarComponent } from './adm-sidebar/adm-sidebar.component';
 
 
 
@@ -13,7 +14,8 @@ import { CadastroAlunoComponent } from './cadastro-aluno/cadastro-aluno.componen
   declarations: [
     AdmHomeComponent,
     CadastroUsuarioComponent,
-    CadastroAlunoComponent
+    CadastroAlunoComponent,
+    AdmSidebarComponent
   ],
   imports: [
     CommonModule,
