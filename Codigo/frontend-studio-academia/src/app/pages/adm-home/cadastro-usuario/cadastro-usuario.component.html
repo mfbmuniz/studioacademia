@@ -1,54 +1,116 @@
 <div class="formulario">
 
 
-<div class="row">
-
-  <div class="col-3 offset-5">
-    <h1>Cadastro de Usuário</h1>
-  </div>
-
-</div>
-
-<form action="" class="mt-4" [formGroup]="novoUsuarioForm" (ngSubmit)="cadastrar()">
   <div class="row">
 
-    <div class="col-sm-4 form-group offset-1 mt-1">
-      <label for="email"><p>E-mail</p></label>
-      <input type="email" class="form-control" formControlName="email" placeholder="Informe o E-mail">
+    <div class="col-3 offset-5">
+      <h1>Cadastro de Usuário</h1>
     </div>
 
-    <div class="col-4 form-group mt-1" >
-      <label for="senha"><p>Senha</p></label>
-      <input type="password" class="form-control" formControlName="senha" placeholder="Informe a senha">
-    </div>
-
-    <div class="col-2 mt-1">
-      <label for=""><p>Origem</p></label>
-      <select name="" id="" class="form-control" formControlName="origem">
-        <option value="professor">Professor</option>
-        <option value="nutricionista">Nutricionista</option>
-      </select>
-    </div>
-
-    <div class="col-4 form-group offset-1 mt-1">
-      <label for="nome"><p>Nome</p></label>
-      <input type="text" class="form-control" formControlName="nome" placeholder="Informe o nome completo" >
-    </div>
-
-    <div class="col-3 form-group mt-1" >
-      <label for="cpf"><p>CPF</p></label>
-      <input type="text" class="form-control" formControlName="cpf" placeholder="Informe o CPF">
-    </div>
-
-    <div class="col-3 form-group mt-1" >
-      <label for="tel"><p>Telefone</p></label>
-      <input type="tel" class="form-control" formControlName="telefone" placeholder="Informe o telefone de contato">
-    </div>
-
-    <div class="col-4 offset-10">
-      <br>
-      <button type="submit" class="btn btn-warning mt-2">Cadastrar</button>
-    </div>
   </div>
-</form>
+
+  <form action="" class="mt-4" [formGroup]="novoUsuarioForm" (ngSubmit)="cadastrar()">
+    <div class="row">
+
+      <div class="col-sm-4 form-group offset-1 mt-1">
+        <label for="email">
+          <p>E-mail</p>
+        </label>
+        <input type="email" class="form-control" formControlName="email" placeholder="Informe o E-mail">
+        <app-mensagem *ngIf="
+        novoUsuarioForm.get('email')?.errors?.['required'] && novoUsuarioForm.get('email')?.touched "
+          mensagem="E-mail obrigatório">
+        </app-mensagem>
+        <app-mensagem *ngIf="
+        novoUsuarioForm.get('email')?.errors?.['email'] " mensagem="E-mail no formato incorreto"></app-mensagem>
+      </div>
+
+
+      <div class="col-3 form-group mt-1">
+        <label for="senha">
+          <p>Senha</p>
+        </label>
+        <input type="password" class="form-control" formControlName="senha" placeholder="Informe a senha">
+
+        <app-mensagem *ngIf="
+        novoUsuarioForm.get('senha')?.errors?.['required'] && novoUsuarioForm.get('senha')?.touched "
+        mensagem="Senha obrigatório">
+        </app-mensagem>
+
+        <app-mensagem *ngIf="
+          novoUsuarioForm.get('senha')?.errors?.['minLength(6)']"
+          mensagem="A senha precisa ter no mínimo 6 dígitos">
+        </app-mensagem>
+      </div>
+
+
+
+
+      <div class="col-3 form-group mt-1">
+        <label for="confirmaSenha">
+          <p>Confirme a Senha</p>
+        </label>
+        <input type="password" class="form-control" formControlName="confirmaSenha" placeholder="Informe a senha">
+
+        <app-mensagem *ngIf="
+        novoUsuarioForm.get('confirmaSenha')?.errors?.['required'] && novoUsuarioForm.get('confirmaSenha')?.touched "
+        mensagem="Senha obrigatório">
+        </app-mensagem>
+
+        <app-mensagem *ngIf="
+        novoUsuarioForm.errors?.['senhaIguais'] "
+        mensagem="Senha tem que ser iguais">
+        </app-mensagem>
+
+      </div>
+
+
+
+      <div class="col-2 mt-1 offset-1">
+        <label for="">
+          <p>Origem</p>
+        </label>
+        <select name="" id="" class="form-control" formControlName="origem">
+          <option value="professor">Professor</option>
+          <option value="nutricionista">Nutricionista</option>
+        </select>
+      </div>
+
+      <div class="col-4 form-group  mt-1">
+        <label for="nome">
+          <p>Nome</p>
+        </label>
+        <input type="text" class="form-control" formControlName="nome" placeholder="Informe o nome completo">
+
+        <app-mensagem *ngIf="
+        novoUsuarioForm.get('nome')?.errors?.['required'] && novoUsuarioForm.get('nome')?.touched "
+        mensagem="Nome completo obrigatório">
+        </app-mensagem>
+      </div>
+
+      <div class="col-2 form-group mt-1">
+        <label for="cpf">
+          <p>CPF</p>
+        </label>
+        <input type="text" class="form-control" formControlName="cpf" placeholder="Informe o CPF">
+
+        <app-mensagem *ngIf="
+        novoUsuarioForm.get('cpf')?.errors?.['required'] && novoUsuarioForm.get('cpf')?.touched "
+        mensagem="CPF obrigatório">
+        </app-mensagem>
+      </div>
+
+      <div class="col-2 form-group mt-1">
+        <label for="tel">
+          <p>Telefone</p>
+        </label>
+        <input type="tel" class="form-control" formControlName="telefone" placeholder="Informe o telefone de contato">
+      </div>
+
+      <div class="col-4 offset-10">
+        <br>
+        <button type="submit" class="btn btn-warning mt-2">Cadastrar</button>
+      </div>
+    </div>
+  </form>
 </div>

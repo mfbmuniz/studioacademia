@@ -1,3 +1,4 @@
+import { MensagemModule } from './../../components/mensagem/mensagem.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -21,7 +22,8 @@ import { AdmSidebarComponent } from './adm-sidebar/adm-sidebar.component';
     CommonModule,
     AdmHomeRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MensagemModule
   ],
   exports:[
     AdmHomeComponent
