@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HomepageComponent } from './pages/homepage/homepage.component';
-import { LoginComponent } from './pages/homepage/login/login.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {AuthGuard} from "./shared/guards/AuthGuard";
+import {AdmHomeComponent} from "./pages/adm-home/adm-home.component";
 
 
 const routes: Routes = [
@@ -12,10 +12,13 @@ const routes: Routes = [
   },
   {
     path: 'home',
+    // component: HomepageComponent,
     loadChildren : ()=> import('./pages/homepage/homepage.module').then((m)=>m.HomepageModule)
   },
   {
     path: 'adm',
+    component: AdmHomeComponent,
+    // canActivate: [AuthGuard],
     loadChildren: ()=> import('./pages/adm-home/adm-home.module').then((m)=>m.AdmHomeModule)
   }
 ];

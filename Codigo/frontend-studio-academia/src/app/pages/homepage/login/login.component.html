@@ -1,4 +1,4 @@
-<form action="" id="form_login" class="form mt-4 p-4" #loginForm (submit)="logar()">
+<form id="form_login" class="form mt-4 p-4" [formGroup]="formLogin" (submit)="logar()">
 
 
   <div class="form-group">
@@ -7,31 +7,28 @@
     <label>
       <p> Usuário </p>
     </label>
-    <input type="email" class="form-control" name="usuario" required
-    [(ngModel)]="usuario" #campoUsuario="ngModel"
+    <input type="email" class="form-control" required  formControlName="email"
       placeholder="Informe o seu  email">
-    <app-mensagem *ngIf="campoUsuario.touched && campoUsuario.invalid"
-    mensagem="Campo Obrigatório"></app-mensagem>
+    <app-mensagem *ngIf="hasError" mensagem="Campo Obrigatório"></app-mensagem>
 
 
     <label for="" class="mt-2">
       <p> Senha </p>
     </label>
-    <input type="password" class="form-control" name="senha" required
-    [(ngModel)]="senha" #campoSenha="ngModel"  placeholder="Informe a sua senha">
-    <app-mensagem *ngIf="campoSenha.touched && campoSenha.invalid"
-    mensagem="Campo Obrigatório"></app-mensagem>
+    <input type="password" class="form-control"  formControlName="password" required
+   placeholder="Informe a sua senha">
+    <app-mensagem *ngIf="hasError" mensagem="Campo Obrigatório"></app-mensagem>
 
-    <label for="origem" class="mt-2">
-      <p>Origem</p>
-    </label>
-    <select name="origem" class="form-control" id="" [(ngModel)] ="origem" #campoOrigem="ngModel">
-      <option value="aluno">Aluno</option>
-      <option value="administrador">Administrador</option>
-      <option value="nutricionista">Nutricionista</option>
-    </select>
-    <app-mensagem *ngIf="campoOrigem.touched && campoOrigem.invalid"
-    mensagem="Campo Obrigatório"></app-mensagem>
+<!--    <label for="origem" class="mt-2">-->
+<!--      <p>Origem</p>-->
+<!--    </label>-->
+<!--    <select name="origem" class="form-control" id="" [(ngModel)] ="origem" #campoOrigem="ngModel">-->
+<!--      <option value="aluno">Aluno</option>-->
+<!--      <option value="administrador">Administrador</option>-->
+<!--      <option value="nutricionista">Nutricionista</option>-->
+<!--    </select>-->
+<!--    <app-mensagem *ngIf="campoOrigem.touched && campoOrigem.invalid"-->
+<!--    mensagem="Campo Obrigatório"></app-mensagem>-->
 
     <div class="mt-4 offset-5">
       <button type="submit" class="btn btn-warning"> Logar </button>
