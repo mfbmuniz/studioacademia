@@ -8,6 +8,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { CarrosselComponent } from './carrossel/carrossel.component';
 import { MensagemModule } from 'src/app/components/mensagem/mensagem.module';
+import {RouterModule} from "@angular/router";
 
 
 
@@ -18,7 +19,7 @@ import { MensagemModule } from 'src/app/components/mensagem/mensagem.module';
         HomepageRoutingModule,
         FormsModule,
         MensagemModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ],
   exports : [HomepageComponent]
 })

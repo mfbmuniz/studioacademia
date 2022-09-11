@@ -24,7 +24,7 @@ export class CadastroAlunoComponent implements OnInit {
       password : ['', [Validators.required,Validators.minLength(8)]],
       passwordConfirm : ['', [Validators.required,Validators.minLength(8)]],
       name : ['',Validators.required],
-      legalDocument: ['',[Validators.required]],
+      legal_document: ['',[Validators.required]],
       phone: ['',[Validators.required]],
       birthDate : ['',[]],
       zipCode: ['',[Validators.required]],
@@ -32,7 +32,10 @@ export class CadastroAlunoComponent implements OnInit {
       number: ['',[]],
       complement: ['',[Validators.required]],
       state: ['',[Validators.required]],
-      city: ['',[Validators.required]]
+      city: ['',[Validators.required]],
+      sex: ['M',[Validators.required]],
+      roles: [['ALUNO'],[Validators.required]],
+      district:['Durval de Barros',[Validators.required]]
     }
     );
   }
@@ -40,7 +43,28 @@ export class CadastroAlunoComponent implements OnInit {
   cadastrar(){
     const novoAluno = this.novoAlunoForm.getRawValue();
 
-    this.userService.create(novoAluno)
+    let body = {
+      email: this.novoAlunoForm.value["email"],
+      password: this.novoAlunoForm.value["password"],
+      passwordConfirm: this.novoAlunoForm.value["passwordConfirm"],
+      name: this.novoAlunoForm.value["name"],
+      legalDocument: this.novoAlunoForm.value["legal_document"],
+      phone: this.novoAlunoForm.value["phone"],
+      birthDate: this.novoAlunoForm.value["birthDate"],
+      roles: this.novoAlunoForm.value["roles"],
+      sex: this.novoAlunoForm.value["sex"],
+      address: {
+        zipCode: this.novoAlunoForm.value["zipCode"],
+        street: this.novoAlunoForm.value["street"],
+        number: this.novoAlunoForm.value["number"],
+        district: this.novoAlunoForm.value["district"],
+        complement: this.novoAlunoForm.value["complement"],
+        state: this.novoAlunoForm.value["state"],
+        city: this.novoAlunoForm.value["city"],
+      }
+    }
+
+    this.userService.create(body)
       .subscribe(
         {
           next:(res) => {

@@ -22,12 +22,14 @@ export class TokenInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const { session } = this.authService.getSession();
+    let session = this.authService.getSession();
+    console.log("testando", session, this.authService.getSession())
     if (
       session &&
       Object.keys(session).length > 0 &&
       this.isAnInterceptableRequest(request?.url)
     ) {
+
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${session.token}`,
