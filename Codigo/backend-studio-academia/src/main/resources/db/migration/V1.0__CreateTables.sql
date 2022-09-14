@@ -34,11 +34,13 @@ CREATE TABLE users (
                        sex VARCHAR(1) NOT NULL,
                        legal_document VARCHAR(11) NOT NULL,
                        address_id INT NOT NULL,
+                       plans_id INT CHECK (user_id > 0) ,
 
                        created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
                        deleted_at TIMESTAMP(0) NULL DEFAULT NULL,
 
                        CONSTRAINT FK_address_id FOREIGN KEY (address_id) REFERENCES address(address_id)
+                       CONSTRAINT FK_plans_id FOREIGN KEY (plans_id) REFERENCES plans(plans_id)
 );
 
 CREATE SEQUENCE country_code_seq;
@@ -82,4 +84,87 @@ CREATE TABLE user_roles (
                     CONSTRAINT FK_role_id FOREIGN KEY (role_id) REFERENCES roles(roles_id)
 );
 
+CREATE SEQUENCE admin_message_service_seq;
+CREATE TABLE admin_message_service (
+                    admin_message_id INT DEFAULT NEXTVAL ('admin_message_service_seq') PRIMARY KEY,
+                    user_id INT CHECK (user_id > 0),
+                    message_content TEXT NOT NULL,
 
+                    created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
+                    deleted_at TIMESTAMP(0) NULL DEFAULT NULL,
+
+                    CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id)
+
+);
+
+CREATE SEQUENCE plans_seq;
+CREATE TABLE plans (
+                    plans_id INT DEFAULT NEXTVAL ('plans_seq') PRIMARY KEY,
+                    name VARCHAR(50) NOT NULL,
+                    price NUMERIC NOT NULL,
+                    description TEXT NOT NULL,
+                    planCode VARCHAR(3) NOT NULL,
+                    contracted_days INT NOT NULL,
+                    week_days_id INT CHECK (user_id > 0),
+
+                    created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
+                    deleted_at TIMESTAMP(0) NULL DEFAULT NULL,
+
+                    CONSTRAINT FK_week_days_id FOREIGN KEY (week_days_id) REFERENCES week_days(week_days_id)
+
+
+);
+
+CREATE SEQUENCE week_days_seq;
+CREATE TABLE week_days (
+                    week_days_id INT DEFAULT NEXTVAL ('week_days_seq') PRIMARY KEY,
+                    user_id INT CHECK (user_id > 0),
+                    daysOfWeek varchar (30),
+
+
+                    created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
+                    deleted_at TIMESTAMP(0) NULL DEFAULT NULL,
+
+                    CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id)
+
+);
+
+CREATE SEQUENCE calendar_seq;
+CREATE TABLE calendar (
+                    calendar_id INT DEFAULT NEXTVAL ('calendar_seq') PRIMARY KEY,
+                    dateEvent TIMESTAMP(0) NULL DEFAULT NULL,
+                    dateDescription TEXT NOT NULL,
+
+
+                    created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
+                    deleted_at TIMESTAMP(0) NULL DEFAULT NULL
+
+);
+
+CREATE SEQUENCE calendar_seq;
+CREATE TABLE calendar (
+                    calendar_id INT DEFAULT NEXTVAL ('calendar_seq') PRIMARY KEY,
+                    dateEvent TIMESTAMP(0) NULL DEFAULT NULL,
+                    dateDescription TEXT NOT NULL,
+
+
+                    created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
+                    deleted_at TIMESTAMP(0) NULL DEFAULT NULL
+
+);
+
+CREATE SEQUENCE monthly_payment_seq;
+CREATE TABLE monthly_payment (
+                    monthly_payment INT DEFAULT NEXTVAL ('monthly_payment') PRIMARY KEY,
+                    due_Date TIMESTAMP(0) NULL DEFAULT NULL,
+                    payment_CHECK BOOLEAN  not null,
+
+                    dateDescription TEXT NOT NULL,
+
+
+                    created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
+                    deleted_at TIMESTAMP(0) NULL DEFAULT NULL,
+
+                    CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id)
+
+);
