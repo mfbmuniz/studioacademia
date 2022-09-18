@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdmHomeComponent } from './adm-home.component';
 import { CadastroAlunoComponent } from './cadastro-aluno/cadastro-aluno.component';
 import { AdmSidebarComponent } from './adm-sidebar/adm-sidebar.component';
+import { SidebarModule } from 'src/app/components/sidebar/sidebar.module';
 
 
 
@@ -23,7 +24,8 @@ import { AdmSidebarComponent } from './adm-sidebar/adm-sidebar.component';
     AdmHomeRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MensagemModule
+    MensagemModule,
+    SidebarModule
   ],
   exports:[
     AdmHomeComponent

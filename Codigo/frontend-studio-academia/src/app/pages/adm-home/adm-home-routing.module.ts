@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdmHomeComponent } from './adm-home.component';
-import { AdmSidebarComponent } from './adm-sidebar/adm-sidebar.component';
 import { CadastroAlunoComponent } from './cadastro-aluno/cadastro-aluno.component';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 import {AuthGuard} from "../../shared/guards/AuthGuard";
