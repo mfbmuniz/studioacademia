@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UserRoleService} from "../../../services/UserRoleService";
 
 @Component({
   selector: 'app-adm-sidebar',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdmSidebarComponent implements OnInit {
 
-  constructor() { }
+  public isAdmin : boolean = false;
+  constructor(private userRoleService:UserRoleService ) {
+
+  }
 
   ngOnInit(): void {
+    this.isAdmin= this.userRoleService.isAdmin();
   }
 
 }

@@ -35,4 +35,11 @@ export class  AuthService {
     return !!localStorage.getItem("session");
   }
 
+  getObservableSession(): Observable<any> {
+          this.sessionSubject = new BehaviorSubject<any>(
+              this.getSession()
+          );
+          return this.sessionSubject.asObservable();
+  }
+
 }

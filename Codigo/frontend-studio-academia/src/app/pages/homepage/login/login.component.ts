@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(["/adm"]);
         break;
       case "ALUNO":
-        this.router.navigate(["/home"]);
+        this.router.navigate(["/adm"]);
         break;
       default:
         if (this.router.url !== "/login")
