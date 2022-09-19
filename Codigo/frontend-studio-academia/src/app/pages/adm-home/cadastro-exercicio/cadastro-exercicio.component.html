@@ -1,0 +1,39 @@
+<div class="formulario">
+
+
+  <div class="row">
+
+    <div class="col-3 offset-5">
+      <h1>Cadastro de Exercício</h1>
+    </div>
+
+  </div>
+
+  <form action="" class="mt-4" [formGroup]="novoExercicioForm" (ngSubmit)="cadastrar()">
+    <div class="row">
+
+      <div class="col-sm-4 offset-1">
+        <label for=""><p>Nome</p></label>
+        <input type="text" name="name" class="form-control" placeholder="Informe o nome do Exercício"
+        formControlName = 'name'>
+        <app-mensagem *ngIf="novoExercicioForm.get('name')?.errors && novoExercicioForm.get('name')?.touched"
+        mensagem="Campo Obrigatório" ></app-mensagem>
+      </div>
+
+      <div class="col-sm-4">
+        <label for=""><p>Link</p></label>
+        <input type="url" name="url" class="form-control" placeholder="Informe o link do youtube"
+        formControlName='url'>
+        <app-mensagem *ngIf="novoExercicioForm.get('url')?.errors && novoExercicioForm.get('url')?.touched"
+        mensagem="Campo Obrigatório" ></app-mensagem>
+      </div>
+
+      <div class="col-8 mt-2 offset-1">
+        <label><p>Descrição</p></label>
+        <textarea name="description" id="" cols="100" class="form-control " rows="10" ></textarea>
+      </div>
+    </div>
+  </form>
+  </div>
+
+

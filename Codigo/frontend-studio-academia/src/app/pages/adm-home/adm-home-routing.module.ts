@@ -4,6 +4,7 @@ import { AdmHomeComponent } from './adm-home.component';
 import { CadastroAlunoComponent } from './cadastro-aluno/cadastro-aluno.component';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 import {AuthGuard} from "../../shared/guards/AuthGuard";
+import { CadastroExercicioComponent } from './cadastro-exercicio/cadastro-exercicio.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
         path: 'cadastrarAluno',
         component: CadastroAlunoComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'cadastrarExercicio',
+        component: CadastroExercicioComponent
       },
     ]
   },

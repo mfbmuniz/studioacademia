@@ -9,6 +9,7 @@ import { AdmHomeComponent } from './adm-home.component';
 import { CadastroAlunoComponent } from './cadastro-aluno/cadastro-aluno.component';
 import { AdmSidebarComponent } from './adm-sidebar/adm-sidebar.component';
 import { SidebarModule } from 'src/app/components/sidebar/sidebar.module';
+import { CadastroExercicioComponent } from './cadastro-exercicio/cadastro-exercicio.component';
 
 
 
@@ -17,7 +18,8 @@ import { SidebarModule } from 'src/app/components/sidebar/sidebar.module';
     AdmHomeComponent,
     CadastroUsuarioComponent,
     CadastroAlunoComponent,
-    AdmSidebarComponent
+    AdmSidebarComponent,
+    CadastroExercicioComponent
   ],
   imports: [
     CommonModule,
