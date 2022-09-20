@@ -1,0 +1,17 @@
+<table class="table table-light mt-2">
+  <thead>
+    <tr class="table-secondary">
+      <th scope="col">Nome</th>
+      <th scope="col">Email</th>
+      <th scope="col">    </th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let aluno of alunos">
+    <tr>
+      <th scope="row">{{aluno?.name}}</th>
+      <td>{{aluno?.email}}</td>
+      <td><a href="#">Detalhes</a></td>
+    </tr>
+  </tbody>
+</table>
+

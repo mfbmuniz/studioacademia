@@ -5,6 +5,7 @@ import { CadastroAlunoComponent } from './cadastro-aluno/cadastro-aluno.componen
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 import {AuthGuard} from "../../shared/guards/AuthGuard";
 import { CadastroExercicioComponent } from './cadastro-exercicio/cadastro-exercicio.component';
+import { SearchHomeComponent } from './search-home/search-home.component';
 
 const routes: Routes = [
   {
@@ -13,8 +14,7 @@ const routes: Routes = [
     children:[
       {
         path: '',
-        pathMatch: 'full',
-        redirectTo: 'adm/cadastrarUsuario'
+        component: SearchHomeComponent
       },
       {
         path: 'cadastrarUsuario',

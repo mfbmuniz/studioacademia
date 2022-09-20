@@ -10,6 +10,8 @@ import { CadastroAlunoComponent } from './cadastro-aluno/cadastro-aluno.componen
 import { AdmSidebarComponent } from './adm-sidebar/adm-sidebar.component';
 import { SidebarModule } from 'src/app/components/sidebar/sidebar.module';
 import { CadastroExercicioComponent } from './cadastro-exercicio/cadastro-exercicio.component';
+import { SearchHomeComponent } from './search-home/search-home.component';
+import { GradeAlunosComponent } from './grade-alunos/grade-alunos.component';
 
 
 
@@ -19,7 +21,9 @@ import { CadastroExercicioComponent } from './cadastro-exercicio/cadastro-exerci
     CadastroUsuarioComponent,
     CadastroAlunoComponent,
     AdmSidebarComponent,
-    CadastroExercicioComponent
+    CadastroExercicioComponent,
+    SearchHomeComponent,
+    GradeAlunosComponent
   ],
   imports: [
     CommonModule,
