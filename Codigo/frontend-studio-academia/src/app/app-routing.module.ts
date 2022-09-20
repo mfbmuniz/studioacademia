@@ -20,6 +20,10 @@ const routes: Routes = [
     // component: AdmHomeComponent,
     // canActivate: [AuthGuard],
     loadChildren: ()=> import('./pages/adm-home/adm-home.module').then((m)=>m.AdmHomeModule)
+  },
+  {
+    path: 'aluno',
+    loadChildren: ()=> import('./pages/aluno-home/aluno-home.module').then((m)=>m.AlunoHomeModule)
   }
 ];
 
