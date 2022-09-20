@@ -167,6 +167,7 @@ CREATE TABLE exercises (
                     exercises_id INT DEFAULT NEXTVAL ('exercises_seq ') PRIMARY KEY,
                     exercise_name VARCHAR(100)  not null,
                     exercise_link VARCHAR(100)  not null,
+                    description varchar(100) not null,
 
 
                     created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
