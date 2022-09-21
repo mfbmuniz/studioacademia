@@ -25,7 +25,7 @@
         novoAlunoForm.get('email')?.errors?.['email'] " mensagem="E-mail no formato incorreto"></app-mensagem>
       </div>
 
-      <div class="col-2 form-group mt-1" >
+      <div class="col-3 form-group mt-1" >
         <label for="senha"><p>Senha</p></label>
         <input type="password" class="form-control" formControlName="password" placeholder="Informe a senha">
 
@@ -35,7 +35,7 @@
         </app-mensagem>
       </div>
 
-      <div class="col-2 form-group mt-1" >
+      <div class="col-3 form-group mt-1" >
         <label for="confirmaSenha"><p>Confirme a Senha</p></label>
         <input type="password" class="form-control" formControlName="passwordConfirm" placeholder="Informe a senha">
         <app-mensagem *ngIf="
@@ -44,12 +44,12 @@
         </app-mensagem>
       </div>
 
-      <div class="col-2 mt-1">
+      <div class="col-3 mt-1 offset-1">
         <label for="dataNascimento"><p>Data de Nascimento</p></label>
         <input type="date" name=""  class="form-control" formControlName="birthDate">
       </div>
 
-      <div class="col-4 form-group offset-1 mt-1">
+      <div class="col-4 form-group  mt-1">
         <label for="nome"><p>Nome</p></label>
         <input type="text" class="form-control" formControlName="name" placeholder="Informe o nome completo" >
         <app-mensagem *ngIf="
@@ -68,7 +68,7 @@
         </app-mensagem>
       </div>
 
-      <div class="col-1 form-group mt-1">
+      <div class="col-1 form-group mt-1 offset-1">
         <label for="cpf"><p>Sexo</p></label>
         <select name="" id="" class="form-control" formControlName="sex">
           <option value="M">M</option>
@@ -81,12 +81,12 @@
         </app-mensagem>
       </div>
 
-      <div class="col-2 form-group mt-1" >
+      <div class="col-3 form-group mt-1" >
         <label for="tel"><p>Telefone</p></label>
-        <input type="tel" class="form-control" formControlName="phone" placeholder="Informe o teledone de contato">
+        <input type="tel" class="form-control" formControlName="phone" placeholder="Informe o contato">
       </div>
 
-      <div class="col-sm-2 form-group offset-1 mt-1">
+      <div class="col-sm-2 form-group  mt-1">
         <label for="cep"><p>CEP</p></label>
         <input type="tel" class="form-control" formControlName="zipCode" placeholder="Informe o CEP">
 
@@ -105,7 +105,7 @@
         </app-mensagem>
       </div>
 
-      <div class="col-2 mt-1">
+      <div class="col-2 mt-1 offset-1">
         <label for="Numero"><p>Nº</p></label>
         <input type="text" name=""  class="form-control" formControlName="number" placeholder="Informe o número">
 
@@ -120,7 +120,7 @@
         <input type="text" name=""  class="form-control" formControlName="complement" placeholder="Aprt">
       </div>
 
-      <div class="col-4 mt-1 offset-1">
+      <div class="col-3 mt-1">
         <label for="estado"><p>Estado</p></label>
         <select name="" id="" class="form-control" formControlName="state" placeholder="infome o Estado">
           <option value="ac">Acre</option>
@@ -158,7 +158,7 @@
         </app-mensagem>
       </div>
 
-      <div class="col-4 mt-1">
+      <div class="col-3 mt-1">
         <label for="cidade"><p>Cidade</p></label>
         <input type="text" name=""  class="form-control" formControlName="city" placeholder="Informe a Cidade">
       </div>

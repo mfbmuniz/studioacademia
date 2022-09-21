@@ -9,12 +9,13 @@ import { AlunoSidebarComponent } from './aluno-sidebar/aluno-sidebar.component';
 import { GradeExerciciosComponent } from './grade-exercicios/grade-exercicios.component';
 
 
+
 @NgModule({
   declarations: [
     AlunoHomeComponent,
     GradeFichasComponent,
     AlunoSidebarComponent,
-    GradeExerciciosComponent
+    GradeExerciciosComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,44 @@
+<div class="formulario">
+
+
+  <div class="row">
+
+    <div class="col-3 offset-5">
+      <h1>Cadastro de Exercício</h1>
+    </div>
+
+  </div>
+
+  <form action="" class="mt-4" (ngSubmit)="cadastrar()">
+    <div class="row">
+
+      <div class="col-sm-4 offset-1">
+        <label for=""><p>Nome</p></label>
+        <input type="text" name="name" class="form-control" placeholder="Informe o nome do Exercício"
+        formControlName = 'name'>
+      </div>
+
+
+      <div class="col-6">
+        <label><p>Descrição</p></label>
+        <textarea name="description" id="" class="form-control " cols="15" rows="1" ></textarea>
+      </div>
+
+      <div id="Exercicio_ficha">
+
+      </div>
+
+
+
+      <div class="col-4 offset-10">
+        <br>
+        <button type="submit" class="btn btn-warning mt-2">Cadastrar</button>
+      </div>
+    </div>
+  </form>
+  </div>
+  <div id="botao_Adicionar" class="col-3 offset-10">
+    <i class="bi bi-plus-square-fill"></i>
+  </div>
+
+

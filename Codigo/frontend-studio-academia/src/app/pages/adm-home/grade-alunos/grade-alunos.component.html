@@ -3,14 +3,16 @@
     <tr class="table-secondary">
       <th scope="col">Nome</th>
       <th scope="col">Email</th>
-      <th scope="col">    </th>
+      <th scope="col">Adicionar Ficha</th>
+      <th scope="col">Editar</th>
     </tr>
   </thead>
   <tbody *ngFor="let aluno of alunos">
     <tr>
       <th scope="row">{{aluno?.name}}</th>
       <td>{{aluno?.email}}</td>
-      <td><a href="#">Detalhes</a></td>
+      <td><a href="#"><i class="bi bi-file-earmark-plus-fill"></i></a></td>
+      <td><a href="#"><i class="bi bi-person-bounding-box"></i></a></td>
     </tr>
   </tbody>
 </table>

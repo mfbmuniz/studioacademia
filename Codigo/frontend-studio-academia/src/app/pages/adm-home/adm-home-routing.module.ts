@@ -6,6 +6,8 @@ import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.co
 import {AuthGuard} from "../../shared/guards/AuthGuard";
 import { CadastroExercicioComponent } from './cadastro-exercicio/cadastro-exercicio.component';
 import { SearchHomeComponent } from './search-home/search-home.component';
+import { CadastroFichaComponent } from './cadastro-ficha/cadastro-ficha.component';
+import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
 
 const routes: Routes = [
   {
@@ -29,6 +31,14 @@ const routes: Routes = [
       {
         path: 'cadastrarExercicio',
         component: CadastroExercicioComponent
+      },
+      {
+        path: 'cadastrarFicha',
+        component: CadastroFichaComponent
+      },
+      {
+        path: 'editarAluno',
+        component: EditarAlunoComponent
       },
     ]
   },
