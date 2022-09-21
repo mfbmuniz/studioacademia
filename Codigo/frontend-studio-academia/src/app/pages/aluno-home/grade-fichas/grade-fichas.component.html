@@ -1,0 +1,37 @@
+<div class="row">
+
+  <div class="col-2 offset-5">
+    <h1>Minhas Fichas:</h1>
+  </div>
+
+
+
+  <div *ngIf="fichas$ |async as fichas">
+    <div *ngIf="fichas.length == 0">
+      <h3>Não há fichas cadastradas</h3>
+    </div>
+    <div *ngFor="let ficha of fichas">
+      <div class="col-8 mt-3 offset-3">
+        <div class="card w-75 mt-3 bg-secondary">
+          <div class="card-body">
+            <h2 class="card-title">{{ficha.name}}</h2>
+            <p class="card-text">{{ficha.description}</p>
+            <a [routerLink]="['exercicios/',ficha.id]" class="btn btn-warning offset-10">Acessar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--
+<div class="col-8 mt-3 offset-3">
+  <div class="card w-75 mt-3 bg-secondary">
+    <div class="card-body">
+      <h2 class="card-title">Sessão A</h2>
+      <p class="card-text">Costas e Ombros </p>
+      <a [routerLink]="['aluno/exercicios/',teste]" class="btn btn-warning offset-10">Acessar</a>
+    </div>
+  </div>
+</div>-->

@@ -1,14 +1,22 @@
+import { GradeExerciciosComponent } from './grade-exercicios/grade-exercicios.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AlunoHomeComponent } from './aluno-home.component';
+import { GradeFichasComponent } from './grade-fichas/grade-fichas.component';
 
 const routes: Routes = [
   {
     path: '',
+    component: AlunoHomeComponent,
     children:[
+
       {
-        path:'',
-        component: AlunoHomeComponent
+        path: 'fichas',
+        component: GradeFichasComponent
+      },
+      {
+        path: 'exercicios/:id',
+        component: GradeExerciciosComponent
       }
     ]
   }

@@ -6,13 +6,15 @@ import { AlunoHomeComponent } from './aluno-home.component';
 import { SidebarModule } from 'src/app/components/sidebar/sidebar.module';
 import { GradeFichasComponent } from './grade-fichas/grade-fichas.component';
 import { AlunoSidebarComponent } from './aluno-sidebar/aluno-sidebar.component';
+import { GradeExerciciosComponent } from './grade-exercicios/grade-exercicios.component';
 
 
 @NgModule({
   declarations: [
     AlunoHomeComponent,
     GradeFichasComponent,
-    AlunoSidebarComponent
+    AlunoSidebarComponent,
+    GradeExerciciosComponent
   ],
   imports: [
     CommonModule,
