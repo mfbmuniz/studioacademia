@@ -33,7 +33,7 @@ public class ExerciseDto {
     }
 
     public static ExerciseDto fromExercise(Exercise exercise){
-        return new ExerciseDto(exercise.getExercise_id(), exercise.getName(), exercise.getExerciseUrl(), exercise.getDescription());
+        return new ExerciseDto(exercise.getExerciseId(), exercise.getName(), exercise.getExerciseUrl(), exercise.getDescription());
     }
 }
 

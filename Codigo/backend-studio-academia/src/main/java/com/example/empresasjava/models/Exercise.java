@@ -16,7 +16,7 @@ public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "exercises_id")
-    private Long exercise_id;
+    private Long exerciseId;
     @Column(name = "exercise_name")
     private String name;
     @Column(name = "exercise_link")
@@ -37,5 +37,12 @@ public class Exercise {
         this.description = description;
 
 
+    }
+
+    public Exercise(String name, String exerciseUrl, String description, Long idExercise) {
+        this.name = name;
+        this.exerciseUrl = exerciseUrl;
+        this.description = description;
+        this.exerciseId=idExercise;
     }
 }
