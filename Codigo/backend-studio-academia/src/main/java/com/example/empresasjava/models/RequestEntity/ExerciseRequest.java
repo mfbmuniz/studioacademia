@@ -38,15 +38,14 @@ public class ExerciseRequest {
     }
 
     public static Exercise toExercise(ExerciseRequest exercise) {
-        return new Exercise(
-                exercise.name,
-                exercise.exerciseUrl,
-                exercise.description
-        );
+
+            return new Exercise(
+                    exercise.name,
+                    exercise.exerciseUrl,
+                    exercise.description
+
+            );
 
     }
-
-
-
 
 }
