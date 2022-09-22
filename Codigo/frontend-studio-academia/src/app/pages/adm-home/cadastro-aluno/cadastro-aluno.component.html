@@ -3,7 +3,7 @@
 
   <div class="row">
 
-    <div class="col-3 offset-5">
+    <div class="col-3 offset-4">
       <h1>Cadastro de Aluno</h1>
     </div>
 
@@ -12,7 +12,23 @@
   <form action="" class="mt-4" [formGroup]="novoAlunoForm" (ngSubmit)="cadastrar()">
     <div class="row">
 
-      <div class="col-sm-4 form-group offset-1 mt-1">
+      <div class="col-2 form-group offset-1 mt-1">
+        <label for="typeUser">
+          <p>Tipo do Usuário</p>
+        </label>
+        <select name="" id="" class="form-control">
+          <option value="aluno">Aluno</option>
+          <option value="professor">Professor</option>
+          <option value="nutricionista">Nutricionista</option>
+        </select>
+
+        <app-mensagem *ngIf="
+        novoAlunoForm.get('roles')?.errors?.['required'] && novoAlunoForm.get('roles')?.touched "
+          mensagem="Senha obrigatório">
+        </app-mensagem>
+      </div>
+
+      <div class="col-sm-4 form-group mt-1">
         <label for="email"><p>E-mail</p></label>
         <input type="email" class="form-control" formControlName="email" placeholder="Informe o E-mail">
 
@@ -25,7 +41,7 @@
         novoAlunoForm.get('email')?.errors?.['email'] " mensagem="E-mail no formato incorreto"></app-mensagem>
       </div>
 
-      <div class="col-3 form-group mt-1" >
+      <div class="col-2 form-group mt-1" >
         <label for="senha"><p>Senha</p></label>
         <input type="password" class="form-control" formControlName="password" placeholder="Informe a senha">
 
@@ -35,7 +51,7 @@
         </app-mensagem>
       </div>
 
-      <div class="col-3 form-group mt-1" >
+      <div class="col-2 form-group mt-1" >
         <label for="confirmaSenha"><p>Confirme a Senha</p></label>
         <input type="password" class="form-control" formControlName="passwordConfirm" placeholder="Informe a senha">
         <app-mensagem *ngIf="
@@ -120,7 +136,21 @@
         <input type="text" name=""  class="form-control" formControlName="complement" placeholder="Aprt">
       </div>
 
-      <div class="col-3 mt-1">
+      <div class="col-2 mt-1">
+        <label for="complemento">
+          <p>Bairro</p>
+        </label>
+        <input type="text" name="" class="form-control" formControlName="district" placeholder="">
+      </div>
+
+      <div class="col-2 mt-1">
+        <label for="cidade">
+          <p>Cidade</p>
+        </label>
+        <input type="text" name="" class="form-control" formControlName="city" placeholder="">
+      </div>
+
+      <div class="col-2 mt-1">
         <label for="estado"><p>Estado</p></label>
         <select name="" id="" class="form-control" formControlName="state" placeholder="infome o Estado">
           <option value="ac">Acre</option>
@@ -156,11 +186,6 @@
         novoAlunoForm.get('state')?.errors?.['required'] && novoAlunoForm.get('state')?.touched "
         mensagem="campo obrigatório">
         </app-mensagem>
-      </div>
-
-      <div class="col-3 mt-1">
-        <label for="cidade"><p>Cidade</p></label>
-        <input type="text" name=""  class="form-control" formControlName="city" placeholder="Informe a Cidade">
       </div>
 
       <div class="col-4 offset-10">

@@ -33,9 +33,9 @@ export class CadastroAlunoComponent implements OnInit {
       complement: ['',[Validators.required]],
       state: ['',[Validators.required]],
       city: ['',[Validators.required]],
-      sex: ['M',[Validators.required]],
-      roles: [['ALUNO'],[Validators.required]],
-      district:['Durval de Barros',[Validators.required]]
+      sex: ['',[Validators.required]],
+      roles: [[''],[Validators.required]],
+      district:['',[Validators.required]]
     }
     );
   }

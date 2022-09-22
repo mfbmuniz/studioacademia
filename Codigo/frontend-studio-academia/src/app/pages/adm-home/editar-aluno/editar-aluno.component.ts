@@ -20,9 +20,10 @@ export class EditarAlunoComponent implements OnInit {
   ngOnInit(): void {
 
     //this.aluno$ = --> Faz o select
-
+    var pegarValorTacaNoForm = 'Valor no bd'
+    var teste = 'teste'
     this.editAlunoForm = this.formbuilder.group({
-      email :  ['', [Validators.required, Validators.email]],
+      email :  ['pegarValorTacaNoForm', [Validators.required, Validators.email]],
       password : ['', [Validators.required,Validators.minLength(8)]],
       passwordConfirm : ['', [Validators.required,Validators.minLength(8)]],
       name : ['',Validators.required],
@@ -35,9 +36,9 @@ export class EditarAlunoComponent implements OnInit {
       complement: ['',[Validators.required]],
       state: ['',[Validators.required]],
       city: ['',[Validators.required]],
-      sex: ['M',[Validators.required]],
+      sex: ['',[Validators.required]],
       roles: [['ALUNO'],[Validators.required]],
-      district:['Durval de Barros',[Validators.required]]
+      district:['',[Validators.required]]
 
     })
   }
@@ -46,4 +47,7 @@ export class EditarAlunoComponent implements OnInit {
 
   }
 
+  public delete() : void {
+    alert()
+  }
 }

@@ -26,7 +26,7 @@ const routes: Routes = [
       {
         path: 'cadastrarAluno',
         component: CadastroAlunoComponent,
-        canActivate: [AuthGuard]
+        //canActivate: [AuthGuard]
       },
       {
         path: 'cadastrarExercicio',
