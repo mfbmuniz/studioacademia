@@ -9,36 +9,76 @@
 
   </div>
 
-  <form action="" class="mt-4" (ngSubmit)="cadastrar()">
+  <form action="" class="form-group mt-4" [formGroup]="fichaForm" (ngSubmit)="cadastrar()">
     <div class="row">
 
       <div class="col-sm-4 offset-1">
-        <label for=""><p>Nome</p></label>
-        <input type="text" name="name" class="form-control" placeholder="Informe o nome do Exercício"
-        formControlName = 'name'>
+        <label for="">
+          <p>Nome</p>
+        </label>
+        <input type="text" name="name" class="form-control" placeholder="Informe a sessão da ficha"
+          formControlName='name'>
       </div>
 
 
       <div class="col-6">
-        <label><p>Descrição</p></label>
-        <textarea name="description" id="" class="form-control " cols="15" rows="1" ></textarea>
+        <label>
+          <p>Descrição</p>
+        </label>
+        <textarea name="description" id="" class="form-control " cols="15" rows="1"
+        placeholder="Informe os músculos a serem trabalhados"></textarea>
       </div>
 
-      <div id="Exercicio_ficha">
+      <div formArrayName="exercicios" class="mt-2">
+        <div *ngFor="let exercicio of exercicios.controls; let i=index">
+          <div [formGroupName]="i">
 
+            <div class="row">
+
+              {{i}}
+              <div class="col-3 offset-1">
+
+                <label for=""><p>Exercicio</p></label>
+                <select name="" id="" class="form-control">
+                  <option value="a">Supino</option>
+                  <option value="b">Barra fixa</option>
+                  <option value="c">Agachamento</option>
+                </select>
+              </div>
+
+              <div class="col-2">
+                <label for=""><p>Series</p></label>
+                <input type="range" min="0" step="1" class="form-control">
+              </div>
+
+              <div class="col-2">
+                <label for=""><p>Repetições</p></label>
+                <input type="range" min="0" step="1" class="form-control">
+              </div>
+
+              <div class="col-1 offset-2">
+                <br>
+                <button class="btn btn-danger mt-1" (click)="removeExercicio(i)"
+                data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Tooltip on right">
+                  <i class="bi bi-trash3">
+                </i></button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
+      <div id="botao_Adicionar" class="col-2 offset-10">
+        <br>
+        <button class="btn btn-warning" (click)="addExercicio()">
+          <i class="bi bi-plus-square-dotted"></i>
+        </button>
+      </div>
 
-
-      <div class="col-4 offset-10">
+      <div class="col-2 offset-10">
         <br>
         <button type="submit" class="btn btn-warning mt-2">Cadastrar</button>
       </div>
     </div>
   </form>
-  </div>
-  <div id="botao_Adicionar" class="col-3 offset-10">
-    <i class="bi bi-plus-square-fill"></i>
-  </div>
-
-
+</div>
