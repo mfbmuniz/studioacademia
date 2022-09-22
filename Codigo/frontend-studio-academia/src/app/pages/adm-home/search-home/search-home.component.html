@@ -1,16 +1,17 @@
 <br>
 <form action="" class="mt-4" [formGroup]="searchForm" (ngSubmit)="search()">
-<div class="input-group mb-3">
+  <div class="input-group mb-3">
 
-  <select class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <option value="aluno">Aluno</option>
-    <option value="exercicio">Exercício</option>
-  </select>
-  <input type="search" class="form-control" aria-label="Text input with dropdown button">
-  <button type="submit" class="btn btn-warning">Pesquisar</button>
-</div>
-</form>
-  <div *ngIf="alunos$ | async as alunos" id="grade-alunos">
-    <app-grade-alunos [alunos]="alunos"></app-grade-alunos>
+    <select class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+      aria-expanded="false">
+      <option value="aluno">Aluno</option>
+      <option value="exercicio">Exercício</option>
+    </select>
+    <input type="search" class="form-control" aria-label="Text input with dropdown button">
+    <button type="submit" class="btn btn-warning">Pesquisar</button>
   </div>
+</form>
+<div *ngIf="alunos$ | async as alunos" id="grade-alunos">
+  <app-grade-alunos [alunos]="alunos"></app-grade-alunos>
+</div>
 
