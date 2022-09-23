@@ -1,18 +1,19 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,FormArray, FormBuilder, Validators } from '@angular/forms'
+import { Ficha } from 'src/app/Models/ficha';
 
 @Component({
-  selector: 'app-cadastro-ficha',
-  templateUrl: './cadastro-ficha.component.html',
-  styleUrls: ['./cadastro-ficha.component.css']
+  selector: 'app-editar-fichas',
+  templateUrl: './editar-fichas.component.html',
+  styleUrls: ['./editar-fichas.component.css']
 })
-export class CadastroFichaComponent implements OnInit {
+export class EditarFichasComponent implements OnInit {
 
+  ficha$ !: Observable<Ficha>
   fichaForm !: FormBuilder | any
 
-  constructor(
-    private formBuilder: FormBuilder
-  ) {
+  constructor(private formBuilder: FormBuilder) {
     this.fichaForm = this.formBuilder.group({
       name: ['',Validators.required],
       description : '',
@@ -23,7 +24,7 @@ export class CadastroFichaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public cadastrar() : void{
+  public editar() : void{
     console.log(this.fichaForm.value);
   }
 
@@ -46,5 +47,6 @@ export class CadastroFichaComponent implements OnInit {
 removeExercicio(i:number) {
   this.exercicios.removeAt(i);
 }
+
 
 }

@@ -3,7 +3,7 @@
 </div>
 
 <div class="col-2 offset-9">
-  <a [routerLink]="['cadastrarFicha','/arthuralexi'] " class="btn btn-warning">
+  <a [routerLink]="['cadastrarFicha/',[emailAluno]] " class="btn btn-warning">
     <i class="bi bi-file-earmark-plus"></i>Adicionar Fichas
   </a>
 </div>
@@ -15,14 +15,15 @@
         <div class="card-body">
           <h2 class="card-title">{{ficha.name}}</h2>
           <p class="card-text">{{ficha.description}}</p>
-          <a [routerLink]="[]" class="btn btn-warning offset-8">editar</a>
-          <button class="btn btn-danger offset-1" (click)="delete()"><i class="bi bi-trash3"></i></button>
-        </div>
+          <a [routerLink]="['editarFicha','{{ficha.name}}']" class="btn btn-warning offset-8">editar</a>
+          <button class="btn btn-danger offset-1" (click)="delete('{{ficha.name}}')"><i class="bi bi-trash3"></i></button>
+        </div>'
       </div>
     </div>
   </div>
 </div>
-<!--
+
+<!-- TEMPLATE BASE
 <div class="col-8 mt-3 offset-3">
   <div class="card w-75 mt-3 bg-secondary">
     <div class="card-body">

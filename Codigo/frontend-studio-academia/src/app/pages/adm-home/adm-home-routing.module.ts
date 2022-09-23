@@ -9,6 +9,7 @@ import { SearchHomeComponent } from './search-home/search-home.component';
 import { CadastroFichaComponent } from './cadastro-ficha/cadastro-ficha.component';
 import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
 import { AdmGradeFichasComponent } from './adm-grade-fichas/adm-grade-fichas.component';
+import { EditarFichasComponent } from './editar-fichas/editar-fichas.component';
 
 
 const routes: Routes = [
@@ -45,6 +46,10 @@ const routes: Routes = [
       {
         path: 'gradeFichas/:id',
         component: AdmGradeFichasComponent
+      },
+      {
+        path: 'editarFichas/:id',
+        component: EditarFichasComponent
       },
     ]
   },
