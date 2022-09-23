@@ -14,6 +14,7 @@ import { SearchHomeComponent } from './search-home/search-home.component';
 import { GradeAlunosComponent } from './grade-alunos/grade-alunos.component';
 import { CadastroFichaComponent } from './cadastro-ficha/cadastro-ficha.component';
 import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
+import { AdmGradeFichasComponent } from './adm-grade-fichas/adm-grade-fichas.component';
 
 
 
@@ -27,7 +28,9 @@ import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
     SearchHomeComponent,
     GradeAlunosComponent,
     CadastroFichaComponent,
-    EditarAlunoComponent
+    EditarAlunoComponent,
+    AdmGradeFichasComponent,
+
   ],
   imports: [
     CommonModule,

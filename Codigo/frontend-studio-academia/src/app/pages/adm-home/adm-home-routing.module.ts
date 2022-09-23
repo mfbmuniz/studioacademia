@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdmHomeComponent } from './adm-home.component';
 import { CadastroAlunoComponent } from './cadastro-aluno/cadastro-aluno.component';
@@ -8,6 +8,8 @@ import { CadastroExercicioComponent } from './cadastro-exercicio/cadastro-exerci
 import { SearchHomeComponent } from './search-home/search-home.component';
 import { CadastroFichaComponent } from './cadastro-ficha/cadastro-ficha.component';
 import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
+import { AdmGradeFichasComponent } from './adm-grade-fichas/adm-grade-fichas.component';
+
 
 const routes: Routes = [
   {
@@ -39,6 +41,10 @@ const routes: Routes = [
       {
         path: 'editarAluno/:id',
         component: EditarAlunoComponent
+      },
+      {
+        path: 'gradeFichas/:id',
+        component: AdmGradeFichasComponent
       },
     ]
   },
