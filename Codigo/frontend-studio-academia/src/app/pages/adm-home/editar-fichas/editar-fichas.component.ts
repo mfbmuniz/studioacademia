@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,FormArray, FormBuilder, Validators } from '@angular/forms'
 import { Ficha } from 'src/app/Models/ficha';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-editar-fichas',
@@ -9,11 +10,14 @@ import { Ficha } from 'src/app/Models/ficha';
   styleUrls: ['./editar-fichas.component.css']
 })
 export class EditarFichasComponent implements OnInit {
-
+  idFicha !: String
   ficha$ !: Observable<Ficha>
   fichaForm !: FormBuilder | any
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private routeAc : ActivatedRoute) {
+      this.routeAc.params.subscribe(params => this.idFicha = params['idFicha']);
     this.fichaForm = this.formBuilder.group({
       name: ['',Validators.required],
       description : '',

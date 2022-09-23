@@ -9,11 +9,11 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./adm-grade-fichas.component.css']
 })
 export class AdmGradeFichasComponent implements OnInit {
-  emailAluno : any
+  emailAluno !: String
   fichas$ !: Observable<Fichas>
 
-  constructor(private routeAR: ActivatedRoute) {
-    this.routeAR.params.subscribe(params => this.emailAluno = params['id']);
+  constructor(private routeAc: ActivatedRoute) {
+    this.routeAc.params.subscribe(params => this.emailAluno = params['idAluno']);
    }
 
   ngOnInit(): void {

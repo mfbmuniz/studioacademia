@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { Aluno } from './../../../Models/aluno';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-editar-aluno',
@@ -9,13 +10,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./editar-aluno.component.css']
 })
 export class EditarAlunoComponent implements OnInit {
-
+  emailAluno !: String
   aluno$ !: Observable<Aluno>
   editAlunoForm !: FormGroup
 
   constructor(
-    private formbuilder: FormBuilder
-    ) { }
+    private formbuilder: FormBuilder,
+    private routeAc : ActivatedRoute
+    ) {
+      this.routeAc.params.subscribe(params => this.emailAluno = params['idAluno']);
+    }
 
   ngOnInit(): void {
 

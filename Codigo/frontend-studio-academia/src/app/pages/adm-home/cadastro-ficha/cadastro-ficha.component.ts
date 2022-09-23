@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,FormArray, FormBuilder, Validators } from '@angular/forms'
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro-ficha',
@@ -7,17 +8,21 @@ import { FormGroup, FormControl,FormArray, FormBuilder, Validators } from '@angu
   styleUrls: ['./cadastro-ficha.component.css']
 })
 export class CadastroFichaComponent implements OnInit {
-
+  emailAluno !:  String
   fichaForm !: FormBuilder | any
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private routeAc : ActivatedRoute
   ) {
+    this.routeAc.params.subscribe(params => this.emailAluno = params['idAluno']);
+
     this.fichaForm = this.formBuilder.group({
       name: ['',Validators.required],
       description : '',
       exercicios: this.formBuilder.array([]) ,
     })
+
   }
 
   ngOnInit(): void {
