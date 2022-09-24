@@ -14,4 +14,8 @@
 <div *ngIf="alunos$ | async as alunos" id="grade-alunos">
   <app-grade-alunos [alunos]="alunos"></app-grade-alunos>
 </div>
-
+<div *ngIf="exercicios$ | async as exercicios">
+  <div class="col-5 offset-4">
+    <app-tabela-exercicios [exercicios]="exercicios"></app-tabela-exercicios>
+  </div>
+</div>

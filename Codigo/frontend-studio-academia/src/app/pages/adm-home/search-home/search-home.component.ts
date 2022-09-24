@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Alunos } from 'src/app/Models/aluno';
 import { Router } from '@angular/router';
+import { Exercicio,Exercicios } from 'src/app/Models/exercicio';
 
 @Component({
   selector: 'app-search-home',
@@ -18,6 +19,7 @@ export class SearchHomeComponent implements OnInit {
 
   searchForm !: FormGroup
   alunos$ !: Observable<Alunos>
+  exercicios$ !: Observable<Exercicios>
 
   ngOnInit(): void {
     this.searchForm = this.formBuilder.group({

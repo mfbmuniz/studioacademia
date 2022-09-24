@@ -5,4 +5,6 @@ export interface Exercicio {
   description: string,
 }
 
+export type Exercicios = Array<Exercicio>
+
 

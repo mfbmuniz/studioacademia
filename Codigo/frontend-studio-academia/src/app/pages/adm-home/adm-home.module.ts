@@ -16,6 +16,7 @@ import { CadastroFichaComponent } from './cadastro-ficha/cadastro-ficha.componen
 import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
 import { AdmGradeFichasComponent } from './adm-grade-fichas/adm-grade-fichas.component';
 import { EditarFichasComponent } from './editar-fichas/editar-fichas.component';
+import { TabelaExerciciosComponent } from './tabela-exercicios/tabela-exercicios.component';
 
 
 
@@ -32,6 +33,7 @@ import { EditarFichasComponent } from './editar-fichas/editar-fichas.component';
     EditarAlunoComponent,
     AdmGradeFichasComponent,
     EditarFichasComponent,
+    TabelaExerciciosComponent,
 
   ],
   imports: [
