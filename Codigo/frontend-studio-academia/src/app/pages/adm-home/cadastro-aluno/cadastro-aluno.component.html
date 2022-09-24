@@ -12,11 +12,11 @@
   <form action="" class="mt-4" [formGroup]="novoAlunoForm" (ngSubmit)="cadastrar()">
     <div class="row">
 
-      <div class="col-2 form-group offset-1 mt-1" formControlName = "roles">
+      <div class="col-2 form-group offset-1 mt-1" >
         <label for="typeUser">
           <p>Tipo do Usuário</p>
         </label>
-        <select name="" id="" class="form-control">
+        <select name="" id="" class="form-control" formControlName = "roles">
           <option value="aluno">Aluno</option>
           <option value="professor">Professor</option>
           <option value="nutricionista">Nutricionista</option>
