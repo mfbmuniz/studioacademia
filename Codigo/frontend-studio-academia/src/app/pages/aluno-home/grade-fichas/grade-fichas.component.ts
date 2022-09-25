@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component,Input, OnInit } from '@angular/core';
 import { Ficha, Fichas } from 'src/app/Models/ficha';
+import { pageableObject } from 'src/app/Models/PageableObject';
 
 
 @Component({
@@ -10,13 +11,13 @@ import { Ficha, Fichas } from 'src/app/Models/ficha';
 })
 export class GradeFichasComponent implements OnInit {
 
- fichas$ !: Observable<Fichas>
- teste = 1
+ fichas$ !: Fichas
+ pageable !: pageableObject
 
   constructor() { }
 
   ngOnInit(): void {
-    // this.ficha$ = .... Recuperação no banco
+    // this.ficha$ = <Fichas>this.pageable?.content
   }
 
 }
