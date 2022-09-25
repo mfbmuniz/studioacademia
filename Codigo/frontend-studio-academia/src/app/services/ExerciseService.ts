@@ -42,4 +42,13 @@ export class ExerciseService {
           return this.sessionSubject.asObservable();
   }
 
+  listByPage(pageRequest: number, sizeRequest: number, keySearch: string){
+    let searchPageUrl = `${environment.apiUrl}/exercise/page/${pageRequest}/size/${sizeRequest}`
+
+    if(keySearch.length > 0){
+      searchPageUrl +='/name/'+keySearch
+    }
+
+    return this.http.get(searchPageUrl)
+  }
 }

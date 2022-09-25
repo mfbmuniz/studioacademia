@@ -2,20 +2,20 @@
 <form action="" class="mt-4" [formGroup]="searchForm" (ngSubmit)="search()">
   <div class="input-group mb-3">
 
-    <select class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+    <select class="btn btn-outline-secondary dropdown-toggle" formControlName="typeSearch" type="button" data-bs-toggle="dropdown"
       aria-expanded="false">
-      <option value="aluno">Aluno</option>
-      <option value="exercicio">Exercício</option>
+      <option value="user" [defaultSelected]="true">Usuario</option>
+      <option value="exercise">Exercício</option>
     </select>
-    <input type="search" class="form-control" aria-label="Text input with dropdown button">
+    <input type="search" formControlName="keySearch" class="form-control" aria-label="Text input with dropdown button">
     <button type="submit" class="btn btn-warning">Pesquisar</button>
   </div>
 </form>
-<div *ngIf="alunos$ | async as alunos" id="grade-alunos">
-  <app-grade-alunos [alunos]="alunos"></app-grade-alunos>
+<div *ngIf="hasValuesToLoad && isSearchUser" id="grade-alunos">
+  <app-grade-alunos [pageable]="content$"></app-grade-alunos>
 </div>
-<div *ngIf="exercicios$ | async as exercicios">
+<div *ngIf="hasValuesToLoad && !isSearchUser">
   <div class="col-5 offset-4">
-    <app-tabela-exercicios [exercicios]="exercicios"></app-tabela-exercicios>
+    <app-tabela-exercicios [pageable]="content$"></app-tabela-exercicios>
   </div>
 </div>

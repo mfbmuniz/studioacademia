@@ -41,7 +41,7 @@ export class EditarAlunoComponent implements OnInit {
       state: ['',[Validators.required]],
       city: ['',[Validators.required]],
       sex: ['',[Validators.required]],
-      roles: [['ALUNO'],[Validators.required]],
+      roles: [[''],[Validators.required]],
       district:['',[Validators.required]]
 
     })

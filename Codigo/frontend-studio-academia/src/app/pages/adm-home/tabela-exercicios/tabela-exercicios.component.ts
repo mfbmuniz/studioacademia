@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Exercicio } from 'src/app/Models/exercicio';
+import {Component, Input, OnInit} from '@angular/core';
+import {Exercicio, Exercicios} from 'src/app/Models/exercicio';
+import {pageableObject} from "../../../Models/PageableObject";
 
 @Component({
   selector: 'app-tabela-exercicios',
@@ -8,10 +9,13 @@ import { Exercicio } from 'src/app/Models/exercicio';
 })
 export class TabelaExerciciosComponent implements OnInit {
 
-  @Input() exercicios !: Array<Exercicio>
-  constructor() { }
+  @Input() exercicios !: Exercicios
+  @Input() pageable !: pageableObject
+
+  constructor() {}
 
   ngOnInit(): void {
+    this.exercicios = <Exercicios>this.pageable?.content
   }
 
 }
