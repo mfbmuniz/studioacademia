@@ -6,10 +6,10 @@
       <th scope="col">editar Exercício</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody *ngFor="let exercicio of exercicios">
     <tr>
-      <th scope="row">1</th>
-      <td>Agachamento</td>
+      <th scope="row">{{exercicio.id}}</th>
+      <td>{{exercicio.name}}</td>
       <td><a [routerLink]="['']"><i class="bi bi-file-earmark-plus-fill"></i></a></td>
 
     </tr>
