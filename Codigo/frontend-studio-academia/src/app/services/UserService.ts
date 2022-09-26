@@ -33,6 +33,11 @@ export class  UserService {
     return this.http.get(searchPageUrl)
   }
 
+  delete(email : String){
+   // let deleteUsuario = `${environment.apiUrl}/delete/${email}`
+    return this.http.delete(`${environment.apiUrl}/delete/${email}`)
+  }
+
   getSession() {
     return JSON.parse(localStorage.getItem("session") || "{}");
   }

@@ -3,6 +3,7 @@ import { Aluno } from './../../../Models/aluno';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/services/UserService';
 
 @Component({
   selector: 'app-editar-aluno',
@@ -16,7 +17,8 @@ export class EditarAlunoComponent implements OnInit {
 
   constructor(
     private formbuilder: FormBuilder,
-    private routeAc : ActivatedRoute
+    private routeAc : ActivatedRoute,
+    private userService : UserService,
     ) {
       this.routeAc.params.subscribe(params => this.emailAluno = params['idAluno']);
     }
@@ -52,6 +54,16 @@ export class EditarAlunoComponent implements OnInit {
   }
 
   public delete() : void {
-    alert()
+    this.userService.delete(this.emailAluno)
+      .subscribe(
+        {
+          next:(res) => {
+            console.log(res)
+          },
+          error: (err) => {
+            console.log(err)
+          }
+        }
+      );
   }
 }
