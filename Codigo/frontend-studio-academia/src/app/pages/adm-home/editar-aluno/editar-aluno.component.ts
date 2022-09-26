@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { Aluno } from './../../../Models/aluno';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/UserService';
 
 @Component({
@@ -19,6 +19,7 @@ export class EditarAlunoComponent implements OnInit {
     private formbuilder: FormBuilder,
     private routeAc : ActivatedRoute,
     private userService : UserService,
+    private router : Router
     ) {
       this.routeAc.params.subscribe(params => this.emailAluno = params['idAluno']);
     }
@@ -59,6 +60,7 @@ export class EditarAlunoComponent implements OnInit {
         {
           next:(res) => {
             console.log(res)
+            this.router.navigateByUrl('adm/home')
           },
           error: (err) => {
             console.log(err)
