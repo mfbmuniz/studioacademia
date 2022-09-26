@@ -49,9 +49,10 @@ export class CadastroAlunoComponent implements OnInit {
       passwordConfirm: this.novoAlunoForm.value["passwordConfirm"],
       name: this.novoAlunoForm.value["name"],
       legalDocument: this.novoAlunoForm.value["legal_document"],
-      phone: this.novoAlunoForm.value["phone"],
+      phone1: this.novoAlunoForm.value["phone"],
+      phone2: this.novoAlunoForm.value["phone"],
       birthDate: this.novoAlunoForm.value["birthDate"],
-      roles: this.novoAlunoForm.value["roles"],
+      roles:[ this.novoAlunoForm.value["roles"]],
       sex: this.novoAlunoForm.value["sex"],
       address: {
         zipCode: this.novoAlunoForm.value["zipCode"],

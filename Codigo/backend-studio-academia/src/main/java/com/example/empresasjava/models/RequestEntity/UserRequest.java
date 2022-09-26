@@ -8,6 +8,7 @@ import lombok.Data;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,18 +25,31 @@ public class UserRequest {
     @NotNull(message = "Campo password não pode ser nulo")
     @NotEmpty(message = "Campo password não pode ser vazio")
     private String password;
+
     @NotNull(message = "Campo roles não pode ser nulo")
     private List<String> roles;
+
     @NotNull(message = "Campo legal_document não pode ser nulo")
     @NotEmpty(message = "Campo legal_document não pode ser vazio")
     private String legalDocument;
 
     @NotNull(message = "Campo address não pode ser nulo")
     private AddressDto address;
+
     @NotNull(message = "Campo sex não pode ser nulo")
     @NotEmpty(message = "Campo sex não pode ser vazio")
     private String sex;
 
+
+    private Date birthDate;
+
+    @NotNull(message = "Campo sex não pode ser nulo")
+    @NotEmpty(message = "Campo sex não pode ser vazio")
+    private String phone1;
+
+    @NotNull(message = "Campo sex não pode ser nulo")
+    @NotEmpty(message = "Campo sex não pode ser vazio")
+    private String phone2;
     public UserRequest() {
     }
 
@@ -51,6 +65,9 @@ public class UserRequest {
                 user.name,
                 user.email,
                 user.password,
+                user.birthDate,
+                user.phone1,
+                user.phone2,
                 user.getLegalDocument(),
                 address,
                 Objects.requireNonNull(SexEnum.getByCd(user.getSex())),
