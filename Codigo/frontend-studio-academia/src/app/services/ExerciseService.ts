@@ -8,8 +8,9 @@ import {environment} from "../../environments/environment";
   providedIn: "root",
 })
 export class ExerciseService {
+
   private static API_URLS = {
-    EXERCICE_REGISTRATION: `${environment.apiUrl}/exercise/create`,
+    CREATE: `${environment.apiUrl}/exercise/create`,
   };
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -18,14 +19,10 @@ export class ExerciseService {
     this.getSession()
   );
 
-  login(body: any): Observable<any> {
-    return this.http.post(ExerciseService.API_URLS.EXERCICE_REGISTRATION, body);
+  create(body: any): Observable<any> {
+    return this.http.post(ExerciseService.API_URLS.CREATE, body);
   }
 
-  logout() {
-    localStorage.clear();
-    this.sessionSubject.next(null);
-  }
 
   getSession() {
     return JSON.parse(localStorage.getItem("session") || "{}");

@@ -17,8 +17,7 @@ public class ExerciseRequest {
     @NotEmpty(message = "Campo name não pode ser vazio")
     private String exerciseUrl;
 
-    @NotNull(message = "Campo name não pode ser nulo")
-    @NotEmpty(message = "Campo name não pode ser vazio")
+
     private String description;
 
     public ExerciseRequest() {

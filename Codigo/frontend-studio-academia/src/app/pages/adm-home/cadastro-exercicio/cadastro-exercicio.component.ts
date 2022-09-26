@@ -11,27 +11,45 @@ import {ExerciseService} from "../../../services/ExerciseService";
 })
 export class CadastroExercicioComponent implements OnInit {
 
+  novoExercicioForm !: FormGroup
+
   constructor(
     private formBuilder: FormBuilder,
     private router : Router,
     private exerciseRegistrationService: ExerciseService,
     ) { }
 
-  novoExercicioForm !: FormGroup
+
+
   ngOnInit(): void {
     this.novoExercicioForm = this.formBuilder.group({
       name : ['',Validators.required,],
       url : ['',Validators.required],
-      description : ['',]
+      description : ['',Validators.required]
     })
   }
 
-  public cadastrar() : void{
+    cadastrar() : void{
+    const novoExercicio = this.novoExercicioForm.getRawValue();
+    console.log("AQUI")
     let body = {
-      name : this.novoExercicioForm.value("name"),
-      description : this.novoExercicioForm.value("description"),
-      url : this.novoExercicioForm.value("url")
+      description : this.novoExercicioForm.value["description"],
+      exerciseUrl : this.novoExercicioForm.value["url"],
+      name : this.novoExercicioForm.value["name"],
     }
+
+    this.exerciseRegistrationService.create(body)
+      .subscribe(
+        {
+          next:(res) => {
+            console.log(res)
+          },
+          error: (err) => {
+            console.log(err)
+          }
+        }
+      );
+    console.log(novoExercicio)
 
   }
 

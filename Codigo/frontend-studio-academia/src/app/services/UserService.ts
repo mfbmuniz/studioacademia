@@ -35,7 +35,7 @@ export class  UserService {
 
   delete(email : String){
    // let deleteUsuario = `${environment.apiUrl}/delete/${email}`
-    return this.http.delete(`${environment.apiUrl}/delete/${email}`)
+    return this.http.delete(`${environment.apiUrl}/user/delete/${email}`)
   }
 
   getSession() {
