@@ -3,7 +3,9 @@ package com.example.empresasjava;
 import com.example.empresasjava.enums.RolesEnum;
 import com.example.empresasjava.enums.SexEnum;
 import com.example.empresasjava.models.*;
-import com.example.empresasjava.repository.*;
+import com.example.empresasjava.repository.AddressRepository;
+import com.example.empresasjava.repository.RoleRepository;
+import com.example.empresasjava.repository.UserRepository;
 import com.example.empresasjava.service.CityService;
 import com.example.empresasjava.service.StateService;
 import javassist.NotFoundException;
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.util.Collections;
+import java.util.Date;
 
 @SpringBootApplication
 public class EmpresasJavaApplication {
@@ -64,7 +67,9 @@ public class EmpresasJavaApplication {
 
 			admin = new User("Admin", "admin@admin.com",
 								this.bcryptEncoder.encode("12345678"),
-								"123456789", address, SexEnum.MALE,
+								new Date(1991,07,30),"123456789","33853056",
+					"123456789" , address, SexEnum.MALE,
+
 								Collections.singletonList(admRole)
 						);
 		}else if(admin.getRoles().stream().noneMatch(role -> role.equals(admRole))){

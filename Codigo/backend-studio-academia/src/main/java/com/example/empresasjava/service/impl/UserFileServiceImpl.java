@@ -1,26 +1,25 @@
 package com.example.empresasjava.service.impl;
 
 import com.example.empresasjava.models.Exercise;
-import com.example.empresasjava.models.RequestEntity.ExerciseRequest;
+import com.example.empresasjava.models.RequestEntity.UserExerciseRequest;
 import com.example.empresasjava.models.RequestEntity.UserFileRequest;
-import com.example.empresasjava.models.RequestEntity.UserRequest;
+import com.example.empresasjava.models.ResponseEntity.ExerciseResponse;
 import com.example.empresasjava.models.ResponseEntity.UserExerciseResponse;
+import com.example.empresasjava.models.ResponseEntity.UserFileResponse;
 import com.example.empresasjava.models.User;
+import com.example.empresasjava.models.UserExercises;
 import com.example.empresasjava.models.UserFile;
 import com.example.empresasjava.models.dto.UserDto;
 import com.example.empresasjava.repository.ExerciseRepository;
+import com.example.empresasjava.repository.UserExercisesRepository;
 import com.example.empresasjava.repository.UserFileRepository;
 import com.example.empresasjava.repository.UserRepository;
-import com.example.empresasjava.service.ExerciseService;
 import com.example.empresasjava.service.UserFileService;
-import com.example.empresasjava.service.UserService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserFileServiceImpl implements UserFileService {
@@ -34,16 +33,46 @@ public class UserFileServiceImpl implements UserFileService {
     @Autowired
     private ExerciseRepository exerciseRepository;
 
+    @Autowired
+    private UserExercisesRepository userExercisesRepository;
+
+
     @Override
-    public UserExerciseResponse create(UserFileRequest userFileRequest) throws NotFoundException {
-        User user = this.userRepository.findById(userFileRequest.getUserId())
+    public UserFileResponse create(UserFileRequest userFileRequest) throws NotFoundException {
+        User user = this.userRepository.findById(userFileRequest.getUser().getId_user())
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
-        List<Exercise> allExercises = this.exerciseRepository.findAllByExerciseIdIn(userFileRequest.getExercisesIds());
-//TODO: checar se tem exercicio
+       return UserFileResponse.fromUserFile(this.userFileRepository.save(new UserFile(user,userFileRequest.getFileName())));
 
-        this.userFileRepository.save(new UserFile(user, allExercises));
+    }
+    @Override
+    public UserExerciseResponse addExercices(UserExerciseRequest userExerciseRequest)throws NotFoundException{
 
-        return new UserExerciseResponse();
+        User user = this.userRepository.findById(userExerciseRequest.getUser().getId_user())
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+
+        UserFile userFile =this.userFileRepository.findById(userExerciseRequest.getFileId())
+                .orElseThrow(() -> new NotFoundException("Ficha Inexistente"));
+
+        Exercise exercise =this.exerciseRepository.findById(userExerciseRequest.getExerciseId())
+                .orElseThrow(() -> new NotFoundException("Exercicio Inexistente"));
+
+        if(userFile.getUser().getId_user() == user.getId_user()){
+
+            return UserExerciseResponse.fromUserExercise(this.userExercisesRepository.save(new UserExercises(
+                    userFile,
+                    exercise,
+                    userExerciseRequest.getSeries(),
+                    userExerciseRequest.getRepetitions() )
+                    ),
+                    UserDto.fromUser(user)
+            );
+
+
+        }else{
+            //throw new UserFileAndUserNotMatch ("id do usuario diferente do id da ficha ");
+            return null;
+        }
+
     }
 }

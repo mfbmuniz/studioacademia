@@ -8,7 +8,15 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
-public class UserFileRequest {
+public class UserExerciseRequest {
+
+    @NotNull(message = "Campo user não pode ser nulo")
+    @NotEmpty(message = "Campo user não pode ser vazio")
+    long exerciseId;
+
+    @NotNull(message = "Campo user não pode ser nulo")
+    @NotEmpty(message = "Campo user não pode ser vazio")
+    long fileId;
 
     @NotNull(message = "Campo user não pode ser nulo")
     @NotEmpty(message = "Campo user não pode ser vazio")
@@ -16,6 +24,9 @@ public class UserFileRequest {
 
     @NotNull(message = "Campo user não pode ser nulo")
     @NotEmpty(message = "Campo user não pode ser vazio")
-    String fileName;
+    Integer series;
 
+    @NotNull(message = "Campo user não pode ser nulo")
+    @NotEmpty(message = "Campo user não pode ser vazio")
+    Integer repetitions;
 }
