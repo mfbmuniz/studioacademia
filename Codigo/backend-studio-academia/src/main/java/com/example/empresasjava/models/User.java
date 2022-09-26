@@ -56,6 +56,21 @@ public class User {
 
 
 
+    @Column(name = "birth_date")
+    private Date birthDate;
+
+    @NotNull(message = "Campo password não pode ser nulo")
+    @NotEmpty(message = "Campo password não pode ser vazio")
+    @Column(name = "phone1")
+    private String phone1;
+
+    @NotNull(message = "Campo password não pode ser nulo")
+    @NotEmpty(message = "Campo password não pode ser vazio")
+    @Column(name = "phone2")
+    private String phone2;
+
+
+
     private Date createdAt;
     private Date deletedAt;
 
@@ -67,6 +82,9 @@ public class User {
                 @NotNull(message = "Campo data não pode ser nulo")
                 @NotEmpty(message = "Campo data não pode ser vazio")
                 String password,
+                Date birthDate,
+                String phone1,
+                String phone2,
                 String legal_document,
                 Address address,
                 SexEnum sex,
@@ -75,11 +93,15 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.birthDate = birthDate;
+        this.phone1 = phone1;
+        this.phone2 = phone2;
         this.sex = sex.getCode();
         this.legal_document = legal_document;
         this.address = address;
         this.roles = roles;
     }
+
 
     public static User fromUserResponse(UserDto user){
         return null;

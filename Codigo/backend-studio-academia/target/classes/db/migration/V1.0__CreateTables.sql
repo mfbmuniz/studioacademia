@@ -50,7 +50,11 @@ CREATE TABLE users (
                        sex VARCHAR(1) NOT NULL,
                        legal_document VARCHAR(11) NOT NULL,
                        address_id INT NOT NULL,
-                       plans_id INT CHECK (plans_id > 0) ,
+                       plans_id INT CHECK (plans_id > 0),
+                       birth_date TIMESTAMP(0) NULL DEFAULT NULL,
+                       phone1 VARCHAR(100) NOT NULL,
+                       phone2 VARCHAR(100) NOT NULL,
+
 
                        created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
                        deleted_at TIMESTAMP(0) NULL DEFAULT NULL,
@@ -179,6 +183,7 @@ CREATE SEQUENCE user_file_seq;
 CREATE TABLE user_file (
                     user_file_id INT DEFAULT NEXTVAL ('user_file_seq') PRIMARY KEY,
                     user_id INT CHECK (user_id > 0) not null,
+                    file_name VARCHAR(100) NOT NULL,
 
                     created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
                     deleted_at TIMESTAMP(0) NULL DEFAULT NULL,
@@ -192,6 +197,9 @@ CREATE TABLE user_exercises (
                     user_exercises_id INT DEFAULT NEXTVAL ('user_exercises_seq') PRIMARY KEY,
                     user_file_id INT CHECK (user_file_id > 0) not null,
                     exercises_id INT CHECK (exercises_id > 0) not null,
+                    series INT not null ,
+                    repetitions INT not null,
+
 
                     created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
                     deleted_at TIMESTAMP(0) NULL DEFAULT NULL,
