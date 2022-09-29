@@ -1,4 +1,4 @@
-package com.example.empresasjava.models.ResponseEntity;
+package com.example.empresasjava.models.dto;
 
 
 import com.example.empresasjava.models.Exercise;

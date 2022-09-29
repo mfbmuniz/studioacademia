@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+//TODO: FINISH IMPLEMENTATIONS
 @Service
 public class UserFileServiceImpl implements UserFileService {
 
@@ -75,4 +77,26 @@ public class UserFileServiceImpl implements UserFileService {
         }
 
     }
+
+    @Override
+    public UserFileResponse editUserFile(UserFileRequest request, Long id) throws NotFoundException {
+        return null;
+    }
+
+    @Override
+    public UserFileResponse deleteUserFile(UserFileRequest request, Long idFile) throws NotFoundException {
+        return null;
+    }
+
+    @Override
+    public UserExerciseResponse deleteUserExercise(UserExerciseRequest request, Long idExercise, Long idFile) throws NotFoundException {
+        return null;
+    }
+
+    @Override
+    public UserExerciseResponse editExercices(UserExerciseRequest request, Long idExercise, Long idFile) throws NotFoundException {
+        return null;
+    }
+
+
 }

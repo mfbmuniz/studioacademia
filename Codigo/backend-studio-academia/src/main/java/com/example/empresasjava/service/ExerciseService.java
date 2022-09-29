@@ -2,7 +2,7 @@ package com.example.empresasjava.service;
 
 import com.example.empresasjava.models.Exercise;
 import com.example.empresasjava.models.RequestEntity.ExerciseRequest;
-import com.example.empresasjava.models.ResponseEntity.ExerciseDto;
+import com.example.empresasjava.models.dto.ExerciseDto;
 import javassist.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

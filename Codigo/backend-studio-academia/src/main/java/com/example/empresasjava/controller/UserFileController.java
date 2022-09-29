@@ -18,6 +18,14 @@ import javax.validation.Valid;
 @RestController
 @CrossOrigin
 @RequestMapping("/user-files")
+
+/*TODO:
+    LISTAR EXERCICIOS DA FICHA X PAGINADO
+    LISTAR TODAS AS FICHAS PAGINADO
+    LISTAR TODAS AS FICHAS DE UM USUARIO PAGINADO (PESQUISAR POR NOME )
+    DENTRO DAS FICHAS DE UM USUARIO X PESQUISAR UMA FICHA EM ESPECIFICO POR NOME ()
+
+*/
 public class UserFileController {
 
     @Autowired
@@ -39,6 +47,38 @@ public class UserFileController {
                 );
 
     }
+    @PostMapping(path = "/edit/{idFile}")
+    @ApiOperation(value = "ficha de usuario")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    public ResponseEntity<UserFileResponse> editUserFile(
+            @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
+            @Valid @RequestBody UserFileRequest request,
+            @PathVariable Long id) throws NotFoundException {
+
+
+        UserFileResponse userFileResponse = this.userFileService.editUserFile(request,id);
+
+        return ResponseEntity.ok().body(
+                userFileResponse
+        );
+    }
+
+    @DeleteMapping(path = "/deleteFile/{idFile}")
+    @ApiOperation(value = "ficha de usuario")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    public ResponseEntity<UserFileResponse> deleteUserFile(
+            @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
+            @Valid @RequestBody UserFileRequest request,
+            @PathVariable Long idFile) throws NotFoundException {
+
+
+        UserFileResponse userFileResponse = this.userFileService.deleteUserFile(request,idFile);
+
+        return ResponseEntity.ok().body(
+                userFileResponse
+        );
+    }
+
 
     @PostMapping(path = "/addExercises")
     @ApiOperation(value = "adiciona exercicios na ficha")
@@ -52,5 +92,37 @@ public class UserFileController {
         return ResponseEntity.ok().body(userExerciseResponse);
 
     }
+    @DeleteMapping(path = "/deleteExercise/{idFile}/{idExercise}")
+    @ApiOperation(value = "ficha de usuario")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    public ResponseEntity<UserExerciseResponse> deleteUserExercise(
+            @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
+            @Valid @RequestBody UserExerciseRequest request,
+            @PathVariable Long idExercise,
+            @PathVariable Long idFile) throws NotFoundException {
+
+
+        UserExerciseResponse userExerciseResponse = this.userFileService.deleteUserExercise(request,idExercise,idFile);
+
+        return ResponseEntity.ok().body(
+                userExerciseResponse
+        );
+    }
+    @PostMapping(path = "/editExercises/{idFile}/{idExercise}")
+    @ApiOperation(value = "adiciona exercicios na ficha")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    public ResponseEntity<UserExerciseResponse> editExercices(
+            @ApiParam(value = "Json da requisição que contem o dado do usuario a ser salvo")
+            @Valid @RequestBody UserExerciseRequest request,
+            @PathVariable Long idExercise,
+            @PathVariable Long idFile) throws NotFoundException {
+
+        UserExerciseResponse userExerciseResponse = this.userFileService.editExercices(request,idExercise,idFile);
+
+        return ResponseEntity.ok().body(userExerciseResponse);
+
+    }
+
+
 
 }

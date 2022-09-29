@@ -158,6 +158,8 @@ CREATE TABLE monthly_payment (
                     due_Date TIMESTAMP(0) NULL DEFAULT NULL,
                     payment_CHECK BOOLEAN  not null,
                     user_id INT CHECK (user_id > 0),
+                    payment_voucher VARCHAR(200),
+                    optional_message VARCHAR(200),
 
 
                     created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,

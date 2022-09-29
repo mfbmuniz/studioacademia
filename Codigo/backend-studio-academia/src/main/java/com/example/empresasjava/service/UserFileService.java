@@ -10,4 +10,13 @@ public interface UserFileService {
 
     UserFileResponse create(UserFileRequest userFileRequest) throws NotFoundException;
     UserExerciseResponse addExercices(UserExerciseRequest request) throws NotFoundException;
+
+    UserFileResponse editUserFile(UserFileRequest request, Long id)throws NotFoundException;
+
+    UserFileResponse deleteUserFile(UserFileRequest request, Long idFile)throws NotFoundException;
+
+    UserExerciseResponse deleteUserExercise(UserExerciseRequest request, Long idExercise, Long idFile)throws NotFoundException;
+
+
+    UserExerciseResponse editExercices(UserExerciseRequest request, Long idExercise, Long idFile)throws NotFoundException;
 }

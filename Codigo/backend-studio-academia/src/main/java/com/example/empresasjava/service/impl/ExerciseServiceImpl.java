@@ -2,8 +2,7 @@ package com.example.empresasjava.service.impl;
 
 import com.example.empresasjava.models.*;
 import com.example.empresasjava.models.RequestEntity.ExerciseRequest;
-import com.example.empresasjava.models.ResponseEntity.ExerciseDto;
-import com.example.empresasjava.models.dto.UserDto;
+import com.example.empresasjava.models.dto.ExerciseDto;
 import com.example.empresasjava.repository.ExerciseRepository;
 import com.example.empresasjava.service.ExerciseService;
 import javassist.NotFoundException;
