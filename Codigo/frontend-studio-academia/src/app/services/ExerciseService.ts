@@ -23,7 +23,6 @@ export class ExerciseService {
     return this.http.post(ExerciseService.API_URLS.CREATE, body);
   }
 
-
   getSession() {
     return JSON.parse(localStorage.getItem("session") || "{}");
   }

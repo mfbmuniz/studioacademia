@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,FormArray, FormBuilder, Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
+import { UserFileService } from 'src/app/services/UserFileService';
 
 @Component({
   selector: 'app-cadastro-ficha',
@@ -13,7 +14,8 @@ export class CadastroFichaComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private routeAc : ActivatedRoute
+    private routeAc : ActivatedRoute,
+    private userFileService : UserFileService
   ) {
     this.routeAc.params.subscribe(params => this.emailAluno = params['idAluno']);
 
@@ -29,7 +31,12 @@ export class CadastroFichaComponent implements OnInit {
   }
 
   public cadastrar() : void{
-    console.log(this.fichaForm.value);
+
+    let body = {
+      user_id : this.emailAluno,
+      name : this.fichaForm.value["name"],
+    }
+
   }
 
   get exercicios() : FormArray {

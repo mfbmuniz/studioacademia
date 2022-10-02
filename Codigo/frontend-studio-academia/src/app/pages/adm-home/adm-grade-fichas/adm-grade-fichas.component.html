@@ -3,10 +3,9 @@
 </div>
 
 <div class="col-2 offset-9">
-  <a [routerLink]="['cadastrarFicha',emailAluno] " class="btn btn-warning">
-    <i class="bi bi-file-earmark-plus"></i>Adicionar Fichas
+  <a  (click)="cadastrar()" class="btn btn-warning">
+    <i class="bi bi-file-earmark-plus"></i>  Adicionar Ficha
   </a>
-  <h2>{{emailAluno}}</h2>
 </div>
 
 
@@ -16,23 +15,22 @@
       <div class="card-body">
         <h2 class="card-title">{{ficha?.name}}</h2>
         <p class="card-text">{{ficha?.description}}</p>
-        <a [routerLink]="['editarFicha','{{ficha?.name}}']" class="btn btn-warning offset-8">editar</a>
-        <button class="btn btn-danger offset-1" (click)="delete('{{ficha?.name}}')"><i
+        <a [routerLink]="['editarFicha','{{ficha?.id}}']" class="btn btn-warning offset-8">editar</a>
+        <button class="btn btn-danger offset-1" (click)="delete('{{ficha?.id}}')"><i
             class="bi bi-trash3"></i></button>
       </div>'
     </div>
   </div>
 </div>
 
-<!-- TEMPLATE BASE
+
 <div class="col-8 mt-3 offset-3">
   <div class="card w-75 mt-3 bg-secondary">
     <div class="card-body">
-      <h2 class="card-title">Sessão A</h2>
-      <p class="card-text">Costas e Ombros </p>
+      <h2 class="card-title">Nova Ficha</h2>
       <a [routerLink]="[]" class="btn btn-warning offset-8">editar</a>
-      <button class="btn btn-danger offset-1" (click)="delete()"><i class="bi bi-trash3"></i></button>
+      <button class="btn btn-danger offset-1" ><i class="bi bi-trash3"></i></button>
     </div>
   </div>
 </div>
--->
+

@@ -46,10 +46,15 @@ export class EditarFichasComponent implements OnInit {
 
  addExercicio() {
   this.exercicios.push(this.newExercicio());
+  this.cadastrar();
 }
 
 removeExercicio(i:number) {
   this.exercicios.removeAt(i);
+}
+
+cadastrar(){
+
 }
 
 

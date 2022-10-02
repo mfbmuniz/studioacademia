@@ -20,15 +20,6 @@
           formControlName='name'>
       </div>
 
-
-      <div class="col-6">
-        <label>
-          <p>Descrição</p>
-        </label>
-        <textarea name="description" id="" class="form-control " cols="15" rows="1"
-        placeholder="Informe os músculos a serem trabalhados"></textarea>
-      </div>
-
       <div formArrayName="exercicios" class="mt-2">
         <div *ngFor="let exercicio of exercicios.controls; let i=index">
           <div [formGroupName]="i">
