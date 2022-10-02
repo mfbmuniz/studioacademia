@@ -3,7 +3,8 @@
     <tr class="table-secondary">
       <th scope="col">id</th>
       <th scope="col">Exercício</th>
-      <th scope="col">editar Exercício</th>
+      <th scope="col">Editar exercício</th>
+      <th scope="col">Apagar exercício</th>
     </tr>
   </thead>
   <tbody *ngFor="let exercicio of exercicios">
@@ -11,7 +12,7 @@
       <th scope="row">{{exercicio.id}}</th>
       <td>{{exercicio.name}}</td>
       <td><a [routerLink]="['']"><i class="bi bi-file-earmark-plus-fill"></i></a></td>
-
+      <td><button class="btn btn-danger offset-1" (click)="deletar(exercicio.id)"><i class="bi bi-trash3"></i></button></td>
     </tr>
   </tbody>
 </table>

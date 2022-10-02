@@ -36,10 +36,6 @@ const routes: Routes = [
         component: CadastroExercicioComponent
       },
       {
-        path: 'cadastrarFicha/:idAluno',
-        component: CadastroFichaComponent
-      },
-      {
         path: 'editarAluno/:idAluno',
         component: EditarAlunoComponent
       },

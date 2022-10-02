@@ -23,6 +23,14 @@ export class ExerciseService {
     return this.http.post(ExerciseService.API_URLS.CREATE, body);
   }
 
+  update(exercise_id : string, body: any) : Observable <any>{
+    return this.http.post(`${environment.apiUrl}/exercise/edit/${exercise_id}`,body)
+  }
+
+  delete(exercise_id : string) : Observable <any>{
+    return this.http.delete(`${environment.apiUrl}/exercise/delete/${exercise_id}`)
+  }
+
   getSession() {
     return JSON.parse(localStorage.getItem("session") || "{}");
   }

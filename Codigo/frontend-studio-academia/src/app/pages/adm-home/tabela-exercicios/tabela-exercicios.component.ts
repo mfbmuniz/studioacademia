@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Exercicio, Exercicios} from 'src/app/Models/exercicio';
+import { ExerciseService } from 'src/app/services/ExerciseService';
 import {pageableObject} from "../../../Models/PageableObject";
 
 @Component({
@@ -12,10 +13,15 @@ export class TabelaExerciciosComponent implements OnInit {
   @Input() exercicios !: Exercicios
   @Input() pageable !: pageableObject
 
-  constructor() {}
+  constructor(private exerciseService : ExerciseService) {}
 
   ngOnInit(): void {
     this.exercicios = <Exercicios>this.pageable?.content
+  }
+
+  public deletar(exercise_id : number){
+    var id = exercise_id.toString()
+    this.exerciseService.delete(id);
   }
 
 }
