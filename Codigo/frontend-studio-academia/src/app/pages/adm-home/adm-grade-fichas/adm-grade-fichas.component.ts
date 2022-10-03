@@ -49,6 +49,7 @@ export class AdmGradeFichasComponent implements OnInit {
   }
 
   public delete(idFile: String): void {
+    console.log("HI")
     this.userFileService.delete(idFile).subscribe(
       {
         next: (res) => {

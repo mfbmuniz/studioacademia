@@ -16,6 +16,7 @@
         <h2 class="card-title">{{ficha?.name}}</h2>
         <p class="card-text">{{ficha?.description}}</p>
         <a [routerLink]="['editarFicha','{{ficha?.id}}']" class="btn btn-warning offset-8">editar</a>
+
         <button class="btn btn-danger offset-1" (click)="delete('{{ficha?.id}}')"><i
             class="bi bi-trash3"></i></button>
       </div>'

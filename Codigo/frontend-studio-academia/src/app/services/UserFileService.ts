@@ -12,6 +12,7 @@ export class UserFileService {
   private static API_URLS = {
     CREATE: `${environment.apiUrl}/user-files/create`,
     ADDEXERCISES : `${environment.apiUrl}/user-files/addExercises`,
+
   };
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -24,8 +25,8 @@ export class UserFileService {
     return this.http.post(UserFileService.API_URLS.ADDEXERCISES, body);
   }
 
-  delete(id_file : String){
-    return this.http.delete(`${environment.apiUrl}/user-files/deleteFile/${id_file}`)
+  delete(idFile : String){
+    return this.http.delete(`${environment.apiUrl}/user-files/deleteFile/${idFile}`)
   }
 
 }
