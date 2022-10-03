@@ -33,7 +33,7 @@ export class  UserService {
     return this.http.get(searchPageUrl)
   }
 
-  delete(email : String){
+  delete(email : String): Observable<any>{
    // let deleteUsuario = `${environment.apiUrl}/delete/${email}`
     return this.http.delete(`${environment.apiUrl}/user/delete/${email}`)
   }

@@ -21,12 +21,22 @@ export class UserFileService {
     return this.http.post(UserFileService.API_URLS.CREATE, body);
   }
 
-  addExercises(body: any){
+  delete(idFile : String): Observable<any>{
+    return this.http.delete(`${environment.apiUrl}/user-files/deleteFile/${idFile}`)
+  }
+
+  addExercise(body: any): Observable<any>{
     return this.http.post(UserFileService.API_URLS.ADDEXERCISES, body);
   }
 
-  delete(idFile : String){
-    return this.http.delete(`${environment.apiUrl}/user-files/deleteFile/${idFile}`)
+  editExercise(body : any , idFile : String , idExercise : String) : Observable<any>{
+    return this.http.post(`${environment.apiUrl}/editExercises/${idFile}/${idExercise}`,body)
   }
+
+  deleteExercise(idFile : String , idExercise : String): Observable<any>{
+    return this.http.delete(`${environment.apiUrl}//deleteExercise/${idFile}/${idExercise}`)
+  }
+
+
 
 }
