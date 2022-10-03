@@ -29,7 +29,7 @@ public class UserDto {
                 .map(RoleDto::toRole)
                 .collect(Collectors.toList());
 
-        return new UserDto(user.getId_user(), user.getName(), user.getEmail(), roles);
+        return new UserDto(user.getIdUser(), user.getName(), user.getEmail(), roles);
     }
 
 }

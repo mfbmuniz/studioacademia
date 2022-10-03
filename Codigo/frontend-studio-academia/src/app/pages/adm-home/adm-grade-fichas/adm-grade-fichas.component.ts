@@ -4,6 +4,8 @@ import { Ficha, Fichas } from 'src/app/Models/ficha';
 import { ActivatedRoute } from '@angular/router';
 import { pageableObject } from 'src/app/Models/PageableObject';
 import { UserFileService } from 'src/app/services/UserFileService';
+import {FormBuilder} from "@angular/forms";
+import {AuthService} from "../../../services/AuthService";
 
 @Component({
   selector: 'app-adm-grade-fichas',
@@ -14,25 +16,29 @@ export class AdmGradeFichasComponent implements OnInit {
   emailAluno !: String | 'teste'
   fichas$ !: Fichas
   pageable !: pageableObject
+  idAluno!:  String | 'teste'
+  auth!: AuthService
 
 
-  constructor(private routeAc: ActivatedRoute, private userFileService : UserFileService) {
-    this.routeAc.params.subscribe(params => this.emailAluno = params['idAluno'])
-   }
+
+  constructor(private routeAc: ActivatedRoute, private userFileService: UserFileService) {
+    this.routeAc.params.subscribe(params => this.idAluno = params['idAluno'])
+
+  }
 
   ngOnInit(): void {
     // this.fichas$ = <Fichas>this.pageables?.content
   }
 
-  cadastrar(){
+  cadastrar() {
     let body = {
-      id_user : this.emailAluno,
-      name : "Nova Ficha",
+      idUser: this.idAluno,
+      fileName: "Nova Ficha2",
     }
 
     this.userFileService.create(body).subscribe(
       {
-        next:(res) => {
+        next: (res) => {
           console.log(res)
         },
         error: (err) => {
@@ -42,10 +48,10 @@ export class AdmGradeFichasComponent implements OnInit {
     )
   }
 
-  public delete(id_file : String) : void{
-    this.userFileService.delete(id_file).subscribe(
+  public delete(idFile: String): void {
+    this.userFileService.delete(idFile).subscribe(
       {
-        next:(res) => {
+        next: (res) => {
           console.log(res)
         },
         error: (err) => {

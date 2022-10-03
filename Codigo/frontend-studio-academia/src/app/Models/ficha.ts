@@ -1,7 +1,7 @@
 import { Exercicio } from "./exercicio";
 
 export interface Ficha {
-  id : number,
+  id : string,
   name : string,
   description : string,
   exercicios : Array<Exercicio>,

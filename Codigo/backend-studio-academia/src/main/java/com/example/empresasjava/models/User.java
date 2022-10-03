@@ -20,7 +20,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long id_user;
+    private Long idUser;
 
     @NotNull(message = "Campo name não pode ser nulo")
     @NotEmpty(message = "Campo name não pode ser vazio")

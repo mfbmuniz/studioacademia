@@ -12,7 +12,7 @@ public class UserFileRequest {
 
     @NotNull(message = "Campo user não pode ser nulo")
     @NotEmpty(message = "Campo user não pode ser vazio")
-    User user;
+    String idUser;
 
     @NotNull(message = "Campo user não pode ser nulo")
     @NotEmpty(message = "Campo user não pode ser vazio")

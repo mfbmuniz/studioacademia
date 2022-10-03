@@ -41,8 +41,12 @@ public class UserFileServiceImpl implements UserFileService {
 
     @Override
     public UserFileResponse create(UserFileRequest userFileRequest) throws NotFoundException {
-        User user = this.userRepository.findById(userFileRequest.getUser().getId_user())
+
+        Long id =  Long.parseLong(userFileRequest.getIdUser());
+        User user = this.userRepository.findById(Long.parseLong(userFileRequest.getIdUser()))
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+
+
 
        return UserFileResponse.fromUserFile(this.userFileRepository.save(new UserFile(user,userFileRequest.getFileName())));
 
@@ -50,7 +54,7 @@ public class UserFileServiceImpl implements UserFileService {
     @Override
     public UserExerciseResponse addExercices(UserExerciseRequest userExerciseRequest)throws NotFoundException{
 
-        User user = this.userRepository.findById(userExerciseRequest.getUser().getId_user())
+        User user = this.userRepository.findById(userExerciseRequest.getUser().getIdUser())
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
         UserFile userFile =this.userFileRepository.findById(userExerciseRequest.getFileId())
@@ -59,7 +63,7 @@ public class UserFileServiceImpl implements UserFileService {
         Exercise exercise =this.exerciseRepository.findById(userExerciseRequest.getExerciseId())
                 .orElseThrow(() -> new NotFoundException("Exercicio Inexistente"));
 
-        if(userFile.getUser().getId_user() == user.getId_user()){
+        if(userFile.getUser().getIdUser() == user.getIdUser()){
 
             return UserExerciseResponse.fromUserExercise(this.userExercisesRepository.save(new UserExercises(
                     userFile,
