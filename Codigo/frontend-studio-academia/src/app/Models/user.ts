@@ -1,4 +1,4 @@
-export interface Aluno {
+export interface User {
   roles ?: string,
   name ?: string,
   email ?: string,
@@ -14,7 +14,7 @@ export interface Aluno {
   state ?: string,
   city ?: string,
   district ?: string
-  idUser?:string
+  idUser?: string
 }
 
-export type Alunos = Array<Aluno>
+export type Users = Array<User>
