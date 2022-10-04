@@ -2,7 +2,6 @@ package com.example.empresasjava.controller;
 
 import com.example.empresasjava.models.RequestEntity.MonthlyPaymentRequest;
 import com.example.empresasjava.models.ResponseEntity.MonthlyPaymentResponse;
-import com.example.empresasjava.models.User;
 import com.example.empresasjava.service.MonthlyPaymentService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -19,10 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
     /*TODO
-        //listar todas ja aprovadas para administrador
-        //listar todos para aluno ( lista suas requisições (do id dele), inclusive as passadas, o front deve separar as pendentes das comuns)
-        //listar pendentes para aluno  ( lista suas requisições (do id dele), inclusive as passadas, o front deve separar as pendentes das comuns)
-        //listar todas as ja aprovadas para aluno ( lista suas requisições (do id dele), inclusive as passadas, o front deve separar as pendentes das comuns)
         //aprova pagamento (e dispara para o usuario uma notificação de pagamento aprovado)
         //reprova pagamento (e dispara para o usuario uma notificação de pagamento reprovado)
     */
@@ -88,7 +83,7 @@ public class MonthlyPaymentController {
     @ResponseBody
     @ApiOperation(value = "Lista usuários por página quantidade")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
-    public Page<MonthlyPaymentRequest> listRequestsByPageWithSize(
+    public Page<MonthlyPaymentResponse> listRequestsByPageWithSize(
             @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
             @PathVariable(value="page")
             int page,
@@ -105,7 +100,7 @@ public class MonthlyPaymentController {
     @ResponseBody
     @ApiOperation(value = "lista todas as requisições pendentes de aprovação")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
-    public Page<MonthlyPaymentRequest> listRequestsPendencyByPageWithSize(
+    public Page<MonthlyPaymentResponse> listRequestsPendencyByPageWithSize(
             @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
             @PathVariable(value="page")
             int page,
@@ -119,7 +114,107 @@ public class MonthlyPaymentController {
 
     }
 
+    @GetMapping(path = "/pageAllApproved/{page}/size/{size}")
+    @ResponseBody
+    @ApiOperation(value = "lista todas as requisições pendentes de aprovação")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    public Page<MonthlyPaymentResponse> listRequestsApprovedByPageWithSize(
+            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
+            @PathVariable(value="page")
+            int page,
+            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @PathVariable(value="size")
+            int size)throws NotFoundException {
 
+        Pageable pages = PageRequest.of(page, size);
+
+        return this.monthlyPaymentService.listApprovedRequestsByPage(pages);
+
+    }
+
+
+    @GetMapping(path = "/pageAll/{page}/size/{size}/{idUser}")
+    @ResponseBody
+    @ApiOperation(value = "Lista usuários por página quantidade")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    public Page<MonthlyPaymentResponse> listUserRequestsByPageWithSize(
+            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
+            @PathVariable(value="page")
+            int page,
+            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @PathVariable(value="size")
+            int size,
+            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @PathVariable(value="idUser")
+            String idUser)throws NotFoundException {
+
+            Long id = Long.parseLong(idUser);
+            Pageable pages = PageRequest.of(page, size);
+
+            return this.monthlyPaymentService.listUserRequestsByPage(pages,id);
+
+    }
+    @GetMapping(path = "/pageAllPendency/{page}/size/{size}/{idUser}")
+    @ResponseBody
+    @ApiOperation(value = "lista todas as requisições pendentes de aprovação")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    public Page<MonthlyPaymentResponse> listUserRequestsPendencyByPageWithSize(
+            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
+            @PathVariable(value="page")
+            int page,
+            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @PathVariable(value="size")
+            int size,
+            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @PathVariable(value="idUser")
+            String idUser)throws NotFoundException {
+
+            Long id = Long.parseLong(idUser);
+            Pageable pages = PageRequest.of(page, size);
+
+            return this.monthlyPaymentService.listUserPendencyRequestsByPage(pages,id);
+
+    }
+
+    @GetMapping(path = "/pageAllApproved/{page}/size/{size}/{idUser}")
+    @ResponseBody
+    @ApiOperation(value = "lista todas as requisições pendentes de aprovação")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    public Page<MonthlyPaymentResponse> listUserRequestsApprovedByPageWithSize(
+            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
+            @PathVariable(value="page")
+            int page,
+            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @PathVariable(value="size")
+            int size,
+            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @PathVariable(value="idUser")
+            String idUser)throws NotFoundException {
+
+            Long id = Long.parseLong(idUser);
+            Pageable pages = PageRequest.of(page, size);
+
+            return this.monthlyPaymentService.listUserApprovedRequestsByPage(pages,id);
+
+    }
+
+    @PostMapping(path = "/aproveRequest/{idMonthlyRequest}")
+    @ApiOperation(value = "aprova uma requisição de mensalidade pendente")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    public ResponseEntity<MonthlyPaymentResponse> approveMonthyRequest(
+            @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
+            @Valid @RequestBody MonthlyPaymentRequest request,
+            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @PathVariable(value="idMonthlyRequest")
+            String idMonthlyRequest) throws NotFoundException {
+
+            Long id = Long.parseLong(idMonthlyRequest);
+            MonthlyPaymentResponse monthlyPaymentResponse = this.monthlyPaymentService.approveMonthyRequest(request,id);
+
+            return ResponseEntity.ok().body(
+                    monthlyPaymentResponse
+            );
+    }
 
 
 

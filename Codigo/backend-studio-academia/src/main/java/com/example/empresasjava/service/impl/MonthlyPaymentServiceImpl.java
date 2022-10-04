@@ -13,40 +13,64 @@ import javax.validation.Valid;
 
 
     /*TODO : IMPLEMENTATIONS
-        //create
-        //delete
-        //edit ( usuario pode editar sua propria requisição, admin nao altera requisição do usuario, apenas aprova ou deleta)
-        //listar todas para administrador
-        //listar todas as pendentes para administrador
-
      */
 
 @Service
 public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
 
-
+    //TODO: 04/10/2022 //create
     @Override
     public MonthlyPaymentResponse create(MonthlyPaymentRequest request) throws NonUniqueResultException, NotFoundException {
         return null;
     }
 
+    //TODO: 04/10/2022 //delete
     @Override
     public MonthlyPaymentResponse deleteMonthlyRequest(@Valid MonthlyPaymentRequest request, Long id) throws NonUniqueResultException, NotFoundException {
         return null;
     }
 
+    //TODO: 04/10/2022 //edit ( usuario pode editar sua propria requisição, admin nao altera requisição do usuario, apenas aprova ou deleta)
     @Override
     public MonthlyPaymentResponse editMonthlyPaymentRequest(@Valid MonthlyPaymentRequest request, Long idUser) throws NonUniqueResultException, NotFoundException {
         return null;
     }
 
+    //TODO: 04/10/2022 //listar todas para administrador
     @Override
-    public Page<MonthlyPaymentRequest> listRequestsByPage(Pageable pages) throws NonUniqueResultException, NotFoundException {
+    public Page<MonthlyPaymentResponse> listRequestsByPage(Pageable pages) throws NonUniqueResultException, NotFoundException {
         return null;
     }
 
+    //TODO: 04/10/2022  //listar todas as pendentes para administrador
     @Override
-    public Page<MonthlyPaymentRequest> listPendencyRequestsByPage(Pageable pages) throws NonUniqueResultException, NotFoundException {
+    public Page<MonthlyPaymentResponse> listPendencyRequestsByPage(Pageable pages) throws NonUniqueResultException, NotFoundException {
         return null;
     }
+
+    //TODO: 04/10/2022 //listar todas ja aprovadas para administrador
+    @Override
+    public Page<MonthlyPaymentResponse> listApprovedRequestsByPage(Pageable pages) throws NonUniqueResultException, NotFoundException {
+        return null;
+    }
+
+    //TODO: 04/10/2022 //listar todas para usuario
+    @Override
+    public Page<MonthlyPaymentResponse> listUserRequestsByPage(Pageable pages, Long id) throws NonUniqueResultException, NotFoundException {
+        return null;
+    }
+
+    //TODO: 04/10/2022   //listar pendentes para aluno  ( lista suas requisições (do id dele), inclusive as passadas, o front deve separar as pendentes das comuns)
+    @Override
+    public Page<MonthlyPaymentResponse> listUserPendencyRequestsByPage(Pageable pages, Long id) throws NonUniqueResultException, NotFoundException {
+        return null;
+    }
+
+    //TODO: 04/10/2022  //listar todas as ja aprovadas para aluno ( lista suas requisições (do id dele), inclusive as passadas, o front deve separar as pendentes das comuns)
+    @Override
+    public Page<MonthlyPaymentResponse> listUserApprovedRequestsByPage(Pageable pages, Long id) throws NonUniqueResultException, NotFoundException {
+        return null;
+    }
+
+
 }
