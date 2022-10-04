@@ -13,12 +13,29 @@ public interface MonthlyPaymentService {
 
 
     MonthlyPaymentResponse create(MonthlyPaymentRequest request)throws NonUniqueResultException, NotFoundException;
+    MonthlyPaymentResponse createAutoRequest(MonthlyPaymentRequest request, Long idLong)throws NonUniqueResultException, NotFoundException;
+    MonthlyPaymentResponse createRequestForApprove(MonthlyPaymentRequest request)throws NonUniqueResultException, NotFoundException;
 
     MonthlyPaymentResponse deleteMonthlyRequest(@Valid MonthlyPaymentRequest request, Long id)throws NonUniqueResultException, NotFoundException;
 
     MonthlyPaymentResponse editMonthlyPaymentRequest(@Valid MonthlyPaymentRequest request, Long idUser)throws NonUniqueResultException, NotFoundException;
 
-    Page<MonthlyPaymentRequest> listRequestsByPage(Pageable pages)throws NonUniqueResultException, NotFoundException;
+    Page<MonthlyPaymentResponse> listRequestsByPage(Pageable pages)throws NonUniqueResultException, NotFoundException;
 
-    Page<MonthlyPaymentRequest> listPendencyRequestsByPage(Pageable pages)throws NonUniqueResultException, NotFoundException;
+    Page<MonthlyPaymentResponse> listPendencyRequestsByPage(Pageable pages)throws NonUniqueResultException, NotFoundException;
+
+    Page<MonthlyPaymentResponse> listApprovedRequestsByPage(Pageable pages)throws NonUniqueResultException, NotFoundException;
+
+    Page<MonthlyPaymentResponse> listUserRequestsByPage(Pageable pages, Long id)throws NonUniqueResultException, NotFoundException;
+
+    Page<MonthlyPaymentResponse> listUserPendencyRequestsByPage(Pageable pages, Long id)throws NonUniqueResultException, NotFoundException;
+
+    Page<MonthlyPaymentResponse> listUserApprovedRequestsByPage(Pageable pages, Long id)throws NonUniqueResultException, NotFoundException;
+
+    MonthlyPaymentResponse approveMonthlyRequest(MonthlyPaymentRequest request, Long id)throws NonUniqueResultException, NotFoundException;
+
+    MonthlyPaymentResponse reproveMonthlyRequest(MonthlyPaymentRequest request, Long id)throws NonUniqueResultException, NotFoundException;
+
+
+
 }
