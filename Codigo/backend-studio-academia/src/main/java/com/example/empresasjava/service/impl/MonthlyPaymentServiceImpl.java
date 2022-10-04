@@ -3,6 +3,7 @@ package com.example.empresasjava.service.impl;
 import com.example.empresasjava.models.RequestEntity.MonthlyPaymentRequest;
 import com.example.empresasjava.models.ResponseEntity.MonthlyPaymentResponse;
 import com.example.empresasjava.service.MonthlyPaymentService;
+import com.sun.xml.bind.v2.TODO;
 import javassist.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,16 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
     //TODO: 04/10/2022 //create
     @Override
     public MonthlyPaymentResponse create(MonthlyPaymentRequest request) throws NonUniqueResultException, NotFoundException {
+        return null;
+    }
+
+    @Override
+    public MonthlyPaymentResponse createAutoRequest(MonthlyPaymentRequest request, Long idLong) throws NonUniqueResultException, NotFoundException {
+        return null;
+    }
+
+    @Override
+    public MonthlyPaymentResponse createRequestForApprove(MonthlyPaymentRequest request) throws NonUniqueResultException, NotFoundException {
         return null;
     }
 
@@ -69,6 +80,18 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
     //TODO: 04/10/2022  //listar todas as ja aprovadas para aluno ( lista suas requisições (do id dele), inclusive as passadas, o front deve separar as pendentes das comuns)
     @Override
     public Page<MonthlyPaymentResponse> listUserApprovedRequestsByPage(Pageable pages, Long id) throws NonUniqueResultException, NotFoundException {
+        return null;
+    }
+
+    //TODO: aprova pagamento (e dispara para o usuario uma notificação de pagamento aprovado)
+    @Override
+    public MonthlyPaymentResponse approveMonthlyRequest(MonthlyPaymentRequest request, Long id) throws NonUniqueResultException, NotFoundException {
+        return null;
+    }
+
+    //TODO: 04/10/2022 //reprova pagamento (e dispara para o usuario uma notificação de pagamento reprovado)
+    @Override
+    public MonthlyPaymentResponse reproveMonthlyRequest(MonthlyPaymentRequest request, Long id) throws NonUniqueResultException, NotFoundException {
         return null;
     }
 

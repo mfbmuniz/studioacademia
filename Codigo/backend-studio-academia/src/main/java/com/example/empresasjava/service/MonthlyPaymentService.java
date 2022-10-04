@@ -13,6 +13,8 @@ public interface MonthlyPaymentService {
 
 
     MonthlyPaymentResponse create(MonthlyPaymentRequest request)throws NonUniqueResultException, NotFoundException;
+    MonthlyPaymentResponse createAutoRequest(MonthlyPaymentRequest request, Long idLong)throws NonUniqueResultException, NotFoundException;
+    MonthlyPaymentResponse createRequestForApprove(MonthlyPaymentRequest request)throws NonUniqueResultException, NotFoundException;
 
     MonthlyPaymentResponse deleteMonthlyRequest(@Valid MonthlyPaymentRequest request, Long id)throws NonUniqueResultException, NotFoundException;
 
@@ -30,5 +32,10 @@ public interface MonthlyPaymentService {
 
     Page<MonthlyPaymentResponse> listUserApprovedRequestsByPage(Pageable pages, Long id)throws NonUniqueResultException, NotFoundException;
 
-    MonthlyPaymentResponse approveMonthyRequest(MonthlyPaymentRequest request, Long id)throws NonUniqueResultException, NotFoundException;
+    MonthlyPaymentResponse approveMonthlyRequest(MonthlyPaymentRequest request, Long id)throws NonUniqueResultException, NotFoundException;
+
+    MonthlyPaymentResponse reproveMonthlyRequest(MonthlyPaymentRequest request, Long id)throws NonUniqueResultException, NotFoundException;
+
+
+
 }

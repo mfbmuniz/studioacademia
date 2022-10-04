@@ -18,8 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
     /*TODO
-        //aprova pagamento (e dispara para o usuario uma notificação de pagamento aprovado)
-        //reprova pagamento (e dispara para o usuario uma notificação de pagamento reprovado)
+       TEST IMPLEMENTATIONS
     */
 
 
@@ -32,14 +31,32 @@ public class MonthlyPaymentController {
     private MonthlyPaymentService monthlyPaymentService;
 
 
-    @PostMapping(path = "/create")
+    @PostMapping(path = "/createAutoRequest/{idUser}")
     @ApiOperation(value = "Criar nova requisição de mensalidade para aprovar")
     @PreAuthorize("@authorityChecker.isAllowed({'USER'})")
-    public ResponseEntity<MonthlyPaymentResponse> createMonthyRequest(
+    public ResponseEntity<MonthlyPaymentResponse> createAutoMonthlyRequest(
+            @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
+            @Valid @RequestBody MonthlyPaymentRequest request,
+            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @PathVariable(value="idUser")
+            String idUser)throws NotFoundException {
+
+        Long idLong =Long.parseLong(idUser);
+        MonthlyPaymentResponse monthlyPaymentResponse = this.monthlyPaymentService.createAutoRequest(request,idLong);
+
+        return ResponseEntity.ok().body(
+                monthlyPaymentResponse
+        );
+    }
+
+    @PostMapping(path = "/createRequestForApprove/{idRequest}")
+    @ApiOperation(value = "Criar nova requisição de mensalidade para aprovar")
+    @PreAuthorize("@authorityChecker.isAllowed({'USER'})")
+    public ResponseEntity<MonthlyPaymentResponse> createUserMonthlyRequest(
             @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
             @Valid @RequestBody MonthlyPaymentRequest request) throws NotFoundException {
 
-        MonthlyPaymentResponse monthlyPaymentResponse = this.monthlyPaymentService.create(request);
+        MonthlyPaymentResponse monthlyPaymentResponse = this.monthlyPaymentService.createRequestForApprove(request);
 
         return ResponseEntity.ok().body(
                 monthlyPaymentResponse
@@ -201,7 +218,7 @@ public class MonthlyPaymentController {
     @PostMapping(path = "/aproveRequest/{idMonthlyRequest}")
     @ApiOperation(value = "aprova uma requisição de mensalidade pendente")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
-    public ResponseEntity<MonthlyPaymentResponse> approveMonthyRequest(
+    public ResponseEntity<MonthlyPaymentResponse> approveMonthlyRequest(
             @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
             @Valid @RequestBody MonthlyPaymentRequest request,
             @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
@@ -209,11 +226,29 @@ public class MonthlyPaymentController {
             String idMonthlyRequest) throws NotFoundException {
 
             Long id = Long.parseLong(idMonthlyRequest);
-            MonthlyPaymentResponse monthlyPaymentResponse = this.monthlyPaymentService.approveMonthyRequest(request,id);
+            MonthlyPaymentResponse monthlyPaymentResponse = this.monthlyPaymentService.approveMonthlyRequest(request,id);
 
             return ResponseEntity.ok().body(
                     monthlyPaymentResponse
             );
+    }
+
+    @PostMapping(path = "/reproveRequest/{idMonthlyRequest}")
+    @ApiOperation(value = "aprova uma requisição de mensalidade pendente")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    public ResponseEntity<MonthlyPaymentResponse> reproveMonthlyRequest(
+            @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
+            @Valid @RequestBody MonthlyPaymentRequest request,
+            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @PathVariable(value="idMonthlyRequest")
+            String idMonthlyRequest) throws NotFoundException {
+
+        Long id = Long.parseLong(idMonthlyRequest);
+        MonthlyPaymentResponse monthlyPaymentResponse = this.monthlyPaymentService.reproveMonthlyRequest(request,id);
+
+        return ResponseEntity.ok().body(
+                monthlyPaymentResponse
+        );
     }
 
 
