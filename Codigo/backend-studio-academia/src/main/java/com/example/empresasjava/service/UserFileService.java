@@ -5,6 +5,8 @@ import com.example.empresasjava.models.RequestEntity.UserFileRequest;
 import com.example.empresasjava.models.ResponseEntity.UserExerciseResponse;
 import com.example.empresasjava.models.ResponseEntity.UserFileResponse;
 import javassist.NotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface UserFileService {
 
@@ -19,4 +21,13 @@ public interface UserFileService {
 
 
     UserExerciseResponse editExercices(UserExerciseRequest request, Long idExercise, Long idFile)throws NotFoundException;
+
+    Page<UserFileResponse> listsUserFilesByPage(Pageable pages, Long id)throws NotFoundException;
+
+    Page<UserFileResponse> listsAllFilesByPage(Pageable pages)throws NotFoundException;
+
+    Page<UserFileResponse> listsUserFilesByNameByPage(Pageable pages, Long id, String fileName)throws NotFoundException;
+
+
+    Page<UserFileResponse> listsExercisesInUserFilesByIdByPage(Pageable pages, Long id_user, Long id_userFile)throws NotFoundException;
 }

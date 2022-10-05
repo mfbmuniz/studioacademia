@@ -54,7 +54,9 @@ public class User {
     )
     private List<Role> roles;
 
-
+    @ManyToOne
+    @JoinColumn(name = "dueDate_id")
+    DueDate dueDate;
 
     @Column(name = "birth_date")
     private Date birthDate;
@@ -88,7 +90,8 @@ public class User {
                 String legal_document,
                 Address address,
                 SexEnum sex,
-                List<Role> roles
+                List<Role> roles,
+                DueDate dueDate
                 ) {
         this.name = name;
         this.email = email;
@@ -100,6 +103,36 @@ public class User {
         this.legal_document = legal_document;
         this.address = address;
         this.roles = roles;
+        this.dueDate=dueDate;
+    }
+
+    public User(String name,
+                @NotNull(message = "Campo data não pode ser nulo")
+                @NotEmpty(message = "Campo data não pode ser vazio")
+                String email,
+                @NotNull(message = "Campo data não pode ser nulo")
+                @NotEmpty(message = "Campo data não pode ser vazio")
+                String password,
+                Date birthDate,
+                String phone1,
+                String phone2,
+                String legal_document,
+                Address address,
+                SexEnum sex,
+                List<Role> roles
+
+    ) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.birthDate = birthDate;
+        this.phone1 = phone1;
+        this.phone2 = phone2;
+        this.sex = sex.getCode();
+        this.legal_document = legal_document;
+        this.address = address;
+        this.roles = roles;
+
     }
 
 

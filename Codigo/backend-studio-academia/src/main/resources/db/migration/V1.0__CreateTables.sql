@@ -1,7 +1,7 @@
 CREATE SEQUENCE dueDate_seq;
 CREATE TABLE dueDate (
                        dueDate_id INT DEFAULT NEXTVAL ('dueDate_seq') PRIMARY KEY,
-                       dueDate TIMESTAMP(0) NOT NULL,
+                       due_Date TIMESTAMP(0) NOT NULL,
 
                        created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
                        deleted_at TIMESTAMP(0) NULL DEFAULT NULL,

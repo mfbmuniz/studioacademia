@@ -17,6 +17,8 @@ import com.example.empresasjava.repository.UserRepository;
 import com.example.empresasjava.service.UserFileService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -99,6 +101,30 @@ public class UserFileServiceImpl implements UserFileService {
 
     @Override
     public UserExerciseResponse editExercices(UserExerciseRequest request, Long idExercise, Long idFile) throws NotFoundException {
+        return null;
+    }
+
+    //TODO: 05/10/2022 LISTAR TODAS AS FICHAS DE UM USUARIO PAGINADO (PESQUISAR POR id ) 
+    @Override
+    public Page<UserFileResponse> listsUserFilesByPage(Pageable pages, Long id) throws NotFoundException {
+        return null;
+    }
+
+    //TODO: 05/10/2022 LISTAR TODAS AS FICHAS PAGINADO 
+    @Override
+    public Page<UserFileResponse> listsAllFilesByPage(Pageable pages) throws NotFoundException {
+        return null;
+    }
+
+    // TODO: 05/10/2022 DENTRO DAS FICHAS DE UM USUARIO X PESQUISAR UMA FICHA EM ESPECIFICO POR NOME () 
+    @Override
+    public Page<UserFileResponse> listsUserFilesByNameByPage(Pageable pages, Long id, String fileName) throws NotFoundException {
+        return null;
+    }
+
+    // TODO: 05/10/2022 LISTAR EXERCICIOS DA FICHA X PAGINADO
+    @Override
+    public Page<UserFileResponse> listsExercisesInUserFilesByIdByPage(Pageable pages, Long id_user, Long id_userFile) throws NotFoundException {
         return null;
     }
 

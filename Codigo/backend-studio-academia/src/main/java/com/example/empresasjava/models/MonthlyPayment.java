@@ -18,8 +18,9 @@ public class MonthlyPayment {
     @Column(name = " monthly_payment_id")
     private Long monthlyPaymentId;
 
-    @Column(name = "due_Date")
-    private Date dueDate;
+    @ManyToOne
+    @JoinColumn(name = "dueDate_id")
+    DueDate dueDate;
 
     @Column(name = "payment_CHECK")
     boolean paymentCheck;
@@ -39,7 +40,7 @@ public class MonthlyPayment {
     @Column(name = "deleted_at")
     private Date deletedAt;
 
-    public MonthlyPayment(Long monthlyPaymentId, Date dueDate, boolean paymentCheck, Long userId, String paymentVoucher) {
+    public MonthlyPayment(Long monthlyPaymentId, DueDate dueDate, boolean paymentCheck, Long userId, String paymentVoucher) {
         this.monthlyPaymentId = monthlyPaymentId;
         this.dueDate = dueDate;
         this.paymentCheck = paymentCheck;
@@ -50,7 +51,7 @@ public class MonthlyPayment {
     public MonthlyPayment() {
     }
 
-    public MonthlyPayment(Date dueDate, boolean paymentCheck, Long userId, String paymentVoucher) {
+    public MonthlyPayment(DueDate dueDate, boolean paymentCheck, Long userId, String paymentVoucher) {
         this.dueDate = dueDate;
         this.paymentCheck = paymentCheck;
         this.userId = userId;
