@@ -1,13 +1,3 @@
-CREATE SEQUENCE dueDate_seq;
-CREATE TABLE dueDate (
-                       dueDate_id INT DEFAULT NEXTVAL ('dueDate_seq') PRIMARY KEY,
-                       due_Date TIMESTAMP(0) NOT NULL,
-
-                       created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
-                       deleted_at TIMESTAMP(0) NULL DEFAULT NULL,
-
-);
-
 CREATE SEQUENCE city_seq;
 CREATE TABLE cities (
                         city_id INT DEFAULT NEXTVAL ('city_seq') PRIMARY KEY,
@@ -63,15 +53,14 @@ CREATE TABLE users (
                        birth_date TIMESTAMP(0) NULL DEFAULT NULL,
                        phone1 VARCHAR(100) NOT NULL,
                        phone2 VARCHAR(100) NOT NULL,
-                       dueDate_id INT not null CHECK (dueDate_id > 0),
+                       due_date TIMESTAMP,
 
 
                        created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
                        deleted_at TIMESTAMP(0) NULL DEFAULT NULL,
 
                        CONSTRAINT FK_address_id FOREIGN KEY (address_id) REFERENCES address(address_id),
-                       CONSTRAINT FK_plans_id FOREIGN KEY (plans_id) REFERENCES plans(plans_id),
-                       CONSTRAINT FK_dueDate_id FOREIGN KEY (dueDate_id) REFERENCES dueDate(dueDate_id)
+                       CONSTRAINT FK_plans_id FOREIGN KEY (plans_id) REFERENCES plans(plans_id)
 
 );
 
@@ -167,19 +156,19 @@ CREATE TABLE calendar (
 CREATE SEQUENCE monthly_payment_seq;
 CREATE TABLE monthly_payment (
                     monthly_payment_id INT DEFAULT NEXTVAL ('monthly_payment_seq') PRIMARY KEY,
-                    paymentDate TIMESTAMP(0) NULL DEFAULT NULL,
-                    payment_CHECK BOOLEAN  not null,
+                    payment_date TIMESTAMP(0) NULL DEFAULT NULL,
+                    payment_status VARCHAR(50)  not null,
                     user_id INT CHECK (user_id > 0),
                     payment_voucher VARCHAR(200),  /*imagem de comprovante*/
-                    optional_message VARCHAR(200),
-                    dueDate_id INT CHECK (dueDate_id > 0),
+                    message VARCHAR(200),
+                    due_date TIMESTAMP,
+                    approved_date TIMESTAMP,
 
 
                     created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
                     deleted_at TIMESTAMP(0) NULL DEFAULT NULL,
 
-                    CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
-                    CONSTRAINT FK_dueDate_id FOREIGN KEY (dueDate_id) REFERENCES dueDate(dueDate_id)
+                    CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id)
 
 );
 CREATE SEQUENCE exercises_seq;

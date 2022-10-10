@@ -2,10 +2,12 @@ package com.example.empresasjava.models.ResponseEntity;
 
 
 import com.example.empresasjava.models.MonthlyPayment;
+import lombok.Data;
 
 
 import java.util.Date;
 
+@Data
 public class MonthlyPaymentResponse {
 
     private Date dueDate;
@@ -39,7 +41,7 @@ public class MonthlyPaymentResponse {
                 monthlyPayment.getDueDate(),
                 monthlyPayment.getUserId(),
                 monthlyPayment.getPaymentVoucher(),
-                monthlyPayment.getOptionalMessage(),
+                monthlyPayment.getMessage(),
                 monthlyPayment.getMonthlyPaymentId()
 
         );

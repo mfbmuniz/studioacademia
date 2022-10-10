@@ -1,13 +1,16 @@
 package com.example.empresasjava.models.RequestEntity;
 
+import com.example.empresasjava.enums.RolesEnum;
 import com.example.empresasjava.enums.SexEnum;
 import com.example.empresasjava.models.*;
 import com.example.empresasjava.models.dto.AddressDto;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -43,35 +46,60 @@ public class UserRequest {
 
     private Date birthDate;
 
-    @NotNull(message = "Campo sex não pode ser nulo")
-    @NotEmpty(message = "Campo sex não pode ser vazio")
+    @NotNull(message = "Campo phone1 não pode ser nulo")
+    @NotEmpty(message = "Campo phone1 não pode ser vazio")
     private String phone1;
 
-    @NotNull(message = "Campo sex não pode ser nulo")
-    @NotEmpty(message = "Campo sex não pode ser vazio")
+    @NotNull(message = "Campo phone2 não pode ser nulo")
+    @NotEmpty(message = "Campo phone2 não pode ser vazio")
     private String phone2;
+
+    @NotNull(message = "Campo dueDate não pode ser nulo")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date dueDate;
+
     public UserRequest() {
     }
 
-    public UserRequest(String name, String email, String password, List<String> roles) {
+    public UserRequest(String name, String email, String password, List<String> roles, String legalDocument,
+                       AddressDto address, String sex, Date birthDate, String phone1, String phone2, Date dueDate) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.legalDocument = legalDocument;
+        this.address = address;
+        this.sex = sex;
+        this.birthDate = birthDate;
+        this.phone1 = phone1;
+        this.phone2 = phone2;
+        this.dueDate = dueDate;
     }
 
     public static User toUser(UserRequest user, List<Role> roles, Address address) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(user.getDueDate());
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+
+        Date dueDate = c.getTime();
+
+        c.setTime(user.getBirthDate());
+        Date birthDate = c.getTime();
         return new User(
-                user.name,
-                user.email,
-                user.password,
-                user.birthDate,
-                user.phone1,
-                user.phone2,
+                user.getName(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getSex(),
                 user.getLegalDocument(),
                 address,
-                Objects.requireNonNull(SexEnum.getByCd(user.getSex())),
-                roles);
+                roles,
+                dueDate,
+                birthDate,
+                user.getPhone1(),
+                user.getPhone2());
     }
 
 }

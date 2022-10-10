@@ -1,10 +1,13 @@
 package com.example.empresasjava.models;
 
 
+import com.example.empresasjava.enums.MonthlyPaymentStatusEnum;
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -18,21 +21,27 @@ public class MonthlyPayment {
     @Column(name = " monthly_payment_id")
     private Long monthlyPaymentId;
 
-    @ManyToOne
-    @JoinColumn(name = "dueDate_id")
-    DueDate dueDate;
+    @Column(name = "due_date")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date dueDate;
 
-    @Column(name = "payment_CHECK")
-    boolean paymentCheck;
+    @Column(name = "approved_date")
+    private Date approved_date;
+
+    @Column(name = "payment_date")
+    private Date paymentDate;
 
     @Column(name = "user_id")
-    Long userId;
+    private Long userId;
 
     @Column(name = "payment_voucher")
-    String paymentVoucher;
+    private String paymentVoucher;
 
-    @Column(name = "optional_message")
-    String optionalMessage;
+    @Column(name = "message")
+    private String message;
+
+    @Column(name = "payment_status")
+    private String paymentStatus;
 
     @Column(name = "created_at")
     private Date createdAt;
@@ -40,24 +49,44 @@ public class MonthlyPayment {
     @Column(name = "deleted_at")
     private Date deletedAt;
 
-    public MonthlyPayment(Long monthlyPaymentId, DueDate dueDate, boolean paymentCheck, Long userId, String paymentVoucher) {
-        this.monthlyPaymentId = monthlyPaymentId;
-        this.dueDate = dueDate;
-        this.paymentCheck = paymentCheck;
-        this.userId = userId;
-        this.paymentVoucher = paymentVoucher;
-    }
-
     public MonthlyPayment() {
     }
 
-    public MonthlyPayment(DueDate dueDate, boolean paymentCheck, Long userId, String paymentVoucher) {
+    public MonthlyPayment(Date dueDate, Date approved_date, Date paymentDate, Long userId, String paymentVoucher, String message, String paymentStatus) {
         this.dueDate = dueDate;
-        this.paymentCheck = paymentCheck;
+        this.approved_date = approved_date;
+        this.paymentDate = paymentDate;
         this.userId = userId;
         this.paymentVoucher = paymentVoucher;
+        this.message = message;
+        this.paymentStatus = paymentStatus;
     }
 
+    public static MonthlyPayment fromUser(User user){
+        Calendar dueDateCalendar = Calendar.getInstance();
+        dueDateCalendar.setTime(user.getDueDate());
+        dueDateCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        dueDateCalendar.set(Calendar.MINUTE, 0);
+        dueDateCalendar.set(Calendar.SECOND, 0);
+        dueDateCalendar.set(Calendar.MILLISECOND, 0);
 
 
+        Calendar next = Calendar.getInstance();
+        next.set(Calendar.DAY_OF_MONTH, dueDateCalendar.get(Calendar.DAY_OF_MONTH));
+        next.add(Calendar.MONTH, 1);
+        next.set(Calendar.HOUR_OF_DAY, 0);
+        next.set(Calendar.MINUTE, 0);
+        next.set(Calendar.SECOND, 0);
+        next.set(Calendar.MILLISECOND, 0);
+
+        return new MonthlyPayment(
+                next.getTime(),
+                null,
+                null,
+                user.getIdUser(),
+                null,
+                null,
+                MonthlyPaymentStatusEnum.AGUARDANDO_PAGAMENTO.getCode()
+        );
+    }
 }

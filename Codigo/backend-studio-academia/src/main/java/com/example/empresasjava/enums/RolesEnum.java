@@ -5,7 +5,8 @@ import java.io.Serializable;
 
 public enum RolesEnum implements Serializable {
     ADMIN("ADMIN"),
-    USER("USER");
+    ALUNO("ALUNO"),
+    NUTRICIONISTA("NUTRICIONISTA");
 
     private final String code;
 

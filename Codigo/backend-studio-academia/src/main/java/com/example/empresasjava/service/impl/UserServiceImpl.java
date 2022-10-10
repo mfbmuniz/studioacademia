@@ -45,6 +45,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private StateService stateService;
 
+    @Autowired
+    private MonthlyPaymentService monthlyPaymentService;
+
     @Override
     public UserDto create(UserRequest user) throws NonUniqueResultException, NotFoundException {
 
@@ -63,7 +66,12 @@ public class UserServiceImpl implements UserService {
             AddressDto addressDto = user.getAddress();
             Address address = this.addressRepository.save(Address.fromAddressDTO(addressDto, city, state));
 
-            return UserDto.fromUser(this.userRepository.save(UserRequest.toUser(user, roles, address)));
+            User savedUser = this.userRepository.save(UserRequest.toUser(user, roles, address));
+
+            if(roles.stream().anyMatch(f -> f.getName().equals(RolesEnum.ALUNO.getCode()))){
+                this.monthlyPaymentService.create(savedUser);
+            }
+            return UserDto.fromUser(savedUser);
         }else{
             throw new NonUniqueResultException("Email ja cadastrado!");
         }
@@ -94,10 +102,8 @@ public class UserServiceImpl implements UserService {
             user.setRoles(NewRoles);
             user.setName(userRequest.getName());
             user.setPassword(this.bcryptEncoder.encode(user.getPassword()));
-        }
-
-        //Usuarios so podem editar eles mesmos
-        if(user == userByPrincipal) {
+        }else if(user == userByPrincipal) {
+            //Usuarios so podem editar eles mesmos
             user.setName(userRequest.getName());
             user.setPassword(this.bcryptEncoder.encode(user.getPassword()));
         }else {
@@ -127,7 +133,8 @@ public class UserServiceImpl implements UserService {
     public UserDto deleteLoggedUser() {
         User loggedUser = this.getUserByPrincipal();
         loggedUser.setDeletedAt(new Date());
-        return UserDto.fromUser(loggedUser);
+        User savedUser = this.userRepository.save(loggedUser);
+        return UserDto.fromUser(savedUser);
     }
 
 
@@ -146,7 +153,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<User> listUsersByPageAndName(Pageable page, String name) {
-        return this.userRepository.findAllByNameAndDeletedAtIsNull(page, name);
+        return this.userRepository.findAllByNameIgnoreCaseAndDeletedAtIsNull(page, name);
     }
 
 }

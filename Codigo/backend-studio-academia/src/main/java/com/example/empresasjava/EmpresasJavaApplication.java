@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 @SpringBootApplication
 public class EmpresasJavaApplication {
@@ -65,13 +66,18 @@ public class EmpresasJavaApplication {
 					states
 			));
 
-			admin = new User("Admin", "admin@admin.com",
-								this.bcryptEncoder.encode("12345678"),
-								new Date(1991,07,30),"123456789","33853056",
-					"123456789" , address, SexEnum.MALE,
-
-								Collections.singletonList(admRole)
-						);
+			admin = new User("Admin",
+					"admin@admin.com",
+					this.bcryptEncoder.encode("12345678"),
+					"M",
+					"",
+					address,
+					Collections.singletonList(admRole),
+					new Date(),
+					new Date(),
+					"123456789",
+					"33853056"
+				);
 		}else if(admin.getRoles().stream().noneMatch(role -> role.equals(admRole))){
 			System.out.println("Adding role to existing Admin account...");
 			admin.setRoles(Collections.singletonList(admRole));

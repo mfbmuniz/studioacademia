@@ -1,38 +1,88 @@
 package com.example.empresasjava.service.impl;
 
+import com.example.empresasjava.enums.MonthlyPaymentStatusEnum;
+import com.example.empresasjava.models.MonthlyPayment;
 import com.example.empresasjava.models.RequestEntity.MonthlyPaymentRequest;
 import com.example.empresasjava.models.ResponseEntity.MonthlyPaymentResponse;
+import com.example.empresasjava.models.User;
+import com.example.empresasjava.repository.MonthlyPaymentRepository;
+import com.example.empresasjava.repository.UserRepository;
 import com.example.empresasjava.service.MonthlyPaymentService;
 import com.sun.xml.bind.v2.TODO;
 import javassist.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.NonUniqueResultException;
 import javax.validation.Valid;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
-    /*TODO : IMPLEMENTATIONS
+/*TODO : IMPLEMENTATIONS
      */
 
 @Service
 public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
 
+    @Autowired
+    private MonthlyPaymentRepository monthlyPaymentRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
     //TODO: 04/10/2022 //create
     @Override
-    public MonthlyPaymentResponse create(MonthlyPaymentRequest request) throws NonUniqueResultException, NotFoundException {
+    public MonthlyPaymentResponse create(){
         return null;
     }
 
     @Override
-    public MonthlyPaymentResponse createAutoRequest(MonthlyPaymentRequest request, Long idLong) throws NonUniqueResultException, NotFoundException {
-        return null;
+    public MonthlyPayment create(User user) {
+
+        MonthlyPayment monthlyPayment = new MonthlyPayment(
+                user.getDueDate(),
+                null,
+                null,
+                user.getIdUser(),
+                null,
+                null,
+                MonthlyPaymentStatusEnum.AGUARDANDO_PAGAMENTO.getCode()
+        );
+
+        return this.monthlyPaymentRepository.save(monthlyPayment);
+    }
+
+
+    @Override
+    public void createNextPayment() {
+        List<User> allByCurrentDay = this.userRepository.findAllByCurrentDay();
+
+        List<MonthlyPayment> monthlyPayments = allByCurrentDay.stream().map(MonthlyPayment::fromUser
+        ).collect(Collectors.toList());
+
+        this.monthlyPaymentRepository.saveAll(monthlyPayments);
+
     }
 
     @Override
     public MonthlyPaymentResponse createRequestForApprove(MonthlyPaymentRequest request) throws NonUniqueResultException, NotFoundException {
-        return null;
+        Calendar c = Calendar.getInstance();
+        c.setTime(request.getDueDate());
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+
+        MonthlyPayment montlhyPayment = this.monthlyPaymentRepository.findByUserIdAndDueDate(request.getUserId(), c.getTime());
+        montlhyPayment.setPaymentStatus(MonthlyPaymentStatusEnum.EM_ANALISE.getCode());
+        montlhyPayment.setPaymentVoucher(request.getPaymentVoucher());
+        montlhyPayment.setPaymentDate(new Date());
+        return MonthlyPaymentResponse.fromMonthlyPayment(this.monthlyPaymentRepository.save(montlhyPayment));
     }
 
     //TODO: 04/10/2022 //delete

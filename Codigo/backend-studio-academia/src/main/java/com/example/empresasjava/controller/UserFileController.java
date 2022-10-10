@@ -1,10 +1,11 @@
 package com.example.empresasjava.controller;
 
-import com.example.empresasjava.models.Exercise;
 import com.example.empresasjava.models.RequestEntity.UserExerciseRequest;
 import com.example.empresasjava.models.RequestEntity.UserFileRequest;
 import com.example.empresasjava.models.ResponseEntity.UserExerciseResponse;
 import com.example.empresasjava.models.ResponseEntity.UserFileResponse;
+import com.example.empresasjava.models.UserExercises;
+import com.example.empresasjava.models.UserFile;
 import com.example.empresasjava.service.UserFileService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -33,7 +34,7 @@ public class UserFileController {
 
 
     @PostMapping(path = "/create")
-    @ApiOperation(value = "Criar nova ficha para um usuário")
+    @ApiOperation(value = "Criar nova ficha vazia para um usuário")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
     public ResponseEntity<UserFileResponse> createFile(
             @ApiParam(value = "Json da requisição que contem o dado do usuario a ser salvo")
@@ -46,32 +47,30 @@ public class UserFileController {
                 );
 
     }
-    @PostMapping(path = "/edit/{idFile}")
-    @ApiOperation(value = "ficha de usuario")
+    @PostMapping(path = "/edit")
+    @ApiOperation(value = "edita ficha de usuario")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
     public ResponseEntity<UserFileResponse> editUserFile(
             @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
-            @Valid @RequestBody UserFileRequest request,
-            @PathVariable Long id) throws NotFoundException {
+            @Valid @RequestBody UserFileRequest request) throws NotFoundException {
 
 
-        UserFileResponse userFileResponse = this.userFileService.editUserFile(request,id);
+        UserFileResponse userFileResponse = this.userFileService.editUserFile(request);
 
         return ResponseEntity.ok().body(
                 userFileResponse
         );
     }
 
-    @DeleteMapping(path = "/deleteFile/{idFile}")
+    @DeleteMapping(path = "/deleteFile")
     @ApiOperation(value = "ficha de usuario")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
     public ResponseEntity<UserFileResponse> deleteUserFile(
             @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
-            @Valid @RequestBody UserFileRequest request,
-            @PathVariable Long idFile) throws NotFoundException {
+            @Valid @RequestBody UserFileRequest request) throws NotFoundException {
 
 
-        UserFileResponse userFileResponse = this.userFileService.deleteUserFile(request,idFile);
+        UserFileResponse userFileResponse = this.userFileService.deleteUserFile(request);
 
         return ResponseEntity.ok().body(
                 userFileResponse
@@ -91,17 +90,15 @@ public class UserFileController {
         return ResponseEntity.ok().body(userExerciseResponse);
 
     }
-    @DeleteMapping(path = "/deleteExercise/{idFile}/{idExercise}")
+    @DeleteMapping(path = "/deleteExercise")
     @ApiOperation(value = "ficha de usuario")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
     public ResponseEntity<UserExerciseResponse> deleteUserExercise(
             @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
-            @Valid @RequestBody UserExerciseRequest request,
-            @PathVariable Long idExercise,
-            @PathVariable Long idFile) throws NotFoundException {
+            @Valid @RequestBody UserExerciseRequest request) throws NotFoundException {
 
 
-        UserExerciseResponse userExerciseResponse = this.userFileService.deleteUserExercise(request,idExercise,idFile);
+        UserExerciseResponse userExerciseResponse = this.userFileService.deleteUserExercise(request);
 
         return ResponseEntity.ok().body(
                 userExerciseResponse
@@ -116,17 +113,18 @@ public class UserFileController {
             @PathVariable Long idExercise,
             @PathVariable Long idFile) throws NotFoundException {
 
-        UserExerciseResponse userExerciseResponse = this.userFileService.editExercices(request,idExercise,idFile);
+        UserExerciseResponse userExerciseResponse = this.userFileService.editExercises(request);
 
         return ResponseEntity.ok().body(userExerciseResponse);
 
     }
 
+    //fichas do usuario
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
-    @GetMapping(path = "/pageUserFiles/{page}/size/{size}/{idUser}")
+    @GetMapping(path = "/page/{page}/size/{size}/iduser/{idUser}")
     @ResponseBody
-    @ApiOperation(value = "Lista usuários por página quantidade")
-    public Page<UserFileResponse> listUserFilesByPageWithSize(
+    @ApiOperation(value = "Lista fichas do usuario por página quantidade")
+    public Page<UserFile> listUserFilesByPageWithSize(
             @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
             @PathVariable(value="page")
             int page,
@@ -144,74 +142,78 @@ public class UserFileController {
 
     }
 
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
-    @GetMapping(path = "/pageAllFiles/{page}/size/{size}/")
-    @ResponseBody
-    @ApiOperation(value = "Lista usuários por página quantidade")
-    public Page<UserFileResponse> listAllFilesByPageWithSize(
-            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
-            @PathVariable(value="page")
-            int page,
-            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
-            @PathVariable(value="size")
-            int size)throws NotFoundException{
+// TODO: nao deixei o listar todas as fichas de todos os usuarios pois admin teria q pesquisar quem é
+// deixei comentado para implementar caso haja necessidade
 
-
-        Pageable pages = PageRequest.of(page, size);
-
-        return this.userFileService.listsAllFilesByPage(pages);
-
-    }
-
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
-    @GetMapping(path = "/pageSpecificUserFile/{page}/size/{size}/{idUser}/{fileName}")
-    @ResponseBody
-    @ApiOperation(value = "Lista usuários por página quantidade")
-    public Page<UserFileResponse> listUserFilesByNameByPageWithSize(
-            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
-            @PathVariable(value="page")
-            int page,
-            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
-            @PathVariable(value="size")
-            int size,
-            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
-            @PathVariable(value="idUser")
-            String idUser,
-            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
-            @PathVariable(value="fileName")
-            String fileName)throws NotFoundException{
-        Long id = Long.parseLong(idUser);
-
-        Pageable pages = PageRequest.of(page, size);
-
-        return this.userFileService.listsUserFilesByNameByPage(pages,id,fileName);
-
-    }
-
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
-    @GetMapping(path = "/pageExercisesInFile/{page}/size/{size}/{idUser}/{fileId}")
-    @ResponseBody
-    @ApiOperation(value = "Lista usuários por página quantidade")
-    public Page<UserFileResponse> listExercisesInUserFilesByIdByPageWithSize(
-            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
-            @PathVariable(value="page")
-            int page,
-            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
-            @PathVariable(value="size")
-            int size,
-            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
-            @PathVariable(value="idUser")
-            String idUser,
-            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
-            @PathVariable(value="fileId")
-            String fileId)throws NotFoundException{
-        Long id_user = Long.parseLong(idUser);
-        Long id_userFile = Long.parseLong(fileId);
-
-        Pageable pages = PageRequest.of(page, size);
-
-        return this.userFileService.listsExercisesInUserFilesByIdByPage(pages,id_user,id_userFile);
-
-    }
+//    //todas as fichas por
+//    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+//    @GetMapping(path = "/page/{page}/size/{size}/")
+//    @ResponseBody
+//    @ApiOperation(value = "Lista usuários por página quantidade")
+//    public Page<UserFileResponse> listAllFilesByPageWithSize(
+//            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
+//            @PathVariable(value="page")
+//            int page,
+//            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+//            @PathVariable(value="size")
+//            int size)throws NotFoundException{
+//
+//
+//        Pageable pages = PageRequest.of(page, size);
+//
+//        return this.userFileService.listsAllFilesByPage(pages);
+//
+//    }
+//
+//    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+//    @GetMapping(path = "/pageSpecificUserFile/{page}/size/{size}/{idUser}/{fileName}")
+//    @ResponseBody
+//    @ApiOperation(value = "Lista usuários por página quantidade")
+//    public Page<UserFileResponse> listUserFilesByNameByPageWithSize(
+//            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
+//            @PathVariable(value="page")
+//            int page,
+//            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+//            @PathVariable(value="size")
+//            int size,
+//            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+//            @PathVariable(value="idUser")
+//            String idUser,
+//            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+//            @PathVariable(value="fileName")
+//            String fileName)throws NotFoundException{
+//        Long id = Long.parseLong(idUser);
+//
+//        Pageable pages = PageRequest.of(page, size);
+//
+//        return this.userFileService.listsUserFilesByNameByPage(pages,id,fileName);
+//
+//    }
+//
+//    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+//    @GetMapping(path = "/pageExercisesInFile/{page}/size/{size}/{idUser}/{fileId}")
+//    @ResponseBody
+//    @ApiOperation(value = "Lista usuários por página quantidade")
+//    public Page<UserFileResponse> listExercisesInUserFilesByIdByPageWithSize(
+//            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
+//            @PathVariable(value="page")
+//            int page,
+//            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+//            @PathVariable(value="size")
+//            int size,
+//            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+//            @PathVariable(value="idUser")
+//            String idUser,
+//            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+//            @PathVariable(value="fileId")
+//            String fileId)throws NotFoundException{
+//        Long id_user = Long.parseLong(idUser);
+//        Long id_userFile = Long.parseLong(fileId);
+//
+//        Pageable pages = PageRequest.of(page, size);
+//
+//        return this.userFileService.listsExercisesInUserFilesByIdByPage(pages,id_user,id_userFile);
+//
+//    }
 
 }
