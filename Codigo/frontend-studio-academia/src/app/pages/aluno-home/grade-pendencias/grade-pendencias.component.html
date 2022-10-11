@@ -1,0 +1,30 @@
+<h2 class="offset-5">Pendências</h2>
+<form action="" (ngSubmit)="onSubmit()" [formGroup]="comprovanteForm" >
+  <button type="submit" class="btn btn-primary">Testar</button>
+<table class="table table-light mt-2">
+  <thead>
+    <tr class="table-secondary">
+      <th scope="col">Status</th>
+      <th scope="col">Valor</th>
+      <th scope="col">Data</th>
+      <th scope="col">Comprovante</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <th scope="row">Pago</th>
+        <td>20,00</td>
+        <td>13/02/2022</td>
+        <td><input type="file" formControlName="test" name="" id=""></td>
+      </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <th scope="row">Pago</th>
+      <td>20,00</td>
+      <td>13/02/2022</td>
+      <td><input type="text" formControlName="test" name="" id=""></td>
+    </tr>
+</tbody>
+</table>
+</form>

@@ -23,11 +23,6 @@ const routes: Routes = [
       },
       {
         path: 'cadastrarUsuario',
-        component: CadastroUsuarioComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'cadastrarAluno',
         component: CadastroAlunoComponent,
         canActivate: [AuthGuard]
       },

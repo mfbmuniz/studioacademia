@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AlunoHomeComponent } from './aluno-home.component';
 import { GradeFichasComponent } from './grade-fichas/grade-fichas.component';
+import { GradePendenciasComponent } from './grade-pendencias/grade-pendencias.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,12 @@ const routes: Routes = [
       {
         path: 'exercicios/:id',
         component: GradeExerciciosComponent
+      },
+      {
+        path: 'pagamentos',
+        component : GradePendenciasComponent
       }
+
     ]
   }
 
