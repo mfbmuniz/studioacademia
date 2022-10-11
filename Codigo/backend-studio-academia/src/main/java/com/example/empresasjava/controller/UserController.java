@@ -41,6 +41,7 @@ public class UserController {
         );
     }
 
+    //todo: trocar rotas de edição para @PatchMapping
     @PostMapping(path = "/edit")
     @ApiOperation(value = "Editar usuário existente")
     public ResponseEntity<UserDto> editUser(

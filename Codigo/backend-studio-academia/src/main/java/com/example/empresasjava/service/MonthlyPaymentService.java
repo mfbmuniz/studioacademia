@@ -1,7 +1,9 @@
 package com.example.empresasjava.service;
 
+import com.example.empresasjava.models.MonthlyPayment;
 import com.example.empresasjava.models.RequestEntity.MonthlyPaymentRequest;
 import com.example.empresasjava.models.ResponseEntity.MonthlyPaymentResponse;
+import com.example.empresasjava.models.User;
 import javassist.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,8 +14,9 @@ import javax.validation.Valid;
 public interface MonthlyPaymentService {
 
 
-    MonthlyPaymentResponse create(MonthlyPaymentRequest request)throws NonUniqueResultException, NotFoundException;
-    MonthlyPaymentResponse createAutoRequest(MonthlyPaymentRequest request, Long idLong)throws NonUniqueResultException, NotFoundException;
+    MonthlyPaymentResponse create();
+    MonthlyPayment create(User user);
+
     MonthlyPaymentResponse createRequestForApprove(MonthlyPaymentRequest request)throws NonUniqueResultException, NotFoundException;
 
     MonthlyPaymentResponse deleteMonthlyRequest(@Valid MonthlyPaymentRequest request, Long id)throws NonUniqueResultException, NotFoundException;
@@ -37,5 +40,5 @@ public interface MonthlyPaymentService {
     MonthlyPaymentResponse reproveMonthlyRequest(MonthlyPaymentRequest request, Long id)throws NonUniqueResultException, NotFoundException;
 
 
-
+    void createNextPayment();
 }

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,30 +31,12 @@ public class MonthlyPaymentController {
     @Autowired
     private MonthlyPaymentService monthlyPaymentService;
 
-
-    @PostMapping(path = "/createAutoRequest/{idUser}")
+    //usuario adicionar informações de pagamento
+    @PostMapping(path = "/createRequestForApprove")
     @ApiOperation(value = "Criar nova requisição de mensalidade para aprovar")
-    @PreAuthorize("@authorityChecker.isAllowed({'USER'})")
-    public ResponseEntity<MonthlyPaymentResponse> createAutoMonthlyRequest(
-            @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
-            @Valid @RequestBody MonthlyPaymentRequest request,
-            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
-            @PathVariable(value="idUser")
-            String idUser)throws NotFoundException {
-
-        Long idLong =Long.parseLong(idUser);
-        MonthlyPaymentResponse monthlyPaymentResponse = this.monthlyPaymentService.createAutoRequest(request,idLong);
-
-        return ResponseEntity.ok().body(
-                monthlyPaymentResponse
-        );
-    }
-
-    @PostMapping(path = "/createRequestForApprove/{idRequest}")
-    @ApiOperation(value = "Criar nova requisição de mensalidade para aprovar")
-    @PreAuthorize("@authorityChecker.isAllowed({'USER'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ALUNO'})")
     public ResponseEntity<MonthlyPaymentResponse> createUserMonthlyRequest(
-            @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
+            @ApiParam(value = "Json da requisição de pagamento do dado do pagamento mensal ")
             @Valid @RequestBody MonthlyPaymentRequest request) throws NotFoundException {
 
         MonthlyPaymentResponse monthlyPaymentResponse = this.monthlyPaymentService.createRequestForApprove(request);
@@ -84,7 +67,7 @@ public class MonthlyPaymentController {
 
     @PostMapping(path = "/editMonthlyPaymentRequest/{idUser}")
     @ApiOperation(value = "edita a requisição de mensalidade")
-    @PreAuthorize("@authorityChecker.isAllowed({'USER'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ALUNO'})")
     public ResponseEntity<MonthlyPaymentResponse> editMonthlyPaymentRequest(
             @ApiParam(value = "Json da requisição que contem o dado do usuario a ser salvo")
             @Valid @RequestBody MonthlyPaymentRequest request,
@@ -98,7 +81,7 @@ public class MonthlyPaymentController {
 
     @GetMapping(path = "/pageAll/{page}/size/{size}")
     @ResponseBody
-    @ApiOperation(value = "Lista usuários por página quantidade")
+    @ApiOperation(value = "Lista todas as requisições (aprovadas ou nao)")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
     public Page<MonthlyPaymentResponse> listRequestsByPageWithSize(
             @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
@@ -115,7 +98,7 @@ public class MonthlyPaymentController {
     }
     @GetMapping(path = "/pageAllPendency/{page}/size/{size}")
     @ResponseBody
-    @ApiOperation(value = "lista todas as requisições pendentes de aprovação")
+    @ApiOperation(value = "lista todos pendente de aprovação")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
     public Page<MonthlyPaymentResponse> listRequestsPendencyByPageWithSize(
             @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
@@ -152,7 +135,7 @@ public class MonthlyPaymentController {
 
     @GetMapping(path = "/pageAll/{page}/size/{size}/{idUser}")
     @ResponseBody
-    @ApiOperation(value = "Lista usuários por página quantidade")
+    @ApiOperation(value = "Lista pagamentos do usuario (aprovado ou nao)")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
     public Page<MonthlyPaymentResponse> listUserRequestsByPageWithSize(
             @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
@@ -173,7 +156,7 @@ public class MonthlyPaymentController {
     }
     @GetMapping(path = "/pageAllPendency/{page}/size/{size}/{idUser}")
     @ResponseBody
-    @ApiOperation(value = "lista todas as requisições pendentes de aprovação")
+    @ApiOperation(value = "lista apenas as requisições pendentes")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
     public Page<MonthlyPaymentResponse> listUserRequestsPendencyByPageWithSize(
             @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")

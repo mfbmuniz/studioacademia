@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -30,11 +31,19 @@ public class UserFile {
 
 
     @Column(name = "created_at")
-    private Date created_at;
+    private Date createdAt;
 
     @Column(name = "deleted_at")
-    private Date deleted_at;
+    private Date deletedAt;
 
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_exercises",
+            joinColumns = @JoinColumn(name = "user_file_id", insertable = false, updatable = false),
+            inverseJoinColumns = @JoinColumn(name = "exercises_id", insertable = false, updatable = false)
+    )
+    private List<Exercise> exercises;
 
 
     public UserFile(User user, @NotNull(message = "Campo user não pode ser nulo") @NotEmpty(message = "Campo user não pode ser vazio") String fileName) {

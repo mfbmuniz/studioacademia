@@ -1,13 +1,11 @@
 package com.example.empresasjava.models;
 
-import com.example.empresasjava.models.RequestEntity.UserRequest;
 import com.example.empresasjava.models.ResponseEntity.UserExerciseResponse;
 import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data
@@ -18,35 +16,35 @@ public class UserExercises {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_exercises_id")
-    Long userExercisesId;
+    private Long userExercisesId;
 
     @ManyToOne
     @JoinColumn(name = "user_file_id")
-    UserFile userFile;
+    private UserFile userFile;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "exercises_id")
-    Exercise exercises;
+    private Exercise exercises;
 
-    /*@ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "user_exercises",
-            joinColumns = @JoinColumn(name = "user_file_id"),
-            inverseJoinColumns = @JoinColumn(name = "exercises_id")
-    )
-    private List<Exercise> exercises;
-   */
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(
+//            name = "user_exercises",
+//            joinColumns = @JoinColumn(name = "user_file_id"),
+//            inverseJoinColumns = @JoinColumn(name = "exercises_id")
+//    )
+//    private List<Exercise> exercises;
+//
     @Column(name = "series")
     private Integer series;
 
-    @Column(name = "repetition")
+    @Column(name = "repetitions")
     private Integer repetition;
 
     @Column(name = "created_at")
-    private Date created_at;
+    private Date createdAt;
 
     @Column(name = "deleted_at")
-    private Date deleted_at;
+    private Date deletedAt;
 
     public UserExercises() {
     }

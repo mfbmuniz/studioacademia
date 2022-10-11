@@ -40,7 +40,6 @@ CREATE TABLE address(
                         CONSTRAINT FK_state_id FOREIGN KEY (state_id) REFERENCES states(state_id)
 );
 
-
 CREATE SEQUENCE users_seq;
 CREATE TABLE users (
                        user_id INT DEFAULT NEXTVAL ('users_seq') PRIMARY KEY,
@@ -54,6 +53,7 @@ CREATE TABLE users (
                        birth_date TIMESTAMP(0) NULL DEFAULT NULL,
                        phone1 VARCHAR(100) NOT NULL,
                        phone2 VARCHAR(100) NOT NULL,
+                       due_date TIMESTAMP,
 
 
                        created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
@@ -61,6 +61,7 @@ CREATE TABLE users (
 
                        CONSTRAINT FK_address_id FOREIGN KEY (address_id) REFERENCES address(address_id),
                        CONSTRAINT FK_plans_id FOREIGN KEY (plans_id) REFERENCES plans(plans_id)
+
 );
 
 CREATE SEQUENCE country_code_seq;
@@ -155,11 +156,13 @@ CREATE TABLE calendar (
 CREATE SEQUENCE monthly_payment_seq;
 CREATE TABLE monthly_payment (
                     monthly_payment_id INT DEFAULT NEXTVAL ('monthly_payment_seq') PRIMARY KEY,
-                    due_Date TIMESTAMP(0) NULL DEFAULT NULL,
-                    payment_CHECK BOOLEAN  not null,
+                    payment_date TIMESTAMP(0) NULL DEFAULT NULL,
+                    payment_status VARCHAR(50)  not null,
                     user_id INT CHECK (user_id > 0),
-                    payment_voucher VARCHAR(200),
-                    optional_message VARCHAR(200),
+                    payment_voucher VARCHAR(200),  /*imagem de comprovante*/
+                    message VARCHAR(200),
+                    due_date TIMESTAMP,
+                    approved_date TIMESTAMP,
 
 
                     created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
