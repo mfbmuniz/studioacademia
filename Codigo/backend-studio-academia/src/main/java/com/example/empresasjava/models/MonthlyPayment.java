@@ -37,6 +37,11 @@ public class MonthlyPayment {
     @Column(name = "payment_voucher")
     private String paymentVoucher;
 
+    /*
+    @Column(name = "payment_voucher")
+    @Lob
+    private byte[]  paymentVoucher;*/
+
     @Column(name = "message")
     private String message;
 

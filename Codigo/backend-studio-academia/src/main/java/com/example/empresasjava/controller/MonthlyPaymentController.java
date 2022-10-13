@@ -3,6 +3,7 @@ package com.example.empresasjava.controller;
 import com.example.empresasjava.models.RequestEntity.MonthlyPaymentRequest;
 import com.example.empresasjava.models.ResponseEntity.MonthlyPaymentResponse;
 import com.example.empresasjava.service.MonthlyPaymentService;
+import com.example.empresasjava.service.impl.MonthlyPaymentServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import javassist.NotFoundException;
@@ -14,9 +15,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import javax.imageio.IIOException;
 import javax.validation.Valid;
+import java.io.IOException;
 
     /*TODO
        TEST IMPLEMENTATIONS
@@ -37,9 +41,11 @@ public class MonthlyPaymentController {
     @PreAuthorize("@authorityChecker.isAllowed({'ALUNO'})")
     public ResponseEntity<MonthlyPaymentResponse> createUserMonthlyRequest(
             @ApiParam(value = "Json da requisição de pagamento do dado do pagamento mensal ")
-            @Valid @RequestBody MonthlyPaymentRequest request) throws NotFoundException {
+            @Valid @RequestBody MonthlyPaymentRequest request,
+            @RequestParam("image") MultipartFile paymentVoucherImage ) throws NotFoundException, IOException {
 
-        MonthlyPaymentResponse monthlyPaymentResponse = this.monthlyPaymentService.createRequestForApprove(request);
+
+            MonthlyPaymentResponse monthlyPaymentResponse = this.monthlyPaymentService.createRequestForApprove(request,paymentVoucherImage );
 
         return ResponseEntity.ok().body(
                 monthlyPaymentResponse
