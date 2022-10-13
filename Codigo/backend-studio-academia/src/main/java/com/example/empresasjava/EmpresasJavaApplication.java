@@ -69,14 +69,14 @@ public class EmpresasJavaApplication {
 			admin = new User("Admin",
 					"admin@admin.com",
 					this.bcryptEncoder.encode("12345678"),
-					"M",
-					"",
-					address,
-					Collections.singletonList(admRole),
 					new Date(),
-					new Date(),
+					"33853056",
+					"33853056",
 					"123456789",
-					"33853056"
+					address,
+					SexEnum.MALE,
+					Collections.singletonList(admRole),
+					new Date()
 				);
 		}else if(admin.getRoles().stream().noneMatch(role -> role.equals(admRole))){
 			System.out.println("Adding role to existing Admin account...");

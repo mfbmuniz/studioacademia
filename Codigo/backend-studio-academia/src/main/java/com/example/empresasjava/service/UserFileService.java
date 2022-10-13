@@ -31,5 +31,5 @@ public interface UserFileService {
     Page<UserFileResponse> listsUserFilesByNameByPage(Pageable pages, Long id, String fileName)throws NotFoundException;
 
 
-    Page<UserFileResponse> listsExercisesInUserFilesByIdByPage(Pageable pages, Long id_user, Long id_userFile)throws NotFoundException;
+    Page<UserExercises> listsExercisesInUserFilesByIdByPage(Pageable pages, Long id_user, Long id_userFile)throws NotFoundException;
 }

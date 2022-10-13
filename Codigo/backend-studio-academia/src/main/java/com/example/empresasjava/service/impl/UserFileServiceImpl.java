@@ -88,6 +88,7 @@ public class UserFileServiceImpl implements UserFileService {
 
     @Override
     public UserFileResponse editUserFile(UserFileRequest request) throws NotFoundException {
+
         UserFile userFile = getUserFile(request.getIdUser(), request.getIdFile());
         userFile.setFileName(request.getFileName());
 
@@ -157,8 +158,21 @@ public class UserFileServiceImpl implements UserFileService {
 
     // TODO: 05/10/2022 LISTAR EXERCICIOS DA FICHA X PAGINADO
     @Override
-    public Page<UserFileResponse> listsExercisesInUserFilesByIdByPage(Pageable pages, Long id_user, Long id_userFile) throws NotFoundException {
-        return null;
+    public Page<UserExercises> listsExercisesInUserFilesByIdByPage(Pageable pages, Long id_user, Long id_userFile) throws NotFoundException {
+        User user = this.userRepository.findById(id_user)
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+
+        UserFile userFile = this.userFileRepository.findById(id_userFile)
+                .orElseThrow(() -> new NotFoundException("Ficha  não encontrado"));
+
+       if(userFile.getUser().getIdUser() == id_user ){
+           return this.userExercisesRepository.findAllByUserFileAndDeletedAtIsNull(userFile, pages);
+       }else{
+           new NotFoundException("Usuario diferente do ID da ficha");
+           return  null;
+       }
+
+
     }
 
 

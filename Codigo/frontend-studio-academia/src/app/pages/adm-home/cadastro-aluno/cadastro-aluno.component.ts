@@ -54,6 +54,7 @@ export class CadastroAlunoComponent implements OnInit {
       birthDate: this.novoAlunoForm.value["birthDate"],
       roles:[ this.novoAlunoForm.value["roles"]],
       sex: this.novoAlunoForm.value["sex"],
+      dueDate:this.novoAlunoForm.value["birthDate"],
       address: {
         zipCode: this.novoAlunoForm.value["zipCode"],
         street: this.novoAlunoForm.value["street"],
