@@ -38,19 +38,35 @@ public class MonthlyPaymentController {
     //usuario adicionar informações de pagamento
     @PostMapping(path = "/createRequestForApprove")
     @ApiOperation(value = "Criar nova requisição de mensalidade para aprovar")
-    @PreAuthorize("@authorityChecker.isAllowed({'ALUNO'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ALUNO','ADMIN'})")
     public ResponseEntity<MonthlyPaymentResponse> createUserMonthlyRequest(
             @ApiParam(value = "Json da requisição de pagamento do dado do pagamento mensal ")
-            @Valid @RequestBody MonthlyPaymentRequest request,
-            @RequestParam("image") MultipartFile paymentVoucherImage ) throws NotFoundException, IOException {
+            @RequestBody MonthlyPaymentRequest request) throws NotFoundException, IOException {
 
 
-            MonthlyPaymentResponse monthlyPaymentResponse = this.monthlyPaymentService.createRequestForApprove(request,paymentVoucherImage );
+            MonthlyPaymentResponse monthlyPaymentResponse = this.monthlyPaymentService.createRequestForApprove(request);
 
         return ResponseEntity.ok().body(
                 monthlyPaymentResponse
         );
     }
+
+    @PostMapping(path = "/uploadImage")
+    @ApiOperation(value = "Criar nova requisição de mensalidade para aprovar")
+    @PreAuthorize("@authorityChecker.isAllowed({'ALUNO','ADMIN'})")
+    public ResponseEntity<String> uploadImage(
+            @ApiParam(value = "Json da requisição de pagamento do dado do pagamento mensal ")
+            @RequestParam MultipartFile paymentVoucherImage ) throws NotFoundException, IOException {
+
+
+        String savedPath = this.monthlyPaymentService.uploadImage(paymentVoucherImage );
+
+        return ResponseEntity.ok().body(
+                savedPath
+        );
+    }
+
+
 
 
     //se for usuario tem que verificar se a pessoa que ta tentanto deletar, tem o id

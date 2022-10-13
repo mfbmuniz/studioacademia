@@ -19,7 +19,7 @@ public interface MonthlyPaymentService {
     MonthlyPaymentResponse create();
     MonthlyPayment create(User user);
 
-    MonthlyPaymentResponse createRequestForApprove(MonthlyPaymentRequest request, MultipartFile paymentVoucherImage)throws NonUniqueResultException, NotFoundException, IOException;
+    MonthlyPaymentResponse createRequestForApprove(MonthlyPaymentRequest request)throws NonUniqueResultException, NotFoundException, IOException;
 
     MonthlyPaymentResponse deleteMonthlyRequest(@Valid MonthlyPaymentRequest request, Long id)throws NonUniqueResultException, NotFoundException;
 
@@ -43,4 +43,6 @@ public interface MonthlyPaymentService {
 
 
     void createNextPayment();
+
+    String uploadImage(MultipartFile paymentVoucherImage)throws NonUniqueResultException, NotFoundException, IOException;
 }

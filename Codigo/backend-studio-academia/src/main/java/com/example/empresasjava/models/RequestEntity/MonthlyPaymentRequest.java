@@ -21,7 +21,7 @@ public class MonthlyPaymentRequest {
     @NotEmpty(message = "Campo email não pode ser vazio")
     private String paymentVoucher;
 
-    private String optionalMessage;
+    private String message;
 }
 
 

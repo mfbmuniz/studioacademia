@@ -41,6 +41,9 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserServiceImpl userServiceImpl;
+
 
 
 
@@ -79,7 +82,13 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
     }
 
     @Override
-    public MonthlyPaymentResponse createRequestForApprove(MonthlyPaymentRequest request, MultipartFile paymentVoucherImage) throws NonUniqueResultException, NotFoundException,IOException {
+    public String uploadImage(MultipartFile paymentVoucherImage) throws NonUniqueResultException, NotFoundException, IOException {
+        return savePaymentVoucher(paymentVoucherImage);
+    }
+
+    @Override
+    public MonthlyPaymentResponse createRequestForApprove(MonthlyPaymentRequest request) throws NonUniqueResultException, NotFoundException,IOException {
+
         Calendar c = Calendar.getInstance();
         c.setTime(request.getDueDate());
         c.set(Calendar.HOUR_OF_DAY, 0);
@@ -87,28 +96,30 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND, 0);
 
-        String resp = savePaymentVoucher(paymentVoucherImage, request.getUserId());
 
-        if (!resp.contains("fail")) {
+
+
 
             MonthlyPayment monthlyPayment = this.monthlyPaymentRepository.findByUserIdAndDueDate(request.getUserId(), c.getTime());
             monthlyPayment.setPaymentStatus(MonthlyPaymentStatusEnum.EM_ANALISE.getCode());
-            monthlyPayment.setPaymentVoucher(resp);
+            monthlyPayment.setPaymentVoucher(request.getPaymentVoucher());
+            monthlyPayment.setMessage(request.getMessage());
             monthlyPayment.setPaymentDate(new Date());
             return MonthlyPaymentResponse.fromMonthlyPayment(this.monthlyPaymentRepository.save(monthlyPayment));
-        }else {
-            //throw new NonUniqueResultException();
-            //throw new NotFoundException();
-            throw new IOException();
-        }
+
     }
 
-    private String savePaymentVoucher(MultipartFile image, Long idUser){
+    private String savePaymentVoucher(MultipartFile image){
 
         try {
             Date saveDate = new Date();
 
-            String path = "C:/studioImages/" + saveDate.toString() + "_" + idUser + ".jpg"; // lugar pra salvar a imagem
+            User loggedUser = userServiceImpl.getUserByPrincipal();
+
+
+
+
+            String path = "C:/studioImages/" +saveDate.getTime() +"_"+loggedUser.getIdUser()+"_.jpg"; // lugar pra salvar a imagem
 
             //private final Path rootLocation = Paths.get("path");
             //Files.copy(image.getInputStream(), this.rootLocation.resolve(""+saveDate.toString()+"_"+idUser+".jpg"));
