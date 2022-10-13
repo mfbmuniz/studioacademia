@@ -52,7 +52,43 @@ export class EditarAlunoComponent implements OnInit {
 
   public editar() : void{
 
+    let body = {
+      email: this.editAlunoForm.value["email"],
+      password: this.editAlunoForm.value["password"],
+      passwordConfirm: this.editAlunoForm.value["passwordConfirm"],
+      name: this.editAlunoForm.value["name"],
+      legalDocument: this.editAlunoForm.value["legal_document"],
+      phone1: this.editAlunoForm.value["phone"],
+      phone2: this.editAlunoForm.value["phone"],
+      birthDate: this.editAlunoForm.value["birthDate"],
+      roles:[ this.editAlunoForm.value["roles"]],
+      sex: this.editAlunoForm.value["sex"],
+      address: {
+        zipCode: this.editAlunoForm.value["zipCode"],
+        street: this.editAlunoForm.value["street"],
+        number: this.editAlunoForm.value["number"],
+        district: this.editAlunoForm.value["district"],
+        complement: this.editAlunoForm.value["complement"],
+        state: this.editAlunoForm.value["state"],
+        city: this.editAlunoForm.value["city"],
+      }
+    }
+
+    this.userService.edit(body)
+      .subscribe(
+        {
+          next:(res) => {
+            console.log(res)
+          },
+          error: (err) => {
+            console.log(err)
+          }
+        }
+      );
+
   }
+
+
 
   public delete() : void {
     this.userService.delete(this.emailAluno)

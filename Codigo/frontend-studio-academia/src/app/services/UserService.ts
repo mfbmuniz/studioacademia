@@ -11,6 +11,7 @@ export class  UserService {
 
   private static API_URLS = {
     CREATE: `${environment.apiUrl}/user/create`,
+    EDIT: `${environment.apiUrl}/user/edit`,
   };
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -21,6 +22,10 @@ export class  UserService {
 
   create(body: any): Observable<any> {
     return this.http.post(UserService.API_URLS.CREATE, body);
+  }
+
+  edit(body: any): Observable<any> {
+    return this.http.post(UserService.API_URLS.EDIT, body);
   }
 
   listByPage(pageRequest: number, sizeRequest: number, keySearch: string){
