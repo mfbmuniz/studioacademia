@@ -11,7 +11,7 @@ public class UserFileRequest {
     @NotNull(message = "Campo user não pode ser nulo")
     private Long idUser;
 
-    @NotNull(message = "Campo user não pode ser nulo")
+
     private Long idFile;
 
     @NotNull(message = "Campo user não pode ser nulo")

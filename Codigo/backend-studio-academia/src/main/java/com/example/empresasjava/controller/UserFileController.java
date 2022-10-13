@@ -190,30 +190,30 @@ public class UserFileController {
 //
 //    }
 //
-//    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
-//    @GetMapping(path = "/pageExercisesInFile/{page}/size/{size}/{idUser}/{fileId}")
-//    @ResponseBody
-//    @ApiOperation(value = "Lista usuários por página quantidade")
-//    public Page<UserFileResponse> listExercisesInUserFilesByIdByPageWithSize(
-//            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
-//            @PathVariable(value="page")
-//            int page,
-//            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
-//            @PathVariable(value="size")
-//            int size,
-//            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
-//            @PathVariable(value="idUser")
-//            String idUser,
-//            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
-//            @PathVariable(value="fileId")
-//            String fileId)throws NotFoundException{
-//        Long id_user = Long.parseLong(idUser);
-//        Long id_userFile = Long.parseLong(fileId);
-//
-//        Pageable pages = PageRequest.of(page, size);
-//
-//        return this.userFileService.listsExercisesInUserFilesByIdByPage(pages,id_user,id_userFile);
-//
-//    }
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','ALUNO'})")
+    @GetMapping(path = "/pageExercisesInFile/{page}/size/{size}/idUser/{idUser}/fileId/{fileId}")
+    @ResponseBody
+    @ApiOperation(value = "Lista usuários por página quantidade")
+    public Page<UserExercises> listExercisesInUserFilesByIdByPageWithSize(
+            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
+            @PathVariable(value="page")
+            int page,
+            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @PathVariable(value="size")
+            int size,
+            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @PathVariable(value="idUser")
+            String idUser,
+            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @PathVariable(value="fileId")
+            String fileId)throws NotFoundException{
+        Long id_user = Long.parseLong(idUser);
+        Long id_userFile = Long.parseLong(fileId);
+
+       Pageable pages = PageRequest.of(page, size);
+
+       return this.userFileService.listsExercisesInUserFilesByIdByPage(pages,id_user,id_userFile);
+
+   }
 
 }

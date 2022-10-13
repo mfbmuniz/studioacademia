@@ -77,12 +77,9 @@ public class User {
     private Date deletedAt;
 
     public User(){}
+
     public User(String name,
-                @NotNull(message = "Campo data não pode ser nulo")
-                @NotEmpty(message = "Campo data não pode ser vazio")
                 String email,
-                @NotNull(message = "Campo data não pode ser nulo")
-                @NotEmpty(message = "Campo data não pode ser vazio")
                 String password,
                 Date birthDate,
                 String phone1,
@@ -120,6 +117,8 @@ public class User {
         this.phone1 = phone1;
         this.phone2 = phone2;
     }
+
+
 
     public static User fromUserResponse(UserDto user){
         return null;
