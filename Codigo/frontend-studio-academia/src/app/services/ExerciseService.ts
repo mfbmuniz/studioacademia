@@ -7,7 +7,7 @@ import {environment} from "../../environments/environment";
 @Injectable({
   providedIn: "root",
 })
-export class ExerciseService {
+export class  ExerciseService {
 
   private static API_URLS = {
     CREATE: `${environment.apiUrl}/exercise/create`,

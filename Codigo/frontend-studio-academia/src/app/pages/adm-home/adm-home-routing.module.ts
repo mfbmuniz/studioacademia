@@ -1,8 +1,8 @@
+import { EditarExercicioComponent } from './editar-exercicio/editar-exercicio.component';
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdmHomeComponent } from './adm-home.component';
 import { CadastroAlunoComponent } from './cadastro-aluno/cadastro-aluno.component';
-import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 import {AuthGuard} from "../../shared/guards/AuthGuard";
 import { CadastroExercicioComponent } from './cadastro-exercicio/cadastro-exercicio.component';
 import { SearchHomeComponent } from './search-home/search-home.component';
@@ -29,6 +29,10 @@ const routes: Routes = [
       {
         path: 'cadastrarExercicio',
         component: CadastroExercicioComponent
+      },
+      {
+        path: 'editarExercicio/:idExercicio',
+        component: EditarExercicioComponent
       },
       {
         path: 'editarAluno/:idAluno',

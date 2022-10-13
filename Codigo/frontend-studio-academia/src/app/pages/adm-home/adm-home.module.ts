@@ -17,6 +17,8 @@ import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
 import { AdmGradeFichasComponent } from './adm-grade-fichas/adm-grade-fichas.component';
 import { EditarFichasComponent } from './editar-fichas/editar-fichas.component';
 import { TabelaExerciciosComponent } from './tabela-exercicios/tabela-exercicios.component';
+import { EditarExercicioComponent } from './editar-exercicio/editar-exercicio.component';
+
 
 
 
@@ -34,7 +36,7 @@ import { TabelaExerciciosComponent } from './tabela-exercicios/tabela-exercicios
     AdmGradeFichasComponent,
     EditarFichasComponent,
     TabelaExerciciosComponent,
-
+    EditarExercicioComponent,
   ],
   imports: [
     CommonModule,
