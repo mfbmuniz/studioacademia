@@ -8,3 +8,5 @@ export interface MonthlyPayment {
   dueDate ?: Date,
   approvedDate ?: Date,
 }
+
+export type MonthlyPayments = Array<MonthlyPayment>

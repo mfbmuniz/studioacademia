@@ -1,6 +1,6 @@
 <h2 class="offset-5">Pendências</h2>
 <form action="" (ngSubmit)="onSubmit()" [formGroup]="comprovanteForm" >
-  <button type="submit" class="btn btn-primary">Testar</button>
+  <button type="submit" class="btn btn-primary">Enviar</button>
 <table class="table table-light mt-2">
   <thead>
     <tr class="table-secondary">
@@ -10,12 +10,12 @@
       <th scope="col">Comprovante</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody *ngFor="let MonthlyPayment of pagamentos">
       <tr>
-        <th scope="row">Pago</th>
-        <td>20,00</td>
-        <td>13/02/2022</td>
-        <td><input type="file" formControlName="test" name="" id=""></td>
+        <th scope="row">{{MonthlyPayment.paymentStatus}}</th>
+        <td>{{MonthlyPayment.payment_voucher}}</td>
+        <td>{{MonthlyPayment.dueDate}}</td>
+        <td><input type="file" formControlName="file" name="" id=""></td>
       </tr>
   </tbody>
   <tbody>

@@ -6,3 +6,5 @@ export interface Plan {
   planConde ?: string,
   contractedDays ?: number
 }
+
+export type Plans = Array<Plan>
