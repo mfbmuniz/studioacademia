@@ -7,9 +7,11 @@ import com.example.empresasjava.models.User;
 import javassist.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.NonUniqueResultException;
 import javax.validation.Valid;
+import java.io.IOException;
 
 public interface MonthlyPaymentService {
 
@@ -17,7 +19,7 @@ public interface MonthlyPaymentService {
     MonthlyPaymentResponse create();
     MonthlyPayment create(User user);
 
-    MonthlyPaymentResponse createRequestForApprove(MonthlyPaymentRequest request)throws NonUniqueResultException, NotFoundException;
+    MonthlyPaymentResponse createRequestForApprove(MonthlyPaymentRequest request)throws NonUniqueResultException, NotFoundException, IOException;
 
     MonthlyPaymentResponse deleteMonthlyRequest(@Valid MonthlyPaymentRequest request, Long id)throws NonUniqueResultException, NotFoundException;
 
@@ -41,4 +43,6 @@ public interface MonthlyPaymentService {
 
 
     void createNextPayment();
+
+    String uploadImage(MultipartFile paymentVoucherImage)throws NonUniqueResultException, NotFoundException, IOException;
 }

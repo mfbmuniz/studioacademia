@@ -14,9 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.NonUniqueResultException;
+import javax.validation.Path;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +40,12 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserServiceImpl userServiceImpl;
+
+
+
 
     //TODO: 04/10/2022 //create
     @Override
@@ -70,7 +82,13 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
     }
 
     @Override
-    public MonthlyPaymentResponse createRequestForApprove(MonthlyPaymentRequest request) throws NonUniqueResultException, NotFoundException {
+    public String uploadImage(MultipartFile paymentVoucherImage) throws NonUniqueResultException, NotFoundException, IOException {
+        return savePaymentVoucher(paymentVoucherImage);
+    }
+
+    @Override
+    public MonthlyPaymentResponse createRequestForApprove(MonthlyPaymentRequest request) throws NonUniqueResultException, NotFoundException,IOException {
+
         Calendar c = Calendar.getInstance();
         c.setTime(request.getDueDate());
         c.set(Calendar.HOUR_OF_DAY, 0);
@@ -78,11 +96,41 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND, 0);
 
-        MonthlyPayment montlhyPayment = this.monthlyPaymentRepository.findByUserIdAndDueDate(request.getUserId(), c.getTime());
-        montlhyPayment.setPaymentStatus(MonthlyPaymentStatusEnum.EM_ANALISE.getCode());
-        montlhyPayment.setPaymentVoucher(request.getPaymentVoucher());
-        montlhyPayment.setPaymentDate(new Date());
-        return MonthlyPaymentResponse.fromMonthlyPayment(this.monthlyPaymentRepository.save(montlhyPayment));
+
+
+
+
+            MonthlyPayment monthlyPayment = this.monthlyPaymentRepository.findByUserIdAndDueDate(request.getUserId(), c.getTime());
+            monthlyPayment.setPaymentStatus(MonthlyPaymentStatusEnum.EM_ANALISE.getCode());
+            monthlyPayment.setPaymentVoucher(request.getPaymentVoucher());
+            monthlyPayment.setMessage(request.getMessage());
+            monthlyPayment.setPaymentDate(new Date());
+            return MonthlyPaymentResponse.fromMonthlyPayment(this.monthlyPaymentRepository.save(monthlyPayment));
+
+    }
+
+    private String savePaymentVoucher(MultipartFile image){
+
+        try {
+            Date saveDate = new Date();
+
+            User loggedUser = userServiceImpl.getUserByPrincipal();
+
+
+
+
+            String path = "C:/studioImages/" +saveDate.getTime() +"_"+loggedUser.getIdUser()+"_.jpg"; // lugar pra salvar a imagem
+
+            //private final Path rootLocation = Paths.get("path");
+            //Files.copy(image.getInputStream(), this.rootLocation.resolve(""+saveDate.toString()+"_"+idUser+".jpg"));
+
+
+
+             File dest = new File(path);
+             image.transferTo(dest);
+            return path;
+        }catch (Exception e){e.printStackTrace();return "fail";}
+
     }
 
     //TODO: 04/10/2022 //delete
