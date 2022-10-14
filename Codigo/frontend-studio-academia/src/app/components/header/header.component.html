@@ -6,8 +6,14 @@
         <p>Planos</p>
         <p>Fale conosco</p>
     </div>
-    <div class="right-section">
-      <a [routerLink]="['home/login']" routerLinkActive="ativok"> <button mat-raised-button>  Entrar </button></a>
+    <div *ngIf="user$ |async as user" class="right-section">
+      <div *ngIf="user.name ; else login">
+        <i class="bi bi-person-circle btn btn-warning"></i>
+      </div>
     </div>
 </header>
-
+<ng-template #login>
+  <div class="right-section">
+    <a [routerLink]="['home/login']" routerLinkActive="ativok"> <button mat-raised-button>  Entrar </button></a>
+  </div>
+</ng-template>
