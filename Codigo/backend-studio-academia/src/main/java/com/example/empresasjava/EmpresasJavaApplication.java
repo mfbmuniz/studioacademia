@@ -2,6 +2,7 @@ package com.example.empresasjava;
 
 import com.example.empresasjava.enums.RolesEnum;
 import com.example.empresasjava.enums.SexEnum;
+import com.example.empresasjava.enums.WeekDaysEnum;
 import com.example.empresasjava.models.*;
 import com.example.empresasjava.repository.AddressRepository;
 import com.example.empresasjava.repository.RoleRepository;
@@ -76,7 +77,8 @@ public class EmpresasJavaApplication {
 					address,
 					SexEnum.MALE,
 					Collections.singletonList(admRole),
-					new Date()
+					new Date(),
+					WeekDaysEnum.SEGUNDA+","+WeekDaysEnum.QUARTA+""
 				);
 		}else if(admin.getRoles().stream().noneMatch(role -> role.equals(admRole))){
 			System.out.println("Adding role to existing Admin account...");

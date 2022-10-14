@@ -32,8 +32,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 
-/*TODO : IMPLEMENTATIONS
-     */
+
 
 @Service
 public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {

@@ -58,11 +58,13 @@ public class UserRequest {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dueDate;
 
+    private String weekDays;
+
     public UserRequest() {
     }
 
     public UserRequest(String name, String email, String password, List<String> roles, String legalDocument,
-                       AddressDto address, String sex, Date birthDate, String phone1, String phone2, Date dueDate) {
+                       AddressDto address, String sex, Date birthDate, String phone1, String phone2, Date dueDate,String weekDays) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -74,6 +76,7 @@ public class UserRequest {
         this.phone1 = phone1;
         this.phone2 = phone2;
         this.dueDate = dueDate;
+        this.weekDays=weekDays;
     }
 
     public static User toUser(UserRequest user, List<Role> roles, Address address) {
@@ -99,7 +102,8 @@ public class UserRequest {
                 dueDate,
                 birthDate,
                 user.getPhone1(),
-                user.getPhone2());
+                user.getPhone2(),
+                user.getWeekDays());
     }
 
 }

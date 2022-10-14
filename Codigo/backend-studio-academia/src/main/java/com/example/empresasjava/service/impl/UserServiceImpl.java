@@ -101,6 +101,7 @@ public class UserServiceImpl implements UserService {
             List<Role> NewRoles = this.roleService.findAllByNameIn(userRequest.getRoles());
             user.setRoles(NewRoles);
             user.setName(userRequest.getName());
+            user.setWeekDays(userRequest.getWeekDays());
             user.setPassword(this.bcryptEncoder.encode(user.getPassword()));
         }else if(user == userByPrincipal) {
             //Usuarios so podem editar eles mesmos
