@@ -72,6 +72,10 @@ public class User {
     private String phone2;
 
 
+    @Column(name = "weekDays")
+    private String weekDays;
+
+
 
     private Date createdAt;
     private Date deletedAt;
@@ -88,7 +92,8 @@ public class User {
                 Address address,
                 SexEnum sex,
                 List<Role> roles,
-                Date dueDate
+                Date dueDate,
+                String weekDays
                 ) {
         this.name = name;
         this.email = email;
@@ -101,10 +106,11 @@ public class User {
         this.address = address;
         this.roles = roles;
         this.dueDate=dueDate;
+        this.weekDays=weekDays;
     }
 
     public User(String name, String email, String password, String sex, String legal_document, Address address,
-                List<Role> roles, Date dueDate, Date birthDate, String phone1, String phone2) {
+                List<Role> roles, Date dueDate, Date birthDate, String phone1, String phone2,String weekDays) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -116,6 +122,7 @@ public class User {
         this.birthDate = birthDate;
         this.phone1 = phone1;
         this.phone2 = phone2;
+        this.weekDays = weekDays;
     }
 
 

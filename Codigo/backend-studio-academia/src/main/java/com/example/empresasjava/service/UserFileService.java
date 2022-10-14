@@ -4,6 +4,7 @@ import com.example.empresasjava.models.RequestEntity.UserExerciseRequest;
 import com.example.empresasjava.models.RequestEntity.UserFileRequest;
 import com.example.empresasjava.models.ResponseEntity.UserExerciseResponse;
 import com.example.empresasjava.models.ResponseEntity.UserFileResponse;
+import com.example.empresasjava.models.User;
 import com.example.empresasjava.models.UserExercises;
 import com.example.empresasjava.models.UserFile;
 import javassist.NotFoundException;
@@ -26,9 +27,9 @@ public interface UserFileService {
 
     Page<UserFile> listsUserFilesByPage(Pageable pages, Long id)throws NotFoundException;
 
-    Page<UserFileResponse> listsAllFilesByPage(Pageable pages)throws NotFoundException;
+    Page<UserFile> listsAllFilesByPage(Pageable pages)throws NotFoundException;
 
-    Page<UserFileResponse> listsUserFilesByNameByPage(Pageable pages, Long id, String fileName)throws NotFoundException;
+    Page<UserFile> listsUserFilesByNameByPage(Pageable pages, Long id, String fileName)throws NotFoundException;
 
 
     Page<UserExercises> listsExercisesInUserFilesByIdByPage(Pageable pages, Long id_user, Long id_userFile)throws NotFoundException;
