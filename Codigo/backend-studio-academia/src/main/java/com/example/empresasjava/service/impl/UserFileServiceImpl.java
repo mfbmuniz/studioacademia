@@ -144,19 +144,20 @@ public class UserFileServiceImpl implements UserFileService {
         return this.userFileRepository.findAllByUserAndDeletedAtIsNull(user, pages);
     }
 
-    //TODO: 05/10/2022 LISTAR TODAS AS FICHAS PAGINADO 
+
     @Override
-    public Page<UserFileResponse> listsAllFilesByPage(Pageable pages) throws NotFoundException {
-        return null;
+    public Page<UserFile> listsAllFilesByPage(Pageable pages) throws NotFoundException {
+        return this.userFileRepository.findAllByDeletedAtIsNull( pages);
     }
 
-    // TODO: 05/10/2022 DENTRO DAS FICHAS DE UM USUARIO X PESQUISAR UMA FICHA EM ESPECIFICO POR NOME () 
     @Override
-    public Page<UserFileResponse> listsUserFilesByNameByPage(Pageable pages, Long id, String fileName) throws NotFoundException {
-        return null;
+    public Page<UserFile> listsUserFilesByNameByPage(Pageable pages, Long id, String fileName) throws NotFoundException {
+
+        User user = this.userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+        return this.userFileRepository.findAllByUserAndFileNameAndDeletedAtIsNull(user, pages,fileName);
     }
 
-    // TODO: 05/10/2022 LISTAR EXERCICIOS DA FICHA X PAGINADO
     @Override
     public Page<UserExercises> listsExercisesInUserFilesByIdByPage(Pageable pages, Long id_user, Long id_userFile) throws NotFoundException {
         User user = this.userRepository.findById(id_user)
