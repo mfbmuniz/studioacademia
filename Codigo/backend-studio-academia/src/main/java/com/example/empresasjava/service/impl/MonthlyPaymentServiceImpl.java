@@ -1,10 +1,12 @@
 package com.example.empresasjava.service.impl;
 
 import com.example.empresasjava.enums.MonthlyPaymentStatusEnum;
+import com.example.empresasjava.models.Exercise;
 import com.example.empresasjava.models.MonthlyPayment;
 import com.example.empresasjava.models.RequestEntity.MonthlyPaymentRequest;
 import com.example.empresasjava.models.ResponseEntity.MonthlyPaymentResponse;
 import com.example.empresasjava.models.User;
+import com.example.empresasjava.models.dto.ExerciseDto;
 import com.example.empresasjava.repository.MonthlyPaymentRepository;
 import com.example.empresasjava.repository.UserRepository;
 import com.example.empresasjava.service.MonthlyPaymentService;
@@ -26,6 +28,7 @@ import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -47,7 +50,9 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
 
 
 
-    //TODO: 04/10/2022 //create
+
+
+
     @Override
     public MonthlyPaymentResponse create(){
         return null;
@@ -96,10 +101,6 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND, 0);
 
-
-
-
-
             MonthlyPayment monthlyPayment = this.monthlyPaymentRepository.findByUserIdAndDueDate(request.getUserId(), c.getTime());
             monthlyPayment.setPaymentStatus(MonthlyPaymentStatusEnum.EM_ANALISE.getCode());
             monthlyPayment.setPaymentVoucher(request.getPaymentVoucher());
@@ -119,6 +120,7 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
 
 
 
+
             String path = "C:/studioImages/" +saveDate.getTime() +"_"+loggedUser.getIdUser()+"_.jpg"; // lugar pra salvar a imagem
 
             //private final Path rootLocation = Paths.get("path");
@@ -133,64 +135,93 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
 
     }
 
-    //TODO: 04/10/2022 //delete
-    @Override
+     @Override
     public MonthlyPaymentResponse deleteMonthlyRequest(@Valid MonthlyPaymentRequest request, Long id) throws NonUniqueResultException, NotFoundException {
-        return null;
-    }
 
-    //TODO: 04/10/2022 //edit ( usuario pode editar sua propria requisição, admin nao altera requisição do usuario, apenas aprova ou deleta)
+        MonthlyPayment monthlyPayment = Optional.of(this.monthlyPaymentRepository.findOneByMonthlyPaymentId(id)).orElseThrow(()-> new NonUniqueResultException("Exercicio inexistente"));
+        monthlyPayment.setDeletedAt(new Date());
+        return MonthlyPaymentResponse.fromMonthlyPayment(this.monthlyPaymentRepository.save(monthlyPayment));
+    }
     @Override
     public MonthlyPaymentResponse editMonthlyPaymentRequest(@Valid MonthlyPaymentRequest request, Long idUser) throws NonUniqueResultException, NotFoundException {
-        return null;
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(request.getDueDate());
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+
+        MonthlyPayment monthlyPayment = this.monthlyPaymentRepository.findByUserIdAndDueDate(request.getUserId(), c.getTime());
+        monthlyPayment.setPaymentStatus(monthlyPayment.getPaymentStatus());
+        monthlyPayment.setPaymentVoucher(request.getPaymentVoucher());
+        monthlyPayment.setMessage(request.getMessage());
+        monthlyPayment.setPaymentDate(new Date());
+        return MonthlyPaymentResponse.fromMonthlyPayment(this.monthlyPaymentRepository.save(monthlyPayment));
+
     }
 
-    //TODO: 04/10/2022 //listar todas para administrador
+
     @Override
-    public Page<MonthlyPaymentResponse> listRequestsByPage(Pageable pages) throws NonUniqueResultException, NotFoundException {
-        return null;
+    public Page<MonthlyPayment> listRequestsByPage(Pageable pages) throws NonUniqueResultException, NotFoundException {
+        return this.monthlyPaymentRepository.findAllByDeletedAtIsNullOrderByName(pages);
     }
 
-    //TODO: 04/10/2022  //listar todas as pendentes para administrador
     @Override
-    public Page<MonthlyPaymentResponse> listPendencyRequestsByPage(Pageable pages) throws NonUniqueResultException, NotFoundException {
-        return null;
+    public Page<MonthlyPayment> listSpecificRequestsByPage(Pageable pages, String paymentStatusRequest) throws NonUniqueResultException, NotFoundException {
+
+
+        return this.monthlyPaymentRepository.findAllByPaymentStatusAndDeletedAtIsNullContainingIgnoreCaseOrderByName(pages, paymentStatusRequest);
     }
 
-    //TODO: 04/10/2022 //listar todas ja aprovadas para administrador
+
     @Override
-    public Page<MonthlyPaymentResponse> listApprovedRequestsByPage(Pageable pages) throws NonUniqueResultException, NotFoundException {
-        return null;
+    public Page<MonthlyPayment> listUserRequestsByPage(Pageable pages, Long id) throws NonUniqueResultException, NotFoundException {
+        return this.monthlyPaymentRepository.findAllByUserIdAndDeletedAtIsNullOrderByName(pages,id);
+
+
     }
 
-    //TODO: 04/10/2022 //listar todas para usuario
     @Override
-    public Page<MonthlyPaymentResponse> listUserRequestsByPage(Pageable pages, Long id) throws NonUniqueResultException, NotFoundException {
-        return null;
+    public Page<MonthlyPayment> listUserSpecificRequestsByPage(Pageable pages, Long id, String paymentStatusRequest) throws NonUniqueResultException, NotFoundException {
+        return this.monthlyPaymentRepository.findAllByUserIdAndPaymentStatusAndDeletedAtIsNullContainingIgnoreCaseOrderByName(pages,id, paymentStatusRequest);
     }
 
-    //TODO: 04/10/2022   //listar pendentes para aluno  ( lista suas requisições (do id dele), inclusive as passadas, o front deve separar as pendentes das comuns)
-    @Override
-    public Page<MonthlyPaymentResponse> listUserPendencyRequestsByPage(Pageable pages, Long id) throws NonUniqueResultException, NotFoundException {
-        return null;
-    }
 
-    //TODO: 04/10/2022  //listar todas as ja aprovadas para aluno ( lista suas requisições (do id dele), inclusive as passadas, o front deve separar as pendentes das comuns)
-    @Override
-    public Page<MonthlyPaymentResponse> listUserApprovedRequestsByPage(Pageable pages, Long id) throws NonUniqueResultException, NotFoundException {
-        return null;
-    }
-
-    //TODO: aprova pagamento (e dispara para o usuario uma notificação de pagamento aprovado)
     @Override
     public MonthlyPaymentResponse approveMonthlyRequest(MonthlyPaymentRequest request, Long id) throws NonUniqueResultException, NotFoundException {
-        return null;
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(request.getDueDate());
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+
+        MonthlyPayment monthlyPayment = this.monthlyPaymentRepository.findByUserIdAndDueDate(request.getUserId(), c.getTime());
+        monthlyPayment.setPaymentStatus((MonthlyPaymentStatusEnum.PAGO.getCode()));
+        monthlyPayment.setPaymentVoucher(monthlyPayment.getPaymentVoucher());
+        monthlyPayment.setMessage(monthlyPayment.getMessage());
+        monthlyPayment.setPaymentDate(monthlyPayment.getPaymentDate());
+        monthlyPayment.setApproved_date(new Date());
+        return MonthlyPaymentResponse.fromMonthlyPayment(this.monthlyPaymentRepository.save(monthlyPayment));
     }
 
-    //TODO: 04/10/2022 //reprova pagamento (e dispara para o usuario uma notificação de pagamento reprovado)
     @Override
     public MonthlyPaymentResponse reproveMonthlyRequest(MonthlyPaymentRequest request, Long id) throws NonUniqueResultException, NotFoundException {
-        return null;
+        Calendar c = Calendar.getInstance();
+        c.setTime(request.getDueDate());
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+
+        MonthlyPayment monthlyPayment = this.monthlyPaymentRepository.findByUserIdAndDueDate(request.getUserId(), c.getTime());
+        monthlyPayment.setPaymentStatus((MonthlyPaymentStatusEnum.NAO_RECEBIDO.getCode()));
+        monthlyPayment.setPaymentVoucher(monthlyPayment.getPaymentVoucher());
+        monthlyPayment.setMessage(monthlyPayment.getMessage());
+        monthlyPayment.setPaymentDate(monthlyPayment.getPaymentDate());
+        return MonthlyPaymentResponse.fromMonthlyPayment(this.monthlyPaymentRepository.save(monthlyPayment));
     }
 
 
