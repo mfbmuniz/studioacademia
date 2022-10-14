@@ -79,9 +79,11 @@ export class EditarAlunoComponent implements OnInit {
         {
           next:(res) => {
             console.log(res)
+            alert("Usuário editado com êxito")
           },
           error: (err) => {
             console.log(err)
+            alert("Não foi possível editar o usuário")
           }
         }
       );
@@ -96,10 +98,12 @@ export class EditarAlunoComponent implements OnInit {
         {
           next:(res) => {
             console.log(res)
+            alert("Usuário apagado com êxito")
             this.router.navigateByUrl('adm/home')
           },
           error: (err) => {
             console.log(err)
+            alert("Não foi possível deletar o usuário")
           }
         }
       );

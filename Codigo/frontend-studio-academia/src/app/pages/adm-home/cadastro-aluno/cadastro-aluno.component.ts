@@ -71,9 +71,11 @@ export class CadastroAlunoComponent implements OnInit {
         {
           next:(res) => {
             console.log(res)
+            alert("Usuário cadastrado com êxito")
           },
           error: (err) => {
             console.log(err)
+            alert("Não foi possível salvar o usuário")
           }
         }
       );

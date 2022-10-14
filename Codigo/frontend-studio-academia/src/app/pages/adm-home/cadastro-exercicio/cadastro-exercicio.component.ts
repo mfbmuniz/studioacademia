@@ -43,9 +43,11 @@ export class CadastroExercicioComponent implements OnInit {
         {
           next:(res) => {
             console.log(res)
+            alert("Exercício cadastrado com êxito")
           },
           error: (err) => {
             console.log(err)
+            alert("Não foi possível salvar o exercício")
           }
         }
       );

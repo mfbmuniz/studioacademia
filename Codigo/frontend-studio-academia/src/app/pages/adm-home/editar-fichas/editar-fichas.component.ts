@@ -1,8 +1,11 @@
+import { Exercicio } from './../../../Models/exercicio';
+import { Exercicios } from 'src/app/Models/exercicio';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,FormArray, FormBuilder, Validators } from '@angular/forms'
 import { Ficha } from 'src/app/Models/ficha';
 import { ActivatedRoute } from '@angular/router';
+import { UserFileService } from 'src/app/services/UserFileService';
 
 @Component({
   selector: 'app-editar-fichas',
@@ -16,7 +19,8 @@ export class EditarFichasComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private routeAc : ActivatedRoute) {
+    private routeAc : ActivatedRoute,
+    private userFileSerce : UserFileService) {
       this.routeAc.params.subscribe(params => this.idFicha = params['idFicha']);
     this.fichaForm = this.formBuilder.group({
       name: ['',Validators.required],
@@ -38,23 +42,49 @@ export class EditarFichasComponent implements OnInit {
 
   newExercicio(): FormGroup {
     return this.formBuilder.group({
-      exercicio: '',
+      exercicio: ['', Validators.required],
       serie: ['',Validators.min(0)],
-      repeticoes: '',
+      repeticoes: ['',Validators.required],
     })
  }
 
  addExercicio() {
   this.exercicios.push(this.newExercicio());
-  this.cadastrar();
+
+  let body = {
+
+  }
+  //this.cadastrarExercicio(body);
 }
 
 removeExercicio(i:number) {
   this.exercicios.removeAt(i);
 }
 
-cadastrar(){
+cadastrarExercicio(body : any){
+  this.userFileSerce.addExercise(body).subscribe(
+    {
+      next: (res) => {
+        console.log(res)
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    }
+  )
+}
 
+deletarExercicio(idFile : string, idExercise : string ) : void{
+  this.userFileSerce.deleteExercise(idFile, idExercise).subscribe(
+    {
+      next: (res) => {
+        console.log(res)
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    }
+  )
 }
 
 
