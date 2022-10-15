@@ -30,11 +30,17 @@ export class UserFileService {
   }
 
   editExercise(body : any , idFile : String , idExercise : String) : Observable<any>{
-    return this.http.post(`${environment.apiUrl}/editExercises/${idFile}/${idExercise}`,body)
+    return this.http.post(`${environment.apiUrl}/user-files/editExercises/${idFile}/${idExercise}`,body)
   }
 
   deleteExercise(idFile : String , idExercise : String): Observable<any>{
-    return this.http.delete(`${environment.apiUrl}//deleteExercise/${idFile}/${idExercise}`)
+    return this.http.delete(`${environment.apiUrl}/user-files/deleteExercise/${idFile}/${idExercise}`)
+  }
+
+  public fihcaUsuario(page : number, size : number, idUser : number , fileId : number){
+    return this.http.get(`${environment.apiUrl}/user-files/pageExercisesInFile/
+    ${page}/size/${size}/idUser/${idUser}/fileId/${fileId}`)
+    //
   }
 
 
