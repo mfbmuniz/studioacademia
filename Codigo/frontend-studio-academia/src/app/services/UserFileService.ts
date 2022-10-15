@@ -37,6 +37,14 @@ export class UserFileService {
     return this.http.delete(`${environment.apiUrl}/user-files/deleteExercise/${idFile}/${idExercise}`)
   }
 
+  /**
+   *
+   * @param page Página que deseja visualizar iniciando em 0", example = "0"
+   * @param size Quantidade de ficha a serem listados por página", example = "10"
+   * @param idUser id do usário
+   * @param fileId id da ficha
+   * @returns
+   */
   public fihcaUsuario(page : number, size : number, idUser : number , fileId : number){
     return this.http.get(`${environment.apiUrl}/user-files/pageExercisesInFile/
     ${page}/size/${size}/idUser/${idUser}/fileId/${fileId}`)
