@@ -16,7 +16,8 @@ export class GradePendenciasComponent implements OnInit {
   comprovanteForm !: FormGroup
   pagamentos !: MonthlyPayments
   pageable$ !: pageableObject
-
+  pagamentosPendentes !: MonthlyPayments
+  pageablePend$ !: pageableObject
   constructor(
     private formBuilder: FormBuilder,
     private monthlyPaymentService : MonthlyPaymentService
@@ -27,6 +28,7 @@ export class GradePendenciasComponent implements OnInit {
       file :['',[]],
     })
     this.listarTodosPagamentos(0,10,1);
+    this.listarPagamentosPendentes(0,10,1);
   }
 
   public onSubmit() : void{
@@ -38,6 +40,13 @@ export class GradePendenciasComponent implements OnInit {
     this.monthlyPaymentService.listarPagamentoUsuario(page,size,idUser).subscribe((res : any)=>{
        this.pageable$ = res
        this.pagamentos =<MonthlyPayments>this.pageable$.content
+    })
+  }
+
+  public listarPagamentosPendentes(page : number, size : number, idUser : number) {
+    this.monthlyPaymentService.listarPagamentoPendentesUsuario(page,size,idUser).subscribe((res : any)=>{
+       this.pageablePend$ = res
+       this.pagamentosPendentes =<MonthlyPayments> this.pageablePend$.content
     })
   }
 
