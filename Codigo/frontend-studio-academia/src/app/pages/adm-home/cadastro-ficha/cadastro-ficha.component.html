@@ -20,6 +20,7 @@
           formControlName='name'>
       </div>
 
+
       <div formArrayName="exercicios" class="mt-2">
         <div *ngFor="let exercicio of exercicios.controls; let i=index">
           <div [formGroupName]="i">

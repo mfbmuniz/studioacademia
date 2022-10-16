@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { FormGroup, FormControl,FormArray, FormBuilder, Validators } from '@angular/forms'
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { UserFileService } from 'src/app/services/UserFileService';
+import {UserService} from "../../../services/UserService";
+import {ExerciseService} from "../../../services/ExerciseService";
+import {Fichas} from "../../../Models/ficha";
+import {pageableObject} from "../../../Models/PageableObject";
+import {Alunos} from "../../../Models/aluno";
 
 @Component({
   selector: 'app-cadastro-ficha',
@@ -12,11 +17,15 @@ export class CadastroFichaComponent implements OnInit {
   emailAluno !:  String
   fichaForm !: FormBuilder | any
 
+  @Input() fichas !: Fichas
+  @Input() pageable !: pageableObject
+
   constructor(
     private formBuilder: FormBuilder,
     private routeAc : ActivatedRoute,
-    private userFileService : UserFileService
+
   ) {
+
     this.routeAc.params.subscribe(params => this.emailAluno = params['idAluno']);
 
     this.fichaForm = this.formBuilder.group({
@@ -27,7 +36,11 @@ export class CadastroFichaComponent implements OnInit {
 
   }
 
+
   ngOnInit(): void {
+
+
+
   }
 
   public cadastrar() : void{
@@ -51,12 +64,13 @@ export class CadastroFichaComponent implements OnInit {
     })
  }
 
- addExercicio() {
-  this.exercicios.push(this.newExercicio());
-}
+   addExercicio() {
+    this.exercicios.push(this.newExercicio());
+  }
 
-removeExercicio(i:number) {
-  this.exercicios.removeAt(i);
-}
+
+  removeExercicio(i:number) {
+    this.exercicios.removeAt(i);
+  }
 
 }

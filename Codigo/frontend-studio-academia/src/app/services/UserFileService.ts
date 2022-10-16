@@ -37,6 +37,19 @@ export class UserFileService {
     return this.http.delete(`${environment.apiUrl}/user-files/deleteExercise/${idFile}/${idExercise}`)
   }
 
+  //
+
+  listUserFilesByPageWithSize (pageRequest: number, sizeRequest: number,idUser : String, keySearch:String): Observable<any>{
+
+        let searchPageUrl = `${environment.apiUrl}/user-files/page/${pageRequest}/size/${sizeRequest}/iduser/${idUser}`
+
+    if(keySearch.length > 0){
+      searchPageUrl +='/name/'+keySearch
+    }
+
+    return this.http.get(searchPageUrl)
+  }
+
   /**
    *
    * @param page Página que deseja visualizar iniciando em 0", example = "0"

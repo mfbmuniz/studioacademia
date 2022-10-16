@@ -4,6 +4,7 @@ import {pageableObject} from "../../../Models/PageableObject";
 import {Users} from "../../../Models/user";
 import {UserService} from "../../../services/UserService";
 import {Router} from "@angular/router";
+import {Fichas} from "../../../Models/ficha";
 
 @Component({
   selector: 'app-grade-alunos',
@@ -15,7 +16,6 @@ export class GradeAlunosComponent implements OnInit {
   @Input() alunos !: Alunos
   @Input() pageable !: pageableObject
   @Input() users !: Users
-
 
   constructor(public userService: UserService,
               public router: Router) { }
