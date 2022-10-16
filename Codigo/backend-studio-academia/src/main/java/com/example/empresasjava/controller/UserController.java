@@ -62,7 +62,7 @@ public class UserController {
         );
     }
 
-    @DeleteMapping(path = "/delete")
+        @DeleteMapping(path = "/delete")
     @ApiOperation(value = "Desativa usuário existente")
     public ResponseEntity<UserDto> deleteLoggedUser(){
         return ResponseEntity.ok().body(

@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../../../services/AuthService";
+import {HeaderComponent} from "../../../components/header/header.component";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [HeaderComponent]
 })
 export class LoginComponent implements OnInit {
 
+  @Output() newItemEvent = new EventEmitter<boolean>();
+
+  public isLogged: Boolean = false;
   public hasError: Boolean = false;
   public formLogin: FormGroup = new FormGroup(
     {
@@ -21,7 +26,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private header: HeaderComponent) {
+  }
 
   ngOnInit(): void {
   }
@@ -31,10 +38,6 @@ export class LoginComponent implements OnInit {
       email: this.formLogin.value["email"],
       password: this.formLogin.value["password"]
     }
-    console.log("body")
-    console.log(
-      body
-    )
     this.authService.login(body)
       .subscribe(
         {
@@ -45,8 +48,9 @@ export class LoginComponent implements OnInit {
               'session',
               JSON.stringify(res)
             );
-
+            this.header.setValue(true);
             this.defineDefaultRouteByRole(res?.roles[0]);
+
           },
           error: (err) => {
             this.hasError = true;

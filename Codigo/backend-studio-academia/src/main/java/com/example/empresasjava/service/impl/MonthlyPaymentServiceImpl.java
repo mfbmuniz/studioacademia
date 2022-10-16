@@ -163,27 +163,30 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
 
     @Override
     public Page<MonthlyPayment> listRequestsByPage(Pageable pages) throws NonUniqueResultException, NotFoundException {
-        return this.monthlyPaymentRepository.findAllByDeletedAtIsNullOrderByName(pages);
+        return this.monthlyPaymentRepository.findAllByDeletedAtIsNullOrderByDueDateDesc(pages);
+
     }
 
     @Override
     public Page<MonthlyPayment> listSpecificRequestsByPage(Pageable pages, String paymentStatusRequest) throws NonUniqueResultException, NotFoundException {
 
 
-        return this.monthlyPaymentRepository.findAllByPaymentStatusAndDeletedAtIsNullContainingIgnoreCaseOrderByName(pages, paymentStatusRequest);
+        return this.monthlyPaymentRepository.findAllByPaymentStatusAndDeletedAtIsNullOrderByDueDateDesc(pages, paymentStatusRequest);
+
     }
 
 
     @Override
     public Page<MonthlyPayment> listUserRequestsByPage(Pageable pages, Long id) throws NonUniqueResultException, NotFoundException {
-        return this.monthlyPaymentRepository.findAllByUserIdAndDeletedAtIsNullOrderByName(pages,id);
+       return this.monthlyPaymentRepository.findAllByUserIdAndDeletedAtIsNullOrderByDueDateDesc(pages,id);
 
 
     }
 
     @Override
     public Page<MonthlyPayment> listUserSpecificRequestsByPage(Pageable pages, Long id, String paymentStatusRequest) throws NonUniqueResultException, NotFoundException {
-        return this.monthlyPaymentRepository.findAllByUserIdAndPaymentStatusAndDeletedAtIsNullContainingIgnoreCaseOrderByName(pages,id, paymentStatusRequest);
+        return this.monthlyPaymentRepository.findAllByUserIdAndPaymentStatusAndDeletedAtIsNullOrderByDueDateDesc(pages, paymentStatusRequest,id);
+
     }
 
 

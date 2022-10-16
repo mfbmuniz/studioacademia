@@ -1,247 +1,249 @@
-<div class="formulario">
+<app-cadastro-aluno [isEdit]="true"></app-cadastro-aluno>
+
+<!--<div class="formulario">-->
 
 
-  <div class="row">
+<!--  <div class="row">-->
 
-    <div class="col-3 offset-5">
-      <h1>Editar Aluno</h1>
-    </div>
+<!--    <div class="col-3 offset-5">-->
+<!--      <h1>Editar Aluno</h1>-->
+<!--    </div>-->
 
-  </div>
+<!--  </div>-->
 
-  <form action="" class="mt-4" [formGroup]="editAlunoForm" (ngSubmit)="editar()">
-    <div class="row">
+<!--  <form action="" class="mt-4" [formGroup]="editAlunoForm" (ngSubmit)="editar()">-->
+<!--    <div class="row">-->
 
-      <div class="col-2 form-group offset-1 mt-1">
-        <label for="typeUser">
-          <p>Tipo do Usuário</p>
-        </label>
-        <select name="" id="" class="form-control" formControlName = "roles">
-          <option value="aluno">Aluno</option>
-          <option value="professor">Professor</option>
-          <option value="nutricionista">Nutricionista</option>
-        </select>
+<!--      <div class="col-2 form-group offset-1 mt-1">-->
+<!--        <label for="typeUser">-->
+<!--          <p>Tipo do Usuário</p>-->
+<!--        </label>-->
+<!--        <select name="" id="" class="form-control" formControlName = "roles">-->
+<!--          <option value="aluno">Aluno</option>-->
+<!--          <option value="professor">Professor</option>-->
+<!--          <option value="nutricionista">Nutricionista</option>-->
+<!--        </select>-->
 
-        <app-mensagem *ngIf="
-        editAlunoForm.get('roles')?.errors?.['required'] && editAlunoForm.get('roles')?.touched "
-          mensagem="Senha obrigatório">
-        </app-mensagem>
-      </div>
+<!--        <app-mensagem *ngIf="-->
+<!--        editAlunoForm.get('roles')?.errors?.['required'] && editAlunoForm.get('roles')?.touched "-->
+<!--          mensagem="Senha obrigatório">-->
+<!--        </app-mensagem>-->
+<!--      </div>-->
 
-      <div class="col-sm-4 form-group  mt-1">
-        <label for="email">
-          <p>E-mail</p>
-        </label>
-        <input type="email" class="form-control" formControlName="email" placeholder="Informe o E-mail">
+<!--      <div class="col-sm-4 form-group  mt-1">-->
+<!--        <label for="email">-->
+<!--          <p>E-mail</p>-->
+<!--        </label>-->
+<!--        <input type="email" class="form-control" formControlName="email" placeholder="Informe o E-mail">-->
 
-        <app-mensagem *ngIf="
-        editAlunoForm.get('email')?.errors?.['required'] && editAlunoForm.get('email')?.touched "
-          mensagem="E-mail obrigatório">
-        </app-mensagem>
-        <app-mensagem *ngIf="
+<!--        <app-mensagem *ngIf="-->
+<!--        editAlunoForm.get('email')?.errors?.['required'] && editAlunoForm.get('email')?.touched "-->
+<!--          mensagem="E-mail obrigatório">-->
+<!--        </app-mensagem>-->
+<!--        <app-mensagem *ngIf="-->
 
-        editAlunoForm.get('email')?.errors?.['email'] " mensagem="E-mail no formato incorreto"></app-mensagem>
-      </div>
+<!--        editAlunoForm.get('email')?.errors?.['email'] " mensagem="E-mail no formato incorreto"></app-mensagem>-->
+<!--      </div>-->
 
-      <div class="col-2 form-group mt-1">
-        <label for="senha">
-          <p>Senha</p>
-        </label>
-        <input type="password" class="form-control" formControlName="password" placeholder="Informe a senha">
+<!--      <div class="col-2 form-group mt-1">-->
+<!--        <label for="senha">-->
+<!--          <p>Senha</p>-->
+<!--        </label>-->
+<!--        <input type="password" class="form-control" formControlName="password" placeholder="Informe a senha">-->
 
-        <app-mensagem *ngIf="
-        editAlunoForm.get('password')?.errors?.['required'] && editAlunoForm.get('password')?.touched "
-          mensagem="Senha obrigatório">
-        </app-mensagem>
-      </div>
+<!--        <app-mensagem *ngIf="-->
+<!--        editAlunoForm.get('password')?.errors?.['required'] && editAlunoForm.get('password')?.touched "-->
+<!--          mensagem="Senha obrigatório">-->
+<!--        </app-mensagem>-->
+<!--      </div>-->
 
-      <div class="col-2 form-group mt-1">
-        <label for="confirmaSenha">
-          <p>Confirme a Senha</p>
-        </label>
-        <input type="password" class="form-control" formControlName="passwordConfirm" placeholder="Informe a senha">
-        <app-mensagem *ngIf="
-        editAlunoForm.get('passwordConfirm')?.errors?.['required'] && editAlunoForm.get('passwordConfirm')?.touched "
-          mensagem="Senha obrigatório">
-        </app-mensagem>
-      </div>
+<!--      <div class="col-2 form-group mt-1">-->
+<!--        <label for="confirmaSenha">-->
+<!--          <p>Confirme a Senha</p>-->
+<!--        </label>-->
+<!--        <input type="password" class="form-control" formControlName="passwordConfirm" placeholder="Informe a senha">-->
+<!--        <app-mensagem *ngIf="-->
+<!--        editAlunoForm.get('passwordConfirm')?.errors?.['required'] && editAlunoForm.get('passwordConfirm')?.touched "-->
+<!--          mensagem="Senha obrigatório">-->
+<!--        </app-mensagem>-->
+<!--      </div>-->
 
-      <div class="col-3 mt-1 offset-1">
-        <label for="dataNascimento">
-          <p>Data de Nascimento</p>
-        </label>
-        <input type="date" name="" class="form-control" formControlName="birthDate">
-      </div>
+<!--      <div class="col-3 mt-1 offset-1">-->
+<!--        <label for="dataNascimento">-->
+<!--          <p>Data de Nascimento</p>-->
+<!--        </label>-->
+<!--        <input type="date" name="" class="form-control" formControlName="birthDate">-->
+<!--      </div>-->
 
-      <div class="col-4 form-group  mt-1">
-        <label for="nome">
-          <p>Nome</p>
-        </label>
-        <input type="text" class="form-control" formControlName="name" placeholder="Informe o nome completo">
-        <app-mensagem *ngIf="
-        editAlunoForm.get('name')?.errors?.['required'] && editAlunoForm.get('name')?.touched "
-          mensagem="Nome completo obrigatório">
-        </app-mensagem>
-      </div>
+<!--      <div class="col-4 form-group  mt-1">-->
+<!--        <label for="nome">-->
+<!--          <p>Nome</p>-->
+<!--        </label>-->
+<!--        <input type="text" class="form-control" formControlName="name" placeholder="Informe o nome completo">-->
+<!--        <app-mensagem *ngIf="-->
+<!--        editAlunoForm.get('name')?.errors?.['required'] && editAlunoForm.get('name')?.touched "-->
+<!--          mensagem="Nome completo obrigatório">-->
+<!--        </app-mensagem>-->
+<!--      </div>-->
 
-      <div class="col-3 form-group mt-1">
-        <label for="cpf">
-          <p>CPF</p>
-        </label>
-        <input type="text" class="form-control" formControlName="legal_document" placeholder="Informe o CPF">
+<!--      <div class="col-3 form-group mt-1">-->
+<!--        <label for="cpf">-->
+<!--          <p>CPF</p>-->
+<!--        </label>-->
+<!--        <input type="text" class="form-control" formControlName="legal_document" placeholder="Informe o CPF">-->
 
-        <app-mensagem *ngIf="
-        editAlunoForm.get('legal_document')?.errors?.['required'] && editAlunoForm.get('legal_document')?.touched "
-          mensagem="CPF obrigatório">
-        </app-mensagem>
-      </div>
+<!--        <app-mensagem *ngIf="-->
+<!--        editAlunoForm.get('legal_document')?.errors?.['required'] && editAlunoForm.get('legal_document')?.touched "-->
+<!--          mensagem="CPF obrigatório">-->
+<!--        </app-mensagem>-->
+<!--      </div>-->
 
-      <div class="col-1 form-group mt-1 offset-1">
-        <label for="cpf">
-          <p>Sexo</p>
-        </label>
-        <select name="" id="" class="form-control" formControlName="sex">
-          <option value="M">M</option>
-          <option value="F">F</option>
-        </select>
+<!--      <div class="col-1 form-group mt-1 offset-1">-->
+<!--        <label for="cpf">-->
+<!--          <p>Sexo</p>-->
+<!--        </label>-->
+<!--        <select name="" id="" class="form-control" formControlName="sex">-->
+<!--          <option value="M">M</option>-->
+<!--          <option value="F">F</option>-->
+<!--        </select>-->
 
-        <app-mensagem *ngIf="
-        editAlunoForm.get('sex')?.errors?.['required'] && editAlunoForm.get('sex')?.touched "
-          mensagem="campo obrigatório">
-        </app-mensagem>
-      </div>
+<!--        <app-mensagem *ngIf="-->
+<!--        editAlunoForm.get('sex')?.errors?.['required'] && editAlunoForm.get('sex')?.touched "-->
+<!--          mensagem="campo obrigatório">-->
+<!--        </app-mensagem>-->
+<!--      </div>-->
 
-      <div class="col-3 form-group mt-1">
-        <label for="tel">
-          <p>Telefone</p>
-        </label>
-        <input type="tel" class="form-control" formControlName="phone" placeholder="Informe o contato">
-      </div>
+<!--      <div class="col-3 form-group mt-1">-->
+<!--        <label for="tel">-->
+<!--          <p>Telefone</p>-->
+<!--        </label>-->
+<!--        <input type="tel" class="form-control" formControlName="phone" placeholder="Informe o contato">-->
+<!--      </div>-->
 
-      <div class="col-sm-2 form-group  mt-1">
-        <label for="cep">
-          <p>CEP</p>
-        </label>
-        <input type="tel" class="form-control" formControlName="zipCode" placeholder="Informe o CEP">
+<!--      <div class="col-sm-2 form-group  mt-1">-->
+<!--        <label for="cep">-->
+<!--          <p>CEP</p>-->
+<!--        </label>-->
+<!--        <input type="tel" class="form-control" formControlName="zipCode" placeholder="Informe o CEP">-->
 
-        <app-mensagem *ngIf="
-        editAlunoForm.get('zipCode')?.errors?.['required'] && editAlunoForm.get('zipCode')?.touched "
-          mensagem="CEP obrigatório">
-        </app-mensagem>
-      </div>
+<!--        <app-mensagem *ngIf="-->
+<!--        editAlunoForm.get('zipCode')?.errors?.['required'] && editAlunoForm.get('zipCode')?.touched "-->
+<!--          mensagem="CEP obrigatório">-->
+<!--        </app-mensagem>-->
+<!--      </div>-->
 
-      <div class="col-4 form-group mt-1">
-        <label for="logradouro">
-          <p>Logradouro</p>
-        </label>
-        <input type="text" class="form-control" formControlName="street" placeholder="Informe a rua">
-        <app-mensagem *ngIf="
-        editAlunoForm.get('street')?.errors?.['required'] && editAlunoForm.get('street')?.touched "
-          mensagem="campo obrigatório">
-        </app-mensagem>
-      </div>
+<!--      <div class="col-4 form-group mt-1">-->
+<!--        <label for="logradouro">-->
+<!--          <p>Logradouro</p>-->
+<!--        </label>-->
+<!--        <input type="text" class="form-control" formControlName="street" placeholder="Informe a rua">-->
+<!--        <app-mensagem *ngIf="-->
+<!--        editAlunoForm.get('street')?.errors?.['required'] && editAlunoForm.get('street')?.touched "-->
+<!--          mensagem="campo obrigatório">-->
+<!--        </app-mensagem>-->
+<!--      </div>-->
 
-      <div class="col-2 mt-1 offset-1">
-        <label for="Numero">
-          <p>Nº</p>
-        </label>
-        <input type="text" name="" class="form-control" formControlName="number" placeholder="Informe o número">
+<!--      <div class="col-2 mt-1 offset-1">-->
+<!--        <label for="Numero">-->
+<!--          <p>Nº</p>-->
+<!--        </label>-->
+<!--        <input type="text" name="" class="form-control" formControlName="number" placeholder="Informe o número">-->
 
-        <app-mensagem *ngIf="
-        editAlunoForm.get('number')?.errors?.['required'] && editAlunoForm.get('number')?.touched "
-          mensagem="número obrigatório">
-        </app-mensagem>
-      </div>
+<!--        <app-mensagem *ngIf="-->
+<!--        editAlunoForm.get('number')?.errors?.['required'] && editAlunoForm.get('number')?.touched "-->
+<!--          mensagem="número obrigatório">-->
+<!--        </app-mensagem>-->
+<!--      </div>-->
 
-      <div class="col-2 mt-1">
-        <label for="complemento">
-          <p>Complemento</p>
-        </label>
-        <input type="text" name="" class="form-control" formControlName="complement" placeholder="Aprt">
-      </div>
+<!--      <div class="col-2 mt-1">-->
+<!--        <label for="complemento">-->
+<!--          <p>Complemento</p>-->
+<!--        </label>-->
+<!--        <input type="text" name="" class="form-control" formControlName="complement" placeholder="Aprt">-->
+<!--      </div>-->
 
-      <div class="col-2 mt-1">
-        <label for="complemento">
-          <p>Bairro</p>
-        </label>
-        <input type="text" name="" class="form-control" formControlName="district" placeholder="">
-      </div>
+<!--      <div class="col-2 mt-1">-->
+<!--        <label for="complemento">-->
+<!--          <p>Bairro</p>-->
+<!--        </label>-->
+<!--        <input type="text" name="" class="form-control" formControlName="district" placeholder="">-->
+<!--      </div>-->
 
-      <div class="col-2 mt-1">
-        <label for="cidade">
-          <p>Cidade</p>
-        </label>
-        <input type="text" name="" class="form-control" formControlName="city" placeholder="Informe a Cidade">
-      </div>
+<!--      <div class="col-2 mt-1">-->
+<!--        <label for="cidade">-->
+<!--          <p>Cidade</p>-->
+<!--        </label>-->
+<!--        <input type="text" name="" class="form-control" formControlName="city" placeholder="Informe a Cidade">-->
+<!--      </div>-->
 
-      <div class="col-2 mt-1">
-        <label for="estado">
-          <p>Estado</p>
-        </label>
-        <select name="" id="" class="form-control" formControlName="state" placeholder="">
-          <option value="ac">Acre</option>
-          <option value="al">Alogoas</option>
-          <option value="ap">Amapá</option>
-          <option value="am">Amazonas</option>
-          <option value="ba">Bahia</option>
-          <option value="ce">Ceara</option>
-          <option value="df">Distrito Federal</option>
-          <option value="es">Espírito Santo</option>
-          <option value="go">Goiás</option>
-          <option value="ma">Maranhão</option>
-          <option value="mt">Mato Grosso</option>
-          <option value="ms">Mato Grosso do Sul</option>
-          <option value="MG">Minas Gerais</option>
-          <option value="pa">Pará</option>
-          <option value="pb">Paraíba</option>
-          <option value="pr">Paraná</option>
-          <option value="pe">Pernambuco</option>
-          <option value="pi">Piauí</option>
-          <option value="rj">Rio de Janeiro</option>
-          <option value="rn">Rio Grande do Norte</option>
-          <option value="rs">Rio Grande do Sul</option>
-          <option value="ro">Rondônia</option>
-          <option value="rr">Roraima</option>
-          <option value="sc">Santa Catarina</option>
-          <option value="sp">São Paulo</option>
-          <option value="se">Sergipe</option>
-          <option value="to">Tocantins</option>
-        </select>
+<!--      <div class="col-2 mt-1">-->
+<!--        <label for="estado">-->
+<!--          <p>Estado</p>-->
+<!--        </label>-->
+<!--        <select name="" id="" class="form-control" formControlName="state" placeholder="">-->
+<!--          <option value="ac">Acre</option>-->
+<!--          <option value="al">Alogoas</option>-->
+<!--          <option value="ap">Amapá</option>-->
+<!--          <option value="am">Amazonas</option>-->
+<!--          <option value="ba">Bahia</option>-->
+<!--          <option value="ce">Ceara</option>-->
+<!--          <option value="df">Distrito Federal</option>-->
+<!--          <option value="es">Espírito Santo</option>-->
+<!--          <option value="go">Goiás</option>-->
+<!--          <option value="ma">Maranhão</option>-->
+<!--          <option value="mt">Mato Grosso</option>-->
+<!--          <option value="ms">Mato Grosso do Sul</option>-->
+<!--          <option value="MG">Minas Gerais</option>-->
+<!--          <option value="pa">Pará</option>-->
+<!--          <option value="pb">Paraíba</option>-->
+<!--          <option value="pr">Paraná</option>-->
+<!--          <option value="pe">Pernambuco</option>-->
+<!--          <option value="pi">Piauí</option>-->
+<!--          <option value="rj">Rio de Janeiro</option>-->
+<!--          <option value="rn">Rio Grande do Norte</option>-->
+<!--          <option value="rs">Rio Grande do Sul</option>-->
+<!--          <option value="ro">Rondônia</option>-->
+<!--          <option value="rr">Roraima</option>-->
+<!--          <option value="sc">Santa Catarina</option>-->
+<!--          <option value="sp">São Paulo</option>-->
+<!--          <option value="se">Sergipe</option>-->
+<!--          <option value="to">Tocantins</option>-->
+<!--        </select>-->
 
-        <app-mensagem *ngIf="
-        editAlunoForm.get('state')?.errors?.['required'] && editAlunoForm.get('state')?.touched "
-          mensagem="campo obrigatório">
-        </app-mensagem>
-      </div>
+<!--        <app-mensagem *ngIf="-->
+<!--        editAlunoForm.get('state')?.errors?.['required'] && editAlunoForm.get('state')?.touched "-->
+<!--          mensagem="campo obrigatório">-->
+<!--        </app-mensagem>-->
+<!--      </div>-->
 
-      <div class="col-2 offset-8">
-        <br>
-        <button type="submit" class="btn btn-warning mt-2">Editar</button>
-      </div>
-      <div class="col-2">
-        <br>
-        <button type="" class="btn btn-danger mt-2" data-bs-toggle="modal" data-bs-target="#deleteModal">
-          <i class="bi bi-trash3"></i>
-        </button>
-        <!-- Modal -->
-        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                Tem certeza que deseja apagar o usuário?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">fechar</button>
-                <button type="button" class="btn btn-danger" (click)="delete()">deletar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
-</div>
+<!--      <div class="col-2 offset-8">-->
+<!--        <br>-->
+<!--        <button type="submit" class="btn btn-warning mt-2">Editar</button>-->
+<!--      </div>-->
+<!--      <div class="col-2">-->
+<!--        <br>-->
+<!--        <button type="" class="btn btn-danger mt-2" data-bs-toggle="modal" data-bs-target="#deleteModal">-->
+<!--          <i class="bi bi-trash3"></i>-->
+<!--        </button>-->
+<!--        &lt;!&ndash; Modal &ndash;&gt;-->
+<!--        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog">-->
+<!--            <div class="modal-content">-->
+<!--              <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="deleteModalLabel"></h5>-->
+<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--              </div>-->
+<!--              <div class="modal-body">-->
+<!--                Tem certeza que deseja apagar o usuário?-->
+<!--              </div>-->
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">fechar</button>-->
+<!--                <button type="button" class="btn btn-danger" (click)="delete()">deletar</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </form>-->
+<!--</div>-->

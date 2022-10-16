@@ -4,23 +4,20 @@
   <div class="row">
 
     <div class="col-3 offset-4">
-      <h1>Cadastro de Aluno</h1>
+      <h1>Cadastro de Aluno {{isEdit}}</h1>
     </div>
 
   </div>
 
-  <form action="" class="mt-4" [formGroup]="novoAlunoForm" (ngSubmit)="cadastrar()">
+  <form action="" class="mt-4" [formGroup]="novoAlunoForm">
     <div class="row">
 
       <div class="col-2 form-group offset-1 mt-1" >
         <label for="typeUser">
           <p>Tipo do Usuário</p>
         </label>
-        <select name="" id="" class="form-control" formControlName = "roles">
-          <option value="ALUNO">Aluno</option>
-          <option value="PROFESSOR">Professor</option>
-          <option value="NUTRICIONISTA">Nutricionista</option>
-          <option value="ADMIN">Administrador</option>
+        <select id="type" class="form-control" formControlName = "roles" (change)="checkValue($event)">
+          <option *ngFor="let t of types" [value]="t">{{t}}</option>
         </select>
 
         <app-mensagem *ngIf="
@@ -154,33 +151,33 @@
       <div class="col-2 mt-1">
         <label for="estado"><p>Estado</p></label>
         <select name="" id="" class="form-control" formControlName="state" placeholder="infome o Estado">
-          <option value="ac">Acre</option>
-          <option value="al">Alogoas</option>
-          <option value="ap">Amapá</option>
-          <option value="am">Amazonas</option>
-          <option value="ba">Bahia</option>
-          <option value="ce">Ceara</option>
-          <option value="df">Distrito Federal</option>
-          <option value="es">Espírito Santo</option>
-          <option value="go">Goiás</option>
-          <option value="ma">Maranhão</option>
-          <option value="mt">Mato Grosso</option>
-          <option value="ms">Mato Grosso do Sul</option>
+          <option value="AC">Acre</option>
+          <option value="AL">Alogoas</option>
+          <option value="AP">Amapá</option>
+          <option value="AM">Amazonas</option>
+          <option value="BA">Bahia</option>
+          <option value="CE">Ceara</option>
+          <option value="DF">Distrito Federal</option>
+          <option value="ES">Espírito Santo</option>
+          <option value="GO">Goiás</option>
+          <option value="MA">Maranhão</option>
+          <option value="MT">Mato Grosso</option>
+          <option value="MS">Mato Grosso do Sul</option>
           <option value="MG">Minas Gerais</option>
-          <option value="pa">Pará</option>
-          <option value="pb">Paraíba</option>
-          <option value="pr">Paraná</option>
-          <option value="pe">Pernambuco</option>
-          <option value="pi">Piauí</option>
-          <option value="rj">Rio de Janeiro</option>
-          <option value="rn">Rio Grande do Norte</option>
-          <option value="rs">Rio Grande do Sul</option>
-          <option value="ro">Rondônia</option>
-          <option value="rr">Roraima</option>
-          <option value="sc">Santa Catarina</option>
-          <option value="sp">São Paulo</option>
-          <option value="se">Sergipe</option>
-          <option value="to">Tocantins</option>
+          <option value="PA">Pará</option>
+          <option value="PB">Paraíba</option>
+          <option value="PR">Paraná</option>
+          <option value="PE">Pernambuco</option>
+          <option value="PI">Piauí</option>
+          <option value="RJ">Rio de Janeiro</option>
+          <option value="RN">Rio Grande do Norte</option>
+          <option value="RS">Rio Grande do Sul</option>
+          <option value="RO">Rondônia</option>
+          <option value="RR">Roraima</option>
+          <option value="SC">Santa Catarina</option>
+          <option value="SP">São Paulo</option>
+          <option value="SE">Sergipe</option>
+          <option value="TO">Tocantins</option>
         </select>
 
         <app-mensagem *ngIf="
@@ -189,9 +186,33 @@
         </app-mensagem>
       </div>
 
+      <div *ngIf="isAluno" class="row" style="display: flex">
+        <div class="col-3 mt-1 offset-1">
+          <label for="cpf"><p>Plano</p></label>
+          <select class="form-control" formControlName="plan">
+            <option *ngFor="let plan of plans" value="{{plan}}">{{plan}}</option>
+          </select>
+        </div>
+        <div class="col-3 mt-1">
+          <label for="cidade">
+            <p>Dia da semana</p>
+          </label>
+          <mat-select formControlName="plan" multiple>
+            <mat-option *ngFor="let weekDay of weekDays" value="{{weekDay}}" >{{weekDay}}</mat-option>
+          </mat-select>
+
+        </div>
+        <div class="col-3 mt-1">
+          <label for="cidade">
+            <p>Data de vencimento</p>
+          </label>
+          <input type="date" name=""  class="form-control" formControlName="dueDate">
+        </div>
+      </div>
       <div class="col-4 offset-10">
         <br>
-        <button type="submit" class="btn btn-warning mt-2">Cadastrar</button>
+        <button *ngIf="!isEdit" type="button" class="btn btn-warning mt-2" (click)="cadastrar()">Cadastrar</button>
+        <button *ngIf="isEdit" type="button" class="btn btn-warning mt-2" (click)="editar()">Editar</button>
       </div>
     </div>
   </form>
