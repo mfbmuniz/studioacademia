@@ -12,6 +12,7 @@ export class  UserService {
   private static API_URLS = {
     CREATE: `${environment.apiUrl}/user/create`,
     EDIT: `${environment.apiUrl}/user/edit`,
+    DELETE: `${environment.apiUrl}/user/delete`
   };
 
   constructor(private http: HttpClient, private router: Router) {}

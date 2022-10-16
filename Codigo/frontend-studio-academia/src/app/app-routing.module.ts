@@ -12,17 +12,16 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    // component: HomepageComponent,
     loadChildren : ()=> import('./pages/homepage/homepage.module').then((m)=>m.HomepageModule)
   },
   {
     path: 'adm',
-    // component: AdmHomeComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     loadChildren: ()=> import('./pages/adm-home/adm-home.module').then((m)=>m.AdmHomeModule)
   },
   {
     path: 'aluno',
+    canActivate: [AuthGuard],
     loadChildren: ()=> import('./pages/aluno-home/aluno-home.module').then((m)=>m.AlunoHomeModule)
   }
 ];

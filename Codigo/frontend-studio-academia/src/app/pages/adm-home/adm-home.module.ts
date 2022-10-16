@@ -18,6 +18,7 @@ import { AdmGradeFichasComponent } from './adm-grade-fichas/adm-grade-fichas.com
 import { EditarFichasComponent } from './editar-fichas/editar-fichas.component';
 import { TabelaExerciciosComponent } from './tabela-exercicios/tabela-exercicios.component';
 import { EditarExercicioComponent } from './editar-exercicio/editar-exercicio.component';
+import {MatSelectModule} from "@angular/material/select";
 
 
 
@@ -38,14 +39,15 @@ import { EditarExercicioComponent } from './editar-exercicio/editar-exercicio.co
     TabelaExerciciosComponent,
     EditarExercicioComponent,
   ],
-  imports: [
-    CommonModule,
-    AdmHomeRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MensagemModule,
-    SidebarModule
-  ],
+    imports: [
+        CommonModule,
+        AdmHomeRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MensagemModule,
+        SidebarModule,
+        MatSelectModule
+    ],
   exports:[
     AdmHomeComponent
   ]

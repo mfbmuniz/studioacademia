@@ -14,11 +14,11 @@ public interface MonthlyPaymentRepository extends JpaRepository<MonthlyPayment,L
 
     MonthlyPayment findOneByMonthlyPaymentId(Long id);
 
-    Page<MonthlyPayment> findAllByDeletedAtIsNullOrderByName(Pageable pages);
+    Page<MonthlyPayment> findAllByDeletedAtIsNullOrderByDueDateDesc (Pageable pages);
 
-    Page<MonthlyPayment> findAllByUserIdAndDeletedAtIsNullOrderByName(Pageable pages, Long id);
+   Page<MonthlyPayment> findAllByUserIdAndDeletedAtIsNullOrderByDueDateDesc(Pageable pages, Long id);
 
-    Page<MonthlyPayment> findAllByPaymentStatusAndDeletedAtIsNullContainingIgnoreCaseOrderByName(Pageable pages, String paymentStatusRequest);
+   Page<MonthlyPayment> findAllByPaymentStatusAndDeletedAtIsNullOrderByDueDateDesc(Pageable pages, String paymentStatusRequest);
 
-    Page<MonthlyPayment> findAllByUserIdAndPaymentStatusAndDeletedAtIsNullContainingIgnoreCaseOrderByName(Pageable pages, Long id, String paymentStatusRequest);
+   Page<MonthlyPayment> findAllByUserIdAndPaymentStatusAndDeletedAtIsNullOrderByDueDateDesc(Pageable pages, String paymentStatusRequest, Long id);
 }

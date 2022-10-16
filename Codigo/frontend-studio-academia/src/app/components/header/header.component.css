@@ -32,5 +32,8 @@ img{
   align-self: center;
 }
 
+form {
+  margin: 10px 20px !important;
+}
 
 

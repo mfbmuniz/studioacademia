@@ -54,6 +54,7 @@ CREATE TABLE users (
                        phone1 VARCHAR(100) NOT NULL,
                        phone2 VARCHAR(100) NOT NULL,
                        due_date TIMESTAMP,
+                       weekDays VARCHAR (250),
 
 
                        created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
@@ -119,26 +120,6 @@ CREATE TABLE admin_message_service (
 );
 
 
-
-CREATE SEQUENCE week_days_seq;
-CREATE TABLE week_days (
-                    week_days_id INT DEFAULT NEXTVAL ('week_days_seq') PRIMARY KEY,
-                    user_id INT CHECK (user_id > 0),
-                    sunday BOOLEAN,
-                    monday BOOLEAN,
-                    tuesday BOOLEAN,
-                    wednesday BOOLEAN,
-                    thursday BOOLEAN,
-                    friday BOOLEAN,
-                    saturday BOOLEAN,
-
-
-                    created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
-                    deleted_at TIMESTAMP(0) NULL DEFAULT NULL,
-
-                    CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id)
-
-);
 
 CREATE SEQUENCE calendar_seq;
 CREATE TABLE calendar (

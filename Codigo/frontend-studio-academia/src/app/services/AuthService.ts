@@ -25,6 +25,7 @@ export class  AuthService {
   logout() {
     localStorage.clear();
     this.sessionSubject.next(null);
+    return {}
   }
 
   getSession() {
