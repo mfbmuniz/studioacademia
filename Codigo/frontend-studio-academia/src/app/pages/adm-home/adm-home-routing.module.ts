@@ -44,7 +44,7 @@ const routes: Routes = [
       },
 
       {
-        path: 'editarFichas/:idFicha',
+        path: 'editarFichas/:idFicha/:nomeFicha',
         component: EditarFichasComponent
       },
       {

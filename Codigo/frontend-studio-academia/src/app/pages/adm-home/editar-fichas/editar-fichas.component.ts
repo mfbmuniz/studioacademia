@@ -16,6 +16,7 @@ import { pageableObject } from 'src/app/Models/PageableObject';
 })
 export class EditarFichasComponent implements OnInit {
   idFicha !: String
+  nomeFicha !: String
   ficha$ !: Observable<Fichas>
   fichaForm !: FormBuilder | any
   exercicios$ !: Exercicios
@@ -26,7 +27,8 @@ export class EditarFichasComponent implements OnInit {
     private routeAc : ActivatedRoute,
     private userFileSerce : UserFileService,
     private exerciseService : ExerciseService) {
-      this.routeAc.params.subscribe(params => this.idFicha = params['idFicha']);
+      this.routeAc.params.subscribe(params => this.idFicha = params['idFicha'])
+      this.routeAc.params.subscribe(params => this.nomeFicha = params['nomeFicha']);
       this.fichaForm = this.formBuilder.group({
       name: ['',Validators.required],
       exercicios: this.formBuilder.array([]) ,
