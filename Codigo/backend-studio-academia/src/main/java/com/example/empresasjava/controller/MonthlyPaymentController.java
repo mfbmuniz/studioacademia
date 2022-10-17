@@ -141,10 +141,10 @@ public class MonthlyPaymentController {
     }
 
 
-    @GetMapping(path = "/pageAll/{page}/size/{size}/{idUser}")
+    @GetMapping(path = "/pageAllUser/{page}/size/{size}/{idUser}")
     @ResponseBody
     @ApiOperation(value = "Lista pagamentos do usuario (aprovado ou nao)")
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','ALUNO'})")
     public Page<MonthlyPayment> listUserRequestsByPageWithSize(
             @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
             @PathVariable(value="page")
@@ -162,10 +162,10 @@ public class MonthlyPaymentController {
             return this.monthlyPaymentService.listUserRequestsByPage(pages,id);
 
     }
-    @GetMapping(path = "/pageAllPendency/{page}/size/{size}/{idUser}/paymentStatusRequest/{paymentStatusRequest}")
+    @GetMapping(path = "/pageAllUserPendency/{page}/size/{size}/idUser/{idUser}/paymentStatusRequest/{paymentStatusRequest}")
     @ResponseBody
     @ApiOperation(value = "lista apenas as requisições pendentes")
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','ALUNO'})")
     public Page<MonthlyPayment> listUserSpecificRequestsByPageWithSize(
             @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
             @PathVariable(value="page")

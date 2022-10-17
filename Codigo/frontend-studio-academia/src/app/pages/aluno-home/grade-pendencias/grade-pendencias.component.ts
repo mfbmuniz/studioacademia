@@ -18,6 +18,8 @@ export class GradePendenciasComponent implements OnInit {
   pageable$ !: pageableObject
   pagamentosPendentes !: MonthlyPayments
   pageablePend$ !: pageableObject
+  fileToUpload: File | null = null;
+
   constructor(
     private formBuilder: FormBuilder,
     private monthlyPaymentService : MonthlyPaymentService
@@ -28,19 +30,25 @@ export class GradePendenciasComponent implements OnInit {
       file :['',[]],
       message : ['',[]]
     })
-    this.listarTodosPagamentos(0,10,1);
-    this.listarPagamentosPendentes(0,10,1);
+    this.listarTodosPagamentos(0,10,2);
+    this.listarPagamentosPendentes(0,10,2);
+  }
+  onFileSelected(event: FileList) {
+    this.fileToUpload = event.item(0);
+
   }
 
   public onSubmit() : void{
     const teste = this.comprovanteForm.getRawValue()
     let body = {
       payment_voucher : this.comprovanteForm.value['file'],
-      message : this.comprovanteForm.value['message'],
-
+      //message : this.comprovanteForm.value['message'],
     }
 
-    this.monthlyPaymentService.sendFile(body).subscribe({
+    const formData: FormData = new FormData();
+    formData.append('file', this.fileToUpload);
+
+    this.monthlyPaymentService.sendFile(formData).subscribe({
       next:(res) => {
         console.log(res)
         alert("Comprovante enviado com êxito")
@@ -61,7 +69,7 @@ export class GradePendenciasComponent implements OnInit {
   }
 
   public listarPagamentosPendentes(page : number, size : number, idUser : number) {
-    this.monthlyPaymentService.listarPagamentoPendentesUsuario(page,size,idUser).subscribe((res : any)=>{
+    this.monthlyPaymentService.listarPagamentoPendentesUsuario(page,size,idUser,'AGUARDANDO_PAGAMENTO').subscribe((res : any)=>{
        this.pageablePend$ = res
        this.pagamentosPendentes =<MonthlyPayments> this.pageablePend$.content
     })

@@ -50,6 +50,12 @@ export class UserFileService {
     return this.http.get(searchPageUrl)
   }
 
+  listUserExercisesByPageWithSize (pageRequest: number, sizeRequest: number,fileId:String):Observable<any> {
+
+    let searchPageUrl = `${environment.apiUrl}/user-files/pageExercisesInFile/${pageRequest}/size/${sizeRequest}/fileId/${fileId}`
+
+    return this.http.get(searchPageUrl)
+  }
   /**
    *
    * @param page Página que deseja visualizar iniciando em 0", example = "0"

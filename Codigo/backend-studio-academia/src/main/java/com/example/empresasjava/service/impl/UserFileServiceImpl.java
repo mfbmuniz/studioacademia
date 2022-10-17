@@ -164,14 +164,17 @@ public class UserFileServiceImpl implements UserFileService {
     }
 
     @Override
-    public Page<UserExercises> listsExercisesInUserFilesByIdByPage(Pageable pages, Long id_user, Long id_userFile) throws NotFoundException {
-        User user = this.userRepository.findById(id_user)
-                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+    public Page<UserExercises> listsExercisesInUserFilesByIdByPage(Pageable pages, Long id_userFile) throws NotFoundException {
 
         UserFile userFile = this.userFileRepository.findById(id_userFile)
                 .orElseThrow(() -> new NotFoundException("Ficha  não encontrado"));
 
-       if(userFile.getUser().getIdUser() == id_user ){
+        User user = this.userRepository.findById(userFile.getUser().getIdUser())
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+
+
+
+       if(userFile.getUser().getIdUser() == user.getIdUser() ){
            return this.userExercisesRepository.findAllByUserFileAndDeletedAtIsNull(userFile, pages);
        }else{
            new NotFoundException("Usuario diferente do ID da ficha");

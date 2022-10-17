@@ -17,8 +17,9 @@ export class MonthlyPaymentService {
   constructor(private http: HttpClient, private router: Router) { }
 
 
-  public sendFile(body : any){
-    return this.http.post(`${MonthlyPaymentService.API_URLS.ROOT}/uploadImage`,body)
+  public sendFile(formData : FormData){
+
+    return this.http.post(`${MonthlyPaymentService.API_URLS.ROOT}/uploadImage`,formData)
   }
 
     /**
@@ -29,7 +30,7 @@ export class MonthlyPaymentService {
    * @returns Observable<any>
    */
   public listarPagamentoUsuario(page : number, size : number, idUser : number) : Observable<any>{
-    return this.http.get(`${environment.apiUrl}/monthly-payment/pageAll/${page}/size/${size}/${idUser}`)
+    return this.http.get(`${environment.apiUrl}/monthly-payment/pageAllUser/${page}/size/${size}/${idUser}`)
   }
 
   /**
@@ -39,7 +40,10 @@ export class MonthlyPaymentService {
    * @param idUser id do usuário
    * @returns Observable<any>
    */
-  public listarPagamentoPendentesUsuario(page : number, size : number, idUser : number) : Observable<any>{
-    return this.http.get(`${environment.apiUrl}/monthly-payment/pageAllPendency/${page}/size/${size}/${idUser}`)
+  public listarPagamentoPendentesUsuario(page : number, size : number, idUser : number, paymentStatusRequest: String) : Observable<any>{
+    paymentStatusRequest = "AGUARDANDO_PAGAMENTO";
+    return this.http.get(`${environment.apiUrl}/monthly-payment/pageAllUserPendency/${page}/size/${size}/idUser/${idUser}/paymentStatusRequest/${paymentStatusRequest}`)
   }
+
+
 }

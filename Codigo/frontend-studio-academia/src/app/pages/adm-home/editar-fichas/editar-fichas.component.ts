@@ -98,7 +98,7 @@ deletarExercicio(idFile : string, idExercise : string ) : void{
 }
 
 listExercise(){
-  this.exerciseService.listByPage(0, 10,'')
+  this.userFileSerce.listUserExercisesByPageWithSize(0,10,this.idFicha)
         .subscribe(
           async (res: any) => {
             this.content$ = await res;
