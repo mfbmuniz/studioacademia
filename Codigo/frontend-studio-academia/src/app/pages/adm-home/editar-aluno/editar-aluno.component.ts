@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/UserService';
   styleUrls: ['./editar-aluno.component.css']
 })
 export class EditarAlunoComponent implements OnInit {
-  emailAluno !: String
+  idAluno !: String
   aluno$ !: Observable<Aluno>
   editAlunoForm !: FormGroup
 
@@ -21,7 +21,7 @@ export class EditarAlunoComponent implements OnInit {
     private userService : UserService,
     private router : Router
     ) {
-      this.routeAc.params.subscribe(params => this.emailAluno = params['idAluno']);
+      this.routeAc.params.subscribe(params => this.idAluno = params['idAluno']);
     }
 
   ngOnInit(): void {
@@ -93,7 +93,7 @@ export class EditarAlunoComponent implements OnInit {
 
 
   public delete() : void {
-    this.userService.delete(this.emailAluno)
+    this.userService.delete(this.idAluno)
       .subscribe(
         {
           next:(res) => {

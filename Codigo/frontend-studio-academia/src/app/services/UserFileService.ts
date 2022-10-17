@@ -58,7 +58,7 @@ export class UserFileService {
    * @param fileId id da ficha
    * @returns
    */
-  public fihcaUsuario(page : number, size : number, idUser : number , fileId : number){
+  public fileExerciseuser(page : number, size : number, idUser : number , fileId : number){
     return this.http.get(`${environment.apiUrl}/user-files/pageExercisesInFile/
     ${page}/size/${size}/idUser/${idUser}/fileId/${fileId}`)
     //

@@ -1,3 +1,4 @@
+import { ExerciseService } from 'src/app/services/ExerciseService';
 import { Exercicio } from './../../../Models/exercicio';
 import { Exercicios } from 'src/app/Models/exercicio';
 import { Observable } from 'rxjs';
@@ -6,6 +7,7 @@ import { FormGroup, FormControl,FormArray, FormBuilder, Validators } from '@angu
 import { Ficha } from 'src/app/Models/ficha';
 import { ActivatedRoute } from '@angular/router';
 import { UserFileService } from 'src/app/services/UserFileService';
+import { pageableObject } from 'src/app/Models/PageableObject';
 
 @Component({
   selector: 'app-editar-fichas',
@@ -16,20 +18,23 @@ export class EditarFichasComponent implements OnInit {
   idFicha !: String
   ficha$ !: Observable<Ficha>
   fichaForm !: FormBuilder | any
+  exercicios$ !: Exercicios
+  content$ !: pageableObject;
 
   constructor(
     private formBuilder: FormBuilder,
     private routeAc : ActivatedRoute,
-    private userFileSerce : UserFileService) {
+    private userFileSerce : UserFileService,
+    private exerciseService : ExerciseService) {
       this.routeAc.params.subscribe(params => this.idFicha = params['idFicha']);
-    this.fichaForm = this.formBuilder.group({
+      this.fichaForm = this.formBuilder.group({
       name: ['',Validators.required],
-      description : '',
       exercicios: this.formBuilder.array([]) ,
     })
   }
 
   ngOnInit(): void {
+    this.listExercise();
   }
 
   public editar() : void{
@@ -42,18 +47,21 @@ export class EditarFichasComponent implements OnInit {
 
   newExercicio(): FormGroup {
     return this.formBuilder.group({
-      exercicio: ['', Validators.required],
-      serie: ['',Validators.min(0)],
-      repeticoes: ['',Validators.required],
+      exerciseId: ['', Validators.required],
+      series: ['',Validators.min(0)],
+      repetitions: ['',Validators.required],
     })
  }
 
  addExercicio() {
   this.exercicios.push(this.newExercicio());
 
+  //Não to conseguindo pegar os dados q eu quero
   let body = {
+    exerciseId : this.fichaForm.value,
 
   }
+  console.log(body)
   //this.cadastrarExercicio(body);
 }
 
@@ -87,5 +95,14 @@ deletarExercicio(idFile : string, idExercise : string ) : void{
   )
 }
 
+listExercise(){
+  this.exerciseService.listByPage(0, 10,'')
+        .subscribe(
+          async (res: any) => {
+            this.content$ = await res;
+            this.exercicios$ =<Exercicios>this.content$.content
+          },
+    );
+}
 
 }

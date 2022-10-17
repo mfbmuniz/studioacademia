@@ -16,7 +16,7 @@ const routes: Routes = [
         component: GradeFichasComponent
       },
       {
-        path: 'exercicios/:id',
+        path: 'exercicios/:idFile',
         component: GradeExerciciosComponent
       },
       {
