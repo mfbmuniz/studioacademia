@@ -17,6 +17,10 @@ export class MonthlyPaymentService {
   constructor(private http: HttpClient, private router: Router) { }
 
 
+  public sendFile(body : any){
+    return this.http.post(`${MonthlyPaymentService.API_URLS.ROOT}/uploadImage`,body)
+  }
+
     /**
    * Listar pagamentos pendentes do usuario
    * @param page Página que deseja visualizar iniciando em 0, example = "0"

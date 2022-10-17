@@ -15,6 +15,7 @@
         <th scope="col">Status</th>
         <th scope="col">Data</th>
         <th scope="col">Comprovante</th>
+        <th scope="col">Comentário</th>
       </tr>
     </thead>
     <tbody *ngFor="let MonthlyPayment of pagamentos">
@@ -22,6 +23,7 @@
           <th scope="row">{{MonthlyPayment.paymentStatus}}</th>
           <td>{{MonthlyPayment.dueDate}}</td>
           <td><input type="file" formControlName="file" name="" id=""></td>
+          <td><input type="text" formControlName="message" name="" id=""></td>
         </tr>
     </tbody>
     <tbody>
@@ -29,6 +31,7 @@
         <th scope="row">Pago</th>
         <td>13/02/2022</td>
         <td><input type="file" formControlName="test" name="" id=""></td>
+        <td><input type="text" formControlName="message" name="" id=""></td>
       </tr>
   </tbody>
   </table>

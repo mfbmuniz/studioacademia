@@ -26,6 +26,7 @@ export class GradePendenciasComponent implements OnInit {
   ngOnInit(): void {
     this.comprovanteForm = this.formBuilder.group({
       file :['',[]],
+      message : ['',[]]
     })
     this.listarTodosPagamentos(0,10,1);
     this.listarPagamentosPendentes(0,10,1);
@@ -33,6 +34,22 @@ export class GradePendenciasComponent implements OnInit {
 
   public onSubmit() : void{
     const teste = this.comprovanteForm.getRawValue()
+    let body = {
+      payment_voucher : this.comprovanteForm.value['file'],
+      message : this.comprovanteForm.value['message'],
+
+    }
+
+    this.monthlyPaymentService.sendFile(body).subscribe({
+      next:(res) => {
+        console.log(res)
+        alert("Comprovante enviado com êxito")
+      },
+      error: (err) => {
+        console.log(err)
+        alert("Não foi enviar o  comprovante")
+      }
+    })
     console.log(teste)
   }
 
