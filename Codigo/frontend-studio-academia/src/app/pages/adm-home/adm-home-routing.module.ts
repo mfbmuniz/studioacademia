@@ -42,10 +42,16 @@ const routes: Routes = [
         path: 'gradeFichas/:idAluno',
         component: AdmGradeFichasComponent
       },
+
       {
         path: 'editarFichas/:idFicha',
         component: EditarFichasComponent
       },
+      {
+        path: 'expandirFicha/:idFicha',
+        component: AdmGradeFichasComponent
+      },
+
     ]
   },
 ];
