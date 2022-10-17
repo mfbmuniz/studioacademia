@@ -31,7 +31,7 @@
 
                 <label for=""><p>Exercicio</p></label>
                 <select id="type" class="form-control" formControlName = "exerciseId">
-                  <option *ngFor="let exercicio of exercicios$" [value]="exercicio.id">{{exercicio.name}</option>
+                  <option *ngFor="let exercicio of exercicios$" [value]="exercicio.exerciseId">{{exercicio.name}</option>
                   <option value="a">Supino</option>
                   <option value="b">Barra fixa</option>
                   <option value="c">Agachamento</option>
