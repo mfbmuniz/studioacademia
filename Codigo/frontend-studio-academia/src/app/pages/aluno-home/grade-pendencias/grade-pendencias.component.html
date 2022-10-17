@@ -22,18 +22,11 @@
         <tr>
           <th scope="row">{{MonthlyPayment.paymentStatus}}</th>
           <td>{{MonthlyPayment.dueDate}}</td>
-          <td><input type="file" formControlName="file" name="file" id="file" class="file-input" accept=".png, .jpg, .jpeg" (change)="onFileSelected($event.target.file)"></td>
+          <td><input  formControlName="profileImage" type="file" formControlName="file" name="file" id="file" class="form-control" ></td>
           <td><input type="text" formControlName="message" name="" id=""></td>
         </tr>
     </tbody>
-    <tbody>
-      <tr>
-        <th scope="row">Pago</th>
-        <td>13/02/2022</td>
-        <td><input type="file" formControlName="test" name="" id=""></td>
-        <td><input type="text" formControlName="message" name="" id=""></td>
-      </tr>
-  </tbody>
+
   </table>
   </form>
 </div>

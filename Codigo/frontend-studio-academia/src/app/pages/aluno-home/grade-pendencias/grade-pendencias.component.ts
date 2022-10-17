@@ -33,8 +33,31 @@ export class GradePendenciasComponent implements OnInit {
     this.listarTodosPagamentos(0,10,2);
     this.listarPagamentosPendentes(0,10,2);
   }
-  onFileSelected(event: FileList) {
-    this.fileToUpload = event.item(0);
+
+  onFileSelected(event: any) {
+  try {
+    event.target.files.item(0);
+  this.comprovanteForm.value["file"]
+
+    console.log(event.target.files.item(0));
+    this.monthlyPaymentService.sendFile(this.comprovanteForm.value["file"]).subscribe({
+      next:(res) => {
+        console.log(res)
+        alert("Comprovante enviado com êxito")
+      },
+      error: (err) => {
+        console.log(err)
+        alert("Não foi enviar o  comprovante")
+      }
+    })
+    console.log(event)
+
+
+
+  }catch (e) {
+
+  }
+
 
   }
 
@@ -46,8 +69,6 @@ export class GradePendenciasComponent implements OnInit {
     }
 
     const formData: FormData = new FormData();
-    formData.append('file', this.fileToUpload);
-
     this.monthlyPaymentService.sendFile(formData).subscribe({
       next:(res) => {
         console.log(res)
