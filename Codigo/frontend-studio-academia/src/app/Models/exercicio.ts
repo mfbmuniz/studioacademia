@@ -1,5 +1,5 @@
 export interface Exercicio {
-  id: number,
+  exerciseId: number,
   name: string,
   url: URL,
   description: string,

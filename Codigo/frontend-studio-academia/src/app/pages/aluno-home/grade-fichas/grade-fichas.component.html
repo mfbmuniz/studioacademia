@@ -14,9 +14,9 @@
     <div class="col-8 mt-3 offset-3">
       <div class="card w-75 mt-3 bg-secondary">
         <div class="card-body">
-          <h2 class="card-title">{{ficha.name}}</h2>
+          <h2 class="card-title">{{ficha.fileName}}</h2>
           <p class="card-text">{{ficha.description}</p>
-          <a [routerLink]="['exercicios/',ficha.id]" class="btn btn-warning offset-10">Acessar</a>
+          <a [routerLink]="['exercicios/',ficha.userFileId]" class="btn btn-warning offset-10">Acessar</a>
         </div>
       </div>
     </div>
