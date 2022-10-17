@@ -1,10 +1,12 @@
 import { Exercicio } from "./exercicio";
+import {User} from "./user";
 
 export interface Ficha {
-  id : string,
-  name : string,
+  userFileId : string,
+  fileName : string,
   description : string,
-  exercicios : Array<Exercicio>,
+  exercises : Array<Exercicio>,
+  user : User
 }
 
 export type Fichas = Array<Ficha>
