@@ -4,7 +4,7 @@ import { Ficha, Fichas } from 'src/app/Models/ficha';
 import { ActivatedRoute, Router } from '@angular/router';
 import { pageableObject } from 'src/app/Models/PageableObject';
 import { UserFileService } from 'src/app/services/UserFileService';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../services/AuthService";
 import {UserService} from "../../../services/UserService";
 import {ExerciseService} from "../../../services/ExerciseService";
@@ -16,6 +16,7 @@ import {ExerciseService} from "../../../services/ExerciseService";
 })
 export class AdmGradeFichasComponent implements OnInit {
 
+  novaFichaForm !: FormGroup
   fichas$ !: Fichas
   idAluno !:  String
   auth!: AuthService
@@ -30,7 +31,8 @@ export class AdmGradeFichasComponent implements OnInit {
     private userFileService: UserFileService,
     private router : Router,
     private userService : UserService,
-    private exerciseService : ExerciseService){
+    private exerciseService : ExerciseService,
+    private formBuilder : FormBuilder){
 
     this.routeAc.params.subscribe(params => this.idAluno = params['idAluno'])
 
@@ -43,16 +45,17 @@ export class AdmGradeFichasComponent implements OnInit {
   isSearchUserFile: boolean = true;
 
   ngOnInit(): void {
-    this.searchFiles('1');
-    this.fichas$ = <Fichas>this.pageable?.content
-
-
+    this.novaFichaForm = this.formBuilder.group({
+      idUser : [this.idAluno,],
+      fileName: ["",Validators.required],
+    })
+    this.searchFiles(this.idAluno);
   }
 
   cadastrar() {
     let body = {
       idUser: this.idAluno,
-      fileName: "Nova Ficha",
+      fileName: this.novaFichaForm.value["fileName"],
     }
 
     this.userFileService.create(body).subscribe(
@@ -84,7 +87,8 @@ export class AdmGradeFichasComponent implements OnInit {
       this.userFileService.listUserFilesByPageWithSize(0, 10,idUser,''  )
         .subscribe(
           (res: any) => {
-            this.content$ = res;
+            this.content$ =  res;
+            this.fichas$ = <Fichas>this.pageable?.content
             this.hasValuesToLoad = true
           },
         );
