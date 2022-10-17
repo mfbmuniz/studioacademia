@@ -40,9 +40,11 @@ idExercise !: string
         {
           next:(res) => {
             console.log(res)
+            alert("Exercício alterado com sucesso!")
           },
           error: (err) => {
             console.log(err)
+            alert("Não foi pssível editar exercício!")
           }
         }
       );
