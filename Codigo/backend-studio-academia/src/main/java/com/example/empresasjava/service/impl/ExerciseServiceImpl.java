@@ -51,7 +51,7 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    public ExerciseDto deleteExercise(ExerciseRequest request, Long id) {
+    public ExerciseDto deleteExercise(Long id) {
         Exercise exercise = Optional.of(this.exerciseRepository.findOneByExerciseId(id)).orElseThrow(()-> new NonUniqueResultException("Exercicio inexistente"));
         exercise.setDeletedAt(new Date());
         return ExerciseDto.fromExercise(this.exerciseRepository.save(exercise));

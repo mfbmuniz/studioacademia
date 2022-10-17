@@ -96,8 +96,13 @@ public class UserFileServiceImpl implements UserFileService {
     }
 
     @Override
-    public UserFileResponse deleteUserFile(UserFileRequest request) throws NotFoundException {
-        UserFile userFile = getUserFile(request.getIdUser(), request.getIdFile());
+    public UserFileResponse deleteUserFile(Long id) throws NotFoundException {
+        UserFile userFile_ = this.userFileRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Ficha nao encontrada"));
+
+        User user = userFile_.getUser();
+
+        UserFile userFile = getUserFile(user.getIdUser(),id);
         userFile.setDeletedAt(new Date());
 
         return UserFileResponse.fromUserFile(this.userFileRepository.save(userFile));

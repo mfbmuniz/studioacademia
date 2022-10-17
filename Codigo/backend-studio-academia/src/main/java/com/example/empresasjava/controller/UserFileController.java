@@ -62,15 +62,15 @@ public class UserFileController {
         );
     }
 
-    @DeleteMapping(path = "/deleteFile")
+    @DeleteMapping(path = "/deleteFile/{idFile}")
     @ApiOperation(value = "ficha de usuario")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
     public ResponseEntity<UserFileResponse> deleteUserFile(
             @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
-            @Valid @RequestBody UserFileRequest request) throws NotFoundException {
+            @PathVariable(value="idFile") final Long id) throws NotFoundException {
 
 
-        UserFileResponse userFileResponse = this.userFileService.deleteUserFile(request);
+        UserFileResponse userFileResponse = this.userFileService.deleteUserFile(id);
 
         return ResponseEntity.ok().body(
                 userFileResponse
