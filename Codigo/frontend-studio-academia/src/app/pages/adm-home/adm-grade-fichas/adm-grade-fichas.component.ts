@@ -8,6 +8,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../services/AuthService";
 import {UserService} from "../../../services/UserService";
 import {ExerciseService} from "../../../services/ExerciseService";
+import {Users} from "../../../Models/user";
 
 @Component({
   selector: 'app-adm-grade-fichas',
@@ -17,12 +18,14 @@ import {ExerciseService} from "../../../services/ExerciseService";
 export class AdmGradeFichasComponent implements OnInit {
 
   novaFichaForm !: FormGroup
-  fichas$ !: Fichas
   idAluno !:  String
   auth!: AuthService
+  savedId !:  String
+
 
   @Input() fichas !: Fichas
   @Input() pageable !: pageableObject
+  @Input() users !: Users
 
 
 
@@ -34,7 +37,7 @@ export class AdmGradeFichasComponent implements OnInit {
     private exerciseService : ExerciseService,
     private formBuilder : FormBuilder){
 
-    this.routeAc.params.subscribe(params => this.idAluno = params['idAluno'])
+     this.routeAc.params.subscribe(params => this.idAluno = params['idAluno'])
 
 
   }
@@ -43,17 +46,43 @@ export class AdmGradeFichasComponent implements OnInit {
   content$ !: {}
   hasValuesToLoad: boolean = false;
   isSearchUserFile: boolean = true;
+  gambs: boolean = true;
+  gambiarra: boolean = true;
 
   ngOnInit(): void {
+
+
     this.novaFichaForm = this.formBuilder.group({
       idUser : [this.idAluno,],
-      fileName: ["",Validators.required],
+      fileName: [""],
     })
-    this.searchFiles(this.idAluno);
+
+    if(this.gambs){
+      this.savedId = this.idAluno;
+      this.gambs = false;
+    }
+
+    console.log(this.routeAc.params.subscribe(params => this.idAluno = params['idAluno']))
+    console.log("here")
+    this.searchFiles(this.savedId);
+
+    this.fichas = <Fichas>this.pageable?.content
   }
 
+  ngOnLoad(): void {
+    if (this.gambiarra == true){
+      this.searchFiles(this.idAluno);
+      this.gambiarra=false;
+    }
+  }
   cadastrar() {
-    let body = {
+
+
+    console.log(this.novaFichaForm.value["fileName"])
+    console.log("teste form")
+
+
+      let body = {
       idUser: this.idAluno,
       fileName: this.novaFichaForm.value["fileName"],
     }
@@ -88,7 +117,7 @@ export class AdmGradeFichasComponent implements OnInit {
         .subscribe(
           (res: any) => {
             this.content$ =  res;
-            this.fichas$ = <Fichas>this.pageable?.content
+            this.fichas = <Fichas>this.pageable?.content
             this.hasValuesToLoad = true
           },
         );

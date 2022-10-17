@@ -19,6 +19,7 @@ import { EditarFichasComponent } from './editar-fichas/editar-fichas.component';
 import { TabelaExerciciosComponent } from './tabela-exercicios/tabela-exercicios.component';
 import { EditarExercicioComponent } from './editar-exercicio/editar-exercicio.component';
 import {MatSelectModule} from "@angular/material/select";
+import {GradeListarFichasComponent} from "./grade-listar-fichas/grade-listar-fichas.component";
 
 
 
@@ -38,6 +39,7 @@ import {MatSelectModule} from "@angular/material/select";
     EditarFichasComponent,
     TabelaExerciciosComponent,
     EditarExercicioComponent,
+    GradeListarFichasComponent
   ],
     imports: [
         CommonModule,

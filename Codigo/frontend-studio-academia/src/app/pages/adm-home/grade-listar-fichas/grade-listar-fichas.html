@@ -1,0 +1,25 @@
+<table class="table table-light mt-2">
+  <thead>
+    <tr class="table-secondary">
+      <th scope="col">Tipo</th>
+      <th scope="col">Nome</th>
+      <th scope="col">ID Ficha</th>
+      <th scope="col">Expandir Exercicios</th>
+      <th scope="col">Editar</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let ficha of fichas">
+    <tr>
+      <th scope="row">{{ficha?.fileName}}</th>
+      <td>{{ficha?.fileName}}</td>
+      <td>{{ficha?.userFileId}}</td>
+
+      <td><a [routerLink]="['expandirFicha',ficha?.userFileId]"><i class="bi bi-file-earmark-plus-fill"></i></a></td>
+      <td>
+        <a [routerLink]="['editarFicha',ficha?.userFileId]"><i class="bi bi-person-bounding-box"></i></a>
+        <a (click)="delete(ficha?.userFileId)" ><i class="bi bi-trash" style="cursor:pointer;"></i></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
