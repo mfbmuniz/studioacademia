@@ -59,10 +59,9 @@ public class ExerciseController {
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
     public ResponseEntity<ExerciseDto> deleteExercise(
             @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
-            @Valid @RequestBody ExerciseRequest request,
-            @PathVariable Long id) throws NotFoundException {
+            @PathVariable(value="id") final Long id) throws NotFoundException {
 
-        ExerciseDto exerciseDto = this.exerciseService.deleteExercise(request,id);
+        ExerciseDto exerciseDto = this.exerciseService.deleteExercise(id);
 
         return ResponseEntity.ok().body(
                 exerciseDto

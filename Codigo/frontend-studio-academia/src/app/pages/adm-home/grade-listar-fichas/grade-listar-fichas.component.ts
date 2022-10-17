@@ -3,12 +3,13 @@ import {pageableObject} from "../../../Models/PageableObject";
 import {Users} from "../../../Models/user";
 import {UserService} from "../../../services/UserService";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Fichas} from "../../../Models/ficha";
+import {Ficha, Fichas} from "../../../Models/ficha";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {AuthService} from "../../../services/AuthService";
 import {UserFileService} from "../../../services/UserFileService";
 import {ExerciseService} from "../../../services/ExerciseService";
 import { Observable } from 'rxjs';
+import {Exercicio, Exercicios} from "../../../Models/exercicio";
 
 
 @Component({
@@ -40,6 +41,11 @@ export class GradeListarFichasComponent implements OnInit {
   ngOnInit(): void {
 
     this.fichas = <Fichas>this.pageable?.content
+  }
+
+  showExercises(ficha: Array<Exercicio>){
+
+    console.log (ficha)
   }
 
   delete(userFileId: string | undefined) {

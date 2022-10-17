@@ -4,7 +4,7 @@ import { Exercicios } from 'src/app/Models/exercicio';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,FormArray, FormBuilder, Validators } from '@angular/forms'
-import { Ficha } from 'src/app/Models/ficha';
+import {Ficha, Fichas} from 'src/app/Models/ficha';
 import { ActivatedRoute } from '@angular/router';
 import { UserFileService } from 'src/app/services/UserFileService';
 import { pageableObject } from 'src/app/Models/PageableObject';
@@ -16,7 +16,7 @@ import { pageableObject } from 'src/app/Models/PageableObject';
 })
 export class EditarFichasComponent implements OnInit {
   idFicha !: String
-  ficha$ !: Observable<Ficha>
+  ficha$ !: Observable<Fichas>
   fichaForm !: FormBuilder | any
   exercicios$ !: Exercicios
   content$ !: pageableObject;

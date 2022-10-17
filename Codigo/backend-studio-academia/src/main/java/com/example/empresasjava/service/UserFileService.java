@@ -18,7 +18,7 @@ public interface UserFileService {
 
     UserFileResponse editUserFile(UserFileRequest request)throws NotFoundException;
 
-    UserFileResponse deleteUserFile(UserFileRequest request)throws NotFoundException;
+    UserFileResponse deleteUserFile(Long id)throws NotFoundException;
 
     UserExerciseResponse deleteUserExercise(UserExerciseRequest request)throws NotFoundException;
 

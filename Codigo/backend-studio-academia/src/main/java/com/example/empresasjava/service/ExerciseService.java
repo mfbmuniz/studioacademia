@@ -13,7 +13,7 @@ public interface ExerciseService {
     ExerciseDto create (ExerciseRequest exercise) throws NonUniqueResultException, NotFoundException;
     ExerciseDto editExercise(ExerciseRequest request, Long id);
 
-    ExerciseDto deleteExercise(ExerciseRequest request, Long id);
+    ExerciseDto deleteExercise(Long id);
 
     Page<Exercise> listUsersByPage(Pageable pages);
 
