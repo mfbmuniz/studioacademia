@@ -14,6 +14,7 @@ import { pageableObject } from 'src/app/Models/PageableObject';
 export class GradePendenciasComponent implements OnInit {
 
   comprovanteForm !: FormGroup
+  fechados !: FormGroup
   pagamentos !: MonthlyPayments
   pageable$ !: pageableObject
   pagamentosPendentes !: MonthlyPayments
@@ -21,7 +22,7 @@ export class GradePendenciasComponent implements OnInit {
   fileToUpload: File | null = null;
   erro : boolean = true
   path : any = null;
-  monthlyPayment !: MonthlyPayment
+
 
 
   constructor(
@@ -81,9 +82,9 @@ export class GradePendenciasComponent implements OnInit {
       let body = {
         paymentVoucher: this.path["0"],
         message: this.comprovanteForm.value['message'],
-        dueDate: this.monthlyPayment.dueDate,
-        userId:  this.monthlyPayment.userId,
-        monthlyPaymentId : this.monthlyPayment.monthlyPaymentId
+        dueDate: this.pagamentos[index].dueDate,
+        userId:  this.pagamentos[index].userId,
+        monthlyPaymentId : this.pagamentos[index].monthlyPaymentId
 
       }
 
@@ -113,7 +114,7 @@ export class GradePendenciasComponent implements OnInit {
   public listarPagamentosPendentes(page : number, size : number, idUser : number) {
     this.monthlyPaymentService.listarPagamentoPendentesUsuario(page,size,idUser,'AGUARDANDO_PAGAMENTO').subscribe((res : any)=>{
        this.pageablePend$ = res
-       this.pagamentosPendentes =<MonthlyPayments> this.pageablePend$.content
+       this.pagamentosPendentes = <MonthlyPayments> this.pageablePend$.content
     })
   }
 

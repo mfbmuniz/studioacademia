@@ -15,6 +15,7 @@
         <th scope="col">Data</th>
         <th scope="col">Comprovante</th>
         <th scope="col">Comentário</th>
+        <th scope="col"> </th>
       </tr>
     </thead>
     <tbody *ngFor="let monthlyPayment of pagamentos; let i = index ">
@@ -26,7 +27,31 @@
           <td><button (click)="onSubmit(i)" type="submit" class="btn btn-warning offset"  style="cursor:pointer;">Enviar</button></td>
         </tr>
     </tbody>
-
   </table>
   </form>
+</div>
+
+
+<div class="row">
+  <div class="col-2 offset-5">
+    <h1>Historico</h1>
+  </div>
+  <form enctype="multipart/form-data" action=""  [formGroup]="comprovanteForm" >
+    <table class="table table-light mt-2">
+      <thead>
+      <tr class="table-secondary">
+        <th scope="col">Status</th>
+        <th scope="col">Data</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let monthlyPayment of pagamentosPendentes; let i = index ">
+      <tr>
+        <th scope="row">{{monthlyPayment.paymentStatus}}</th>
+        <td>{{monthlyPayment.dueDate}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+
+
 </div>
