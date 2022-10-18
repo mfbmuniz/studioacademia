@@ -132,7 +132,10 @@ export class CadastroAlunoComponent implements OnInit {
     this.user=this.content$;
     console.log(this.content$);
     console.log(this.user);
+
+
     let body = {
+      idUser:this.user.idUser,
       email: this.novoAlunoForm.value["email"],
       password: this.novoAlunoForm.value["password"],
       passwordConfirm: this.novoAlunoForm.value["passwordConfirm"],
@@ -144,10 +147,8 @@ export class CadastroAlunoComponent implements OnInit {
       roles:[ this.novoAlunoForm.value["roles"]],
       sex: this.novoAlunoForm.value["sex"],
       dueDate:this.user.dueDate,
-      plan: this.user.plan,
-      weekday: this.user.weekday,
-      idUser:this.user.idUser,
-
+      plan:this.user.plan,
+      weekday:this.user.weekday,
       address: {
         zipCode: this.novoAlunoForm.value["zipCode"],
         street: this.novoAlunoForm.value["street"],
