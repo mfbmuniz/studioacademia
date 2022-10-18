@@ -6,16 +6,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/UserService';
 import {User} from "../../../Models/user";
 
+
+
 @Component({
   selector: 'app-editar-aluno',
   templateUrl: './editar-aluno.component.html',
   styleUrls: ['./editar-aluno.component.css']
 })
 export class EditarAlunoComponent implements OnInit {
-  idAluno !: String
-  user !: User
+  idUser !: String
+  public user !: User
   aluno$ !: Observable<User>
   editAlunoForm !: FormGroup
+  content$ !: {}
 
   constructor(
     private formbuilder: FormBuilder,
@@ -23,7 +26,9 @@ export class EditarAlunoComponent implements OnInit {
     private userService : UserService,
     private router : Router,
     ) {
-      this.routeAc.params.subscribe(params => this.user = params['user']);
+      this.routeAc.params.subscribe(params => this.idUser = params['idUser']);
+      this.ngBuiltUser( this.idUser);
+
     }
 
   ngOnInit(): void {
@@ -50,6 +55,19 @@ export class EditarAlunoComponent implements OnInit {
       district:['',[Validators.required]]
 
     })
+  }
+
+  ngBuiltUser( id : any) {
+
+    console.log('search user by id')
+    this.userService.findUser(id)
+      .subscribe(
+        (res: any) => {
+          this.content$ = res;
+        },
+      );
+    console.log(this.content$)
+    this.user = this.content$
   }
 
   public editar() : void{
@@ -98,7 +116,7 @@ export class EditarAlunoComponent implements OnInit {
 
 
   public delete() : void {
-    this.userService.delete(this.idAluno)
+    this.userService.delete(this.idUser)
       .subscribe(
         {
           next:(res) => {

@@ -107,4 +107,18 @@ public class UserController {
         return this.userService.listUsersByPageAndName(pages, name);
 
     }
+
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @GetMapping(path = "getuserbyid/userId/{userId}")
+    @ResponseBody
+    @ApiOperation(value = "Lista usuários por página quantidade")
+    public ResponseEntity<User> getUserById(
+              @PathVariable(value="userId")
+            Long userId)throws NotFoundException{
+
+        return ResponseEntity.ok().body(
+                this.userService.getUserById(userId)
+        );
+
+    }
 }

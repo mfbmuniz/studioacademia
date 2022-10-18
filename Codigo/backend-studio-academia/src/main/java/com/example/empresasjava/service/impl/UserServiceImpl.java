@@ -12,6 +12,7 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -160,6 +161,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Page<User> listUsersByPageAndName(Pageable page, String name) {
         return this.userRepository.findAllByNameIgnoreCaseAndDeletedAtIsNull(page, name);
+    }
+
+    @Override
+    public User getUserById(Long userId) throws NotFoundException {
+        return this.userRepository.findOneByIdUser(userId);
     }
 
 }

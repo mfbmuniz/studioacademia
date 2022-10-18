@@ -8,6 +8,7 @@ import com.example.empresasjava.models.dto.UserDto;
 import javassist.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
@@ -23,4 +24,6 @@ public interface UserService {
     Page<User> listUsersByPage(Pageable page);
 
     Page<User> listUsersByPageAndName(Pageable pages, String name);
+
+    User getUserById(Long userId) throws NotFoundException;
 }

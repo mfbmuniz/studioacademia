@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {UserService} from "../../../services/UserService";
+import {User} from "../../../Models/user";
 
 @Component({
   selector: 'app-cadastro-aluno',
@@ -11,18 +12,23 @@ import {UserService} from "../../../services/UserService";
 export class CadastroAlunoComponent implements OnInit {
 
   @Input() isEdit: boolean = false
+  @Input() content$ !: {}
   novoAlunoForm !: FormGroup
   isAluno: Boolean = false;
   public types = ['ALUNO', 'PROFESSOR', 'NUTRICIONISTA', 'ADMIN']
   public plans = []
   public selectedPlan = ""
   public weekDays = ['SEGUNDA', 'TERÇA', 'QUARTA', 'QUINTA', 'SEXTA', 'SABADO', 'DOMINGO']
+  idUser !: String
+  user !: User
 
   constructor(
     private formBuilder: FormBuilder,
     private router : Router,
     private userService: UserService
-  ) { }
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.novoAlunoForm = this.formBuilder.group({
@@ -48,6 +54,19 @@ export class CadastroAlunoComponent implements OnInit {
 
     }
     );
+  }
+
+  ngBuiltUser( id : any) {
+
+    console.log('search user by id')
+    this.userService.findUser(id)
+      .subscribe(
+        (res: any) => {
+          this.content$ = res;
+        },
+      );
+    console.log(this.content$)
+    this.user = this.content$
   }
 
   cadastrar(){
@@ -110,6 +129,9 @@ export class CadastroAlunoComponent implements OnInit {
 
   public editar() : void{
 
+    this.user=this.content$;
+    console.log(this.content$);
+    console.log(this.user);
     let body = {
       email: this.novoAlunoForm.value["email"],
       password: this.novoAlunoForm.value["password"],
@@ -121,9 +143,11 @@ export class CadastroAlunoComponent implements OnInit {
       birthDate: this.novoAlunoForm.value["birthDate"],
       roles:[ this.novoAlunoForm.value["roles"]],
       sex: this.novoAlunoForm.value["sex"],
-      dueDate:this.novoAlunoForm.value["dueDate"],
-      plan: this.novoAlunoForm.value["plan"],
-      weekday: this.novoAlunoForm.value["weekDay"],
+      dueDate:this.user.dueDate,
+      plan: this.user.plan,
+      weekday: this.user.weekday,
+      idUser:this.user.idUser,
+
       address: {
         zipCode: this.novoAlunoForm.value["zipCode"],
         street: this.novoAlunoForm.value["street"],
