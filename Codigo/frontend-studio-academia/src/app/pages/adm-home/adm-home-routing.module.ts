@@ -35,7 +35,7 @@ const routes: Routes = [
         component: EditarExercicioComponent
       },
       {
-        path: 'editarAluno/:idAluno',
+        path: 'editarAluno/:user',
         component: EditarAlunoComponent
       },
       {

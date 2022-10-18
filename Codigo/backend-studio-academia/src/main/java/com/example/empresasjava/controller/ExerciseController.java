@@ -54,7 +54,7 @@ public class ExerciseController {
         );
     }
 
-    @DeleteMapping(path = "/delete/{id}")
+    @DeleteMapping(path = "/delete/id/{id}")
     @ApiOperation(value = "deletar o e exercicio")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
     public ResponseEntity<ExerciseDto> deleteExercise(

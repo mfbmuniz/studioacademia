@@ -15,7 +15,7 @@
       <td>{{user?.email}}</td>
       <td><a [routerLink]="['gradeFichas',user?.idUser]"><i class="bi bi-file-earmark-plus-fill"></i></a></td>
       <td>
-          <a [routerLink]="['editarAluno',user?.idUser]"><i class="bi bi-person-bounding-box"></i></a>
+          <a [routerLink]="['editarAluno',user]"><i class="bi bi-person-bounding-box"></i></a>
           <a (click)="delete(user?.idUser)" ><i class="bi bi-trash" style="cursor:pointer;"></i></a>
       </td>
     </tr>

@@ -28,7 +28,7 @@ export class  ExerciseService {
   }
 
   delete(exercise_id : string) : Observable <any>{
-    return this.http.delete(`${environment.apiUrl}/exercise/delete/${exercise_id}`)
+    return this.http.delete(`${environment.apiUrl}/exercise/delete/id/${exercise_id}`)
   }
 
   getSession() {

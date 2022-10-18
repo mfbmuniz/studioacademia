@@ -91,7 +91,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto editUser(UserRequest userRequest) {
+
         User user = this.userRepository.findOneByEmail(userRequest.getEmail());
+        if (user == null){
+
+            user = this.userRepository.findOneByIdUser(userRequest.getIdUser());
+        }
 
         //usuarios nao administradores nao podem editar Roles
         //usuarios nao administradores nao podem adicionar Roles

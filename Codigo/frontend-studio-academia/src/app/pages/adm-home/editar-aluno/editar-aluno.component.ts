@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/UserService';
+import {User} from "../../../Models/user";
 
 @Component({
   selector: 'app-editar-aluno',
@@ -12,16 +13,17 @@ import { UserService } from 'src/app/services/UserService';
 })
 export class EditarAlunoComponent implements OnInit {
   idAluno !: String
-  aluno$ !: Observable<Aluno>
+  user !: User
+  aluno$ !: Observable<User>
   editAlunoForm !: FormGroup
 
   constructor(
     private formbuilder: FormBuilder,
     private routeAc : ActivatedRoute,
     private userService : UserService,
-    private router : Router
+    private router : Router,
     ) {
-      this.routeAc.params.subscribe(params => this.idAluno = params['idAluno']);
+      this.routeAc.params.subscribe(params => this.user = params['user']);
     }
 
   ngOnInit(): void {
@@ -63,6 +65,9 @@ export class EditarAlunoComponent implements OnInit {
       birthDate: this.editAlunoForm.value["birthDate"],
       roles:[ this.editAlunoForm.value["roles"]],
       sex: this.editAlunoForm.value["sex"],
+      dueDate:this.user.dueDate,
+      plan: this.user.plan,
+      weekday: this.user.weekday,
       address: {
         zipCode: this.editAlunoForm.value["zipCode"],
         street: this.editAlunoForm.value["street"],

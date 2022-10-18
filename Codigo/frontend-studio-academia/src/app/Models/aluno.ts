@@ -14,7 +14,10 @@ export interface Aluno {
   state ?: string,
   city ?: string,
   district ?: string
-  idUser?:string
+  idUser?: string
+  dueDate?: Date,
+  plan?:string,
+  weekday?:string
 }
 
 export type Alunos = Array<Aluno>

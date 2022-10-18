@@ -12,7 +12,8 @@
       <th scope="row">{{exercicio.exerciseId}}</th>
       <td>{{exercicio.name}}</td>
       <td><a [routerLink]="['editarExercicio',exercicio.exerciseId]"><i class="bi bi-file-earmark-plus-fill"></i></a></td>
-      <td><button class="btn btn-danger offset-1" (click)="deletar(exercicio.exerciseId)"><i class="bi bi-trash3"></i></button></td>
+      <td><a (click)="delete(exercicio?.exerciseId)"> <i class="bi bi-trash"style="cursor:pointer;"></i></a></td>
+
     </tr>
   </tbody>
 </table>

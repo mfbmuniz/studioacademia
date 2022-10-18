@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User,Long > {
     User findOneByEmail(String email);
-    User findOneByIdUser(String email);
+    User findOneByIdUser(Long idUser);
     Page<User> findAllByDeletedAtIsNullOrderByName(Pageable page);
     Page<User> findAllByNameIgnoreCaseAndDeletedAtIsNull(Pageable page, String name);
 

@@ -43,7 +43,7 @@ public class UserRequest {
     @NotEmpty(message = "Campo sex não pode ser vazio")
     private String sex;
 
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date birthDate;
 
     @NotNull(message = "Campo phone1 não pode ser nulo")
@@ -54,11 +54,13 @@ public class UserRequest {
     @NotEmpty(message = "Campo phone2 não pode ser vazio")
     private String phone2;
 
-    @NotNull(message = "Campo dueDate não pode ser nulo")
+
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dueDate;
 
     private String weekDays;
+
+    private Long idUser;
 
     public UserRequest() {
     }
@@ -79,15 +81,37 @@ public class UserRequest {
         this.weekDays=weekDays;
     }
 
-    public static User toUser(UserRequest user, List<Role> roles, Address address) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(user.getDueDate());
-        c.set(Calendar.HOUR_OF_DAY, 0);
-        c.set(Calendar.MINUTE, 0);
-        c.set(Calendar.SECOND, 0);
-        c.set(Calendar.MILLISECOND, 0);
+    public UserRequest(String name, String email, String password, List<String> roles, String legalDocument,
+                       AddressDto address, String sex, Date birthDate, String phone1, String phone2) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.legalDocument = legalDocument;
+        this.address = address;
+        this.sex = sex;
+        this.birthDate = birthDate;
+        this.phone1 = phone1;
+        this.phone2 = phone2;
+        this.dueDate = null;
+        this.weekDays=null;
+    }
 
-        Date dueDate = c.getTime();
+    public static User toUser(UserRequest user, List<Role> roles, Address address) {
+        Date dueDate;
+        Calendar c = Calendar.getInstance();
+
+        if(roles.stream().anyMatch(f -> f.getName().equals(RolesEnum.ALUNO.getCode()))) {
+            c.setTime(user.getDueDate());
+            c.set(Calendar.HOUR_OF_DAY, 0);
+            c.set(Calendar.MINUTE, 0);
+            c.set(Calendar.SECOND, 0);
+            c.set(Calendar.MILLISECOND, 0);
+
+            dueDate = c.getTime();
+        }else {
+            dueDate = null;
+        }
 
         c.setTime(user.getBirthDate());
         Date birthDate = c.getTime();

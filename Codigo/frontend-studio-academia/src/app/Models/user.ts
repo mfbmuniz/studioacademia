@@ -15,6 +15,9 @@ export interface User {
   city ?: string,
   district ?: string
   idUser?: string
+  dueDate?: Date,
+  plan?:string,
+  weekday?:string
 }
 
 export type Users = Array<User>
