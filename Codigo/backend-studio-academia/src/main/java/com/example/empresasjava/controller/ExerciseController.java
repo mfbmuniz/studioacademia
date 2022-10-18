@@ -3,6 +3,7 @@ package com.example.empresasjava.controller;
 
 import com.example.empresasjava.models.Exercise;
 import com.example.empresasjava.models.RequestEntity.ExerciseRequest;
+import com.example.empresasjava.models.User;
 import com.example.empresasjava.models.dto.ExerciseDto;
 import com.example.empresasjava.service.ExerciseService;
 import io.swagger.annotations.ApiOperation;
@@ -107,7 +108,19 @@ public class ExerciseController {
     }
 
 
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @GetMapping(path = "getexercisebyid/exerciseId/{exerciseId}")
+    @ResponseBody
+    @ApiOperation(value = "Lista usuários por página quantidade")
+    public ResponseEntity<Exercise> getExerciseById(
+            @PathVariable(value="exerciseId")
+            Long exerciseId)throws NotFoundException{
 
+        return ResponseEntity.ok().body(
+                this.exerciseService.getExerciseById(exerciseId)
+        );
+
+    }
 
 
 

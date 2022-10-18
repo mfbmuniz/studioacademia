@@ -20,4 +20,5 @@ public interface ExerciseRepository extends JpaRepository<Exercise,Long> {
     Page<Exercise> findAllByNameContainingIgnoreCaseOrderByName(String name, Pageable pages);
 
     List<Exercise> findAllByExerciseIdIn(List<Long> exerciseIds);
+
 }

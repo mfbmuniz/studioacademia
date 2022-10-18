@@ -18,4 +18,6 @@ public interface ExerciseService {
     Page<Exercise> listUsersByPage(Pageable pages);
 
     Page<Exercise> listSpecificUsersByPage(Pageable pages, String searchName);
+
+    Exercise getExerciseById(Long exerciseId)throws  NotFoundException;
 }

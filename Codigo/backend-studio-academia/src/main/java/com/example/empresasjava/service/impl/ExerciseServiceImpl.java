@@ -68,5 +68,10 @@ public class ExerciseServiceImpl implements ExerciseService {
         return this.exerciseRepository.findAllByNameContainingIgnoreCaseOrderByName(searchName,pages);
     }
 
+    @Override
+    public Exercise getExerciseById(Long exerciseId) throws NotFoundException {
+        return this.exerciseRepository.findOneByExerciseId(exerciseId);
+    }
+
 
 }

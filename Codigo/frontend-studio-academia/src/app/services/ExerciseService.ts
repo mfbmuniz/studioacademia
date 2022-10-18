@@ -23,7 +23,7 @@ export class  ExerciseService {
     return this.http.post(ExerciseService.API_URLS.CREATE, body);
   }
 
-  update(exercise_id : string, body: any) : Observable <any>{
+  update(exercise_id : any, body: any) : Observable <any>{
     return this.http.post(`${environment.apiUrl}/exercise/edit/${exercise_id}`,body)
   }
 
@@ -44,6 +44,10 @@ export class  ExerciseService {
               this.getSession()
           );
           return this.sessionSubject.asObservable();
+  }
+
+  findExercise(exerciseId : String){
+    return this.http.get(`${environment.apiUrl}/exercise/getexercisebyid/exerciseId/${exerciseId}`)
   }
 
   listByPage(pageRequest: number, sizeRequest: number, keySearch: string){

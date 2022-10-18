@@ -1,10 +1,10 @@
 export interface Exercicio {
-  exerciseId: number,
+  exerciseId: string,
   name ?: string,
-  url ?: URL,
+  url ?:URL,
   description ?: string,
-  series ?: number,
-  repetitions ?: number
+  series ?: string,
+  repetitions ?:string
 }
 
 export type Exercicios = Array<Exercicio>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ExerciseService } from 'src/app/services/ExerciseService';
+import {User} from "../../../Models/user";
+import {Exercicio} from "../../../Models/exercicio";
 
 @Component({
   selector: 'app-editar-exercicio',
@@ -10,14 +12,17 @@ import { ExerciseService } from 'src/app/services/ExerciseService';
 })
 export class EditarExercicioComponent implements OnInit {
 
-editExercicioForm !: FormGroup;
-idExercise !: string
+  editExercicioForm !: FormGroup
+  idExercise !: String
+  content !: {}
+  public exerc!: Exercicio
 
   constructor(
     private exerciseService : ExerciseService,
     private formBuilder : FormBuilder,
     private routeAc : ActivatedRoute) {
       this.routeAc.params.subscribe(params => this.idExercise = params['idExercicio']);
+      this.ngBuiltExercise( this.idExercise);
     }
 
   ngOnInit(): void {
@@ -26,6 +31,20 @@ idExercise !: string
       url : ['',Validators.required],
       description : ['',Validators.required]
     })
+  }
+
+  ngBuiltExercise( id : any) {
+
+    console.log('search Exercise by id')
+    this.exerciseService.findExercise(id)
+      .subscribe(
+        (res: any) => {
+          this.content = res;
+        },
+      );
+    console.log(this.content)
+    this.exerc = <Exercicio>this.content
+    console.log(this.exerc)
   }
 
   editar() {
