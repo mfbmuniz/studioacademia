@@ -19,6 +19,10 @@ export class GradePendenciasComponent implements OnInit {
   pagamentosPendentes !: MonthlyPayments
   pageablePend$ !: pageableObject
   fileToUpload: File | null = null;
+  erro : boolean = true
+  path : any = null;
+  monthlyPayment !: MonthlyPayment
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,18 +40,27 @@ export class GradePendenciasComponent implements OnInit {
 
   onFileSelected(event: any) {
   try {
-    event.target.files.item(0);
-  this.comprovanteForm.value["file"]
+
+    const paymentVoucherImage: FormData = new FormData();
+    paymentVoucherImage.append('paymentVoucherImage',event.target.files.item(0));
 
     console.log(event.target.files.item(0));
-    this.monthlyPaymentService.sendFile(this.comprovanteForm.value["file"]).subscribe({
+
+    console.log("imagem : ");
+    console.log(paymentVoucherImage);
+
+
+    this.monthlyPaymentService.sendFile(paymentVoucherImage).subscribe({
       next:(res) => {
         console.log(res)
-        alert("Comprovante enviado com êxito")
+        //alert("Comprovante enviado com êxito")
+        this.erro=false;
+        this.path = res
       },
       error: (err) => {
         console.log(err)
-        alert("Não foi enviar o  comprovante")
+        //alert("Não foi enviar o  comprovante")
+        this.erro=true;
       }
     })
     console.log(event)
@@ -55,31 +68,39 @@ export class GradePendenciasComponent implements OnInit {
 
 
   }catch (e) {
-
+      console.log("erro, catch")
+      console.log(e)
   }
 
 
   }
 
   public onSubmit() : void{
-    const teste = this.comprovanteForm.getRawValue()
-    let body = {
-      payment_voucher : this.comprovanteForm.value['file'],
-      //message : this.comprovanteForm.value['message'],
+
+    if( (!this.erro) && (this.path!=null) ) {
+      let body = {
+        paymentVoucher: this.path["0"],
+        message: this.comprovanteForm.value['message'],
+        dueDate: this.monthlyPayment.dueDate,
+        userId:  this.monthlyPayment.userId,
+        monthlyPaymentId : this.monthlyPayment.monthlyPaymentId
+
+      }
+
+      this.monthlyPaymentService.createRequestForApprove(body).subscribe({
+        next: (res) => {
+          console.log(res)
+          alert("Comprovante enviado com êxito")
+        },
+        error: (err) => {
+          console.log(err)
+          alert("Não foi enviar a requisição")
+        }
+      })
+    }else{
+      alert("Não foi possivel carregar a imagem do comprovante")
     }
 
-    const formData: FormData = new FormData();
-    this.monthlyPaymentService.sendFile(formData).subscribe({
-      next:(res) => {
-        console.log(res)
-        alert("Comprovante enviado com êxito")
-      },
-      error: (err) => {
-        console.log(err)
-        alert("Não foi enviar o  comprovante")
-      }
-    })
-    console.log(teste)
   }
 
   public listarTodosPagamentos(page : number, size : number, idUser : number) {

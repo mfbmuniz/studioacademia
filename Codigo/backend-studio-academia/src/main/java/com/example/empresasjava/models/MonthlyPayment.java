@@ -26,7 +26,7 @@ public class MonthlyPayment {
     private Date dueDate;
 
     @Column(name = "approved_date")
-    private Date approved_date;
+    private Date approvedDate;
 
     @Column(name = "payment_date")
     private Date paymentDate;
@@ -57,9 +57,9 @@ public class MonthlyPayment {
     public MonthlyPayment() {
     }
 
-    public MonthlyPayment(Date dueDate, Date approved_date, Date paymentDate, Long userId, String paymentVoucher, String message, String paymentStatus) {
+    public MonthlyPayment(Date dueDate, Date approvedDate, Date paymentDate, Long userId, String paymentVoucher, String message, String paymentStatus) {
         this.dueDate = dueDate;
-        this.approved_date = approved_date;
+        this.approvedDate = approvedDate;
         this.paymentDate = paymentDate;
         this.userId = userId;
         this.paymentVoucher = paymentVoucher;

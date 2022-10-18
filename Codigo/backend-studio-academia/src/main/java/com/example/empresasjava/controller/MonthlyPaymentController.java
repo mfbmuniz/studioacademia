@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.imageio.IIOException;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.HashMap;
 
     /*TODO
        TEST IMPLEMENTATIONS
@@ -52,18 +54,21 @@ public class MonthlyPaymentController {
         );
     }
 
-    @PostMapping(path = "/uploadImage")
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE , path = "/uploadImage")
     @ApiOperation(value = "Criar nova requisição de mensalidade para aprovar")
     @PreAuthorize("@authorityChecker.isAllowed({'ALUNO','ADMIN'})")
-    public ResponseEntity<String> uploadImage(
+    public ResponseEntity<HashMap> uploadImage(
             @ApiParam(value = "Json da requisição de pagamento do dado do pagamento mensal ")
             @RequestParam MultipartFile paymentVoucherImage ) throws NotFoundException, IOException {
 
 
+
         String savedPath = this.monthlyPaymentService.uploadImage(paymentVoucherImage );
+        HashMap<String, String> map = new HashMap<>();
+        map.put("0", savedPath);
 
         return ResponseEntity.ok().body(
-                savedPath
+                map
         );
     }
 

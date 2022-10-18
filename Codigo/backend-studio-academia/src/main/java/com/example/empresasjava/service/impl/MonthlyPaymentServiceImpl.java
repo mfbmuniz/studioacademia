@@ -120,7 +120,7 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
 
 
 
-            String path = "C:/studioImages/" +saveDate.getTime() +"_"+loggedUser.getIdUser()+"_.jpg"; // lugar pra salvar a imagem
+            String path = "c:/studioImages/" +saveDate.getTime() +"_"+loggedUser.getIdUser()+"_.jpg"; // lugar pra salvar a imagem
 
             //private final Path rootLocation = Paths.get("path");
             //Files.copy(image.getInputStream(), this.rootLocation.resolve(""+saveDate.toString()+"_"+idUser+".jpg"));
@@ -205,7 +205,7 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
         monthlyPayment.setPaymentVoucher(monthlyPayment.getPaymentVoucher());
         monthlyPayment.setMessage(monthlyPayment.getMessage());
         monthlyPayment.setPaymentDate(monthlyPayment.getPaymentDate());
-        monthlyPayment.setApproved_date(new Date());
+        monthlyPayment.setApprovedDate(new Date());
         return MonthlyPaymentResponse.fromMonthlyPayment(this.monthlyPaymentRepository.save(monthlyPayment));
     }
 

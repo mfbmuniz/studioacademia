@@ -1,12 +1,13 @@
 export interface MonthlyPayment {
-  id ?: number,
+  monthlyPaymentId ?: number,
   paymentDate ?: Date,
   paymentStatus ?: string,
-  user_id ?: number,
+  userId ?: number,
   message ?: string,
-  payment_voucher ?: File,
+  paymentVoucher ?: File,
   dueDate ?: Date,
   approvedDate ?: Date,
+
 }
 
 export type MonthlyPayments = Array<MonthlyPayment>

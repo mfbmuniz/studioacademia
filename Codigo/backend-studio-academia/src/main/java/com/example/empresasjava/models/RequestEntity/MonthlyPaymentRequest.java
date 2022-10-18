@@ -22,6 +22,8 @@ public class MonthlyPaymentRequest {
     private String paymentVoucher;
 
     private String message;
+
+    private Long monthlyPaymentId;
 }
 
 

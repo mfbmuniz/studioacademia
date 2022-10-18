@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpEvent} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -17,11 +17,15 @@ export class MonthlyPaymentService {
   constructor(private http: HttpClient, private router: Router) { }
 
 
-  public sendFile(formData : FormData){
+  public  sendFile (paymentVoucherImage : FormData){
 
-    return this.http.post(`${MonthlyPaymentService.API_URLS.ROOT}/uploadImage`,formData)
+    return this.http.post(`${MonthlyPaymentService.API_URLS.ROOT}/uploadImage`,paymentVoucherImage)
   }
 
+  public  createRequestForApprove (body: any): Observable<any> {
+
+    return this.http.post(`${MonthlyPaymentService.API_URLS.ROOT}/createRequestForApprove`,body)
+  }
     /**
    * Listar pagamentos pendentes do usuario
    * @param page Página que deseja visualizar iniciando em 0, example = "0"
