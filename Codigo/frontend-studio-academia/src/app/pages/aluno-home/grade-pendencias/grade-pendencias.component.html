@@ -7,8 +7,7 @@
     A simple primary alert—check it out!
   </div>
 -->
-  <form enctype="multipart/form-data" action="" (ngSubmit)="onSubmit()" [formGroup]="comprovanteForm" >
-    <button type="submit" class="btn btn-warning offset-11">Enviar</button>
+  <form enctype="multipart/form-data" action=""  [formGroup]="comprovanteForm" >
   <table class="table table-light mt-2">
     <thead>
       <tr class="table-secondary">
@@ -18,13 +17,13 @@
         <th scope="col">Comentário</th>
       </tr>
     </thead>
-    <tbody *ngFor="let monthlyPayment of pagamentos">
+    <tbody *ngFor="let monthlyPayment of pagamentos; let i = index ">
         <tr>
           <th scope="row">{{monthlyPayment.paymentStatus}}</th>
           <td>{{monthlyPayment.dueDate}}</td>
           <td><input  formControlName="file" type="file" formControlName="file" name="file" id="file" class="form-control"(change)="onFileSelected($event)" enctype="multipart/form-data" ></td>
-
-          <td><input type="text" formControlName="message" name="" id=""></td>
+          <td><input type="text" formControlName="message" name="" id="" class="form-control"></td>
+          <td><button (click)="onSubmit(i)" type="submit" class="btn btn-warning offset"  style="cursor:pointer;">Enviar</button></td>
         </tr>
     </tbody>
 

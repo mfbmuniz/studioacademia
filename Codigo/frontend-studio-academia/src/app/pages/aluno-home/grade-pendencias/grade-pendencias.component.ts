@@ -75,7 +75,7 @@ export class GradePendenciasComponent implements OnInit {
 
   }
 
-  public onSubmit() : void{
+  public onSubmit(index : any){
 
     if( (!this.erro) && (this.path!=null) ) {
       let body = {
