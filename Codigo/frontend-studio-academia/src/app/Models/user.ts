@@ -1,5 +1,7 @@
+import {Role} from "./roles";
+
 export interface User {
-  roles ?: string,
+  roles ?: Array<Role>,
   name ?: string,
   email ?: string,
   password ?: string,
