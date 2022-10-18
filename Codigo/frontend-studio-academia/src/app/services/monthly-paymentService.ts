@@ -44,9 +44,10 @@ export class MonthlyPaymentService {
    * @param idUser id do usuário
    * @returns Observable<any>
    */
-  public listarPagamentoPendentesUsuario(page : number, size : number, idUser : number, paymentStatusRequest: String) : Observable<any>{
+  public  listarPagamentoPendentesUsuario(page : number, size : number, idUser : number, paymentStatusRequest: String) : Observable<any>{
     paymentStatusRequest = "AGUARDANDO_PAGAMENTO";
-    return this.http.get(`${environment.apiUrl}/monthly-payment/pageAllUserPendency/${page}/size/${size}/idUser/${idUser}/paymentStatusRequest/${paymentStatusRequest}`)
+    return this.http.get(`${environment.apiUrl}/monthly-payment/pageAllUserPendency/page/${page}/size/${size}/idUser/${idUser}/paymentStatusRequest/${paymentStatusRequest}`)
+   
   }
 
 

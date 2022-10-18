@@ -185,7 +185,10 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
 
     @Override
     public Page<MonthlyPayment> listUserSpecificRequestsByPage(Pageable pages, Long id, String paymentStatusRequest) throws NonUniqueResultException, NotFoundException {
-        return this.monthlyPaymentRepository.findAllByUserIdAndPaymentStatusAndDeletedAtIsNullOrderByDueDateDesc(pages, paymentStatusRequest,id);
+
+       String keysearch = MonthlyPaymentStatusEnum.getByCd(paymentStatusRequest).getCode();
+
+        return this.monthlyPaymentRepository.findAllByUserIdAndPaymentStatusAndDeletedAtIsNullOrderByDueDateDesc(pages,id, keysearch);
 
     }
 

@@ -167,7 +167,7 @@ public class MonthlyPaymentController {
             return this.monthlyPaymentService.listUserRequestsByPage(pages,id);
 
     }
-    @GetMapping(path = "/pageAllUserPendency/{page}/size/{size}/idUser/{idUser}/paymentStatusRequest/{paymentStatusRequest}")
+    @GetMapping(path = "/pageAllUserPendency/page/{page}/size/{size}/idUser/{idUser}/paymentStatusRequest/{paymentStatusRequest}")
     @ResponseBody
     @ApiOperation(value = "lista apenas as requisições pendentes")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','ALUNO'})")

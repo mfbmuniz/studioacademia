@@ -7,6 +7,8 @@
     A simple primary alert—check it out!
   </div>
 -->
+
+
   <form enctype="multipart/form-data" action=""  [formGroup]="comprovanteForm" >
   <table class="table table-light mt-2">
     <thead>
@@ -18,7 +20,7 @@
         <th scope="col"> </th>
       </tr>
     </thead>
-    <tbody *ngFor="let monthlyPayment of pagamentos; let i = index ">
+    <tbody *ngFor="let monthlyPayment of pagamentosPendentes ; let i = index ">
         <tr>
           <th scope="row">{{monthlyPayment.paymentStatus}}</th>
           <td>{{monthlyPayment.dueDate}}</td>
@@ -31,10 +33,41 @@
   </form>
 </div>
 
+<div class="row">
+  <div class="col-2 offset-5">
+    <h1>Pesquisar</h1>
+  </div>
+
+  <select class="btn btn-outline-secondary dropdown-toggle" formControlName="typeSearch" type="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+    <option value="PAGO" [defaultSelected]="true">Pago</option>
+    <option value="ATRASADO">Atrasado</option>
+    <option value="AGUARDANDO_PAGAMENTO">Aguardando Pagamento</option>
+    <option value="EM_ANALISE">Em Análise</option>
+    <option value="NAO_RECEBIDO">Não Recebido(Reprovadas)</option>
+  </select>
+
+  <form enctype="multipart/form-data" action=""  [formGroup]="comprovanteForm" >
+    <table class="table table-light mt-2">
+      <thead>
+      <tr class="table-secondary">
+        <th scope="col">Status</th>
+        <th scope="col">Data</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let monthlyPayment of pagamentos; let i = index ">
+      <tr>
+        <th scope="row">{{monthlyPayment.paymentStatus}}</th>
+        <td>{{monthlyPayment.dueDate}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+
 
 <div class="row">
   <div class="col-2 offset-5">
-    <h1>Historico</h1>
+    <h1>Historico de Finalizados</h1>
   </div>
   <form enctype="multipart/form-data" action=""  [formGroup]="comprovanteForm" >
     <table class="table table-light mt-2">
@@ -44,7 +77,7 @@
         <th scope="col">Data</th>
       </tr>
       </thead>
-      <tbody *ngFor="let monthlyPayment of pagamentosPendentes; let i = index ">
+      <tbody *ngFor="let monthlyPayment of pagamentosPagos; let i = index ">
       <tr>
         <th scope="row">{{monthlyPayment.paymentStatus}}</th>
         <td>{{monthlyPayment.dueDate}}</td>

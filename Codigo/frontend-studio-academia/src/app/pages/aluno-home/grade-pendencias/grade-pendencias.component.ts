@@ -18,7 +18,9 @@ export class GradePendenciasComponent implements OnInit {
   pagamentos !: MonthlyPayments
   pageable$ !: pageableObject
   pagamentosPendentes !: MonthlyPayments
+  pagamentosPagos !: MonthlyPayments
   pageablePend$ !: pageableObject
+  pageablePagos$ !: pageableObject
   fileToUpload: File | null = null;
   erro : boolean = true
   path : any = null;
@@ -37,6 +39,7 @@ export class GradePendenciasComponent implements OnInit {
     })
     this.listarTodosPagamentos(0,10,2);
     this.listarPagamentosPendentes(0,10,2);
+    this.listarPagamentosPagos(0,10,2);
   }
 
   onFileSelected(event: any) {
@@ -115,6 +118,13 @@ export class GradePendenciasComponent implements OnInit {
     this.monthlyPaymentService.listarPagamentoPendentesUsuario(page,size,idUser,'AGUARDANDO_PAGAMENTO').subscribe((res : any)=>{
        this.pageablePend$ = res
        this.pagamentosPendentes = <MonthlyPayments> this.pageablePend$.content
+    })
+  }
+
+  public listarPagamentosPagos(page : number, size : number, idUser : number) {
+    this.monthlyPaymentService.listarPagamentoPendentesUsuario(page,size,idUser,'PAGO').subscribe((res : any)=>{
+      this.pageablePagos$ = res
+      this.pagamentosPagos = <MonthlyPayments> this.pageablePagos$.content
     })
   }
 
