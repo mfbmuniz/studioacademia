@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MonthlyPayments } from 'src/app/Models/monthly-payment';
 import {PageableObject, pageableObject} from 'src/app/Models/PageableObject';
+import {AuthService} from "../../../services/AuthService";
 
 
 @Component({
@@ -26,13 +27,17 @@ export class GradePendenciasComponent implements OnInit {
   erro : boolean = true
   path : any = null;
   public types = ['PAGO', 'ATRASADO', 'AGUARDANDO_PAGAMENTO', 'EM_ANALISE', 'NAO_RECEBIDO' , 'TODOS']
-
+  actualUser : any
 
 
   constructor(
     private formBuilder: FormBuilder,
-    private monthlyPaymentService : MonthlyPaymentService
-    ) { }
+    private monthlyPaymentService : MonthlyPaymentService,
+    private authServeice : AuthService
+
+    ) {
+        this.actualUser = authServeice.getSession().userId
+      }
 
   ngOnInit(): void {
     this.comprovanteForm = this.formBuilder.group({
@@ -40,8 +45,10 @@ export class GradePendenciasComponent implements OnInit {
       message : ['',[]]
     })
 
-    this.listarPagamentosPendentes(0,10,2);
-    this.listarPagamentosPagos(0,10,2);
+
+
+    this.listarPagamentosPendentes(0,10,this.actualUser);
+    this.listarPagamentosPagos(0,10,this.actualUser);
 
 
   }
