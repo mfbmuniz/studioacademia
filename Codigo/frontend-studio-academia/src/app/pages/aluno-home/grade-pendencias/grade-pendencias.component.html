@@ -38,16 +38,13 @@
     <h1>Pesquisar</h1>
   </div>
 
-  <select class="btn btn-outline-secondary dropdown-toggle" formControlName="typeSearch" type="button" data-bs-toggle="dropdown"
-          aria-expanded="false">
-    <option value="PAGO" [defaultSelected]="true">Pago</option>
-    <option value="ATRASADO">Atrasado</option>
-    <option value="AGUARDANDO_PAGAMENTO">Aguardando Pagamento</option>
-    <option value="EM_ANALISE">Em Análise</option>
-    <option value="NAO_RECEBIDO">Não Recebido(Reprovadas)</option>
-  </select>
+
 
   <form enctype="multipart/form-data" action=""  [formGroup]="comprovanteForm" >
+    <select id="type" class="btn btn-outline-secondary dropdown-toggle"  formControlName = "typeSearch" data-bs-toggle="dropdown"
+            aria-expanded="false"(change)="specificSearch($event)">
+      <option *ngFor="let t of types" [value]="t">{{t}}</option>
+    </select>
     <table class="table table-light mt-2">
       <thead>
       <tr class="table-secondary">

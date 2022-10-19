@@ -2,9 +2,10 @@ import { Observable } from 'rxjs';
 import { MonthlyPayment } from './../../../Models/monthly-payment';
 import { MonthlyPaymentService } from './../../../services/monthly-paymentService';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MonthlyPayments } from 'src/app/Models/monthly-payment';
-import { pageableObject } from 'src/app/Models/PageableObject';
+import {PageableObject, pageableObject} from 'src/app/Models/PageableObject';
+
 
 @Component({
   selector: 'app-grade-pendencias',
@@ -24,6 +25,7 @@ export class GradePendenciasComponent implements OnInit {
   fileToUpload: File | null = null;
   erro : boolean = true
   path : any = null;
+  public types = ['PAGO', 'ATRASADO', 'AGUARDANDO_PAGAMENTO', 'EM_ANALISE', 'NAO_RECEBIDO' , 'TODOS']
 
 
 
@@ -37,9 +39,11 @@ export class GradePendenciasComponent implements OnInit {
       file :['',[]],
       message : ['',[]]
     })
-    this.listarTodosPagamentos(0,10,2);
+
     this.listarPagamentosPendentes(0,10,2);
     this.listarPagamentosPagos(0,10,2);
+
+
   }
 
   onFileSelected(event: any) {
@@ -108,6 +112,7 @@ export class GradePendenciasComponent implements OnInit {
   }
 
   public listarTodosPagamentos(page : number, size : number, idUser : number) {
+
     this.monthlyPaymentService.listarPagamentoUsuario(page,size,idUser).subscribe((res : any)=>{
        this.pageable$ = res
        this.pagamentos =<MonthlyPayments>this.pageable$.content
@@ -128,4 +133,23 @@ export class GradePendenciasComponent implements OnInit {
     })
   }
 
+  public listarPagamentosEspecificos(page : number, size : number, idUser : number, paymentStatus : String) {
+    this.monthlyPaymentService.listarPagamentoPendentesUsuario(page,size,idUser,paymentStatus).subscribe((res : any)=>{
+      this.pageable$ = res
+      this.pagamentos =<MonthlyPayments>this.pageable$.content
+    })
+  }
+
+  specificSearch(value: any) {
+
+    let parameter =value?.target?.value ;
+
+    if ( value?.target?.value == "TODOS"){
+      this.listarTodosPagamentos(0,10,2);
+    }else{
+      this.listarPagamentosEspecificos(0,10,2,parameter)
+    }
+
+
+  }
 }
