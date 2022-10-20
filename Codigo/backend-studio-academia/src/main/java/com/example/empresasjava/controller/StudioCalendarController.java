@@ -20,7 +20,7 @@ import javax.validation.Valid;
 @RestController
 @CrossOrigin
 @RequestMapping("/calendar")
-public class CalendarController {
+public class StudioCalendarController {
 
     @Autowired
     private UserService userService;
