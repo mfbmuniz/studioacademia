@@ -18,6 +18,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -122,6 +123,18 @@ public class ExerciseController {
 
     }
 
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @GetMapping(path = "/getexercisesdropdown")
+    @ResponseBody
+    @ApiOperation(value = "Lista usuários por página quantidade")
+    public ResponseEntity<List<Exercise>> getExercisesForDropDown()
+            throws NotFoundException{
+
+        return ResponseEntity.ok().body(
+                this.exerciseService.getExercisesForDropDown()
+        );
+
+    }
 
 
 

@@ -21,4 +21,5 @@ public interface ExerciseRepository extends JpaRepository<Exercise,Long> {
 
     List<Exercise> findAllByExerciseIdIn(List<Long> exerciseIds);
 
+    List<Exercise> findAllByDeletedAtIsNullOrderByName();
 }
