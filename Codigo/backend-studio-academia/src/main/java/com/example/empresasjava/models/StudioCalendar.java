@@ -11,64 +11,45 @@ import java.util.Date;
 @Entity
 @Data
 @ToString
-@Table(name = "plans")
+@Table(name = "StudioCalendar")
 
-public class Plans {
+public class StudioCalendar {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "plans_id")
-    private Long planId;
+    @Column(name = "studiocalendar_id")
+    private Long studioCalendarId;
 
 
-    @Column(name = "planCode")
-    private String planCode;
+    @Column(name = "dateEvent")
+    private Date dateEvent;
 
-    @Column(name = "name")
-    private String name ;
+    @Column(name = "dateDescription")
+    private String dateDescription ;
 
-    @Column(name = "contracted_days")
-    private String contractedDays;
+    @Column(name = "title")
+    private String title;
 
-    @Column(name = "price")
-    private BigDecimal price;
-
-    @Column(name = "description")
-    private String description;
 
     @Column(name = "created_at")
     private Date createdAt;
     @Column(name = "deleted_at")
     private Date deletedAt;
 
-    public Plans() {
+    public StudioCalendar() {
 
     }
 
-    public Plans(String planCode, String name, String contractedDays, BigDecimal price, String description) {
-        this.planCode = planCode;
-        this.name = name;
-        this.contractedDays = contractedDays;
-        this.price = price;
-        this.description = description;
-
+    public StudioCalendar(Long studioCalendarId, Date dateEvent, String dateDescription, String title) {
+        this.studioCalendarId = studioCalendarId;
+        this.dateEvent = dateEvent;
+        this.dateDescription = dateDescription;
+        this.title = title;
     }
 
-    public Plans(Long planId, String planCode, String name, String contractedDays, BigDecimal price, String description) {
-        this.planId = planId;
-        this.planCode = planCode;
-        this.name = name;
-        this.contractedDays = contractedDays;
-        this.price = price;
-        this.description = description;
-
-    }
-
-    public Plans(String name, String contractedDays, BigDecimal price, String description) {
-        this.name = name;
-        this.contractedDays = contractedDays;
-        this.price = price;
-        this.description = description;
-
+    public StudioCalendar(Date dateEvent, String dateDescription, String title) {
+        this.dateEvent = dateEvent;
+        this.dateDescription = dateDescription;
+        this.title = title;
     }
 }

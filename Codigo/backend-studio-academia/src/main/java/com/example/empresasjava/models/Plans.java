@@ -5,24 +5,33 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
 @Data
 @ToString
-@Table(name = "exercises")
-public class Exercise {
+@Table(name = "plans")
+
+public class Plans {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "exercises_id")
-    private Long exerciseId;
+    @Column(name = "plans_id")
+    private Long planId;
 
-    @Column(name = "exercise_name")
+
+    @Column(name = "planCode")
+    private String planCode;
+
+    @Column(name = "name")
     private String name ;
 
-    @Column(name = "exercise_link")
-    private String exerciseUrl;
+    @Column(name = "contracted_days")
+    private String contractedDays;
+
+    @Column(name = "price")
+    private BigDecimal price;
 
     @Column(name = "description")
     private String description;
@@ -32,22 +41,34 @@ public class Exercise {
     @Column(name = "deleted_at")
     private Date deletedAt;
 
-    public Exercise() {
+    public Plans() {
 
     }
 
-    public Exercise(String name, String exerciseUrl, String description) {
+    public Plans(String planCode, String name, String contractedDays, BigDecimal price, String description) {
+        this.planCode = planCode;
         this.name = name;
-        this.exerciseUrl = exerciseUrl;
+        this.contractedDays = contractedDays;
+        this.price = price;
         this.description = description;
-
 
     }
 
-    public Exercise(String name, String exerciseUrl, String description, Long idExercise) {
+    public Plans(Long planId, String planCode, String name, String contractedDays, BigDecimal price, String description) {
+        this.planId = planId;
+        this.planCode = planCode;
         this.name = name;
-        this.exerciseUrl = exerciseUrl;
+        this.contractedDays = contractedDays;
+        this.price = price;
         this.description = description;
-        this.exerciseId=idExercise;
+
+    }
+
+    public Plans(String name, String contractedDays, BigDecimal price, String description) {
+        this.name = name;
+        this.contractedDays = contractedDays;
+        this.price = price;
+        this.description = description;
+
     }
 }

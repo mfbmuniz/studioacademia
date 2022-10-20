@@ -1,8 +1,13 @@
 package com.example.empresasjava.controller;
 
+import com.example.empresasjava.models.MessagesCommunication;
+import com.example.empresasjava.models.RequestEntity.MessagesCommunicationRequest;
 import com.example.empresasjava.models.RequestEntity.UserRequest;
+import com.example.empresasjava.models.ResponseEntity.MessagesCommunicationResponse;
+import com.example.empresasjava.models.ResponseEntity.PlansResponse;
 import com.example.empresasjava.models.User;
 import com.example.empresasjava.models.dto.UserDto;
+import com.example.empresasjava.service.MessagesCommunicationService;
 import com.example.empresasjava.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -20,88 +25,123 @@ import javax.validation.Valid;
 @RestController
 @CrossOrigin
 @RequestMapping("/message-service")
-public class MessageServiceController {
+public class MessagesCommunicationController {
+
+
+
 
     @Autowired
-    private UserService userService;
+    private MessagesCommunicationService messagesCommunicationService;
 
     @PostMapping(path = "/create")
-    @ApiOperation(value = "Criar novo usuário")
-    //@Secure({RolesEnum.ADMIN})
+    @ApiOperation(value = "Criar nova mensagem ")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
-    public ResponseEntity<UserDto> createUser(
+    public ResponseEntity<MessagesCommunicationResponse> createMessage(
             @ApiParam(value = "Json da requisição que contem o dado do usuario a ser salvo")
-            @Valid @RequestBody UserRequest request) throws NotFoundException {
-        UserDto userDto = this.userService.create(request);
+            @Valid @RequestBody MessagesCommunicationRequest request) throws NotFoundException {
+
+        MessagesCommunicationResponse messagesCommunicationResponse = this.messagesCommunicationService.create(request);
         return ResponseEntity.ok().body(
-                userDto
+                messagesCommunicationResponse
         );
     }
-
-    //todo: trocar rotas de edição para @PatchMapping
     @PostMapping(path = "/edit")
-    @ApiOperation(value = "Editar usuário existente")
-    public ResponseEntity<UserDto> editUser(
+    @ApiOperation(value = "Editar mensagem existente")
+    public ResponseEntity<MessagesCommunicationResponse> editUser(
             @ApiParam(value = "Json da requisição que contem o dado a ser editado")
-            @Valid @RequestBody UserRequest request){
+            @Valid @RequestBody MessagesCommunicationRequest request) throws NotFoundException {
 
         return ResponseEntity.ok().body(
-                this.userService.editUser(request)
+                this.messagesCommunicationService.editMessage(request)
         );
     }
 
-//    @Secure({RolesEnum.ADMIN})
-    @DeleteMapping(path = "/delete/{email}")
+
+    @DeleteMapping(path = "/delete/idMessage/{idMessage}")
     @ApiOperation(value = "Desativa usuário existente")
-    public ResponseEntity<UserDto> deleteUser(@PathVariable(value="email") final String email){
+    public ResponseEntity<MessagesCommunicationResponse> deleteUser(@PathVariable(value="idMessage") Long idMessage) throws NotFoundException {
         return ResponseEntity.ok().body(
-                this.userService.deleteUser(email)
+                this.messagesCommunicationService.deleteMessage(idMessage)
         );
     }
 
-    @DeleteMapping(path = "/delete")
-    @ApiOperation(value = "Desativa usuário existente")
-    public ResponseEntity<UserDto> deleteLoggedUser(){
-        return ResponseEntity.ok().body(
-                this.userService.deleteLoggedUser()
-        );
-    }
-
-//    @Secure({RolesEnum.ADMIN})
     @GetMapping(path = "/page/{page}/size/{size}")
     @ResponseBody
     @ApiOperation(value = "Lista usuários por página quantidade")
-    public Page<User> listUsersByPageWithSize(
+    public Page<MessagesCommunication> listMessagesByPage(
             @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
             @PathVariable(value="page")
             int page,
             @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
             @PathVariable(value="size")
-            int size){
+            int size) throws NotFoundException {
 
         Pageable pages = PageRequest.of(page, size);
-        return this.userService.listUsersByPage(pages);
+        return this.messagesCommunicationService.listMessagesByPage(pages);
 
     }
 
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
-    @GetMapping(path = "page/{page}/size/{size}/name/{name}")
+    @GetMapping(path = "/page/{page}/size/{size}/title/{title}")
     @ResponseBody
     @ApiOperation(value = "Lista usuários por página quantidade")
-    public Page<User> listUserByNameAndPageWithSize(
+    public Page<MessagesCommunication> listSpecificMessageByPage(
             @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
             @PathVariable(value="page")
                     int page,
             @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
             @PathVariable(value="size")
                     int size,
-            @PathVariable(value="name")
-                    String name
-    ){
+            @PathVariable(value="title")
+                    String title
+    ) throws NotFoundException {
 
         Pageable pages = PageRequest.of(page, size);
 
-        return this.userService.listUsersByPageAndName(pages, name);
+        return this.messagesCommunicationService.listSpecificMessageByPage(pages, title);
 
     }
+
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @GetMapping(path = "/getmessagebyid/messageid/{messageid}")
+    @ResponseBody
+    @ApiOperation(value = "Lista planos por página quantidade")
+    public ResponseEntity<MessagesCommunicationResponse> getMessageByMessageId(
+            @PathVariable(value="messageid")
+            Long messageid)throws NotFoundException{
+
+        return ResponseEntity.ok().body(
+                this.messagesCommunicationService.getMessageByMessageId(messageid)
+        );
+
+    }
+
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @GetMapping(path = "/getmessagebyuserId/userId/{userId}")
+    @ResponseBody
+    @ApiOperation(value = "Lista planos por página quantidade")
+    public ResponseEntity<MessagesCommunicationResponse> getMessageByUserId(
+            @PathVariable(value="userId")
+            Long userId)throws NotFoundException{
+
+        return ResponseEntity.ok().body(
+                this.messagesCommunicationService.getMessageByUserId(userId)
+        );
+
+    }
+
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @GetMapping(path = "/getmessagebytitle/title/{title}")
+    @ResponseBody
+    @ApiOperation(value = "Lista planos por página quantidade")
+    public ResponseEntity<MessagesCommunicationResponse> getMessageByTitle(
+            @PathVariable(value="title")
+            String title)throws NotFoundException{
+
+        return ResponseEntity.ok().body(
+                this.messagesCommunicationService.getMessageByTitle(title)
+        );
+
+    }
+
 }

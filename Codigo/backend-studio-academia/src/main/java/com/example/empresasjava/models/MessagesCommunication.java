@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -13,7 +12,7 @@ import java.util.Date;
 @ToString
 @Table(name = "admin_message_service")
 
-public class Messages {
+public class MessagesCommunication {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,10 +35,10 @@ public class Messages {
     @Column(name = "deleted_at")
     private Date deletedAt;
 
-    public Messages() {
+    public MessagesCommunication() {
     }
 
-    public Messages(Long adminMessageId, Long userId, String messageContent, String title, Date createdAt, Date deletedAt) {
+    public MessagesCommunication(Long adminMessageId, Long userId, String messageContent, String title, Date createdAt, Date deletedAt) {
         this.adminMessageId = adminMessageId;
         this.userId = userId;
         this.messageContent = messageContent;
@@ -48,7 +47,7 @@ public class Messages {
         this.deletedAt = deletedAt;
     }
 
-    public Messages(Long adminMessageId, String messageContent, String title, Date createdAt, Date deletedAt) {
+    public MessagesCommunication(Long adminMessageId, String messageContent, String title, Date createdAt, Date deletedAt) {
         this.adminMessageId = adminMessageId;
         this.messageContent = messageContent;
         this.title = title;
@@ -56,10 +55,23 @@ public class Messages {
         this.deletedAt = deletedAt;
     }
 
-    public Messages(String messageContent, String title, Date createdAt, Date deletedAt) {
+    public MessagesCommunication(String messageContent, String title, Date createdAt, Date deletedAt) {
         this.messageContent = messageContent;
         this.title = title;
         this.createdAt = createdAt;
         this.deletedAt = deletedAt;
+    }
+
+    public MessagesCommunication(Long adminMessageId, Long userId, String messageContent, String title) {
+        this.adminMessageId = adminMessageId;
+        this.userId = userId;
+        this.messageContent = messageContent;
+        this.title = title;
+    }
+
+    public MessagesCommunication(Long userId, String messageContent, String title) {
+        this.userId = userId;
+        this.messageContent = messageContent;
+        this.title = title;
     }
 }

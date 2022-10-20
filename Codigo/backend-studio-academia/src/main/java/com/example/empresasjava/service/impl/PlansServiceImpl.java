@@ -1,10 +1,15 @@
 package com.example.empresasjava.service.impl;
 
-import com.example.empresasjava.models.*;
+import com.example.empresasjava.models.Exercise;
+import com.example.empresasjava.models.Plans;
 import com.example.empresasjava.models.RequestEntity.ExerciseRequest;
+import com.example.empresasjava.models.RequestEntity.PlansRequest;
+import com.example.empresasjava.models.ResponseEntity.PlansResponse;
 import com.example.empresasjava.models.dto.ExerciseDto;
 import com.example.empresasjava.repository.ExerciseRepository;
+import com.example.empresasjava.repository.PlansRepository;
 import com.example.empresasjava.service.ExerciseService;
+import com.example.empresasjava.service.PlansService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,66 +22,75 @@ import java.util.List;
 import java.util.Optional;
 
 
-
-
-
-
 @Service
-public class ExerciseServiceImpl implements ExerciseService {
+public class PlansServiceImpl implements PlansService {
 
     @Autowired
-    ExerciseRepository exerciseRepository;
+    PlansRepository plansRepository;
 
     @Override
-    public ExerciseDto create(ExerciseRequest receivedExercise) throws NonUniqueResultException, NotFoundException {
+    public PlansResponse create(PlansRequest plansRequest) throws NonUniqueResultException, NotFoundException {
 
-        Optional<Exercise> exercise = Optional.ofNullable(this.exerciseRepository.findOneByName(receivedExercise.getName()));
+        Optional<Plans> plan = Optional.ofNullable(this.plansRepository.findOneByName(plansRequest.getName()));
 
-        if(!exercise.isPresent()){
-            return ExerciseDto.fromExercise(this.exerciseRepository.save(ExerciseRequest.toExercise(receivedExercise)));
+        if(!plan.isPresent()){
+            return PlansResponse.fromPlans(this.plansRepository.save(PlansRequest.toPlans(plansRequest)));
         }else{
-            throw new NonUniqueResultException("Exercicio ja cadastrado!");
+            throw new NonUniqueResultException("Plano ja cadastrado!");
         }
     }
 
     @Override
-    public ExerciseDto editExercise(ExerciseRequest request, Long id) {
-        Exercise exercise = Optional.of(this.exerciseRepository.findOneByExerciseId(id)).orElseThrow(()-> new NonUniqueResultException("Exercicio inexistente"));
+    public PlansResponse editPlan(PlansRequest plansRequest) throws  NotFoundException{
 
-        exercise.setDescription(request.getDescription());
-        exercise.setExerciseUrl(request.getExerciseUrl());
-        exercise.setName(request.getName());
+        Plans plan = Optional.of(this.plansRepository.findOneByPlanId(plansRequest.getPlanId())).orElseThrow(()-> new NonUniqueResultException("Plano inexistente"));
 
-        return ExerciseDto.fromExercise(this.exerciseRepository.save(exercise));
+        plan.setPlanCode(plansRequest.getPlanCode());
+        plan.setDescription(plansRequest.getDescription());
+        plan.setName(plansRequest.getName());
+        plan.setPrice(plansRequest.getPrice());
+        plan.setContractedDays(plansRequest.getContractedDays());
 
-    }
 
-    @Override
-    public ExerciseDto deleteExercise(Long id) {
-        Exercise exercise = Optional.of(this.exerciseRepository.findOneByExerciseId(id)).orElseThrow(()-> new NonUniqueResultException("Exercicio inexistente"));
-        exercise.setDeletedAt(new Date());
-        return ExerciseDto.fromExercise(this.exerciseRepository.save(exercise));
+
+        return PlansResponse.fromPlans(this.plansRepository.save(plan));
 
     }
 
     @Override
-    public Page<Exercise> listExercisesByPage(Pageable pages) {
-        return this.exerciseRepository.findAllByDeletedAtIsNullOrderByName(pages);
+    public PlansResponse deletePlan(Long id) throws  NotFoundException{
+        Plans plan = Optional.of(this.plansRepository.findOneByPlanId(id)).orElseThrow(()-> new NonUniqueResultException("Exercicio inexistente"));
+        plan.setDeletedAt(new Date());
+        return PlansResponse.fromPlans(this.plansRepository.save(plan));
+
     }
 
     @Override
-    public Page<Exercise> listSpecificUsersByPage(Pageable pages, String searchName) {
-        return this.exerciseRepository.findAllByNameContainingIgnoreCaseOrderByName(searchName,pages);
+    public Page<Plans> listPlansByPage(Pageable pages) throws  NotFoundException{
+        return this.plansRepository.findAllByDeletedAtIsNullOrderByName(pages);
     }
 
     @Override
-    public Exercise getExerciseById(Long exerciseId) throws NotFoundException {
-        return this.exerciseRepository.findOneByExerciseId(exerciseId);
+    public Page<Plans> listSpecificPlanByPage(Pageable pages, String searchName){
+        return this.plansRepository.findAllByNameContainingIgnoreCaseOrderByName(searchName,pages);
     }
 
     @Override
-    public List<Exercise> getExercisesForDropDown() throws NotFoundException {
-        return (List<Exercise>) this.exerciseRepository.findAllByDeletedAtIsNullOrderByName();
+    public PlansResponse getPlanByPlanId(Long planId)throws  NotFoundException {
+        return PlansResponse.fromPlans(this.plansRepository.findOneByPlanId(planId));
+    }
+    @Override
+    public PlansResponse getPlanByPlanCode(String planCode)throws  NotFoundException{
+        return PlansResponse.fromPlans(this.plansRepository.findOneByPlanCode(planCode));
+    }
+    @Override
+    public PlansResponse getPlanByName(String name)throws  NotFoundException{
+        return PlansResponse.fromPlans(this.plansRepository.findOneByName(name));
+    }
+
+    @Override
+    public List<Plans> getPlansForDropDown()throws  NotFoundException{
+        return (List<Plans>) this.plansRepository.findAllByDeletedAtIsNullOrderByName();
     }
 
 

@@ -1,7 +1,10 @@
 package com.example.empresasjava.service;
 
 import com.example.empresasjava.models.Exercise;
+import com.example.empresasjava.models.Plans;
 import com.example.empresasjava.models.RequestEntity.ExerciseRequest;
+import com.example.empresasjava.models.RequestEntity.PlansRequest;
+import com.example.empresasjava.models.ResponseEntity.PlansResponse;
 import com.example.empresasjava.models.dto.ExerciseDto;
 import javassist.NotFoundException;
 import org.springframework.data.domain.Page;
@@ -10,18 +13,24 @@ import org.springframework.data.domain.Pageable;
 import javax.persistence.NonUniqueResultException;
 import java.util.List;
 
-public interface ExerciseService {
-    ExerciseDto create (ExerciseRequest exercise) throws NonUniqueResultException, NotFoundException;
-    ExerciseDto editExercise(ExerciseRequest request, Long id);
+public interface PlansService {
 
-    ExerciseDto deleteExercise(Long id);
+    PlansResponse create (PlansRequest plansRequest) throws NonUniqueResultException, NotFoundException;
 
-    Page<Exercise> listUsersByPage(Pageable pages);
+    PlansResponse editPlan(PlansRequest plansRequest)throws  NotFoundException;
 
-    Page<Exercise> listSpecificUsersByPage(Pageable pages, String searchName);
+    PlansResponse deletePlan(Long id)throws  NotFoundException;
 
-    Exercise getExerciseById(Long exerciseId)throws  NotFoundException;
+    Page<Plans> listPlansByPage(Pageable pages)throws  NotFoundException;
 
-    List<Exercise> getExercisesForDropDown()throws  NotFoundException;
+    Page<Plans> listSpecificPlanByPage(Pageable pages, String searchName)throws  NotFoundException;
+
+    PlansResponse getPlanByPlanId(Long planId)throws  NotFoundException;
+
+    PlansResponse getPlanByName(String name )throws  NotFoundException;
+
+    PlansResponse getPlanByPlanCode(String planCode)throws  NotFoundException;
+
+    List<Plans> getPlansForDropDown()throws  NotFoundException;
 
 }

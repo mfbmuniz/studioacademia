@@ -1,15 +1,15 @@
 package com.example.empresasjava.service.impl;
 
-import com.example.empresasjava.models.Exercise;
 import com.example.empresasjava.models.Plans;
-import com.example.empresasjava.models.RequestEntity.ExerciseRequest;
 import com.example.empresasjava.models.RequestEntity.PlansRequest;
+import com.example.empresasjava.models.RequestEntity.StudioCalendarRequest;
 import com.example.empresasjava.models.ResponseEntity.PlansResponse;
-import com.example.empresasjava.models.dto.ExerciseDto;
-import com.example.empresasjava.repository.ExerciseRepository;
+import com.example.empresasjava.models.ResponseEntity.StudioCalendarResponse;
+import com.example.empresasjava.models.StudioCalendar;
 import com.example.empresasjava.repository.PlansRepository;
-import com.example.empresasjava.service.ExerciseService;
+import com.example.empresasjava.repository.StudioCalendarRepository;
 import com.example.empresasjava.service.PlansService;
+import com.example.empresasjava.service.StudioCalendarService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,25 +23,25 @@ import java.util.Optional;
 
 
 @Service
-public class PlansServiceImpl implements PlansService {
+public class StudioCalendarServiceImpl implements StudioCalendarService {
 
     @Autowired
-    PlansRepository plansRepository;
+    StudioCalendarRepository studioCalendarRepository;
 
     @Override
-    public PlansResponse create(PlansRequest plansRequest) throws NonUniqueResultException, NotFoundException {
+    public StudioCalendarResponse createCalendarDate (StudioCalendarRequest studioCalendarRequest) throws NonUniqueResultException, NotFoundException {
 
-        Optional<Plans> plan = Optional.ofNullable(this.plansRepository.findOneByName(plansRequest.getName()));
+        Optional<StudioCalendar> studioCalendar = Optional.ofNullable(this.studioCalendarRepository.findOneByTitle(studioCalendarRequest.getTitle()));
 
-        if(!plan.isPresent()){
-            return PlansResponse.fromPlans(this.plansRepository.save(PlansRequest.toPlans(plansRequest)));
+        if(!studioCalendar.isPresent()){
+            return StudioCalendarResponse.fromStudioCalendar(this.studioCalendarRepository.save(StudioCalendarRequest.toStudioCalendar(studioCalendarRequest)));
         }else{
-            throw new NonUniqueResultException("Plano ja cadastrado!");
+            throw new NonUniqueResultException("Evento ja cadastrado para esta data");
         }
     }
 
     @Override
-    public PlansResponse editPlan(PlansRequest plansRequest) throws  NotFoundException{
+    public PlansResponse editPlan(StudioCalendarRequest studioCalendarRequest) throws  NotFoundException{
 
         Plans plan = Optional.of(this.plansRepository.findOneByPlanId(plansRequest.getPlanId())).orElseThrow(()-> new NonUniqueResultException("Plano inexistente"));
 

@@ -1,51 +1,46 @@
 package com.example.empresasjava.models.ResponseEntity;
 
 
-import com.example.empresasjava.models.MonthlyPayment;
 import com.example.empresasjava.models.Plans;
+import com.example.empresasjava.models.StudioCalendar;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-public class PlansResponse {
+public class StudioCalendarResponse {
 
-    private Long planId;
+    private Long studioCalendarId;
 
-    private String planCode;
+    private Date dateEvent;
 
-    private String name ;
+    private String dateDescription ;
 
-    private String contractedDays;
+    private String title;
 
-    private BigDecimal price;
-
-    private String description;
-
-
-    public PlansResponse(Long planId, String planCode, String name, String contractedDays, BigDecimal price, String description) {
-        this.planId = planId;
-        this.planCode = planCode;
-        this.name = name;
-        this.contractedDays = contractedDays;
-        this.price = price;
-        this.description = description;
+    public StudioCalendarResponse() {
     }
 
+    public StudioCalendarResponse(Long studioCalendarId, Date dateEvent, String dateDescription, String title) {
+        this.studioCalendarId = studioCalendarId;
+        this.dateEvent = dateEvent;
+        this.dateDescription = dateDescription;
+        this.title = title;
+    }
 
+    public static StudioCalendarResponse fromStudioCalendar (StudioCalendar studioCalendar){
 
-    public static PlansResponse fromPlans (Plans plan){
+        return new StudioCalendarResponse(
 
-        return new PlansResponse(
-                plan.getPlanId(),
-                plan.getPlanCode(),
-                plan.getName(),
-                plan.getContractedDays(),
-                plan.getPrice(),
-                plan.getDescription()
+                studioCalendar.getStudioCalendarId(),
+                studioCalendar.getDateEvent(),
+                studioCalendar.getDateDescription(),
+                studioCalendar.getTitle()
 
         );
     }

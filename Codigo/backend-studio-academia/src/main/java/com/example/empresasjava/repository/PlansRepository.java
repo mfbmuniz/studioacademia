@@ -1,18 +1,30 @@
 package com.example.empresasjava.repository;
 
+import com.example.empresasjava.models.Exercise;
+import com.example.empresasjava.models.Plans;
 import com.example.empresasjava.models.Role;
-import com.example.empresasjava.models.User;
-import com.example.empresasjava.models.UserRole;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role,Long> {
+public interface PlansRepository extends JpaRepository<Plans,Long> {
 
-    Role findByName(String name);
+    Plans findByName (String name);
 
-    List<Role> findAllByNameIn(List<String> roles);
+    Plans findOneByName(String name);
+    Plans findOneByPlanCode(String planCode);
+
+    Plans findOneByPlanId(Long id);
+
+    Page<Plans> findAllByDeletedAtIsNullOrderByName(Pageable pages);
+
+    Page<Plans> findAllByNameContainingIgnoreCaseOrderByName(String name, Pageable pages);
+
+    List<Plans> findAllByPlanIdIn(List<Long> planIds);
+
+    List<Plans> findAllByDeletedAtIsNullOrderByName();
 }

@@ -1,11 +1,11 @@
 package com.example.empresasjava.service;
 
-import com.example.empresasjava.models.Exercise;
+import com.example.empresasjava.models.MessagesCommunication;
 import com.example.empresasjava.models.Plans;
-import com.example.empresasjava.models.RequestEntity.ExerciseRequest;
+import com.example.empresasjava.models.RequestEntity.MessagesCommunicationRequest;
 import com.example.empresasjava.models.RequestEntity.PlansRequest;
+import com.example.empresasjava.models.ResponseEntity.MessagesCommunicationResponse;
 import com.example.empresasjava.models.ResponseEntity.PlansResponse;
-import com.example.empresasjava.models.dto.ExerciseDto;
 import javassist.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,24 +13,22 @@ import org.springframework.data.domain.Pageable;
 import javax.persistence.NonUniqueResultException;
 import java.util.List;
 
-public interface PlansService {
+public interface MessagesCommunicationService {
 
-    PlansResponse create (PlansRequest plansRequest) throws NonUniqueResultException, NotFoundException;
+    MessagesCommunicationResponse create (MessagesCommunicationRequest messagesCommunicationRequest) throws NonUniqueResultException, NotFoundException;
 
-    PlansResponse editPlan(PlansRequest plansRequest)throws  NotFoundException;
+    MessagesCommunicationResponse editMessage(MessagesCommunicationRequest messagesCommunicationRequest)throws  NotFoundException;
 
-    PlansResponse deletePlan(Long id)throws  NotFoundException;
+    MessagesCommunicationResponse deleteMessage(Long id)throws  NotFoundException;
 
-    Page<Plans> listPlansByPage(Pageable pages)throws  NotFoundException;
+    Page<MessagesCommunication> listMessagesByPage(Pageable pages)throws  NotFoundException;
 
-    Page<Plans> listSpecificPlanByPage(Pageable pages, String searchName)throws  NotFoundException;
+    Page<MessagesCommunication> listSpecificMessageByPage(Pageable pages, String title)throws  NotFoundException;
 
-    PlansResponse getPlanByPlanId(Long planId)throws  NotFoundException;
+    MessagesCommunicationResponse getMessageByMessageId(Long adminMessageId)throws  NotFoundException;
 
-    PlansResponse getPlanByName(String name )throws  NotFoundException;
+    MessagesCommunicationResponse getMessageByUserId(Long userId)throws  NotFoundException;
 
-    PlansResponse getPlanByPlanCode(String planCode)throws  NotFoundException;
 
-    List<Plans> getPlansForDropDown()throws  NotFoundException;
-
+    MessagesCommunicationResponse getMessageByTitle(String title)throws  NotFoundException;
 }

@@ -2,47 +2,50 @@ package com.example.empresasjava.models.ResponseEntity;
 
 
 import com.example.empresasjava.models.MonthlyPayment;
+import com.example.empresasjava.models.Plans;
 import lombok.Data;
 
-
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-public class MonthlyPaymentResponse {
+public class PlansResponse {
 
-    private Date dueDate;
-    private Long userId;
-    private String paymentVoucher;
-    private String optionalMessage;
+    private Long planId;
 
-    private Long monthlyPaymentId;
+    private String planCode;
 
-    public MonthlyPaymentResponse() {
+    private String name ;
+
+    private String contractedDays;
+
+    private BigDecimal price;
+
+    private String description;
+
+
+    public PlansResponse(Long planId, String planCode, String name, String contractedDays, BigDecimal price, String description) {
+        this.planId = planId;
+        this.planCode = planCode;
+        this.name = name;
+        this.contractedDays = contractedDays;
+        this.price = price;
+        this.description = description;
     }
 
-    public MonthlyPaymentResponse(Date dueDate, Long userId, String paymentVoucher, String optionalMessage) {
-        this.dueDate = dueDate;
-        this.userId = userId;
-        this.paymentVoucher = paymentVoucher;
-        this.optionalMessage = optionalMessage;
-    }
 
-    public MonthlyPaymentResponse(Date dueDate, Long userId, String paymentVoucher, String optionalMessage, Long monthlyPaymentId) {
-        this.dueDate = dueDate;
-        this.userId = userId;
-        this.paymentVoucher = paymentVoucher;
-        this.optionalMessage = optionalMessage;
-        this.monthlyPaymentId = monthlyPaymentId;
-    }
 
-    public static MonthlyPaymentResponse fromMonthlyPayment(MonthlyPayment monthlyPayment){
+    public static PlansResponse fromPlans (Plans plan){
 
-        return new MonthlyPaymentResponse(
-                monthlyPayment.getDueDate(),
-                monthlyPayment.getUserId(),
-                monthlyPayment.getPaymentVoucher(),
-                monthlyPayment.getMessage(),
-                monthlyPayment.getMonthlyPaymentId()
+        return new PlansResponse(
+                plan.getPlanId(),
+                plan.getPlanCode(),
+                plan.getName(),
+                plan.getContractedDays(),
+                plan.getPrice(),
+                plan.getDescription()
 
         );
     }

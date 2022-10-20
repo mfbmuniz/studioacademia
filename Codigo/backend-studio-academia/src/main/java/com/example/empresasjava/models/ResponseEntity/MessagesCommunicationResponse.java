@@ -1,52 +1,48 @@
 package com.example.empresasjava.models.ResponseEntity;
 
 
-import com.example.empresasjava.models.MonthlyPayment;
+import com.example.empresasjava.models.MessagesCommunication;
 import com.example.empresasjava.models.Plans;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-public class PlansResponse {
-
-    private Long planId;
-
-    private String planCode;
-
-    private String name ;
-
-    private String contractedDays;
-
-    private BigDecimal price;
-
-    private String description;
+public class MessagesCommunicationResponse {
 
 
-    public PlansResponse(Long planId, String planCode, String name, String contractedDays, BigDecimal price, String description) {
-        this.planId = planId;
-        this.planCode = planCode;
-        this.name = name;
-        this.contractedDays = contractedDays;
-        this.price = price;
-        this.description = description;
+    private Long adminMessageId;
+
+    private Long userId;
+
+
+    private String messageContent ;
+
+
+    private String title;
+
+    public MessagesCommunicationResponse(Long adminMessageId, Long userId, String messageContent, String title) {
+        this.adminMessageId = adminMessageId;
+        this.userId = userId;
+        this.messageContent = messageContent;
+        this.title = title;
     }
 
+    public MessagesCommunicationResponse() {
+    }
 
+    public static MessagesCommunicationResponse fromMessagesCommunication (MessagesCommunication messagesCommunication){
 
-    public static PlansResponse fromPlans (Plans plan){
-
-        return new PlansResponse(
-                plan.getPlanId(),
-                plan.getPlanCode(),
-                plan.getName(),
-                plan.getContractedDays(),
-                plan.getPrice(),
-                plan.getDescription()
-
+        return new MessagesCommunicationResponse(
+                messagesCommunication.getAdminMessageId(),
+                messagesCommunication.getUserId(),
+                messagesCommunication.getMessageContent(),
+                messagesCommunication.getTitle()
         );
     }
 }

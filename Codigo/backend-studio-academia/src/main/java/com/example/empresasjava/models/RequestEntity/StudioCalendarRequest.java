@@ -1,49 +1,59 @@
 package com.example.empresasjava.models.RequestEntity;
 
-import com.example.empresasjava.models.Exercise;
-import com.example.empresasjava.models.Plans;
+
+import com.example.empresasjava.models.StudioCalendar;
 import lombok.Data;
 
-import javax.persistence.Column;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-public class PlansRequest {
+public class StudioCalendarRequest {
 
 
-    private Long planId;
 
-    private String planCode;
-    @NotNull(message = "Campo name não pode ser nulo")
-    @NotEmpty(message = "Campo name não pode ser vazio")
-    private String name ;
 
-    @NotNull(message = "Campo name não pode ser nulo")
-    @NotEmpty(message = "Campo name não pode ser vazio")
-    private String contractedDays;
+    private Long studioCalendarId;
+
 
     @NotNull(message = "Campo name não pode ser nulo")
     @NotEmpty(message = "Campo name não pode ser vazio")
-    private BigDecimal price;
+    private Date dateEvent;
+
     @NotNull(message = "Campo name não pode ser nulo")
     @NotEmpty(message = "Campo name não pode ser vazio")
-    private String description;
+    private String dateDescription ;
+
+    @NotNull(message = "Campo name não pode ser nulo")
+    @NotEmpty(message = "Campo name não pode ser vazio")
+    private String title;
 
 
 
+    private Date createdAt;
 
-    public static Plans toPlans(PlansRequest plan) {
-        return new Plans(
+    private Date deletedAt;
 
-                plan.planCode,
-                plan.name,
-                plan.contractedDays,
-                plan.price,
-                plan.description
+    public StudioCalendarRequest(Long studioCalendarId, Date dateEvent, String dateDescription, String title) {
+        this.studioCalendarId = studioCalendarId;
+        this.dateEvent = dateEvent;
+        this.dateDescription = dateDescription;
+        this.title = title;
+    }
 
+    public StudioCalendarRequest(Date dateEvent, String dateDescription, String title) {
+        this.dateEvent = dateEvent;
+        this.dateDescription = dateDescription;
+        this.title = title;
+    }
+
+    public static StudioCalendar toStudioCalendar (StudioCalendarRequest studioCalendarRequest) {
+        return new StudioCalendar(
+                studioCalendarRequest.getDateEvent(),
+                studioCalendarRequest.getDateDescription(),
+                studioCalendarRequest.getTitle()
         );
     }
 

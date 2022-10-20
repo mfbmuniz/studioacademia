@@ -1,36 +1,36 @@
 package com.example.empresasjava.service;
 
-import com.example.empresasjava.models.Exercise;
 import com.example.empresasjava.models.Plans;
-import com.example.empresasjava.models.RequestEntity.ExerciseRequest;
 import com.example.empresasjava.models.RequestEntity.PlansRequest;
+import com.example.empresasjava.models.RequestEntity.StudioCalendarRequest;
 import com.example.empresasjava.models.ResponseEntity.PlansResponse;
-import com.example.empresasjava.models.dto.ExerciseDto;
+import com.example.empresasjava.models.ResponseEntity.StudioCalendarResponse;
+import com.example.empresasjava.models.StudioCalendar;
 import javassist.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import javax.persistence.NonUniqueResultException;
+import java.util.Date;
 import java.util.List;
 
-public interface PlansService {
+public interface StudioCalendarService {
 
-    PlansResponse create (PlansRequest plansRequest) throws NonUniqueResultException, NotFoundException;
+    StudioCalendarResponse createCalendarDate (StudioCalendarRequest studioCalendarRequest) throws NonUniqueResultException, NotFoundException;
 
-    PlansResponse editPlan(PlansRequest plansRequest)throws  NotFoundException;
+    StudioCalendarResponse editCalendarDate(StudioCalendarRequest studioCalendarRequest)throws  NotFoundException;
 
-    PlansResponse deletePlan(Long id)throws  NotFoundException;
+    StudioCalendarResponse deleteCalendarDate(Long id)throws  NotFoundException;
 
-    Page<Plans> listPlansByPage(Pageable pages)throws  NotFoundException;
+    Page<StudioCalendar> listCalendarDateByPage(Pageable pages)throws  NotFoundException;
 
-    Page<Plans> listSpecificPlanByPage(Pageable pages, String searchName)throws  NotFoundException;
+    Page<StudioCalendar> listSpecificCalendarDateByPage(Pageable pages, String searchTitle)throws  NotFoundException;
 
-    PlansResponse getPlanByPlanId(Long planId)throws  NotFoundException;
+    StudioCalendarResponse getCalendarDateByStudioCalendarId(Long planId)throws  NotFoundException;
 
-    PlansResponse getPlanByName(String name )throws  NotFoundException;
+    StudioCalendarResponse getCalendarDateByTitle(String title )throws  NotFoundException;
 
-    PlansResponse getPlanByPlanCode(String planCode)throws  NotFoundException;
+    StudioCalendarResponse getPlanByDateEvent(Date dateEvent)throws  NotFoundException;
 
-    List<Plans> getPlansForDropDown()throws  NotFoundException;
 
 }
