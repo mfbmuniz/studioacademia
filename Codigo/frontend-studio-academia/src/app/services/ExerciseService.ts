@@ -59,4 +59,9 @@ export class  ExerciseService {
 
     return this.http.get(searchPageUrl)
   }
+
+  getExercisesForDropDown (){
+    let searchPageUrl = `${environment.apiUrl}/exercise/getexercisesdropdown`
+    return this.http.get(searchPageUrl)
+  }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.NonUniqueResultException;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -71,6 +72,11 @@ public class ExerciseServiceImpl implements ExerciseService {
     @Override
     public Exercise getExerciseById(Long exerciseId) throws NotFoundException {
         return this.exerciseRepository.findOneByExerciseId(exerciseId);
+    }
+
+    @Override
+    public List<Exercise> getExercisesForDropDown() throws NotFoundException {
+        return (List<Exercise>) this.exerciseRepository.findAllByDeletedAtIsNullOrderByName();
     }
 
 
