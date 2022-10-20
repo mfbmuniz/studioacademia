@@ -41,56 +41,51 @@ public class StudioCalendarServiceImpl implements StudioCalendarService {
     }
 
     @Override
-    public PlansResponse editPlan(StudioCalendarRequest studioCalendarRequest) throws  NotFoundException{
+    public StudioCalendarResponse editCalendarDate(StudioCalendarRequest studioCalendarRequest)throws  NotFoundException{
 
-        Plans plan = Optional.of(this.plansRepository.findOneByPlanId(plansRequest.getPlanId())).orElseThrow(()-> new NonUniqueResultException("Plano inexistente"));
+        StudioCalendar studioCalendar = Optional.of(this.studioCalendarRepository.findOneByStudioCalendarId(studioCalendarRequest.getStudioCalendarId())).
+                orElseThrow(()-> new NonUniqueResultException("Evento Inexistente"));
 
-        plan.setPlanCode(plansRequest.getPlanCode());
-        plan.setDescription(plansRequest.getDescription());
-        plan.setName(plansRequest.getName());
-        plan.setPrice(plansRequest.getPrice());
-        plan.setContractedDays(plansRequest.getContractedDays());
+        studioCalendar.setDateEvent(studioCalendarRequest.getDateEvent());
+        studioCalendar.setDateDescription(studioCalendarRequest.getDateDescription());
+        studioCalendar.setTitle(studioCalendarRequest.getTitle());
 
-
-
-        return PlansResponse.fromPlans(this.plansRepository.save(plan));
+        return StudioCalendarResponse.fromStudioCalendar(this.studioCalendarRepository.save(studioCalendar));
 
     }
 
     @Override
-    public PlansResponse deletePlan(Long id) throws  NotFoundException{
-        Plans plan = Optional.of(this.plansRepository.findOneByPlanId(id)).orElseThrow(()-> new NonUniqueResultException("Exercicio inexistente"));
-        plan.setDeletedAt(new Date());
-        return PlansResponse.fromPlans(this.plansRepository.save(plan));
+    public StudioCalendarResponse deleteCalendarDate(Long id)throws  NotFoundException{
+        StudioCalendar studioCalendar = Optional.of(this.studioCalendarRepository.findOneByStudioCalendarId(id)).orElseThrow(()->
+                new NonUniqueResultException("Exercicio inexistente"));
+
+        studioCalendar.setDeletedAt(new Date());
+        return StudioCalendarResponse.fromStudioCalendar(this.studioCalendarRepository.save(studioCalendar));
 
     }
 
     @Override
-    public Page<Plans> listPlansByPage(Pageable pages) throws  NotFoundException{
-        return this.plansRepository.findAllByDeletedAtIsNullOrderByName(pages);
+    public  Page<StudioCalendar> listCalendarDateByPage(Pageable pages)throws  NotFoundException{
+
+        return this.studioCalendarRepository.findAllByDeletedAtIsNullOrderByTitle(pages);
     }
 
     @Override
-    public Page<Plans> listSpecificPlanByPage(Pageable pages, String searchName){
-        return this.plansRepository.findAllByNameContainingIgnoreCaseOrderByName(searchName,pages);
+    public  Page<StudioCalendar> listSpecificCalendarDateByPage(Pageable pages, String searchTitle)throws  NotFoundException{
+        return this.studioCalendarRepository.findAllByTitleContainingIgnoreCaseOrderByTitle(searchTitle,pages);
     }
 
     @Override
-    public PlansResponse getPlanByPlanId(Long planId)throws  NotFoundException {
-        return PlansResponse.fromPlans(this.plansRepository.findOneByPlanId(planId));
+    public StudioCalendarResponse getCalendarDateByStudioCalendarId(Long calendarId)throws  NotFoundException{
+        return StudioCalendarResponse.fromStudioCalendar(this.studioCalendarRepository.findOneByStudioCalendarId(calendarId));
     }
     @Override
-    public PlansResponse getPlanByPlanCode(String planCode)throws  NotFoundException{
-        return PlansResponse.fromPlans(this.plansRepository.findOneByPlanCode(planCode));
+    public StudioCalendarResponse getCalendarDateByTitle(String title )throws  NotFoundException{
+        return StudioCalendarResponse.fromStudioCalendar(this.studioCalendarRepository.findOneByTitle(title));
     }
     @Override
-    public PlansResponse getPlanByName(String name)throws  NotFoundException{
-        return PlansResponse.fromPlans(this.plansRepository.findOneByName(name));
-    }
-
-    @Override
-    public List<Plans> getPlansForDropDown()throws  NotFoundException{
-        return (List<Plans>) this.plansRepository.findAllByDeletedAtIsNullOrderByName();
+    public StudioCalendarResponse getPlanByDateEvent(Date dateEvent)throws  NotFoundException{
+        return StudioCalendarResponse.fromStudioCalendar(this.studioCalendarRepository.findOneByDateEvent(dateEvent));
     }
 
 
