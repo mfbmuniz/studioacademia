@@ -10,6 +10,7 @@ import { CadastroFichaComponent } from './cadastro-ficha/cadastro-ficha.componen
 import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
 import { AdmGradeFichasComponent } from './adm-grade-fichas/adm-grade-fichas.component';
 import { EditarFichasComponent } from './editar-fichas/editar-fichas.component';
+import { GradePagamentosComponent } from './grade-pagamentos/grade-pagamentos.component';
 
 
 const routes: Routes = [
@@ -51,6 +52,10 @@ const routes: Routes = [
         path: 'expandirFicha/:idFicha',
         component: AdmGradeFichasComponent
       },
+      {
+        path : 'pagamentos/:idAluno',
+        component : GradePagamentosComponent
+      }
 
     ]
   },

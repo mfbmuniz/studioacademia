@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-2 offset-5">
+    <h1>Pagamentos</h1>
+  </div>
+
+  <table class="table table-light mt-2">
+    <thead>
+      <tr class="table-secondary">
+        <th scope="col">Status</th>
+        <th scope="col">Data Limite</th>
+        <th scope="col">Data Pago</th>
+        <th scope="col">Comprovante</th>
+        <th scope="col">Validar</th>
+        <th scope="col">Recusar</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let monthlyPayment of pagamentos">
+      <tr>
+        <th scope="col">{{monthlyPayment?.paymentStatus}}</th>
+        <th scope="col">{{monthlyPayment?.dueDate}}</th>
+        <th scope="col">{{monthlyPayment?.paymentDate}}</th>
+        <th scope="col"><button type="button" class="btn btn-secondary" (click)="download()"><i class="bi bi-download"></i></button></th>
+        <th scope="col"><button type="button" class="btn btn-warning"   (click)="aprove(monthlyPayment?.monthlyPaymentId)"><i class="bi bi-check-square"></i></button></th>
+        <th scope="col"><button type="button" class="btn btn-danger"    (click)="reprove(monthlyPayment?.monthlyPaymentId)" ><i class="bi bi-x-square"></i></button></th>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr>
+
+        <th scope="col">Status</th>
+        <th scope="col">Data</th>
+        <th scope="col">Data</th>
+        <th scope="col"><button class="btn btn-secondary" (click)="download()"><i class="bi bi-download"></i></button></th>
+        <th scope="col"><button type="button" class="btn btn-warning"><i class="bi bi-check-square"></i></button></th>
+        <th scope="col"><button type="button" class="btn btn-danger"><i class="bi bi-x-square"></i></button></th>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

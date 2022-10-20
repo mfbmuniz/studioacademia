@@ -27,7 +27,7 @@ export class MonthlyPaymentService {
     return this.http.post(`${MonthlyPaymentService.API_URLS.ROOT}/createRequestForApprove`,body)
   }
     /**
-   * Listar pagamentos pendentes do usuario
+   * Listar todos os pagamentos  do usuario
    * @param page Página que deseja visualizar iniciando em 0, example = "0"
    * @param size Quantidade de itens a serem listados por página", example = "10"
    * @param idUser id do usuário
@@ -49,5 +49,14 @@ export class MonthlyPaymentService {
 
   }
 
+  //Tem q olhar se tá dando certo
+  public aprovePayment(idMonthlyRequest : number){
+    return this.http.get(`${environment.apiUrl}/monthly-payment/aproveRequest/${idMonthlyRequest}`)
+  }
+
+  //Tem q olhar se tá dando certo
+  public reprovePayment(idMonthlyRequest : number){
+    return this.http.get(`${environment.apiUrl}/monthly-payment/reproveRequest/${idMonthlyRequest}`)
+  }
 
 }
