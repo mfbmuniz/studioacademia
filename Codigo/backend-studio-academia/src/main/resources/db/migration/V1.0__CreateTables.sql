@@ -111,6 +111,7 @@ CREATE TABLE admin_message_service (
                     admin_message_id INT DEFAULT NEXTVAL ('admin_message_service_seq') PRIMARY KEY,
                     user_id INT CHECK (user_id > 0),
                     message_content TEXT NOT NULL,
+                    title VARCHAR(100),
 
                     created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
                     deleted_at TIMESTAMP(0) NULL DEFAULT NULL,
@@ -121,11 +122,12 @@ CREATE TABLE admin_message_service (
 
 
 
-CREATE SEQUENCE calendar_seq;
-CREATE TABLE calendar (
-                    calendar_id INT DEFAULT NEXTVAL ('calendar_seq') PRIMARY KEY,
+CREATE SEQUENCE studiocalendar_seq;
+CREATE TABLE StudioCalendar (
+                    studiocalendar_id INT DEFAULT NEXTVAL ('studiocalendar_seq') PRIMARY KEY,
                     dateEvent TIMESTAMP(0) NULL DEFAULT NULL,
                     dateDescription TEXT NOT NULL,
+                    title VARCHAR(100),
 
 
                     created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,

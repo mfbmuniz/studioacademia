@@ -16,7 +16,7 @@ public interface ExerciseService {
 
     ExerciseDto deleteExercise(Long id);
 
-    Page<Exercise> listUsersByPage(Pageable pages);
+    Page<Exercise> listExercisesByPage(Pageable pages);
 
     Page<Exercise> listSpecificUsersByPage(Pageable pages, String searchName);
 

@@ -62,6 +62,13 @@ public class UserRequest {
 
     private Long idUser;
 
+    private Long planId;
+
+    private String planName;
+
+
+
+
     public UserRequest() {
     }
 

@@ -60,7 +60,7 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    public Page<Exercise> listUsersByPage(Pageable pages) {
+    public Page<Exercise> listExercisesByPage(Pageable pages) {
         return this.exerciseRepository.findAllByDeletedAtIsNullOrderByName(pages);
     }
 

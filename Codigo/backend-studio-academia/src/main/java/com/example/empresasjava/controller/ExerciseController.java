@@ -74,7 +74,7 @@ public class ExerciseController {
     @GetMapping(path = "/page/{page}/size/{size}")
     @ResponseBody
     @ApiOperation(value = "Lista usuários por página quantidade")
-    public Page<Exercise> listUsersByPageWithSize(
+    public Page<Exercise> listExercisesByPageWithSize(
             @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
             @PathVariable(value="page")
             int page,
@@ -83,7 +83,7 @@ public class ExerciseController {
             int size){
 
         Pageable pages = PageRequest.of(page, size);
-        return this.exerciseService.listUsersByPage(pages);
+        return this.exerciseService.listExercisesByPage(pages);
 
     }
 
