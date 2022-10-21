@@ -30,7 +30,7 @@ public interface StudioCalendarService {
 
     StudioCalendarResponse getCalendarDateByTitle(String title )throws  NotFoundException;
 
-    StudioCalendarResponse getPlanByDateEvent(Date dateEvent)throws  NotFoundException;
+    List <StudioCalendar> getCalendarDateByDateEvent(Date dateEvent)throws  NotFoundException;
 
 
 }

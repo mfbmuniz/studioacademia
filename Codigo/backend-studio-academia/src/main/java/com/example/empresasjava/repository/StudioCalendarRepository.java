@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface StudioCalendarRepository extends JpaRepository<StudioCalendar,Long> {
 
-    StudioCalendar findOneByDateEvent (Date dateEvent);
+    List<StudioCalendar> findAllByDateEvent (Date dateEvent);
 
     StudioCalendar findOneByTitle (String title);
 
