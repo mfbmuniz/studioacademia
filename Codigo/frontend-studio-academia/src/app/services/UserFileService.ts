@@ -25,7 +25,7 @@ export class UserFileService {
     return this.http.delete(`${environment.apiUrl}/user-files/deleteFile/${idFile}`)
   }
 
-  addExercise(body: any): Observable<any>{
+  addExercises(body: any): Observable<any>{
     return this.http.post(UserFileService.API_URLS.ADDEXERCISES, body);
   }
 

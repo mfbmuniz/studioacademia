@@ -44,7 +44,7 @@ const routes: Routes = [
         component: AdmGradeFichasComponent
       },
       {
-        path : 'cadastrarFicha/:idAluno',
+        path : 'adicionarExercicios/:idAluno/:idFicha',
         component : CadastroFichaComponent
       },
       {

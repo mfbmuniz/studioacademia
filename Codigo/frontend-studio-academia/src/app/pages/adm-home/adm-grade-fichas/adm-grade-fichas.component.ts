@@ -37,7 +37,7 @@ export class AdmGradeFichasComponent implements OnInit {
     private exerciseService : ExerciseService,
     private formBuilder : FormBuilder){
 
-     this.routeAc.params.subscribe(params => this.idAluno = params['idAluno'])
+    this.routeAc.params.subscribe(params => this.idAluno = params['idAluno'])
 
 
   }
@@ -57,14 +57,9 @@ export class AdmGradeFichasComponent implements OnInit {
       fileName: [""],
     })
 
-    if(this.gambs){
-      this.savedId = this.idAluno;
-      this.gambs = false;
-    }
+    this.routeAc.params.subscribe(params => this.idAluno = params['idAluno'])
 
-    console.log(this.routeAc.params.subscribe(params => this.idAluno = params['idAluno']))
-    console.log("here")
-    this.searchFiles(this.savedId);
+    this.searchFiles(this.idAluno);
 
     this.fichas = <Fichas>this.pageable?.content
   }

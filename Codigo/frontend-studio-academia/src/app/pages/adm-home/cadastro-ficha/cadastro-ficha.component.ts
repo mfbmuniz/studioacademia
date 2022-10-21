@@ -14,7 +14,8 @@ import {Alunos} from "../../../Models/aluno";
   styleUrls: ['./cadastro-ficha.component.css']
 })
 export class CadastroFichaComponent implements OnInit {
-  emailAluno !:  String
+  idAluno !:  String
+  idFicha !: String
   fichaForm !: FormBuilder | any
 
   fichas !: Fichas
@@ -23,10 +24,12 @@ export class CadastroFichaComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private routeAc : ActivatedRoute,
+    private userFileService : UserFileService
 
   ) {
 
-    this.routeAc.params.subscribe(params => this.emailAluno = params['idAluno']);
+    this.routeAc.params.subscribe(params => this.idAluno = params['idAluno']);
+    this.routeAc.params.subscribe(params => this.idFicha = params['ifFicha']);
 
     this.fichaForm = this.formBuilder.group({
       name: ['',Validators.required],
@@ -47,7 +50,16 @@ export class CadastroFichaComponent implements OnInit {
 
     let body = this.fichaForm.value
     console.log(body)
-
+    this.userFileService.addExercises(body).subscribe({
+      next : (res) =>{
+        console.log(res)
+        alert("Exercícios cadastrados com sucesso")
+      },
+      error(err) {
+          console.log(err)
+          alert("Não foi possível cadastrar exercícios")
+      },
+    })
   }
 
   get exercicios() : FormArray {
