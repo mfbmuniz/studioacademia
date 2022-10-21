@@ -49,6 +49,17 @@ export class MonthlyPaymentService {
 
   }
 
+  /**
+   *
+   * @param page Quantidade de itens a serem listados por página", example = "10"
+   * @param size Quantidade de itens a serem listados por página", example = "10"
+   * @param paymentStatusRequest Types : [PAGO, AGUARDANDO_PAGAMENTO,ATRASADO,EM_ANALISE, NAO_RECEBIDO]
+   * @returns Observable<MonthlyPayments>
+   */
+  public listarTodosPagamentosPendentes(page : number, size : number ,  paymentStatusRequest: String){
+    return this.http.get(`${environment.apiUrl}/monthly-payment/pageAllPendency/${page}/size/${size}/paymentStatusRequest/${paymentStatusRequest}`)
+  }
+
   //Tem q olhar se tá dando certo
   public aprovePayment(idMonthlyRequest : number){
     return this.http.get(`${environment.apiUrl}/monthly-payment/aproveRequest/${idMonthlyRequest}`)

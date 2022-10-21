@@ -72,7 +72,7 @@ removeExercicio(i:number) {
 }
 
 cadastrarExercicio(body : any){
-  this.userFileSerce.addExercise(body).subscribe(
+  this.userFileSerce.addExercises(body).subscribe(
     {
       next: (res) => {
         console.log(res)

@@ -20,7 +20,8 @@ import { TabelaExerciciosComponent } from './tabela-exercicios/tabela-exercicios
 import { EditarExercicioComponent } from './editar-exercicio/editar-exercicio.component';
 import {MatSelectModule} from "@angular/material/select";
 import {GradeListarFichasComponent} from "./grade-listar-fichas/grade-listar-fichas.component";
-import { GradePagamentosComponent } from './grade-pagamentos/grade-pagamentos.component';
+import { GradeGeralPagamentosComponent } from './grade-geral-pagamentos/grade-geral-pagamentos.component';
+import { GradeAlunoPagamentosComponent } from './grade-aluno-pagamentos/grade-aluno-pagamentos.component';
 
 
 
@@ -41,7 +42,8 @@ import { GradePagamentosComponent } from './grade-pagamentos/grade-pagamentos.co
     TabelaExerciciosComponent,
     EditarExercicioComponent,
     GradeListarFichasComponent,
-    GradePagamentosComponent
+    GradeGeralPagamentosComponent,
+    GradeAlunoPagamentosComponent
   ],
     imports: [
         CommonModule,

@@ -10,7 +10,7 @@ import { CadastroFichaComponent } from './cadastro-ficha/cadastro-ficha.componen
 import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
 import { AdmGradeFichasComponent } from './adm-grade-fichas/adm-grade-fichas.component';
 import { EditarFichasComponent } from './editar-fichas/editar-fichas.component';
-import { GradePagamentosComponent } from './grade-pagamentos/grade-pagamentos.component';
+import { GradeAlunoPagamentosComponent } from './grade-aluno-pagamentos/grade-aluno-pagamentos.component';
 
 
 const routes: Routes = [
@@ -57,7 +57,7 @@ const routes: Routes = [
       },
       {
         path : 'pagamentos/:idAluno',
-        component : GradePagamentosComponent
+        component : GradeAlunoPagamentosComponent
       },
 
     ]

@@ -4,23 +4,25 @@ import { MonthlyPayments } from 'src/app/Models/monthly-payment';
 import { pageableObject } from 'src/app/Models/PageableObject';
 import { MonthlyPaymentService } from 'src/app/services/monthly-paymentService';
 
+
 @Component({
-  selector: 'app-grade-pagamentos',
-  templateUrl: './grade-pagamentos.component.html',
-  styleUrls: ['./grade-pagamentos.component.css']
+  selector: 'app-grade-aluno-pagamentos',
+  templateUrl: './grade-aluno-pagamentos.component.html',
+  styleUrls: ['./grade-aluno-pagamentos.component.css']
 })
-export class GradePagamentosComponent implements OnInit {
+export class GradeAlunoPagamentosComponent implements OnInit {
 
   pagamentos !: MonthlyPayments
   idAluno !: string
   pageable !: pageableObject
-  //@Input() pagamentos !: MonthlyPayments
+
   constructor(private monthlyPaymentService : MonthlyPaymentService,
-    private routeAc : ActivatedRoute,
-    ) { }
+    private routeAc : ActivatedRoute,) {
+    this.routeAc.params.subscribe(params => this.idAluno = params['idAluno']);
+
+   }
 
   ngOnInit(): void {
-    this.routeAc.params.subscribe(params => this.idAluno = params['idAluno']);
     this.listPayments(this.idAluno)
   }
 
@@ -60,4 +62,5 @@ export class GradePagamentosComponent implements OnInit {
       }
     })
   }
+
 }
