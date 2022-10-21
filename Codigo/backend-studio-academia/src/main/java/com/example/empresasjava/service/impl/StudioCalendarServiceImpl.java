@@ -84,8 +84,8 @@ public class StudioCalendarServiceImpl implements StudioCalendarService {
         return StudioCalendarResponse.fromStudioCalendar(this.studioCalendarRepository.findOneByTitle(title));
     }
     @Override
-    public StudioCalendarResponse getPlanByDateEvent(Date dateEvent)throws  NotFoundException{
-        return StudioCalendarResponse.fromStudioCalendar(this.studioCalendarRepository.findOneByDateEvent(dateEvent));
+    public List<StudioCalendar> getCalendarDateByDateEvent(Date dateEvent)throws  NotFoundException{
+        return this.studioCalendarRepository.findAllByDateEvent(dateEvent);
     }
 
 
