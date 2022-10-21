@@ -43,7 +43,10 @@ const routes: Routes = [
         path: 'gradeFichas/:idAluno',
         component: AdmGradeFichasComponent
       },
-
+      {
+        path : 'cadastrarFicha/:idAluno',
+        component : CadastroFichaComponent
+      },
       {
         path: 'editarFichas/:idFicha/:nomeFicha',
         component: EditarFichasComponent
@@ -55,7 +58,7 @@ const routes: Routes = [
       {
         path : 'pagamentos/:idAluno',
         component : GradePagamentosComponent
-      }
+      },
 
     ]
   },

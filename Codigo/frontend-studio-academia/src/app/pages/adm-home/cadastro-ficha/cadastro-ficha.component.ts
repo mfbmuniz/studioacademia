@@ -17,8 +17,8 @@ export class CadastroFichaComponent implements OnInit {
   emailAluno !:  String
   fichaForm !: FormBuilder | any
 
-  @Input() fichas !: Fichas
-  @Input() pageable !: pageableObject
+  fichas !: Fichas
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,10 +45,8 @@ export class CadastroFichaComponent implements OnInit {
 
   public cadastrar() : void{
 
-    let body = {
-      user_id : this.emailAluno,
-      name : this.fichaForm.value["name"],
-    }
+    let body = this.fichaForm.value
+    console.log(body)
 
   }
 
