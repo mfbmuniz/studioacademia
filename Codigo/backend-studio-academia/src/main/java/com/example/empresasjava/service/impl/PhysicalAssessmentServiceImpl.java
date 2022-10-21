@@ -1,14 +1,14 @@
 package com.example.empresasjava.service.impl;
 
-import com.example.empresasjava.models.Exercise;
+import com.example.empresasjava.models.PhysicalAssessment;
 import com.example.empresasjava.models.Plans;
-import com.example.empresasjava.models.RequestEntity.ExerciseRequest;
+import com.example.empresasjava.models.RequestEntity.PhysicalAssessmentRequest;
 import com.example.empresasjava.models.RequestEntity.PlansRequest;
+import com.example.empresasjava.models.ResponseEntity.PhysicalAssessmentResponse;
 import com.example.empresasjava.models.ResponseEntity.PlansResponse;
-import com.example.empresasjava.models.dto.ExerciseDto;
-import com.example.empresasjava.repository.ExerciseRepository;
+import com.example.empresasjava.repository.PhysicalAssessmentRepository;
 import com.example.empresasjava.repository.PlansRepository;
-import com.example.empresasjava.service.ExerciseService;
+import com.example.empresasjava.service.PhysicalAssessmentService;
 import com.example.empresasjava.service.PlansService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,74 +23,76 @@ import java.util.Optional;
 
 
 @Service
-public class PlansServiceImpl implements PlansService {
+public class PhysicalAssessmentServiceImpl implements PhysicalAssessmentService {
 
     @Autowired
-    PlansRepository plansRepository;
+    PhysicalAssessmentRepository physicalAssessmentRepository;
 
     @Override
-    public PlansResponse create(PlansRequest plansRequest) throws NonUniqueResultException, NotFoundException {
+    public PhysicalAssessmentResponse createPhysicalAssessment(PhysicalAssessmentRequest physicalAssessmentRequest)
+            throws NonUniqueResultException, NotFoundException{
 
-        Optional<Plans> plan = Optional.ofNullable(this.plansRepository.findOneByName(plansRequest.getName()));
+        Optional<PhysicalAssessment> physicalAssessment = Optional.ofNullable(this.physicalAssessmentRepository.
+                findOneByPhysicalAssessmentId(physicalAssessmentRequest.getPhysicalAssessment_id()));
 
-        if(!plan.isPresent()){
-            return PlansResponse.fromPlans(this.plansRepository.save(PlansRequest.toPlans(plansRequest)));
+        if(!physicalAssessment .isPresent()){
+            return PhysicalAssessmentResponse.fromPhysicalAssessment(this.physicalAssessmentRepository.save(PhysicalAssessmentRequest.toPhysicalAssessment(physicalAssessmentRequest)));
         }else{
-            throw new NonUniqueResultException("Plano ja cadastrado!");
+            throw new NonUniqueResultException("Avaliação ja cadastrada ja cadastrado!");
         }
     }
 
     @Override
-    public PlansResponse editPlan(PlansRequest plansRequest) throws  NotFoundException{
+    public PhysicalAssessmentResponse editPhysicalAssessment(PhysicalAssessmentRequest physicalAssessmentRequest)throws  NotFoundException{
 
-        Plans plan = Optional.of(this.plansRepository.findOneByPlanId(plansRequest.getPlanId())).orElseThrow(()-> new NonUniqueResultException("Plano inexistente"));
+        PhysicalAssessment physicalAssessmentTemp = Optional.of(this.physicalAssessmentRepository.findOneByPhysicalAssessmentId(physicalAssessmentRequest.getPhysicalAssessment_id())).
+                orElseThrow(()-> new NonUniqueResultException("Avaliação Inexistente"));
 
-        plan.setPlanCode(plansRequest.getPlanCode());
-        plan.setDescription(plansRequest.getDescription());
-        plan.setName(plansRequest.getName());
-        plan.setPrice(plansRequest.getPrice());
-        plan.setContractedDays(plansRequest.getContractedDays());
+        PhysicalAssessment physicalAssessment = PhysicalAssessmentRequest.toPhysicalAssessment(physicalAssessmentRequest);
 
+        physicalAssessment.setPhysicalAssessmentId(physicalAssessmentTemp.getPhysicalAssessmentId());
+        physicalAssessment.setCreatedAt(physicalAssessmentTemp.getCreatedAt());
+        physicalAssessment.setDeletedAt(physicalAssessmentTemp.getDeletedAt());
 
-
-        return PlansResponse.fromPlans(this.plansRepository.save(plan));
-
-    }
-
-    @Override
-    public PlansResponse deletePlan(Long id) throws  NotFoundException{
-        Plans plan = Optional.of(this.plansRepository.findOneByPlanId(id)).orElseThrow(()-> new NonUniqueResultException("Exercicio inexistente"));
-        plan.setDeletedAt(new Date());
-        return PlansResponse.fromPlans(this.plansRepository.save(plan));
+        return PhysicalAssessmentResponse.fromPhysicalAssessment(this.physicalAssessmentRepository.save(physicalAssessment));
 
     }
 
     @Override
-    public Page<Plans> listPlansByPage(Pageable pages) throws  NotFoundException{
-        return this.plansRepository.findAllByDeletedAtIsNullOrderByName(pages);
+    public PhysicalAssessmentResponse deletePhysicalAssessment(Long physicalAssessmentId)throws  NotFoundException{
+        PhysicalAssessment physicalAssessment = Optional.of(this.physicalAssessmentRepository.findOneByPhysicalAssessmentId(physicalAssessmentId)).
+                orElseThrow(()-> new NonUniqueResultException("Avaliação Inexistente"));
+        physicalAssessment.setDeletedAt(new Date());
+        return PhysicalAssessmentResponse.fromPhysicalAssessment(this.physicalAssessmentRepository.save(physicalAssessment));
+
     }
 
     @Override
-    public Page<Plans> listSpecificPlanByPage(Pageable pages, String searchName){
-        return this.plansRepository.findAllByNameContainingIgnoreCaseOrderByName(searchName,pages);
+    public Page<PhysicalAssessment> listPhysicalAssessmentsByPage(Pageable pages)throws  NotFoundException{
+        return this.physicalAssessmentRepository.findAllByDeletedAtIsNullOrderByPhysicalAssessmentId(pages);
     }
 
     @Override
-    public PlansResponse getPlanByPlanId(Long planId)throws  NotFoundException {
-        return PlansResponse.fromPlans(this.plansRepository.findOneByPlanId(planId));
-    }
-    @Override
-    public PlansResponse getPlanByPlanCode(String planCode)throws  NotFoundException{
-        return PlansResponse.fromPlans(this.plansRepository.findOneByPlanCode(planCode));
-    }
-    @Override
-    public PlansResponse getPlanByName(String name)throws  NotFoundException{
-        return PlansResponse.fromPlans(this.plansRepository.findOneByName(name));
+    public Page<PhysicalAssessment> listSpecificUserPhysicalAssessmentsByPage(Pageable pages, Long idUser)throws  NotFoundException{
+        return this.physicalAssessmentRepository.findAllByUserIdAndDeletedAtIsNullOrderByPhysicalAssessmentId(idUser,pages);
     }
 
     @Override
-    public List<Plans> getPlansForDropDown()throws  NotFoundException{
-        return (List<Plans>) this.plansRepository.findAllByDeletedAtIsNullOrderByName();
+    public Page<PhysicalAssessment> listSpecificProfessionalPhysicalAssessmentsByPage(Pageable pages, Long professionalId)throws  NotFoundException{
+        return this.physicalAssessmentRepository.findAllByProfessionalIdAndDeletedAtIsNullOrderByPhysicalAssessmentId(professionalId,pages);
+    }
+
+    @Override
+    public PhysicalAssessmentResponse getPhysicalAssessmentById(Long physicalAssessmentId)throws  NotFoundException {
+        return PhysicalAssessmentResponse.fromPhysicalAssessment(this.physicalAssessmentRepository.findOneByPhysicalAssessmentId(physicalAssessmentId));
+    }
+    @Override
+    public List<PhysicalAssessment> getSpecificUserPhysicalAssessments(Long idUser)throws  NotFoundException{
+        return this.physicalAssessmentRepository.findAllByUserIdAndDeletedAtIsNullOrderByPhysicalAssessmentId(idUser);
+    }
+    @Override
+    public List<PhysicalAssessment> getSpecificProfessionalPhysicalAssessments(Long professionalId)throws  NotFoundException{
+        return this.physicalAssessmentRepository.findAllByProfessionalIdAndDeletedAtIsNullOrderByPhysicalAssessmentId(professionalId);
     }
 
 

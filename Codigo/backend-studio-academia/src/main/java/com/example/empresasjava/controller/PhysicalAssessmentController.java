@@ -22,6 +22,26 @@ import javax.validation.Valid;
 @RequestMapping("/physical-assessment")
 public class PhysicalAssessmentController {
 
+    /*
+        PhysicalAssessmentResponse createPhysicalAssessment (PhysicalAssessmentRequest physicalAssessmentRequest) throws NonUniqueResultException, NotFoundException;
+
+    PhysicalAssessmentResponse editPhysicalAssessment(PhysicalAssessmentRequest physicalAssessmentRequest)throws  NotFoundException;
+
+    PhysicalAssessmentResponse deletePhysicalAssessment(Long physicalAssessmentId)throws  NotFoundException;
+
+    Page<PhysicalAssessment> listPhysicalAssessmentsByPage(Pageable pages)throws  NotFoundException;
+
+    Page<PhysicalAssessment> listSpecificUserPhysicalAssessmentsByPage(Pageable pages, Long idUser)throws  NotFoundException;
+
+    Page<PhysicalAssessment> listSpecificProfessionalPhysicalAssessmentsByPage(Pageable pages, Long professionalId)throws  NotFoundException;
+
+    PhysicalAssessmentResponse getPhysicalAssessmentById(Long physicalAssessmentId)throws  NotFoundException;
+
+    List<PhysicalAssessment> getSpecificUserPhysicalAssessments(Long idUser)throws  NotFoundException;
+
+    List<PhysicalAssessment> getSpecificProfessionalPhysicalAssessments(Long professionalId)throws  NotFoundException;
+     */
+
     @Autowired
     private UserService userService;
 
