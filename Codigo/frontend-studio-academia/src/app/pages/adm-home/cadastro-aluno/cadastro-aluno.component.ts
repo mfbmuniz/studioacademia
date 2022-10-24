@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {UserService} from "../../../services/UserService";
 import {User} from "../../../Models/user";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cadastro-aluno',
@@ -25,9 +26,17 @@ export class CadastroAlunoComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router : Router,
-    private userService: UserService
+    private userService: UserService,
+    private toastr: ToastrService
   ) {
+  }
 
+  showSuccessToastr(){
+    this.toastr.success("Enviado com sucesso", "Sucesso")
+  }
+
+  showErrorToastr(){
+    this.toastr.error("O envio não pode ser feito", "Erro")
   }
 
   ngOnInit(): void {
@@ -71,7 +80,6 @@ export class CadastroAlunoComponent implements OnInit {
 
   cadastrar(){
     const novoAluno = this.novoAlunoForm.getRawValue();
-
     let body = {
       email: this.novoAlunoForm.value["email"],
       password: this.novoAlunoForm.value["password"],
@@ -102,11 +110,11 @@ export class CadastroAlunoComponent implements OnInit {
         {
           next:(res) => {
             console.log(res)
-            alert("Usuário cadastrado com êxito")
+            this.showSuccessToastr()
           },
           error: (err) => {
             console.log(err)
-            alert("Não foi possível salvar o usuário")
+            this.showErrorToastr()
           }
         }
       );
@@ -165,11 +173,11 @@ export class CadastroAlunoComponent implements OnInit {
         {
           next:(res) => {
             console.log(res)
-            alert("Usuário editado com êxito")
+            this.showSuccessToastr()
           },
           error: (err) => {
             console.log(err)
-            alert("Não foi possível editar o usuário")
+            this.showErrorToastr()
           }
         }
       );
