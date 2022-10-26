@@ -2,6 +2,7 @@ package com.example.empresasjava.models;
 
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,6 +10,8 @@ import java.util.Date;
 @Entity
 @Data
 
+@ToString
+@Table(name = "physical_assessment")
 public class PhysicalAssessment {
 
     @Id
@@ -64,7 +67,7 @@ public class PhysicalAssessment {
     @Column(name = "neck")
     private Double neck;
 
-    @Column(name = "abdomen")
+    @Column(name = "chest")
     private Double chest;
 
     @Column(name = "abdomen")
