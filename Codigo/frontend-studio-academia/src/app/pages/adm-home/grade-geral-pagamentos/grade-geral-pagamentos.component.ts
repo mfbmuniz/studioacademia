@@ -34,6 +34,7 @@ export class GradeGeralPagamentosComponent implements OnInit {
     })
   }
 
+
   search(){
 
   }

@@ -35,6 +35,7 @@ export class GradeAlunoPagamentosComponent implements OnInit {
     })
   }
 
+
   download(){
     alert("BAIXANDO ARQUIVO")
   }
