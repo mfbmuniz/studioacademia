@@ -11,6 +11,7 @@ import { EditarAlunoComponent } from './editar-aluno/editar-aluno.component';
 import { AdmGradeFichasComponent } from './adm-grade-fichas/adm-grade-fichas.component';
 import { EditarFichasComponent } from './editar-fichas/editar-fichas.component';
 import { GradeAlunoPagamentosComponent } from './grade-aluno-pagamentos/grade-aluno-pagamentos.component';
+import { GradeGeralPagamentosComponent } from './grade-geral-pagamentos/grade-geral-pagamentos.component';
 
 
 const routes: Routes = [
@@ -58,6 +59,10 @@ const routes: Routes = [
       {
         path : 'pagamentos/:idAluno',
         component : GradeAlunoPagamentosComponent
+      },
+      {
+        path : 'visualizacaoPagamentos',
+        component : GradeGeralPagamentosComponent
       },
 
     ]
