@@ -203,6 +203,8 @@ CREATE SEQUENCE physical_assessment_seq;
 CREATE TABLE physical_assessment (
                     physical_assessment_id INT DEFAULT NEXTVAL ('physical_assessment_seq') PRIMARY KEY,
                     user_id INT CHECK (user_id > 0) ,
+                    physical_assessment_date TIMESTAMP(0),
+                    professional_id INT CHECK (professional_id > 0),
                     height DECIMAL,
                     general_description DECIMAL,
                     ideal_weight DECIMAL,
@@ -247,7 +249,8 @@ CREATE TABLE physical_assessment (
                     muscular_weight DECIMAL,
                     metabolic_age DECIMAL,
                     bone_weight DECIMAL,
-                    physical_assessment_date DECIMAL,
+                    description VARCHAR(200),
+
 
                     created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
                     deleted_at TIMESTAMP(0) NULL DEFAULT NULL,
