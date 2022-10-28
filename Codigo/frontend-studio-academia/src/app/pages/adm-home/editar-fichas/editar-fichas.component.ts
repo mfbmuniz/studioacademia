@@ -97,6 +97,7 @@ deletarExercicio(idFile : string, idExercise : string ) : void{
   )
 }
 
+
 listExercise(){
   this.userFileSerce.listUserExercisesByPageWithSize(0,10,this.idFicha)
         .subscribe(

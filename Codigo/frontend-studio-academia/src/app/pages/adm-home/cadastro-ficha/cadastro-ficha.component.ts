@@ -1,12 +1,13 @@
+import { ExerciseService } from 'src/app/services/ExerciseService';
 import {Component, Input, OnInit} from '@angular/core';
 import { FormGroup, FormControl,FormArray, FormBuilder, Validators } from '@angular/forms'
 import {ActivatedRoute, Router} from '@angular/router';
 import { UserFileService } from 'src/app/services/UserFileService';
 import {UserService} from "../../../services/UserService";
-import {ExerciseService} from "../../../services/ExerciseService";
 import {Fichas} from "../../../Models/ficha";
 import {pageableObject} from "../../../Models/PageableObject";
 import {Alunos} from "../../../Models/aluno";
+import { Exercicios } from 'src/app/Models/exercicio';
 
 @Component({
   selector: 'app-cadastro-ficha',
@@ -19,12 +20,15 @@ export class CadastroFichaComponent implements OnInit {
   fichaForm !: FormBuilder | any
 
   fichas !: Fichas
+  exercicios$ !: Exercicios
+  content$ !: pageableObject;
 
 
   constructor(
     private formBuilder: FormBuilder,
     private routeAc : ActivatedRoute,
-    private userFileService : UserFileService
+    private userFileService : UserFileService,
+    private exerciseService : ExerciseService
 
   ) {
 
@@ -33,7 +37,6 @@ export class CadastroFichaComponent implements OnInit {
 
     this.fichaForm = this.formBuilder.group({
       name: ['',Validators.required],
-      description : '',
       exercicios: this.formBuilder.array([]) ,
     })
 
@@ -42,7 +45,7 @@ export class CadastroFichaComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    this.listarExercicios();
 
   }
 
@@ -68,9 +71,9 @@ export class CadastroFichaComponent implements OnInit {
 
   newExercicio(): FormGroup {
     return this.formBuilder.group({
-      exercicio: '',
-      serie: ['',Validators.min(0)],
-      repeticoes: '',
+      exerciseId: ['', Validators.required],
+      series: ['',Validators.min(0)],
+      repetitions: ['',Validators.required],
     })
  }
 
@@ -81,6 +84,18 @@ export class CadastroFichaComponent implements OnInit {
 
   removeExercicio(i:number) {
     this.exercicios.removeAt(i);
+  }
+
+  listarExercicios(){
+    this.exerciseService.getExercisesForDropDown().subscribe({
+      next: (res)=>{
+        this.content$ = res;
+        this.exercicios$ =<Exercicios>this.content$.content
+      },
+      error : (err)=>{
+        console.log(err)
+      }
+    })
   }
 
 }
