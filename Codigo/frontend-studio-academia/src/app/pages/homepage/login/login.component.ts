@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
               'session',
               JSON.stringify(res)
             );
-            this.header.setValue(true);
             this.defineDefaultRouteByRole(res?.roles[0]);
 
           },

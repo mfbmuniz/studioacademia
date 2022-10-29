@@ -1,10 +1,8 @@
-import { Observable } from 'rxjs';
-import { MonthlyPayment } from './../../../Models/monthly-payment';
-import { MonthlyPaymentService } from './../../../services/monthly-paymentService';
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { MonthlyPayments } from 'src/app/Models/monthly-payment';
-import {PageableObject, pageableObject} from 'src/app/Models/PageableObject';
+import {MonthlyPaymentService} from './../../../services/monthly-paymentService';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {MonthlyPayments} from 'src/app/Models/monthly-payment';
+import {pageableObject} from 'src/app/Models/PageableObject';
 import {AuthService} from "../../../services/AuthService";
 
 
@@ -36,17 +34,18 @@ export class GradePendenciasComponent implements OnInit {
     private authServeice : AuthService
 
     ) {
-        this.actualUser = authServeice.getSession().userId
+
       }
 
   ngOnInit(): void {
     this.comprovanteForm = this.formBuilder.group({
       file :['',[]],
       message : ['',[]]
+
     })
 
 
-
+    this.actualUser = this.authServeice.getSession().user.id
     this.listarPagamentosPendentes(0,10,this.actualUser);
     this.listarPagamentosPagos(0,10,this.actualUser);
 

@@ -6,6 +6,7 @@
   <button type="button" class="btn btn-warning" data-bs-toggle="modal"
   data-bs-target="#FormFicha" data-bs-whatever="@mdo"><i class="bi bi-file-earmark-plus"></i>Adicionar Ficha</button>
 </div>
+
 <div class="modal fade" id="FormFicha" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -29,34 +30,21 @@
 </div>
 <!-- Modal: Final-->
 
-<div *ngFor="let ficha of fichas">
+<div *ngFor="let ficha of fichas; let i=index">
   <div class="col-8 mt-3 offset-3">
     <div class="card w-75 mt-3 bg-secondary">
       <div class="card-body">
         <h2 class="card-title">{{ficha?.fileName}}</h2>
         <p class="card-text">{{ficha?.description}}</p>
-        <a [routerLink]="['adicionarExercicios',[idAluno],'{{ficha?.id}}']" class="btn btn-warning offset-8">editar</a>
-        <button class="btn btn-danger offset-1" (click)="delete('{{ficha?.id}}')"><i
-          class="bi bi-trash3"></i></button>
+
+
+        <a [routerLink]="['/adm/editarFichas', ficha.user.idUser, ficha.userFileId, ficha.fileName]"><i class="bi bi-person-bounding-box"></i></a>
+
+        <a [routerLink]="['/adm/editarFichas', ficha.user.idUser, ficha.userFileId, ficha.fileName]" class="btn btn-warning offset-8">editar</a>
+        <button class="btn btn-danger offset-1" (click)="delete(ficha.userFileId)">
+          <i class="bi bi-trash3"></i>
+        </button>
       </div>'
     </div>
   </div>
-</div>
-
-
-<div class="col-8 mt-3 offset-3">
-  <div class="card w-75 mt-3 bg-secondary">
-    <div class="card-body">
-      <h2 class="card-title">Nova Ficha</h2>
-      <a [routerLink]="['editarFicha/teste']" class="btn btn-warning offset-8">editar</a>
-      <button class="btn btn-danger offset-1" ><i class="bi bi-trash3"></i></button>
-
-    </div>
-  </div>
-</div>
-
-
-
-<div *ngIf= isSearchUserFile id="app-adm-grade-fichas">
-  <app-grade-listar-fichas [pageable]="content$"></app-grade-listar-fichas>
 </div>

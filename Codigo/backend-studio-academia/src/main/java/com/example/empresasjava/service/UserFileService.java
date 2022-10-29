@@ -11,6 +11,8 @@ import javassist.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface UserFileService {
 
     UserFileResponse create(UserFileRequest userFileRequest) throws NotFoundException;
@@ -33,4 +35,8 @@ public interface UserFileService {
 
 
     Page<UserExercises> listsExercisesInUserFilesByIdByPage(Pageable pages, Long id_userFile)throws NotFoundException;
+
+    UserFileResponse listUserFileById(Long idFile);
+
+    List<UserExerciseResponse> listsUserExercicesByUserFileId(Long idFile) throws NotFoundException;
 }

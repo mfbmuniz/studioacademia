@@ -10,7 +10,7 @@ import {LoginComponent} from "../../pages/homepage/login/login.component";
 })
 export class HeaderComponent implements OnInit  {
 
-  public user$: any;
+  @Input() public user$: any;
   public _isLogged: boolean = false;
 
   constructor(
@@ -22,12 +22,7 @@ export class HeaderComponent implements OnInit  {
 
     this._isLogged = false;
     this.user$ = this.authService.getSession()
-  }
-  setValue(value: boolean){
-    console.log("alou", value, this._isLogged)
-    this._isLogged = value
-    console.log("-> ", this._isLogged)
-
+    console.log(this.user$.source.value.user.name)
   }
 
   navigateToHome() {

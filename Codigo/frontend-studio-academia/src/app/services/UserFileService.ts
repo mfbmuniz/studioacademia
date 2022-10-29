@@ -11,7 +11,9 @@ export class UserFileService {
 
   private static API_URLS = {
     CREATE: `${environment.apiUrl}/user-files/create`,
+    EDIT: `${environment.apiUrl}/user-files/edit`,
     ADDEXERCISES : `${environment.apiUrl}/user-files/addExercises`,
+    FIND_EXERCISES: `${environment.apiUrl}/user-files/getUserFileExercise/fileId/`
 
   };
 
@@ -19,6 +21,10 @@ export class UserFileService {
 
   create(body: any): Observable<any> {
     return this.http.post(UserFileService.API_URLS.CREATE, body);
+  }
+
+  edit(body: any): Observable<any> {
+    return this.http.post(UserFileService.API_URLS.EDIT, body);
   }
 
   delete(idFile : String): Observable<any>{
@@ -70,6 +76,9 @@ export class UserFileService {
     //
   }
 
+  public getExercisesFromList (userFileId: number): Observable<any>{
 
+    return this.http.get(UserFileService.API_URLS.FIND_EXERCISES+userFileId)
+  }
 
 }

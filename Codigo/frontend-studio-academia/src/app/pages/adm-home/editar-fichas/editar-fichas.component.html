@@ -3,49 +3,46 @@
 
   <div class="row">
 
-    <div class="col-3 offset-5">
-      <h1>Cadastro de Exercícios</h1>
+    <div class="col-3 offset-5" >
+      <h1>{{nomeFicha}} <span><i class="bi bi-pencil-square" style="cursor:pointer;" (click)="wantsToEditUserFileName()"></i></span></h1>
     </div>
 
+    <div *ngIf="isToEditUserFileName" style="display: flex; padding: 0 15%;">
+        <input type="text" class="form-control" [(ngModel)]="newUserFileName">>
+        <button type="button" class="btn btn-warning small" (click)="saveNewUserFileName()">Salvar</button>
+        <button type="button" class="btn btn-danger small" (click)="cancelEditUserFileName()">Cancelar</button>
+    </div>
   </div>
 
   <form action="" class="form-group mt-4" [formGroup]="fichaForm" (ngSubmit)="editar()">
     <div class="row">
 
-      <div class="col-sm-4 offset-1">
-        <label for="">
-          <p>Nome</p>
-        </label>
-        <input type="text" name="name" class="form-control" placeholder="{{nomeFicha}}"
-               formControlName='name'>
-      </div>
-
-      <div formArrayName="exercicios" class="mt-2">
-        <div *ngFor="let exercicio of exercicios.controls; let i=index">
-          <div [formGroupName]="i">
+      <div class="mt-2">
+        <div *ngFor="let userExercise of userExercises; let i=index">
+          <div>
 
             <div class="row">
 
-              {{i}}
+
               <div class="col-3 offset-1">
 
                 <label for=""><p>Exercicio</p></label>
-                <select id="type" class="form-control" formControlName = "exerciseId">
-                  <option *ngFor="let exercicio of exercicios$" [value]="exercicio.exerciseId">{{exercicio.name}</option>
-                  <option value="a">Supino</option>
-                  <option value="b">Barra fixa</option>
-                  <option value="c">Agachamento</option>
+                <select id="type" class="form-control" (change)="checkValue($event)">
+                  <option value="-1"></option>
+                  <option *ngFor="let exercicio of exercicios$"
+                          [value]="exercicio.exerciseId"
+                          [selected]="exercicio.exerciseId == userExercise.exercises?.exerciseId">{{exercicio.name}}</option>
                 </select>
               </div>
 
               <div class="col-2">
                 <label for=""><p>Series</p></label>
-                <input type="number" min="0" formControlName="series" class="form-control">
+                <input type="number" min="0" class="form-control" value="{{userExercise.series}}">
               </div>
 
               <div class="col-2">
                 <label for=""><p>Repetições</p></label>
-                <input type="number" min="0" formControlName="repetitions" class="form-control">
+                <input type="number" min="0" class="form-control" value="{{userExercise.repetitions}}">
               </div>
 
               <div class="col-1 offset-2">
@@ -55,6 +52,7 @@
                   <i class="bi bi-trash3">
                 </i></button>
               </div>
+
             </div>
           </div>
         </div>
@@ -68,6 +66,8 @@
       </div>
 
       <div class="col-2 offset-10">
+        <br>
+        <button type="button" (click)="returnToList()" class="btn btn-warning mt-2">Voltar</button>
         <br>
         <button type="submit" class="btn btn-warning mt-2">Cadastrar</button>
       </div>

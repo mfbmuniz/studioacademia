@@ -7,9 +7,9 @@
         <p>Fale conosco</p>
     </div>
     <div class="right-section">
-      <div *ngIf="(user$| json) !='{}'  ; else login">
-        <a (click)="navigateToHome()" routerLinkActive="ativok">
-          <i class="bi bi-person-circle btn btn-warning"></i>
+      <div *ngIf="user$?.user?.name ; else login">
+        <a (click)="navigateToHome()" routerLinkActive="ativok" class="btn btn-warning" style="margin-right: 5px;">
+          {{user$?.user?.name}}  <i class="bi bi-person-circle"></i>
         </a>
         <a (click)="logout()" routerLinkActive="ativok">
           <i class="bi bi-power btn btn-warning"></i>

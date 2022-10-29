@@ -1,6 +1,7 @@
 package com.example.empresasjava.repository;
 
 
+import com.example.empresasjava.enums.MonthlyPaymentStatusEnum;
 import com.example.empresasjava.models.MonthlyPayment;
 import com.example.empresasjava.models.ResponseEntity.MonthlyPaymentResponse;
 import org.springframework.data.domain.Page;
@@ -22,5 +23,6 @@ public interface MonthlyPaymentRepository extends JpaRepository<MonthlyPayment,L
 
    Page<MonthlyPayment> findAllByUserIdAndPaymentStatusAndDeletedAtIsNullOrderByDueDateDesc(Pageable pages, Long id ,String paymentStatusRequest);
 
+   Page<MonthlyPayment> findAllByPaymentStatusNotAndDeletedAtIsNullOrderByDueDateDesc(MonthlyPaymentStatusEnum status, Pageable pages);
 
 }

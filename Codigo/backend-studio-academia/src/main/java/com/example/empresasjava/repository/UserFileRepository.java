@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface UserFileRepository extends JpaRepository<UserFile,Long> {
 
     UserFile findByUserFileIdAndUserAndDeletedAtIsNull(Long userFileId, User user);
@@ -17,4 +19,6 @@ public interface UserFileRepository extends JpaRepository<UserFile,Long> {
     Page<UserFile> findAllByDeletedAtIsNull(Pageable pages);
 
     Page<UserFile> findAllByUserAndFileNameAndDeletedAtIsNull(User user, Pageable pages, String fileName);
+
+    Optional<UserFile> findByUserFileIdAndDeletedAtIsNull(Long idFile);
 }
