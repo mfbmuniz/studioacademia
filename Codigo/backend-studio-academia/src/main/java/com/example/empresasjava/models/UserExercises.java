@@ -1,8 +1,7 @@
 package com.example.empresasjava.models;
 
 import com.example.empresasjava.models.ResponseEntity.UserExerciseResponse;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jdk.nashorn.internal.ir.annotations.Ignore;
+
 import lombok.Data;
 import lombok.ToString;
 
