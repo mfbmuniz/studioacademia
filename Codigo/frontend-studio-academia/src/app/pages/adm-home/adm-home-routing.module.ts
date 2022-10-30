@@ -49,7 +49,7 @@ const routes: Routes = [
         component : CadastroFichaComponent
       },
       {
-        path: 'editarFichas/:idFicha/:nomeFicha',
+        path: 'editarFichas/:idAluno/:idFicha/:nomeFicha',
         component: EditarFichasComponent
       },
       {

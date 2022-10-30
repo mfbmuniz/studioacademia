@@ -21,8 +21,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
-
+import java.util.stream.Collectors;
 
 
 @Service
@@ -184,5 +186,21 @@ public class UserFileServiceImpl implements UserFileService {
 
     }
 
+    @Override
+    public UserFileResponse listUserFileById(Long idFile) {
+        return UserFileResponse.fromUserFile(this.userFileRepository.findByUserFileIdAndDeletedAtIsNull(idFile)
+                .orElseThrow(() -> new NoSuchElementException("Ficha não encontrada")));
+    }
+
+    @Override
+    public List<UserExerciseResponse> listsUserExercicesByUserFileId(Long idFile) throws NotFoundException {
+        UserFile userFile = this.userFileRepository.findById(idFile)
+                .orElseThrow(() -> new NotFoundException("Ficha  não encontrado"));
+        UserDto user = UserDto.fromUser(userFile.getUser());
+
+        return this.userExercisesRepository.findAllByUserFileAndDeletedAtIsNull(userFile)
+                .stream().map(m -> UserExerciseResponse.fromUserExercise(m, user))
+                .collect(Collectors.toList());
+    }
 
 }

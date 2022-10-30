@@ -1,6 +1,7 @@
 package com.example.empresasjava.models;
 
 import com.example.empresasjava.models.ResponseEntity.UserExerciseResponse;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -17,6 +18,7 @@ public class UserExercises {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_exercises_id")
     private Long userExercisesId;
+
 
     @ManyToOne
     @JoinColumn(name = "user_file_id")

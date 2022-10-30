@@ -1,6 +1,7 @@
 package com.example.empresasjava.models.ResponseEntity;
 
 import com.example.empresasjava.models.User;
+import com.example.empresasjava.models.UserExercises;
 import com.example.empresasjava.models.UserFile;
 import com.example.empresasjava.models.dto.UserDto;
 import lombok.Data;
@@ -14,26 +15,25 @@ public class UserFileResponse {
 
     private String fileName;
     private UserDto user;
-    private List<ExerciseResponse> exercises;
-
-    private Integer series;
-    private Integer repetitions;
+    private List<UserExercises> exercises;
 
     public UserFileResponse() {
     }
 
-    public UserFileResponse(Long userFileId, UserDto user, String fileName) {
+    public UserFileResponse(Long userFileId, String fileName, UserDto user, List<UserExercises> exercises) {
         this.userFileId = userFileId;
         this.fileName = fileName;
         this.user = user;
+        this.exercises = exercises;
     }
 
     public static UserFileResponse fromUserFile(UserFile userFile){
         UserFileResponse a = new UserFileResponse();
         return new UserFileResponse(
                 userFile.getUserFileId(),
+                userFile.getFileName(),
                 UserDto.fromUser(userFile.getUser()),
-                userFile.getFileName()
+                null
         );
     }
 }

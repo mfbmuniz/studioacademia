@@ -32,6 +32,7 @@ public class Exercise {
     @Column(name = "deleted_at")
     private Date deletedAt;
 
+
     public Exercise() {
 
     }

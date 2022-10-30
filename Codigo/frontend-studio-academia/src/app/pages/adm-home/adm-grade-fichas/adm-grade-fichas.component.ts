@@ -51,7 +51,7 @@ export class AdmGradeFichasComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    console.log("fichas aluno")
     this.novaFichaForm = this.formBuilder.group({
       idUser : [this.idAluno,],
       fileName: [""],
@@ -62,6 +62,7 @@ export class AdmGradeFichasComponent implements OnInit {
     this.searchFiles(this.idAluno);
 
     this.fichas = <Fichas>this.pageable?.content
+
   }
 
   ngOnLoad(): void {
@@ -71,11 +72,6 @@ export class AdmGradeFichasComponent implements OnInit {
     }
   }
   cadastrar() {
-
-
-    console.log(this.novaFichaForm.value["fileName"])
-    console.log("teste form")
-
 
       let body = {
       idUser: this.idAluno,
@@ -90,6 +86,9 @@ export class AdmGradeFichasComponent implements OnInit {
         },
         error: (err) => {
           console.log(err)
+        },
+        complete: () =>{
+          this.searchFiles(this.idAluno)
         }
       }
     )
@@ -100,19 +99,17 @@ export class AdmGradeFichasComponent implements OnInit {
     //this.isSearchUserFile = ['userFile', ''].includes(this.searchForm?.value?.typeSearch)
 
 
-    console.log(this.searchForm?.value?.typeSearch, this.isSearchUserFile)
-    console.log('óiiii')
+    console.log(this.searchForm, this.isSearchUserFile)
     this.hasValuesToLoad = false
     // Faz a presquisa q tem q fazer e recarrega a página
     //let keysearch = this.searchForm.value.keySearch;
 
     if(this.isSearchUserFile) {
-      console.log('search userFile')
+      console.log('search userFile', idUser)
       this.userFileService.listUserFilesByPageWithSize(0, 10,idUser,''  )
         .subscribe(
           (res: any) => {
-            this.content$ =  res;
-            this.fichas = <Fichas>this.pageable?.content
+            this.fichas = <Fichas>res?.content
             this.hasValuesToLoad = true
           },
         );
@@ -128,18 +125,29 @@ export class AdmGradeFichasComponent implements OnInit {
     }
   }
 
-  public delete(idFile: String): void {
-    this.userFileService.delete(idFile).subscribe(
-      {
-        next: (res) => {
-          console.log(res)
-          this.router.navigate(['gradeFichas',this.idAluno])
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      }
-    )
+  delete(userFileId: string | undefined) {
+    let nomeFicha = this.fichas.filter(f => f.userFileId == userFileId)[0]?.fileName
+
+    if(confirm("Tem certeza que deseja deletar?") && nomeFicha){
+      this.userFileService.delete(this.fichas.filter(f => f.userFileId == userFileId)[0]?.userFileId)
+        .subscribe(
+          {
+            next:(res) => {
+              console.log(res)
+              alert("Usuário apagado com êxito")
+              this.router.navigateByUrl('adm/home')
+            },
+            error: (err) => {
+              console.log(err)
+              alert("Não foi possível deletar o usuário")
+            },
+            complete: () => {
+              this.searchFiles(this.idAluno)
+            }
+          }
+        );
+      console.log(nomeFicha)
+    }
   }
 
 }

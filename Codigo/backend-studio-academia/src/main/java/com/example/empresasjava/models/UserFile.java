@@ -37,13 +37,15 @@ public class UserFile {
     private Date deletedAt;
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "user_exercises",
-            joinColumns = @JoinColumn(name = "user_file_id", insertable = false, updatable = false),
-            inverseJoinColumns = @JoinColumn(name = "exercises_id", insertable = false, updatable = false)
-    )
-    private List<Exercise> exercises;
+
+//    @OneToMany(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_file_id")
+////    @JoinTable(
+////            name = "user_exercises",
+////            joinColumns = @JoinColumn(name = "user_file_id", insertable = false, updatable = false),
+////            inverseJoinColumns = @JoinColumn(name = "exercises_id", insertable = false, updatable = false)
+////    )
+//    private List<UserExercises> exercises;
 
 
     public UserFile(User user, @NotNull(message = "Campo user não pode ser nulo") @NotEmpty(message = "Campo user não pode ser vazio") String fileName) {

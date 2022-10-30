@@ -19,6 +19,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -166,27 +167,15 @@ public class UserFileController {
 //    }
 //
 //    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
-//    @GetMapping(path = "/pageSpecificUserFile/{page}/size/{size}/{idUser}/{fileName}")
+//    @GetMapping(path = "/getUserFile/{idFile}")
 //    @ResponseBody
 //    @ApiOperation(value = "Lista usuários por página quantidade")
-//    public Page<UserFileResponse> listUserFilesByNameByPageWithSize(
-//            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
-//            @PathVariable(value="page")
-//            int page,
-//            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
-//            @PathVariable(value="size")
-//            int size,
-//            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
-//            @PathVariable(value="idUser")
-//            String idUser,
-//            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
-//            @PathVariable(value="fileName")
-//            String fileName)throws NotFoundException{
-//        Long id = Long.parseLong(idUser);
-//
-//        Pageable pages = PageRequest.of(page, size);
-//
-//        return this.userFileService.listsUserFilesByNameByPage(pages,id,fileName);
+//    public UserExercises listUserExerciseFilesById(
+//            @ApiParam(value = "Id da ficha", example = "10")
+//            @PathVariable(value="idFile")
+//            Long idFile
+//    )throws NotFoundException{
+//        return this.userFileService.listUserFileById(idFile);
 //
 //    }
 //
@@ -212,5 +201,20 @@ public class UserFileController {
        return this.userFileService.listsExercisesInUserFilesByIdByPage(pages,id_userFile);
 
    }
+
+    //fichas do usuario
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @GetMapping(path = "/getUserFileExercise/fileId/{idFile}")
+    @ResponseBody
+    @ApiOperation(value = "Lista fichas do usuario por página quantidade")
+    public List<UserExerciseResponse> listUserFilesByPageWithSize(
+            @ApiParam(value = "id da ficha", example = "3")
+            @PathVariable(value="idFile") Long idFile
+            )throws NotFoundException{
+
+
+        return this.userFileService.listsUserExercicesByUserFileId(idFile);
+
+    }
 
 }
