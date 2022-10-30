@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Exercicios } from 'src/app/Models/exercicio';
 import { Ficha } from 'src/app/Models/ficha';
 import { pageableObject } from 'src/app/Models/PageableObject';
+import { AuthService } from 'src/app/services/AuthService';
 import { UserFileService } from 'src/app/services/UserFileService';
 
 @Component({
@@ -16,14 +17,20 @@ export class GradeExerciciosComponent implements OnInit {
   pageable !: pageableObject
   idFile: any;
   exercicios !: Exercicios;
+  actualUser !: any
 
-  constructor(private userFileServise : UserFileService,
-    private routeAc : ActivatedRoute,) {
+  constructor(
+    private userFileServise : UserFileService,
+    private authService : AuthService,
+    private routeAc : ActivatedRoute,
+    )
+    {
       this.routeAc.params.subscribe(params => this.idFile = params['idFile']);
+      this.actualUser = this.authService.getSession().user.id
     }
 
   ngOnInit(): void {
-    this.listExerciseUser(0,10,1,this.idFile)
+    this.listExerciseUser(0,10,this.actualUser,this.idFile)
   }
 
   listExerciseUser(page : number, size : number, idUser : number , fileId : number){
