@@ -1,3 +1,4 @@
+import { MonthlyPayment } from './../../../Models/monthly-payment';
 import { Component, OnInit } from '@angular/core';
 import { MonthlyPayments } from 'src/app/Models/monthly-payment';
 import { pageableObject } from 'src/app/Models/PageableObject';
@@ -22,7 +23,7 @@ export class GradeGeralPagamentosComponent implements OnInit {
 
 
   listarTodosPagamentosEmAnalise(){
-    this.monthlyPaymentService.listarTodosPagamentosPendentes(0,10,"EM_ANALISE").subscribe({
+    this.monthlyPaymentService.listarTodosPagamentosPendentes(0,10,"AGUARDANDO_PAGAMENTO").subscribe({
       next : (res)=>{
         this.pageable = res
         this.pagamentos = <MonthlyPayments> this.pageable?.content
@@ -43,8 +44,8 @@ export class GradeGeralPagamentosComponent implements OnInit {
     alert("BAIXANDO ARQUIVO")
   }
 
-  aprove(idMonthlyRequest: any) {
-    this.monthlyPaymentService.aprovePayment(idMonthlyRequest).subscribe({
+  aprove(idMonthlyRequest: any,body : MonthlyPayment) {
+    this.monthlyPaymentService.aprovePayment(idMonthlyRequest,body).subscribe({
       next: (res) => {
         alert("Pagamento aprovado")
       },
@@ -55,8 +56,8 @@ export class GradeGeralPagamentosComponent implements OnInit {
     })
   }
 
-  reprove(idMonthlyRequest: any) {
-    this.monthlyPaymentService.reprovePayment(idMonthlyRequest).subscribe({
+  reprove(idMonthlyRequest: any,body : MonthlyPayment) {
+    this.monthlyPaymentService.reprovePayment(idMonthlyRequest,body).subscribe({
       next: (res) => {
         alert("Pagamento recusado")
       },

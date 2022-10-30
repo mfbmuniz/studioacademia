@@ -1,3 +1,4 @@
+import { MonthlyPayment } from './../../../Models/monthly-payment';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MonthlyPayments } from 'src/app/Models/monthly-payment';
@@ -40,8 +41,8 @@ export class GradeAlunoPagamentosComponent implements OnInit {
     alert("BAIXANDO ARQUIVO")
   }
 
-  aprove(idMonthlyRequest : any){
-    this.monthlyPaymentService.aprovePayment(idMonthlyRequest).subscribe({
+  aprove(idMonthlyRequest : any, body : MonthlyPayment){
+    this.monthlyPaymentService.aprovePayment(idMonthlyRequest, body).subscribe({
       next : (res)=>{
         alert("Pagamento aprovado")
       },
@@ -52,8 +53,8 @@ export class GradeAlunoPagamentosComponent implements OnInit {
     })
   }
 
-  reprove(idMonthlyRequest : any){
-    this.monthlyPaymentService.reprovePayment(idMonthlyRequest).subscribe({
+  reprove(idMonthlyRequest : any, body : MonthlyPayment){
+    this.monthlyPaymentService.reprovePayment(idMonthlyRequest,body).subscribe({
       next : (res)=>{
         alert("Pagamento recusado")
       },

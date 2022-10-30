@@ -1,9 +1,10 @@
+import { ToastrService } from 'ngx-toastr';
 import {Component, Input, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {UserService} from "../../../services/UserService";
 import {User} from "../../../Models/user";
-import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-cadastro-aluno',
@@ -110,6 +111,7 @@ export class CadastroAlunoComponent implements OnInit {
         {
           next:(res) => {
             console.log(res)
+            this.novoAlunoForm.reset()
             this.showSuccessToastr()
           },
           error: (err) => {

@@ -36,7 +36,7 @@ export class EditarFichasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listExercise();
+    //this.listExercise();
   }
 
   public editar() : void{
@@ -97,6 +97,17 @@ deletarExercicio(idFile : string, idExercise : string ) : void{
   )
 }
 
+listaExercicio(){
+  this.exerciseService.listByPage(0,10,'').subscribe({
+    next : (res =>{
+      this.content$ =  res;
+      this.exercicios$ =<Exercicios>this.content$.content
+    }),
+    error : (err)=>{
+      console.log(err)
+    }
+  })
+}
 
 listExercise(){
   this.userFileSerce.listUserExercisesByPageWithSize(0,10,this.idFicha)

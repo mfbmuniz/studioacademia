@@ -43,6 +43,7 @@ export class CadastroExercicioComponent implements OnInit {
         {
           next:(res) => {
             console.log(res)
+            this.novoExercicioForm.reset()
             alert("Exercício cadastrado com êxito")
           },
           error: (err) => {

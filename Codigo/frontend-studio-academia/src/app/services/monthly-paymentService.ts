@@ -61,13 +61,13 @@ export class MonthlyPaymentService {
   }
 
   //Tem q olhar se tá dando certo
-  public aprovePayment(idMonthlyRequest : number){
-    return this.http.get(`${environment.apiUrl}/monthly-payment/aproveRequest/${idMonthlyRequest}`)
+  public aprovePayment(idMonthlyRequest : number, body : any){
+    return this.http.post(`${environment.apiUrl}/monthly-payment/aproveRequest/${idMonthlyRequest}`, body)
   }
 
   //Tem q olhar se tá dando certo
-  public reprovePayment(idMonthlyRequest : number){
-    return this.http.get(`${environment.apiUrl}/monthly-payment/reproveRequest/${idMonthlyRequest}`)
+  public reprovePayment(idMonthlyRequest : number, body : any){
+    return this.http.post(`${environment.apiUrl}/monthly-payment/reproveRequest/${idMonthlyRequest}`,body)
   }
 
 }

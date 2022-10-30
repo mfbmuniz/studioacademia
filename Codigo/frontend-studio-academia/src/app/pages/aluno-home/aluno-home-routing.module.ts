@@ -12,12 +12,12 @@ const routes: Routes = [
     children:[
 
       {
-        path: 'fichas/:id',
-        component: GradeFichasComponent
-      },
-      {
         path: 'exercicios/:idFile',
         component: GradeExerciciosComponent
+      },
+      {
+        path: 'visualizarFichas',
+        component: GradeFichasComponent,
       },
       {
         path: 'pagamentos',

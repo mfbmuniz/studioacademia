@@ -21,9 +21,9 @@
       <th scope="col"><button type="button" class="btn btn-secondary" (click)="download()"><i
             class="bi bi-download"></i></button></th>
       <th scope="col"><button type="button" class="btn btn-warning"
-          (click)="aprove(monthlyPayment?.monthlyPaymentId)"><i class="bi bi-check-square"></i></button></th>
+          (click)="aprove(monthlyPayment?.monthlyPaymentId,monthlyPayment)"><i class="bi bi-check-square"></i></button></th>
       <th scope="col"><button type="button" class="btn btn-danger"
-          (click)="reprove(monthlyPayment?.monthlyPaymentId)"><i class="bi bi-x-square"></i></button></th>
+          (click)="reprove(monthlyPayment?.monthlyPaymentId,monthlyPayment)"><i class="bi bi-x-square"></i></button></th>
     </tr>
   </tbody>
   <tbody>
