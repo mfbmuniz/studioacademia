@@ -23,7 +23,7 @@ export class GradeFichasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.ficha$ = <Fichas>this.pageable?.content
+
     this.actualUser = this.authService.getSession().user.id
 
     this.listarFichas();
