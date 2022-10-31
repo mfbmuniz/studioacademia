@@ -17,8 +17,6 @@ public class MonthlyPaymentRequest {
     @NotNull(message = "Campo email não pode ser nulo")
     private Long userId;
 
-    @NotNull(message = "Campo email não pode ser nulo")
-    @NotEmpty(message = "Campo email não pode ser vazio")
     private String paymentVoucher;
 
     private String message;
