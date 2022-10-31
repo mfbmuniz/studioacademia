@@ -1,8 +1,10 @@
 package com.example.empresasjava.service.impl;
 
 import com.example.empresasjava.models.Exercise;
+import com.example.empresasjava.models.RequestEntity.UserExerciseListRequest;
 import com.example.empresasjava.models.RequestEntity.UserExerciseRequest;
 import com.example.empresasjava.models.RequestEntity.UserFileRequest;
+import com.example.empresasjava.models.ResponseEntity.UserExerciseListResponse;
 import com.example.empresasjava.models.ResponseEntity.UserExerciseResponse;
 import com.example.empresasjava.models.ResponseEntity.UserFileResponse;
 import com.example.empresasjava.models.User;
@@ -20,10 +22,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -55,37 +54,38 @@ public class UserFileServiceImpl implements UserFileService {
 
     }
     @Override
-    public UserExerciseResponse addExercices(UserExerciseRequest userExerciseRequest)throws NotFoundException{
+    public UserExerciseListResponse addExercices(UserExerciseListRequest userExerciseRequest)throws NotFoundException{
 
-        User user = this.userRepository.findById(userExerciseRequest.getUserId())
-                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+        LinkedList<UserExercises> insertedExercises = new LinkedList<UserExercises>();
 
         UserFile userFile =this.userFileRepository.findById(userExerciseRequest.getFileId())
                 .orElseThrow(() -> new NotFoundException("Ficha Inexistente"));
 
-        Exercise exercise =this.exerciseRepository.findById(userExerciseRequest.getExerciseId())
-                .orElseThrow(() -> new NotFoundException("Exercicio Inexistente"));
 
-        if(userFile.getUser().getIdUser() == user.getIdUser()){
+        User user = this.userRepository.findById(userFile.getUser().getIdUser())
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
-            return UserExerciseResponse.fromUserExercise(
-                    this.userExercisesRepository.save(
-                            new UserExercises(
+        for (UserExercises actualUserExercise:
+                userExerciseRequest.getFileExercises()) {
+
+            Exercise exercise =this.exerciseRepository.findById(actualUserExercise.getExercises().getExerciseId())
+                    .orElseThrow(() -> new NotFoundException("Exercicio Inexistente"));
+
+            insertedExercises.add(this.userExercisesRepository.save(
+                        new UserExercises(
                                 userFile,
                                 exercise,
-                                userExerciseRequest.getSeries(),
-                                userExerciseRequest.getRepetitions()
-                            )
-                    ),
-                    UserDto.fromUser(user)
-            );
+                                actualUserExercise.getSeries(),
+                                actualUserExercise.getRepetition()
+                        )
+                    )
+                );
 
 
-        }else{
-            //throw new UserFileAndUserNotMatch ("id do usuario diferente do id da ficha ");
-            return null;
         }
 
+
+        return UserExerciseListResponse.fromUserExercise(userFile , insertedExercises );
     }
 
     @Override

@@ -86,10 +86,8 @@ export class EditarFichasComponent implements OnInit {
  addExercicio() {
   this.userExercises.push(this.newExercicio());
 
-  //Não to conseguindo pegar os dados q eu quero
   let body = {
     exerciseId : this.fichaForm.value,
-
   }
   console.log(body)
   //this.cadastrarExercicio(body);

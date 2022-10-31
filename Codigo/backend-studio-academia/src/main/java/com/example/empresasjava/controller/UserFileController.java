@@ -1,7 +1,9 @@
 package com.example.empresasjava.controller;
 
+import com.example.empresasjava.models.RequestEntity.UserExerciseListRequest;
 import com.example.empresasjava.models.RequestEntity.UserExerciseRequest;
 import com.example.empresasjava.models.RequestEntity.UserFileRequest;
+import com.example.empresasjava.models.ResponseEntity.UserExerciseListResponse;
 import com.example.empresasjava.models.ResponseEntity.UserExerciseResponse;
 import com.example.empresasjava.models.ResponseEntity.UserFileResponse;
 import com.example.empresasjava.models.UserExercises;
@@ -82,11 +84,11 @@ public class UserFileController {
     @PostMapping(path = "/addExercises")
     @ApiOperation(value = "adiciona exercicios na ficha")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
-    public ResponseEntity<UserExerciseResponse> addExercices(
+    public ResponseEntity<UserExerciseListResponse> addExercices(
             @ApiParam(value = "Json da requisição que contem o dado do usuario a ser salvo")
-            @Valid @RequestBody UserExerciseRequest request) throws NotFoundException {
+            @Valid @RequestBody UserExerciseListRequest request) throws NotFoundException {
 
-        UserExerciseResponse userExerciseResponse = this.userFileService.addExercices(request);
+        UserExerciseListResponse userExerciseResponse = this.userFileService.addExercices(request);
 
         return ResponseEntity.ok().body(userExerciseResponse);
 

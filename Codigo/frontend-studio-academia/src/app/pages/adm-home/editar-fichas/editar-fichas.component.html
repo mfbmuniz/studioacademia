@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <form action="" class="form-group mt-4" [formGroup]="fichaForm" (ngSubmit)="editar()">
+  <form action="" class="form-group mt-4" [formGroup]="fichaForm" >
     <div class="row">
 
       <div class="mt-2">
@@ -70,8 +70,10 @@
         <br>
         <button type="button" (click)="returnToList()" class="btn btn-warning mt-2">Voltar</button>
         <br>
-        <button type="submit" class="btn btn-warning mt-2">Cadastrar</button>
+        <button (click)="editar()"type="submit" class="btn btn-warning mt-2">Cadastrar</button>
       </div>
     </div>
   </form>
 </div>
+
+--(ngSubmit)="editar()"
