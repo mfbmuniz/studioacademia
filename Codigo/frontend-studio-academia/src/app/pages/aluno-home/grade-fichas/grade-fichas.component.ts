@@ -31,7 +31,7 @@ export class GradeFichasComponent implements OnInit {
 
   listarFichas(){
 
-    this.userFileService.listUserFilesByPageWithSize(0,10,this.actualUser,'').subscribe({
+    this.userFileService.listUserExercisesByPageWithSize(0,10,this.actualUser,).subscribe({
       next:(res)=>{
         this.pageable = res,
         this.fichas$ = <Fichas>this.pageable?.content

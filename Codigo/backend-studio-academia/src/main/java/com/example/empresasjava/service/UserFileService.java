@@ -6,7 +6,6 @@ import com.example.empresasjava.models.RequestEntity.UserFileRequest;
 import com.example.empresasjava.models.ResponseEntity.UserExerciseListResponse;
 import com.example.empresasjava.models.ResponseEntity.UserExerciseResponse;
 import com.example.empresasjava.models.ResponseEntity.UserFileResponse;
-import com.example.empresasjava.models.User;
 import com.example.empresasjava.models.UserExercises;
 import com.example.empresasjava.models.UserFile;
 import javassist.NotFoundException;

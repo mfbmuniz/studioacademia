@@ -1,12 +1,9 @@
 package com.example.empresasjava.controller;
 
-import com.example.empresasjava.enums.RolesEnum;
-import com.example.empresasjava.models.Exercise;
 import com.example.empresasjava.models.RequestEntity.UserRequest;
 import com.example.empresasjava.models.User;
 import com.example.empresasjava.models.dto.UserDto;
 import com.example.empresasjava.service.UserService;
-import com.example.empresasjava.util.Secure;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import javassist.NotFoundException;

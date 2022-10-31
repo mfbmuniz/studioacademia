@@ -71,15 +71,16 @@ public class UserFileServiceImpl implements UserFileService {
             Exercise exercise =this.exerciseRepository.findById(actualUserExercise.getExercises().getExerciseId())
                     .orElseThrow(() -> new NotFoundException("Exercicio Inexistente"));
 
-            insertedExercises.add(this.userExercisesRepository.save(
-                        new UserExercises(
-                                userFile,
-                                exercise,
-                                actualUserExercise.getSeries(),
-                                actualUserExercise.getRepetition()
-                        )
+            UserExercises temp = this.userExercisesRepository.save(
+                    new UserExercises(
+                            userFile,
+                            exercise,
+                            actualUserExercise.getSeries(),
+                            actualUserExercise.getRepetition()
                     )
-                );
+            );
+
+            insertedExercises.add(temp);
 
 
         }
@@ -136,7 +137,7 @@ public class UserFileServiceImpl implements UserFileService {
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado")));
 
         userExercises.setSeries(request.getSeries());
-        userExercises.setRepetition(request.getRepetitions());
+        userExercises.setRepetition(request.getRepetition());
 
         return UserExerciseResponse.fromUserExercise(this.userExercisesRepository.save(userExercises), userDto);
 

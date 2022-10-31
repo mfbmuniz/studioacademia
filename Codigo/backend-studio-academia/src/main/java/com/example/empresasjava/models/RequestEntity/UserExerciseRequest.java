@@ -20,5 +20,5 @@ public class UserExerciseRequest {
     private Integer series;
 
     @NotNull(message = "Quantidade de repetições não pode ser nulo")
-    private Integer repetitions;
+    private Integer repetition;
 }

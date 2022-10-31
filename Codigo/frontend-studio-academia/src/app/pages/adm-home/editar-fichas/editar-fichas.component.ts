@@ -56,8 +56,8 @@ export class EditarFichasComponent implements OnInit {
   public editar() : void{
     let body = {
       fileId: this.idFicha,
-      name: this.nomeFicha,
-      exercises: this.userExercises
+      fileName: this.nomeFicha,
+      fileExercises: this.userExercises
     };
     this.userFileService.addExercises(body).subscribe({
       next : (res) =>{
@@ -77,9 +77,11 @@ export class EditarFichasComponent implements OnInit {
 
   newExercicio(): {} {
     return {
-      exerciseId: '',
-      series: 0,
-      repetitions: 0,
+      exercises:{
+        exerciseId: '3'
+      },
+      series: 3,
+      repetition: 3,
     }
  }
 

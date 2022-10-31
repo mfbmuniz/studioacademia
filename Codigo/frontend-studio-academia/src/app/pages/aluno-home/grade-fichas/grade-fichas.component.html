@@ -5,11 +5,6 @@
   </div>
 
 
-
-
-  <div *ngIf="fichas$.length == 0">
-    <h3>Não há fichas cadastradas</h3>
-  </div>
   <div *ngFor="let ficha of fichas$">
     <div class="col-8 mt-3 offset-3">
       <div class="card w-75 mt-3 bg-secondary">

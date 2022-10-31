@@ -1,6 +1,6 @@
 package com.example.empresasjava.models.ResponseEntity;
 
-import com.example.empresasjava.models.User;
+
 import com.example.empresasjava.models.UserExercises;
 import com.example.empresasjava.models.UserFile;
 import com.example.empresasjava.models.dto.UserDto;

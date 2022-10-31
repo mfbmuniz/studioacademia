@@ -72,7 +72,7 @@ public class UserExercises {
                 userExerciseResponse.getUserFile(),
                 userExerciseResponse.getExercises(),
                 userExerciseResponse.getSeries(),
-                userExerciseResponse.getRepetitions()
+                userExerciseResponse.getRepetition()
         );
 
     }

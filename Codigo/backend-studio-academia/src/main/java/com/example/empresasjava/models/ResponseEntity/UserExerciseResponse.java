@@ -17,7 +17,7 @@ public class UserExerciseResponse {
     private UserFile userFile;
     private Exercise exercises;
     private Integer series;
-    private Integer repetitions;
+    private Integer repetition;
     private UserDto user;
 
 
@@ -26,21 +26,21 @@ public class UserExerciseResponse {
     public UserExerciseResponse() {
     }
 
-    public UserExerciseResponse(UserFile userFile, UserDto user, Exercise exercises, Integer series, Integer repetitions, Long userExercisesId) {
+    public UserExerciseResponse(UserFile userFile, UserDto user, Exercise exercises, Integer series, Integer repetition, Long userExercisesId) {
         this.userFile = userFile;
         this.user = user;
         this.exercises = exercises;
         this.series = series;
-        this.repetitions = repetitions;
+        this.repetition = repetition;
         this.userExercisesId = userExercisesId;
     }
 
-    public UserExerciseResponse(UserFile userFile, UserDto user, Exercise exercises, Integer series, Integer repetitions) {
+    public UserExerciseResponse(UserFile userFile, UserDto user, Exercise exercises, Integer series, Integer repetition) {
         this.userFile = userFile;
         this.user = user;
         this.exercises = exercises;
         this.series = series;
-        this.repetitions = repetitions;
+        this.repetition = repetition;
     }
 
     public static UserExerciseResponse fromUserExercise(UserExercises userExercise,UserDto userDto){

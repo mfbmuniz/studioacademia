@@ -1,14 +1,9 @@
 package com.example.empresasjava.controller;
 
-import com.example.empresasjava.models.Exercise;
 import com.example.empresasjava.models.Plans;
 import com.example.empresasjava.models.RequestEntity.PlansRequest;
-import com.example.empresasjava.models.RequestEntity.UserRequest;
 import com.example.empresasjava.models.ResponseEntity.PlansResponse;
-import com.example.empresasjava.models.User;
-import com.example.empresasjava.models.dto.UserDto;
 import com.example.empresasjava.service.PlansService;
-import com.example.empresasjava.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import javassist.NotFoundException;
