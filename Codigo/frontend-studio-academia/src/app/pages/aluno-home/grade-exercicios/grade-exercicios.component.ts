@@ -18,6 +18,7 @@ export class GradeExerciciosComponent implements OnInit {
   idFile: any;
   exercicios !: Exercicios;
   actualUser !: any
+  fichaAuxiliar !: Ficha
 
   constructor(
     private userFileServise : UserFileService,
@@ -35,10 +36,11 @@ export class GradeExerciciosComponent implements OnInit {
 
   listExerciseUser(page : number, size : number, idUser : number , fileId : number){
 
-    this.userFileServise.fileExerciseuser(page, size, idUser, fileId).subscribe({
+    this.userFileServise.pegarFichaUser(fileId).subscribe({
       next: (res)=>{
         this.pageable = res,
-        this.exercicios = <Exercicios>this.pageable?.content
+        this.fichaAuxiliar = this.pageable?.content as unknown as Ficha
+        this.exercicios = this.fichaAuxiliar.exercises
       },
       error: (err)=>{
 
