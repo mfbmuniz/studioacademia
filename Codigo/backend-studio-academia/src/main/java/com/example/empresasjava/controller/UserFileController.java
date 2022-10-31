@@ -123,7 +123,7 @@ public class UserFileController {
     }
 
     //fichas do usuario
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','ALUNO'})")
     @GetMapping(path = "/page/{page}/size/{size}/iduser/{idUser}")
     @ResponseBody
     @ApiOperation(value = "Lista fichas do usuario por página quantidade")
@@ -205,7 +205,7 @@ public class UserFileController {
    }
 
     //fichas do usuario
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','ALUNO'})")
     @GetMapping(path = "/getUserFileExercise/fileId/{idFile}")
     @ResponseBody
     @ApiOperation(value = "Lista fichas do usuario por página quantidade")
