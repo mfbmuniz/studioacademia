@@ -76,6 +76,10 @@ export class UserFileService {
     //
   }
 
+  public listarFichasUser(page : number, size : number, idUser : number){
+    return this.http.get(`${environment.apiUrl}/user-files/page/${page}/size/${size}/iduser/${idUser}`)
+  }
+
   public getExercisesFromList (userFileId: number): Observable<any>{
 
     return this.http.get(UserFileService.API_URLS.FIND_EXERCISES+userFileId)
