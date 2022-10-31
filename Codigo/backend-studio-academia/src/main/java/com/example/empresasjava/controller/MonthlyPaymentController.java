@@ -201,10 +201,9 @@ public class MonthlyPaymentController {
             @Valid @RequestBody MonthlyPaymentRequest request,
             @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
             @PathVariable(value="idMonthlyRequest")
-            String idMonthlyRequest) throws NotFoundException {
+            Long idMonthlyRequest) throws NotFoundException {
 
-            Long id = Long.parseLong(idMonthlyRequest);
-            MonthlyPaymentResponse monthlyPaymentResponse = this.monthlyPaymentService.approveMonthlyRequest(request,id);
+            MonthlyPaymentResponse monthlyPaymentResponse = this.monthlyPaymentService.approveMonthlyRequest(request,idMonthlyRequest);
 
             return ResponseEntity.ok().body(
                     monthlyPaymentResponse
