@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Exercicios } from 'src/app/Models/exercicio';
+import { Exercicio, Exercicios } from 'src/app/Models/exercicio';
 import { Ficha } from 'src/app/Models/ficha';
 import { pageableObject } from 'src/app/Models/PageableObject';
+import { UserExercises } from 'src/app/Models/user-exercises';
 import { AuthService } from 'src/app/services/AuthService';
 import { UserFileService } from 'src/app/services/UserFileService';
 
@@ -18,7 +19,7 @@ export class GradeExerciciosComponent implements OnInit {
   idFile: any;
   exercicios !: Exercicios;
   actualUser !: any
-  fichaAuxiliar !: Ficha
+  fichaAuxiliar !: UserExercises
 
   constructor(
     private userFileServise : UserFileService,
@@ -31,16 +32,16 @@ export class GradeExerciciosComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.listExerciseUser(0,10,this.actualUser,this.idFile)
+    this.listExerciseUser(this.idFile)
   }
 
-  listExerciseUser(page : number, size : number, idUser : number , fileId : number){
+  listExerciseUser(fileId : number){
 
     this.userFileServise.pegarFichaUser(fileId).subscribe({
       next: (res)=>{
         this.pageable = res,
-        this.fichaAuxiliar = this.pageable?.content as unknown as Ficha
-        this.exercicios = this.fichaAuxiliar.exercises
+        this.fichaAuxiliar = this.pageable?.content as unknown as UserExercises
+        this.exercicios = this.fichaAuxiliar?.exercises as Exercicios
       },
       error: (err)=>{
 

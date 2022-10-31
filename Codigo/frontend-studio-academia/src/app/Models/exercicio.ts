@@ -4,7 +4,7 @@ export interface Exercicio {
   url ?:URL,
   description ?: string,
   series ?: string,
-  repetitions ?:string
+  repetition ?:string
 }
 
 export type Exercicios = Array<Exercicio>
