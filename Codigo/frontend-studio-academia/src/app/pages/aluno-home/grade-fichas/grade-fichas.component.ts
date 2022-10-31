@@ -33,8 +33,10 @@ export class GradeFichasComponent implements OnInit {
 
     this.userFileService.listarFichasUser(0,10,this.actualUser).subscribe({
       next:(res)=>{
+        console.log('res->'+res),
         this.pageable = res,
-        this.fichas$ = <Fichas>this.pageable?.content
+        this.fichas$ = <Fichas>this.pageable?.content,
+        console.log('fichas$$$$$$$->'+this.fichas$)
 
       },error:(err)=>{
         console.log(err)
