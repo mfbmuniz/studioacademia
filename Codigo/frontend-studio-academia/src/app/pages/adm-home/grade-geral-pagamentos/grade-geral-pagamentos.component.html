@@ -6,6 +6,8 @@
   <thead>
     <tr class="table-secondary">
       <th scope="col">Status</th>
+      <th scope="col">ID Requisição</th>
+      <th scope="col">ID Aluno</th>
       <th scope="col">Data Limite</th>
       <th scope="col">Data Pago</th>
       <th scope="col">Comprovante</th>
@@ -16,6 +18,8 @@
   <tbody *ngFor="let monthlyPayment of pagamentos">
     <tr>
       <th scope="col">{{monthlyPayment?.paymentStatus}}</th>
+      <th scope="col">{{monthlyPayment?.monthlyPaymentId}}</th>
+      <th scope="col">{{monthlyPayment?.userId}}</th>
       <th scope="col">{{monthlyPayment?.dueDate}}</th>
       <th scope="col">{{monthlyPayment?.paymentDate}}</th>
       <th scope="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal" (click)="getImage(monthlyPayment.monthlyPaymentId)"
@@ -29,7 +33,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body text-center">
-                 <img [attr.src]="image" />
+                <img [src]="imageToShow"
+                     alt="Comprovante"
+                     *ngIf="!isImageLoading; else noImageFound">
+                <ng-template #noImageFound>
+                  <img src="" alt="">
+                </ng-template>
               </div>
               <div class="modal-footer">
               </div>

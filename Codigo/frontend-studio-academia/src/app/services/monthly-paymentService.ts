@@ -1,4 +1,4 @@
-import {HttpClient, HttpEvent} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -23,9 +23,10 @@ export class MonthlyPaymentService {
     return this.http.post(`${MonthlyPaymentService.API_URLS.ROOT}/uploadImage`,paymentVoucherImage)
   }
 
-  public  getImage (idMonthlyPayment: number){
+  public  getImage (idMonthlyPayment: number): Observable<Blob> {
 
-    return this.http.get(`${MonthlyPaymentService.API_URLS.ROOT}/getImage/idMonthlyPayment/${idMonthlyPayment}`)
+    return this.http.get(`${MonthlyPaymentService.API_URLS.ROOT}/getImage/idMonthlyPayment/${idMonthlyPayment}`,{ responseType: 'blob' });
+
   }
 
 

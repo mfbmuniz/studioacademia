@@ -2,6 +2,7 @@
   <thead>
     <tr class="table-secondary">
       <th scope="col">Tipo</th>
+      <th scope="col">ID Usuario</th>
       <th scope="col">Nome</th>
       <th scope="col">Email</th>
       <th scope="col">Adicionar Ficha</th>
@@ -12,6 +13,7 @@
   <tbody *ngFor="let user of users">
     <tr>
       <th scope="row">{{user?.roles?.[0]?.name }}</th>
+      <td>{{user?.idUser}}</td>
       <td>{{user?.name}}</td>
       <td>{{user?.email}}</td>
       <td><a [routerLink]="['gradeFichas',user?.idUser]"><i class="bi bi-file-earmark-plus-fill"></i></a></td>

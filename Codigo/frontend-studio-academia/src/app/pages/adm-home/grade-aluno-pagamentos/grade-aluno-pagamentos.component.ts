@@ -16,6 +16,9 @@ export class GradeAlunoPagamentosComponent implements OnInit {
   pagamentos !: MonthlyPayments
   idAluno !: string
   pageable !: pageableObject
+  image!: any
+  imageToShow: any;
+  isImageLoading: any;
 
   constructor(private monthlyPaymentService : MonthlyPaymentService,
     private routeAc : ActivatedRoute,) {
@@ -63,6 +66,29 @@ export class GradeAlunoPagamentosComponent implements OnInit {
         alert("Não foi possível realizar a ação")
       }
     })
+  }
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.imageToShow = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
+  getImage(monthlyPaymentId: any) {
+    this.isImageLoading = true;
+    this.monthlyPaymentService.getImage(monthlyPaymentId).subscribe(data =>{
+        this.createImageFromBlob(data);
+        this.isImageLoading = false;
+      },
+      error => {
+        this.isImageLoading = false;
+        this.imageToShow = null;
+        console.log(error);
+      });
   }
 
 }

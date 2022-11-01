@@ -24,6 +24,8 @@ export class GradeGeralPagamentosComponent implements OnInit, PipeTransform {
   pageable !: pageableObject
   actualMonthlyPayment !: MonthlyPayment
   image!: any
+  imageToShow: any;
+  isImageLoading: any;
 
 
   constructor(private monthlyPaymentService: MonthlyPaymentService,
@@ -99,21 +101,28 @@ export class GradeGeralPagamentosComponent implements OnInit, PipeTransform {
 
   }
 
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.imageToShow = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
   getImage(monthlyPaymentId: any) {
-
-    this.monthlyPaymentService.getImage(monthlyPaymentId).subscribe({
-      next: (res) => {
-        alert("pegou")
-        console.log(res)
-        this.image = res
-
+    this.isImageLoading = true;
+    this.monthlyPaymentService.getImage(monthlyPaymentId).subscribe(data =>{
+        this.createImageFromBlob(data);
+        this.isImageLoading = false;
       },
-      error: (err) => {
-        console.log(err)
-        alert("nao pegou")
-        this.image = err
-      }
-    })
+      error => {
+      this.isImageLoading = false;
+      this.imageToShow = null;
+      console.log(error);
+    });
   }
 
 }
