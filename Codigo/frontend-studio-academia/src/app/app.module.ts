@@ -15,6 +15,7 @@ import {TokenInterceptor} from "./shared/TokenInterceptor";
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,19 +31,22 @@ import {TokenInterceptor} from "./shared/TokenInterceptor";
     FormsModule,
     HttpClientModule,
     ToastrModule.forRoot({
-      timeOut:1000,
+      timeOut: 1000,
       progressBar: true,
       progressAnimation: "increasing",
       preventDuplicates: true
     }),
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: "pt-Br" },
+    {provide: MAT_DATE_LOCALE, useValue: "pt-Br"},
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true,
     },
+  ],
+  exports: [
+
   ],
   bootstrap: [AppComponent]
 })

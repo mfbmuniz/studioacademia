@@ -21,8 +21,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.imageio.IIOException;
+import javax.validation.Path;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
     /*TODO
@@ -124,7 +127,7 @@ public class MonthlyPaymentController {
         return this.monthlyPaymentService.listRequestsByPage(pages);
 
     }
-    @GetMapping(path = "/pageAllPendency/{page}/size/{size}/paymentStatusRequest/{paymentStatusRequest}")
+    @GetMapping(path = "/pageAllWithKeySearch/{page}/size/{size}/paymentStatusRequest/{paymentStatusRequest}")
     @ResponseBody
     @ApiOperation(value = "lista todos pendente de aprovação")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
@@ -142,6 +145,24 @@ public class MonthlyPaymentController {
         Pageable pages = PageRequest.of(page, size);
 
         return this.monthlyPaymentService.listSpecificRequestsByPage(pages,paymentStatusRequest);
+
+    }
+
+    @GetMapping(path = "/pageAllPendency/{page}/size/{size}")
+    @ResponseBody
+    @ApiOperation(value = "lista todos pendente de aprovação")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    public Page<MonthlyPayment> listAllPendencyRequestsByPageWithSize(
+            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
+            @PathVariable(value="page")
+            int page,
+            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @PathVariable(value="size")
+            int size) throws NotFoundException, IOException {
+
+        Pageable pages = PageRequest.of(page, size);
+
+        return this.monthlyPaymentService.listAllPendencyRequestsByPageWithSize(pages);
 
     }
 
@@ -167,7 +188,7 @@ public class MonthlyPaymentController {
             return this.monthlyPaymentService.listUserRequestsByPage(pages,id);
 
     }
-    @GetMapping(path = "/pageAllUserPendency/page/{page}/size/{size}/idUser/{idUser}/paymentStatusRequest/{paymentStatusRequest}")
+    @GetMapping(path = "/pageUserWithKeySearch/page/{page}/size/{size}/idUser/{idUser}/paymentStatusRequest/{paymentStatusRequest}")
     @ResponseBody
     @ApiOperation(value = "lista apenas as requisições pendentes")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','ALUNO'})")
@@ -188,6 +209,29 @@ public class MonthlyPaymentController {
             Pageable pages = PageRequest.of(page, size);
 
             return this.monthlyPaymentService.listUserSpecificRequestsByPage(pages,id,paymentStatusRequest);
+
+    }
+
+    @GetMapping(path = "/pageAllUserPendency/page/{page}/size/{size}/idUser/{idUser}")
+    @ResponseBody
+    @ApiOperation(value = "lista apenas as requisições pendentes")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','ALUNO'})")
+    public Page<MonthlyPayment> listUserPendencySpecificRequestsByPageWithSize(
+            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
+            @PathVariable(value="page")
+            int page,
+            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @PathVariable(value="size")
+            int size,
+            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @PathVariable(value="idUser")
+            Long idUser
+            ) throws NotFoundException, IOException {
+
+
+        Pageable pages = PageRequest.of(page, size);
+
+        return this.monthlyPaymentService.listUserPendencyRequestsByPageWithSize(pages,idUser);
 
     }
 
@@ -228,6 +272,20 @@ public class MonthlyPaymentController {
         );
     }
 
+
+    @GetMapping(
+            value = "/getImage/idMonthlyPayment/{idMonthlyPayment}",
+            produces = MediaType.IMAGE_JPEG_VALUE
+    )
+    @ApiOperation(value = "get image")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    public @ResponseBody byte[] getImage(
+            @ApiParam("id monthly payment")
+            @PathVariable (value="idMonthlyPayment") Long idMonthlyPayment) throws IOException, NotFoundException {
+
+        return this.monthlyPaymentService.getImages(idMonthlyPayment);
+
+    }
 
 
 }

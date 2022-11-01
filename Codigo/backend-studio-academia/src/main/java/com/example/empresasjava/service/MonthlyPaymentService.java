@@ -7,6 +7,7 @@ import com.example.empresasjava.models.User;
 import javassist.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.NonUniqueResultException;
@@ -44,4 +45,10 @@ public interface MonthlyPaymentService {
     void createNextPayment();
 
     String uploadImage(MultipartFile paymentVoucherImage)throws NonUniqueResultException, NotFoundException, IOException;
+
+    Page<MonthlyPayment> listUserPendencyRequestsByPageWithSize(Pageable pages, Long idUser)throws NonUniqueResultException, NotFoundException, IOException;
+
+    Page<MonthlyPayment> listAllPendencyRequestsByPageWithSize(Pageable pages)throws NonUniqueResultException, NotFoundException, IOException;
+
+    public @ResponseBody byte[] getImages(Long id) throws NonUniqueResultException, NotFoundException, IOException;
 }

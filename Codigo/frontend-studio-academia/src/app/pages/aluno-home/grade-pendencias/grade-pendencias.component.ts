@@ -91,13 +91,18 @@ export class GradePendenciasComponent implements OnInit {
 
   public onSubmit(index : any){
 
+    console.log('entrei porra')
     if( (!this.erro) && (this.path!=null) ) {
+      console.log(this.path)
+      console.log('index: '+index)
+      console.log('objeto pagamentos : '+this.pagamentosPendentes)
+      console.log('objeto pagamentos no index : '+this.pagamentosPendentes[index])
       let body = {
         paymentVoucher: this.path["0"],
         message: this.comprovanteForm.value['message'],
-        dueDate: this.pagamentos[index].dueDate,
-        userId:  this.pagamentos[index].userId,
-        monthlyPaymentId : this.pagamentos[index].monthlyPaymentId
+        dueDate: this.pagamentosPendentes[index].dueDate,
+        userId:  this.pagamentosPendentes[index].userId,
+        monthlyPaymentId : this.pagamentosPendentes[index].monthlyPaymentId
 
       }
 
@@ -126,21 +131,21 @@ export class GradePendenciasComponent implements OnInit {
   }
 
   public listarPagamentosPendentes(page : number, size : number, idUser : number) {
-    this.monthlyPaymentService.listarPagamentoPendentesUsuario(page,size,idUser,'AGUARDANDO_PAGAMENTO').subscribe((res : any)=>{
+    this.monthlyPaymentService.listarPagamentoPendentesUsuario(page,size,idUser).subscribe((res : any)=>{
        this.pageablePend$ = res
        this.pagamentosPendentes = <MonthlyPayments> this.pageablePend$.content
     })
   }
 
   public listarPagamentosPagos(page : number, size : number, idUser : number) {
-    this.monthlyPaymentService.listarPagamentoPendentesUsuario(page,size,idUser,'PAGO').subscribe((res : any)=>{
+    this.monthlyPaymentService.listarPagamentoUsuarioPorChaveDeBusca(page,size,idUser,'PAGO').subscribe((res : any)=>{
       this.pageablePagos$ = res
       this.pagamentosPagos = <MonthlyPayments> this.pageablePagos$.content
     })
   }
 
   public listarPagamentosEspecificos(page : number, size : number, idUser : number, paymentStatus : String) {
-    this.monthlyPaymentService.listarPagamentoPendentesUsuario(page,size,idUser,paymentStatus).subscribe((res : any)=>{
+    this.monthlyPaymentService.listarPagamentoUsuarioPorChaveDeBusca(page,size,idUser,paymentStatus).subscribe((res : any)=>{
       this.pageable$ = res
       this.pagamentos =<MonthlyPayments>this.pageable$.content
     })
@@ -151,9 +156,9 @@ export class GradePendenciasComponent implements OnInit {
     let parameter =value?.target?.value ;
 
     if ( value?.target?.value == "TODOS"){
-      this.listarTodosPagamentos(0,10,2);
+      this.listarTodosPagamentos(0,10,this.actualUser);
     }else{
-      this.listarPagamentosEspecificos(0,10,2,parameter)
+      this.listarPagamentosEspecificos(0,10,this.actualUser,parameter)
     }
 
 

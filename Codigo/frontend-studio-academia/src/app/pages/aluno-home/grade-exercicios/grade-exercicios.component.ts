@@ -42,6 +42,7 @@ export class GradeExerciciosComponent implements OnInit {
         this.pageable = res,
         this.fichaAuxiliar = this.pageable?.content as unknown as UserExercises
         this.exercicios = this.fichaAuxiliar?.exercises as Exercicios
+        console.log("--->"+this.exercicios)
       },
       error: (err)=>{
 

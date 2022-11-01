@@ -23,6 +23,8 @@ public interface MonthlyPaymentRepository extends JpaRepository<MonthlyPayment,L
 
    Page<MonthlyPayment> findAllByUserIdAndPaymentStatusAndDeletedAtIsNullOrderByDueDateDesc(Pageable pages, Long id ,String paymentStatusRequest);
 
-   Page<MonthlyPayment> findAllByPaymentStatusNotAndDeletedAtIsNullOrderByDueDateDesc(MonthlyPaymentStatusEnum status, Pageable pages);
+   Page<MonthlyPayment> findAllByPaymentStatusNotAndDeletedAtIsNullOrderByDueDateDesc(String paymentStatus, Pageable pages);
+
+    Page<MonthlyPayment> findAllByPaymentStatusNotAndUserIdAndDeletedAtIsNullOrderByDueDateDesc(String paymentStatus,Long monthlyPaymentId, Pageable pages);
 
 }

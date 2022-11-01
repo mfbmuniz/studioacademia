@@ -4,7 +4,7 @@ export interface MonthlyPayment {
   paymentStatus ?: string,
   userId ?: number,
   message ?: string,
-  paymentVoucher ?: File,
+  paymentVoucher ?: string,
   dueDate ?: Date,
   approvedDate ?: Date,
 

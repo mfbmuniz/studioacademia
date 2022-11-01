@@ -1,29 +1,27 @@
 package com.example.empresasjava.service.impl;
 
 import com.example.empresasjava.enums.MonthlyPaymentStatusEnum;
-import com.example.empresasjava.models.Exercise;
 import com.example.empresasjava.models.MonthlyPayment;
 import com.example.empresasjava.models.RequestEntity.MonthlyPaymentRequest;
 import com.example.empresasjava.models.ResponseEntity.MonthlyPaymentResponse;
 import com.example.empresasjava.models.User;
-import com.example.empresasjava.models.dto.ExerciseDto;
 import com.example.empresasjava.repository.MonthlyPaymentRepository;
 import com.example.empresasjava.repository.UserRepository;
 import com.example.empresasjava.service.MonthlyPaymentService;
-import com.sun.xml.bind.v2.TODO;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.NonUniqueResultException;
-import javax.validation.Path;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.Date;
@@ -88,6 +86,16 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
     @Override
     public String uploadImage(MultipartFile paymentVoucherImage) throws NonUniqueResultException, NotFoundException, IOException {
         return savePaymentVoucher(paymentVoucherImage);
+    }
+
+    @Override
+    public Page<MonthlyPayment> listUserPendencyRequestsByPageWithSize(Pageable pages, Long idUser) throws NonUniqueResultException, NotFoundException, IOException {
+        return this.monthlyPaymentRepository.findAllByPaymentStatusNotAndUserIdAndDeletedAtIsNullOrderByDueDateDesc(MonthlyPaymentStatusEnum.PAGO.getCode(),idUser,pages);
+    }
+
+    @Override
+    public Page<MonthlyPayment> listAllPendencyRequestsByPageWithSize(Pageable pages) throws NonUniqueResultException, NotFoundException, IOException {
+        return this.monthlyPaymentRepository.findAllByPaymentStatusNotAndDeletedAtIsNullOrderByDueDateDesc("PAGO",pages);
     }
 
     @Override
@@ -229,5 +237,14 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
         return MonthlyPaymentResponse.fromMonthlyPayment(this.monthlyPaymentRepository.save(monthlyPayment));
     }
 
+    @Override
+    public @ResponseBody byte[] getImages(Long id) throws NonUniqueResultException, NotFoundException, IOException {
 
+        MonthlyPayment monthlyPayment = Optional.of(this.monthlyPaymentRepository.findOneByMonthlyPaymentId(id))
+                .orElseThrow(()-> new NonUniqueResultException("Requisição inexistente"));
+
+        Path imagePath = Paths.get(monthlyPayment.getPaymentVoucher());
+
+        return Files.readAllBytes(imagePath);
+    }
 }
