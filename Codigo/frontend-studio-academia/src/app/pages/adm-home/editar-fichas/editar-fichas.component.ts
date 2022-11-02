@@ -77,6 +77,7 @@ export class EditarFichasComponent implements OnInit {
 
   newExercicio(): {} {
     return {
+      userExercisesId:-1,
       exercises:{
         exerciseId: -1
       },
