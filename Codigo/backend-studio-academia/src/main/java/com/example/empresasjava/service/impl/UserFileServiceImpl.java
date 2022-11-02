@@ -71,14 +71,28 @@ public class UserFileServiceImpl implements UserFileService {
             Exercise exercise =this.exerciseRepository.findById(actualUserExercise.getExercises().getExerciseId())
                     .orElseThrow(() -> new NotFoundException("Exercicio Inexistente"));
 
-            UserExercises temp = this.userExercisesRepository.save(
-                    new UserExercises(
-                            userFile,
-                            exercise,
-                            actualUserExercise.getSeries(),
-                            actualUserExercise.getRepetition()
-                    )
-            );
+            Optional<UserExercises> userExercise = this.userExercisesRepository.findById(actualUserExercise.getUserExercisesId());
+            UserExercises temp = null;
+            /*todo: buscar todos que existe
+                ver qual nao existe mais e remover
+                dos que existe faz abaixo
+             */
+
+            if(userExercise.isPresent()){
+                //todo: atualizar
+                temp = this.userExercisesRepository.save(userExercise.get());
+            }else{
+                temp = this.userExercisesRepository.save(
+                        new UserExercises(
+                                userFile,
+                                exercise,
+                                actualUserExercise.getSeries(),
+                                actualUserExercise.getRepetition()
+                        )
+                );
+            }
+
+            this.userExercisesRepository.save(temp);
 
             insertedExercises.add(temp);
 
@@ -88,7 +102,6 @@ public class UserFileServiceImpl implements UserFileService {
 
         return UserExerciseListResponse.fromUserExercise(userFile , insertedExercises );
     }
-
     @Override
     public UserFileResponse editUserFile(UserFileRequest request) throws NotFoundException {
 
