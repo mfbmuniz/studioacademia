@@ -1,7 +1,7 @@
 import { User } from './user';
-import { Exercicios } from './exercicio';
+import {Exercicio, Exercicios} from './exercicio';
 export interface UserExercises {
-  exercises ?:  Exercicios,
+  exercises ?:  Exercicio,
   series ?: string,
   repetition ?:string,
   user: User,

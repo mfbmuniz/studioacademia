@@ -78,20 +78,20 @@ export class EditarFichasComponent implements OnInit {
   newExercicio(): {} {
     return {
       exercises:{
-        exerciseId: '3'
+        exerciseId: -1
       },
-      series: 3,
-      repetition: 3,
+      series: 0,
+      repetition: 0,
     }
  }
 
  addExercicio() {
   this.userExercises.push(this.newExercicio());
-
+console.log(this.userExercises)
   let body = {
     exerciseId : this.fichaForm.value,
   }
-  console.log(body)
+  // console.log(body)
   //this.cadastrarExercicio(body);
 }
 
@@ -168,8 +168,9 @@ listExercise(){
     })
   }
 
-  checkValue(event: any) {
+  checkValue(i: number, event: any) {
     this.selectedExercice = event?.target?.value
+    this.userExercises[i].exercises.exerciseId = Number(event?.target?.value)
   }
 
   wantsToEditUserFileName() {
@@ -202,5 +203,12 @@ listExercise(){
 
   cancelEditUserFileName() {
     this.isToEditUserFileName = false;
+  }
+
+  updateSeries(i: number, event: any) {
+    this.userExercises[i].series = Number(event?.target?.value)
+  }
+  updateRepetitions(i: number, event: any) {
+    this.userExercises[i].repetition = Number(event?.target?.value)
   }
 }
