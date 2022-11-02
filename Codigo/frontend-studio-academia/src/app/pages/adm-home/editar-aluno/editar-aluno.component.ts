@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/UserService';
 import {User} from "../../../Models/user";
+import { pageableObject } from 'src/app/Models/PageableObject';
 
 
 
@@ -16,9 +17,9 @@ import {User} from "../../../Models/user";
 export class EditarAlunoComponent implements OnInit {
   idUser !: String
   public user !: User
-  aluno$ !: Observable<User>
+  aluno$ !: User
   editAlunoForm !: FormGroup
-  content$ !: {}
+  content$ !: pageableObject
 
   constructor(
     private formbuilder: FormBuilder,
@@ -27,32 +28,30 @@ export class EditarAlunoComponent implements OnInit {
     private router : Router,
     ) {
       this.routeAc.params.subscribe(params => this.idUser = params['idUser']);
-      this.ngBuiltUser( this.idUser);
+
 
     }
 
   ngOnInit(): void {
+    this.ngBuiltUser( this.idUser);
 
-    //this.aluno$ = --> Faz o select
-    var pegarValorTacaNoForm = 'Valor no bd'
-    var teste = 'teste'
     this.editAlunoForm = this.formbuilder.group({
-      email :  ['pegarValorTacaNoForm', [Validators.required, Validators.email]],
-      password : ['', [Validators.required,Validators.minLength(8)]],
-      passwordConfirm : ['', [Validators.required,Validators.minLength(8)]],
-      name : ['',Validators.required],
-      legal_document: ['',[Validators.required]],
-      phone: ['',[Validators.required]],
-      birthDate : ['',[]],
-      zipCode: ['',[Validators.required]],
-      street: ['',[Validators.required]],
-      number: ['',[]],
-      complement: ['',[Validators.required]],
-      state: ['',[Validators.required]],
-      city: ['',[Validators.required]],
-      sex: ['',[Validators.required]],
-      roles: [[''],[Validators.required]],
-      district:['',[Validators.required]]
+      email :  [this.aluno$?.email, [Validators.required, Validators.email]],
+      password : [this.aluno$?.password, [Validators.required,Validators.minLength(8)]],
+      passwordConfirm : [this.aluno$?.password, [Validators.required,Validators.minLength(8)]],
+      name : [this.aluno$?.name,Validators.required],
+      legal_document: [this.aluno$?.legal_document,[Validators.required]],
+      phone: [this.aluno$?.phone,[Validators.required]],
+      birthDate : [this.aluno$?.birthDate,[]],
+      zipCode: [this.aluno$?.zipCode,[Validators.required]],
+      street: [this.aluno$?.street,[Validators.required]],
+      number: [this.aluno$?.number,[]],
+      complement: [this.aluno$?.complement,[Validators.required]],
+      state: [this.aluno$?.state,[Validators.required]],
+      city: [this.aluno$?.city,[Validators.required]],
+      sex: [this.aluno$?.sex,[Validators.required]],
+      roles: [[this.aluno$?.roles],[Validators.required]],
+      district:[this.aluno$?.district,[Validators.required]]
 
     })
   }
@@ -64,10 +63,9 @@ export class EditarAlunoComponent implements OnInit {
       .subscribe(
         (res: any) => {
           this.content$ = res;
+          this.aluno$ = <User> this.content$?.content
         },
       );
-    console.log(this.content$)
-    this.user = this.content$
   }
 
   public editar() : void{
