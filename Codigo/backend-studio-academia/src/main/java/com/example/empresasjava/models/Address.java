@@ -14,11 +14,14 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_id")
-    private Long id_address;
+    private Long addressId;
 
     private String street;
     private Integer number;
     private String district;
+
+    @Column(name = "zip_code")
+    private String zipCode;
 
     @OneToOne
     @JoinColumn(name = "city_id")
@@ -28,12 +31,13 @@ public class Address {
     @JoinColumn(name = "state_id")
     private States state;
 
-    public Address(String street, Integer number, String district, Cities city, States state) {
+    public Address(String street, Integer number, String district, Cities city, States state, String zipCode) {
         this.street = street;
         this.number = number;
         this.district = district;
         this.city = city;
         this.state = state;
+        this.zipCode = zipCode;
     }
 
     public Address() {
@@ -47,7 +51,8 @@ public class Address {
                 address.getNumber(),
                 address.getDistrict(),
                 city,
-                states
+                states,
+                address.getZipCode()
         );
     }
 }

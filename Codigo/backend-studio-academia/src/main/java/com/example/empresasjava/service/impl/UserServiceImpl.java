@@ -91,24 +91,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto editUser(UserRequest userRequest) {
+    public UserDto editUser(UserRequest userRequest) throws NotFoundException {
 
         User user = this.userRepository.findOneByEmail(userRequest.getEmail());
         if (user == null){
-
             user = this.userRepository.findOneByIdUser(userRequest.getIdUser());
         }
+
 
         //usuarios nao administradores nao podem editar Roles
         //usuarios nao administradores nao podem adicionar Roles
         User userByPrincipal = this.getUserByPrincipal();
 
         if(this.hasRole(userByPrincipal, RolesEnum.ADMIN)) {
-            List<Role> NewRoles = this.roleService.findAllByNameIn(userRequest.getRoles());
-            user.setRoles(NewRoles);
-            user.setName(userRequest.getName());
-            user.setWeekDays(userRequest.getWeekDays());
-            user.setPassword(this.bcryptEncoder.encode(user.getPassword()));
+            List<Role> newRoles = this.roleService.findAllByNameIn(userRequest.getRoles());
+
+            Cities city = this.cityService.findByCity(userRequest.getAddress().getCity());
+            States state = this.stateService.findByUf(userRequest.getAddress().getState());
+
+            //if (userRequest.getAddress().getAddressId() > 0) this.addressRepository.deleteById(userRequest.getAddress().getAddressId());
+
+            AddressDto addressDto = userRequest.getAddress();
+            Address newAddress = this.addressRepository.save(Address.fromAddressDTO(addressDto, city, state));
+
+
+            User userEditado = UserRequest.toUser(userRequest,newRoles,newAddress);
+
+            userEditado.setPassword(this.bcryptEncoder.encode(userRequest.getPassword()));
+            userEditado.setIdUser(userRequest.getIdUser());
+
+            user=userEditado;
+
         }else if(user == userByPrincipal) {
             //Usuarios so podem editar eles mesmos
             user.setName(userRequest.getName());

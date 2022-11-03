@@ -58,7 +58,7 @@ public class UserRequest {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dueDate;
 
-    private String weekDays;
+    private String[] weekDays;
 
     private Long idUser;
 
@@ -73,7 +73,7 @@ public class UserRequest {
     }
 
     public UserRequest(String name, String email, String password, List<String> roles, String legalDocument,
-                       AddressDto address, String sex, Date birthDate, String phone1, String phone2, Date dueDate,String weekDays) {
+                       AddressDto address, String sex, Date birthDate, String phone1, String phone2, Date dueDate,String[] weekDays) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -111,7 +111,7 @@ public class UserRequest {
         if(roles.stream().anyMatch(f -> f.getName().equals(RolesEnum.ALUNO.getCode()))) {
             c.setTime(user.getDueDate());
             c.set(Calendar.HOUR_OF_DAY, 0);
-            c.set(Calendar.MINUTE, 0);
+            c.set(Calendar.MINUTE, 1);
             c.set(Calendar.SECOND, 0);
             c.set(Calendar.MILLISECOND, 0);
 
@@ -134,7 +134,7 @@ public class UserRequest {
                 birthDate,
                 user.getPhone1(),
                 user.getPhone2(),
-                user.getWeekDays());
+                user.getWeekDays().toString());
     }
 
 }

@@ -33,6 +33,7 @@ CREATE TABLE address(
                         street VARCHAR(255) NOT NULL,
                         number INT NOT NULL,
                         district VARCHAR(100) NOT NULL,
+                        zip_code VARCHAR(100),
                         city_id INT NOT NULL,
                         state_id INT NOT NULL,
 

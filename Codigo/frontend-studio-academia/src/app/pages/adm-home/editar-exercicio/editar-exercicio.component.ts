@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ExerciseService } from 'src/app/services/ExerciseService';
 import {User} from "../../../Models/user";
 import {Exercicio} from "../../../Models/exercicio";
-import { PageableObject } from 'src/app/Models/PageableObject';
 
 @Component({
   selector: 'app-editar-exercicio',
@@ -15,24 +14,22 @@ export class EditarExercicioComponent implements OnInit {
 
   editExercicioForm !: FormGroup
   idExercise !: String
-  content !: PageableObject
-  public exerc !: Exercicio
+  content !: any
+  exerc!: any
 
   constructor(
     private exerciseService : ExerciseService,
     private formBuilder : FormBuilder,
     private routeAc : ActivatedRoute) {
       this.routeAc.params.subscribe(params => this.idExercise = params['idExercicio']);
-
+      this.ngBuiltExercise( this.idExercise);
     }
 
   ngOnInit(): void {
-    this.ngBuiltExercise( this.idExercise);
-
     this.editExercicioForm = this.formBuilder.group({
-      name : [this.exerc?.name,Validators.required,],
-      url : [this.exerc?.exerciseUrl,Validators.required],
-      description : [this.exerc?.description,Validators.required]
+      name : ['',Validators.required,],
+      url : ['',Validators.required],
+      description : ['',Validators.required]
     })
   }
 
@@ -41,11 +38,15 @@ export class EditarExercicioComponent implements OnInit {
     console.log('search Exercise by id')
     this.exerciseService.findExercise(id)
       .subscribe(
-        (res: any) => {
-          this.content = res;
-          this.exerc = <Exercicio><unknown>this.content?.content
-        },
-      );
+        {
+          next: (res) =>{
+            this.content = res;
+            }, error: (err) => {
+            console.log(err)
+          },complete: () =>{
+            this.completeFields();
+          }
+        });
   }
 
   editar() {
@@ -54,7 +55,6 @@ export class EditarExercicioComponent implements OnInit {
       exerciseUrl : this.editExercicioForm.value["url"],
       name : this.editExercicioForm.value["name"],
     }
-
 
     this.exerciseService.update(this.idExercise,body)
       .subscribe(
@@ -72,4 +72,11 @@ export class EditarExercicioComponent implements OnInit {
 
   }
 
+  private completeFields() {
+    this.editExercicioForm = this.formBuilder.group({
+      name : [this.content?.name,Validators.required,],
+      url : [this.content?.exerciseUrl,Validators.required],
+      description : [this.content?.description,Validators.required]
+    })
+  }
 }

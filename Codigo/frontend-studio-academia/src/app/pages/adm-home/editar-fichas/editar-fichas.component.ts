@@ -40,7 +40,7 @@ export class EditarFichasComponent implements OnInit {
     //this.listExercise();
 
     this.fichaForm = this.formBuilder.group({
-      name: ['',Validators.required],
+      name: [this.nomeFicha,Validators.required],
       exercicios: this.formBuilder.array([]) ,
     });
 
