@@ -69,7 +69,7 @@ export class CadastroAlunoComponent implements OnInit {
         district:['',[Validators.required]],
         plan:[''],
         dueDate: [''],
-        weekday: [''],
+        weekday: [[],[]],
 
       }
     );
@@ -109,30 +109,54 @@ export class CadastroAlunoComponent implements OnInit {
     this.isAluno = this.userForm?.roles[0]?.name == "ALUNO";
     this.checkValueModular();
 
+    if(this.isAluno) {
+      this.novoAlunoForm = this.formBuilder.group({
+          email: [this.userForm?.email, [Validators.required, Validators.email]],
+          password: ['', [Validators.required, Validators.minLength(8)]],
+          passwordConfirm: ['', [Validators.required, Validators.minLength(8)]],
+          name: [this.userForm?.name, Validators.required],
+          legal_document: [this.userForm?.legal_document, [Validators.required]],
+          phone: [this.userForm?.phone1, [Validators.required]],
+          birthDate: [(this.userForm?.birthDate).substring(0, 10), []],
+          zipCode: [this.userForm?.address?.zipCode, [Validators.required]],
+          street: [this.userForm?.address?.street, [Validators.required]],
+          number: [this.userForm?.address?.number, []],
+          complement: [this.userForm?.address?.complement, [Validators.required]],
+          state: [this.userForm?.address?.state?.uf, [Validators.required]],
+          city: [this.userForm?.address?.city?.city, [Validators.required]],
+          sex: [this.userForm?.sex, [Validators.required]],
+          roles: [this.userForm?.roles[0]?.name, [Validators.required]],
+          district: [this.userForm?.address?.district, [Validators.required]],
+          plan: [this.userForm?.plan, []],
+          dueDate: [(this.userForm?.dueDate).substring(0, 10), []],
+          weekday: [this.userForm.weekday, []],
 
-    this.novoAlunoForm = this.formBuilder.group({
-      email :  [this.userForm?.email, [Validators.required, Validators.email]],
-      password : ['', [Validators.required,Validators.minLength(8)]],
-      passwordConfirm : ['', [Validators.required,Validators.minLength(8)]],
-      name : [this.userForm?.name,Validators.required],
-      legal_document: [this.userForm?.legal_document,[Validators.required]],
-      phone: [this.userForm?.phone1,[Validators.required]],
-      birthDate : [(this.userForm?.birthDate).substring(0,10),[]],
-      zipCode: [this.userForm?.address?.zipCode,[Validators.required]],
-      street: [this.userForm?.address?.street,[Validators.required]],
-      number: [this.userForm?.address?.number,[]],
-      complement: [this.userForm?.address?.complement,[Validators.required]],
-      state: [this.userForm?.address?.state?.uf,[Validators.required]],
-      city: [this.userForm?.address?.city?.city,[Validators.required]],
-      sex: [this.userForm?.sex,[Validators.required]],
-      roles: [this.userForm?.roles[0]?.name,[Validators.required]],
-      district:[this.userForm?.address?.district,[Validators.required]],
-      plan:[this.userForm?.plan,[]],
-      dueDate: [(this.userForm?.dueDate).substring(0,10),[]],
-      weekday: [this.userForm.weekday,[]],
+        }
+      );
+    }else{
+      this.novoAlunoForm = this.formBuilder.group({
+        email: [this.userForm?.email, [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        passwordConfirm: ['', [Validators.required, Validators.minLength(8)]],
+        name: [this.userForm?.name, Validators.required],
+        legal_document: [this.userForm?.legal_document, [Validators.required]],
+        phone: [this.userForm?.phone1, [Validators.required]],
+        birthDate: [(this.userForm?.birthDate).substring(0, 10), []],
+        zipCode: [this.userForm?.address?.zipCode, [Validators.required]],
+        street: [this.userForm?.address?.street, [Validators.required]],
+        number: [this.userForm?.address?.number, []],
+        complement: [this.userForm?.address?.complement, [Validators.required]],
+        state: [this.userForm?.address?.state?.uf, [Validators.required]],
+        city: [this.userForm?.address?.city?.city, [Validators.required]],
+        sex: [this.userForm?.sex, [Validators.required]],
+        roles: [this.userForm?.roles[0]?.name, [Validators.required]],
+        district: [this.userForm?.address?.district, [Validators.required]],
+        }
+      );
+    }
 
-      }
-    );
+
+
   }
   cadastrar(){
     const novoAluno = this.novoAlunoForm.getRawValue();
@@ -149,7 +173,7 @@ export class CadastroAlunoComponent implements OnInit {
       sex: this.novoAlunoForm.value["sex"],
       dueDate:this.novoAlunoForm.value["dueDate"],
       plan: this.novoAlunoForm.value["plan"],
-      weekDays: this.novoAlunoForm.value["weekday"],
+      weekDays:  this.novoAlunoForm.value["weekday"],
       address: {
         zipCode: this.novoAlunoForm.value["zipCode"],
         street: this.novoAlunoForm.value["street"],

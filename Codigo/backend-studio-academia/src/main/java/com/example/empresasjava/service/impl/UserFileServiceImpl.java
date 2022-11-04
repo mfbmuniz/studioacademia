@@ -65,6 +65,12 @@ public class UserFileServiceImpl implements UserFileService {
         User user = this.userRepository.findById(userFile.getUser().getIdUser())
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
+
+
+        // remove os exercicios que o usuario apagou no front
+        List<UserExercises> removidosPeloUsuario = removeOldUserExercises(userExerciseRequest.getFileExercises(),userFile);
+
+
         for (UserExercises actualUserExercise:
                 userExerciseRequest.getFileExercises()) {
 
@@ -72,14 +78,14 @@ public class UserFileServiceImpl implements UserFileService {
                     .orElseThrow(() -> new NotFoundException("Exercicio Inexistente"));
 
             Optional<UserExercises> userExercise = this.userExercisesRepository.findById(actualUserExercise.getUserExercisesId());
+
             UserExercises temp = null;
-            /*todo: buscar todos que existe
-                ver qual nao existe mais e remover
-                dos que existe faz abaixo
-             */
 
             if(userExercise.isPresent()){
-                //todo: atualizar
+
+                userExercise.get().setSeries(actualUserExercise.getSeries());
+                userExercise.get().setRepetition(actualUserExercise.getRepetition());
+                userExercise.get().setExercises(actualUserExercise.getExercises());
                 temp = this.userExercisesRepository.save(userExercise.get());
             }else{
                 temp = this.userExercisesRepository.save(
@@ -110,6 +116,37 @@ public class UserFileServiceImpl implements UserFileService {
 
         return UserFileResponse.fromUserFile(this.userFileRepository.save(userFile));
     }
+
+    public List<UserExercises> removeOldUserExercises(/*lista editada pelo usuario*/ List<UserExercises> exercisesList,
+                                                        /*Ficha atual*/ UserFile  userFile) throws NotFoundException {
+
+        //lista com todos os exercicios desta ficha atualmente
+        List<UserExercises> listaAtual = this.userExercisesRepository.findAllByUserFileAndDeletedAtIsNull(userFile);
+
+        //exercicios removidos da antiga da ficha
+        List<UserExercises> removed = new LinkedList<UserExercises>();
+
+
+        List<Long> idsNovos = exercisesList.stream().map(UserExercises :: getUserExercisesId).collect(Collectors.toList());
+        
+        listaAtual.stream().map(
+                m -> {
+                    UserExercises retorno = new UserExercises();
+                    if(! idsNovos.contains(m.getUserExercisesId()) ){
+                        m.setDeletedAt(new Date());
+                        retorno = this.userExercisesRepository.save(m);
+                        removed.add(m);
+                    }
+                    return retorno;
+                }
+        ).collect(Collectors.toList());
+
+
+        return removed;
+    }
+
+
+
 
     @Override
     public UserFileResponse deleteUserFile(Long id) throws NotFoundException {
