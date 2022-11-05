@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AlunoHomeComponent } from './aluno-home.component';
 import { GradeFichasComponent } from './grade-fichas/grade-fichas.component';
 import { GradePendenciasComponent } from './grade-pendencias/grade-pendencias.component';
+import { CommentsComponent } from './comments/comments.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'pagamentos',
         component : GradePendenciasComponent
+      },
+      {
+        path: 'comentarios',
+        component: CommentsComponent
       }
 
     ]

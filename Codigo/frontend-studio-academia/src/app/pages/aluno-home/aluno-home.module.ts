@@ -9,6 +9,8 @@ import { AlunoSidebarComponent } from './aluno-sidebar/aluno-sidebar.component';
 import { GradeExerciciosComponent } from './grade-exercicios/grade-exercicios.component';
 import { GradePendenciasComponent } from './grade-pendencias/grade-pendencias.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommentsComponent } from './comments/comments.component';
+import { MensagemModule } from 'src/app/components/mensagem/mensagem.module';
 
 
 
@@ -19,13 +21,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     GradeFichasComponent,
     AlunoSidebarComponent,
     GradeExerciciosComponent,
-    GradePendenciasComponent
+    GradePendenciasComponent,
+    CommentsComponent
   ],
   imports: [
     CommonModule,
     AlunoHomeRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    MensagemModule,
   ],
   exports: [
     AlunoHomeComponent
