@@ -43,7 +43,7 @@ public class UserController {
     @ApiOperation(value = "Editar usuário existente")
     public ResponseEntity<UserDto> editUser(
             @ApiParam(value = "Json da requisição que contem o dado a ser editado")
-            @Valid @RequestBody UserRequest request){
+            @Valid @RequestBody UserRequest request) throws NotFoundException {
 
         return ResponseEntity.ok().body(
                 this.userService.editUser(request)

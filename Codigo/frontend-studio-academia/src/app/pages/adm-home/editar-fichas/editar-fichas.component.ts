@@ -40,7 +40,7 @@ export class EditarFichasComponent implements OnInit {
     //this.listExercise();
 
     this.fichaForm = this.formBuilder.group({
-      name: ['',Validators.required],
+      name: [this.nomeFicha,Validators.required],
       exercicios: this.formBuilder.array([]) ,
     });
 
@@ -87,13 +87,13 @@ export class EditarFichasComponent implements OnInit {
  }
 
  addExercicio() {
-  this.userExercises.push(this.newExercicio());
-console.log(this.userExercises)
-  let body = {
-    exerciseId : this.fichaForm.value,
-  }
-  // console.log(body)
-  //this.cadastrarExercicio(body);
+    this.userExercises.push(this.newExercicio());
+    console.log(this.userExercises)
+    let body = {
+      exerciseId : this.fichaForm.value,
+    }
+    // console.log(body)
+    //this.cadastrarExercicio(body);
 }
 
 removeExercicio(i:number) {

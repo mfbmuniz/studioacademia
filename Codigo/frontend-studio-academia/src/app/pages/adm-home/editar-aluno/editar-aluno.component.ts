@@ -19,7 +19,7 @@ export class EditarAlunoComponent implements OnInit {
   public user !: User
   aluno$ !: User
   editAlunoForm !: FormGroup
-  content$ !: pageableObject
+  content$ !: User
 
   constructor(
     private formbuilder: FormBuilder,
@@ -33,37 +33,23 @@ export class EditarAlunoComponent implements OnInit {
     }
 
   ngOnInit(): void {
+
     this.ngBuiltUser( this.idUser);
+    console.log('on init do editar')
+    console.log (this.content$)
 
-    this.editAlunoForm = this.formbuilder.group({
-      email :  [this.aluno$?.email, [Validators.required, Validators.email]],
-      password : [this.aluno$?.password, [Validators.required,Validators.minLength(8)]],
-      passwordConfirm : [this.aluno$?.password, [Validators.required,Validators.minLength(8)]],
-      name : [this.aluno$?.name,Validators.required],
-      legal_document: [this.aluno$?.legal_document,[Validators.required]],
-      phone: [this.aluno$?.phone,[Validators.required]],
-      birthDate : [this.aluno$?.birthDate,[]],
-      zipCode: [this.aluno$?.zipCode,[Validators.required]],
-      street: [this.aluno$?.street,[Validators.required]],
-      number: [this.aluno$?.number,[]],
-      complement: [this.aluno$?.complement,[Validators.required]],
-      state: [this.aluno$?.state,[Validators.required]],
-      city: [this.aluno$?.city,[Validators.required]],
-      sex: [this.aluno$?.sex,[Validators.required]],
-      roles: [[this.aluno$?.roles],[Validators.required]],
-      district:[this.aluno$?.district,[Validators.required]]
-
-    })
   }
 
   ngBuiltUser( id : any) {
 
+    console.log('chamei pelo editar')
     console.log('search user by id')
     this.userService.findUser(id)
       .subscribe(
         (res: any) => {
           this.content$ = res;
-          this.aluno$ = <User> this.content$?.content
+          this.aluno$ = this.content$
+          console.log(this.content$)
         },
       );
   }

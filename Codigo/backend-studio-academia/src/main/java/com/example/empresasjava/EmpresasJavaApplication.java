@@ -64,7 +64,8 @@ public class EmpresasJavaApplication {
 					123,
 					"bairro",
 					city,
-					states
+					states,
+					"30690740"
 			));
 
 			admin = new User("Admin",
