@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/AuthService';
-import { messageService } from 'src/app/services/messageService';
+import { MessageService } from 'src/app/services/messageService';
 
 @Component({
   selector: 'app-comments',
@@ -18,7 +18,7 @@ export class CommentsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService : AuthService,
     private toastr: ToastrService,
-    private messageService : messageService) { }
+    private messageService : MessageService) { }
 
   ngOnInit(): void {
     this.commentsForm = this.formBuilder.group({

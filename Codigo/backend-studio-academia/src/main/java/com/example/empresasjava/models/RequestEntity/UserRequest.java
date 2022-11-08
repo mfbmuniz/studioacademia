@@ -122,19 +122,41 @@ public class UserRequest {
 
         c.setTime(user.getBirthDate());
         Date birthDate = c.getTime();
-        return new User(
-                user.getName(),
-                user.getEmail(),
-                user.getPassword(),
-                user.getSex(),
-                user.getLegalDocument(),
-                address,
-                roles,
-                dueDate,
-                birthDate,
-                user.getPhone1(),
-                user.getPhone2(),
-                user.getWeekDays().toString());
+
+        User newUSer;
+
+        if(!roles.stream().anyMatch(f -> f.getName().equals(RolesEnum.ALUNO.getCode()))) {
+            newUSer = new User(
+                    user.getName(),
+                    user.getEmail(),
+                    user.getPassword(),
+                    user.getSex(),
+                    user.getLegalDocument(),
+                    address,
+                    roles,
+                    dueDate,
+                    birthDate,
+                    user.getPhone1(),
+                    user.getPhone2(),
+                    null);
+
+        }else {
+
+            newUSer = new User(
+                    user.getName(),
+                    user.getEmail(),
+                    user.getPassword(),
+                    user.getSex(),
+                    user.getLegalDocument(),
+                    address,
+                    roles,
+                    dueDate,
+                    birthDate,
+                    user.getPhone1(),
+                    user.getPhone2(),
+                    user.getWeekDays().toString());
+        }
+        return newUSer;
     }
 
 }

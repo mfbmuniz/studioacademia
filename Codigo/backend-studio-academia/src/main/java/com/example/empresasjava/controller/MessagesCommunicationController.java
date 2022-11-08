@@ -30,7 +30,7 @@ public class MessagesCommunicationController {
 
     @PostMapping(path = "/create")
     @ApiOperation(value = "Criar nova mensagem ")
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','ALUNO','NUTRICIONISTA'})")
     public ResponseEntity<MessagesCommunicationResponse> createMessage(
             @ApiParam(value = "Json da requisição que contem o dado do usuario a ser salvo")
             @Valid @RequestBody MessagesCommunicationRequest request) throws NotFoundException {
