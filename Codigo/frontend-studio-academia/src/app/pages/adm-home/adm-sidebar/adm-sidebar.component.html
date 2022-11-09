@@ -5,22 +5,27 @@
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
           <li class="nav-item">
             <a routerLink="/adm" class="nav-link align-middle px-0">
-              <i class="bi bi-house-fill"></i> Home
+              <i class="bi bi-house-fill"></i><span> Home</span>
             </a>
           </li>
           <li>
             <a [routerLink]="['cadastrarUsuario']" class="nav-link px-0 align-middle">
-              <i class="bi bi-person-plus-fill"></i> Cadastrar Usuário
+              <i class="bi bi-person-plus-fill"></i> <span>Cadastrar Usuário</span>
             </a>
           </li>
           <li>
             <a [routerLink]="['cadastrarExercicio']" class="nav-link px-0 align-middle">
-              Cadastrar Exercício
+              <i class="bi bi-file-earmark-plus-fill"></i> <span> Cadastrar Exercício </span>
             </a>
           </li>
           <li>
             <a [routerLink]="['visualizacaoPagamentos']" class="nav-link px-0 align-middle">
-              Visualizar pagamentos
+              <i class="bi bi-credit-card-2-back-fill"></i> <span> Visualizar pagamentos</span>
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['comentarios']" class="nav-link px-0 align-middle">
+              <i class="bi bi-card-heading"></i> <span> Comentarios </span>
             </a>
           </li>
 

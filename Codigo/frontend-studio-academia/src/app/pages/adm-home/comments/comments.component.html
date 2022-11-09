@@ -1,0 +1,34 @@
+<div class="col-3 offset-5 ">
+  <h1>Comentários</h1>
+</div>
+<br>
+<br>
+<div class="row">
+  <div *ngFor="let comments of messages">
+    <div class="col-4 mt-2">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h3 class="card-title"><i class="bi bi-person-square"></i>{{comments.title}}</h3>
+          <p class="card-text">{{comments.messageContent}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+  <div class="row">
+  <div>
+    <div class="col-4 mt-2">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h3 class="card-title"><i class="bi bi-person-square"></i> title</h3>
+          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam architecto at deleniti
+            eligendi fuga quia, quos, natus nobis, ratione illo incidunt odit ea rerum eaque facere quibusdam quisquam.
+            Labore, reprehenderit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->

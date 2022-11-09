@@ -1,3 +1,4 @@
+import { CommentsComponent } from './comments/comments.component';
 import { EditarExercicioComponent } from './editar-exercicio/editar-exercicio.component';
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -63,6 +64,10 @@ const routes: Routes = [
       {
         path : 'visualizacaoPagamentos',
         component : GradeGeralPagamentosComponent
+      },
+      {
+        path : 'comentarios',
+        component : CommentsComponent
       },
 
     ]

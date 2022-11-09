@@ -1,11 +1,8 @@
-body{
-  background-color: rgb(49, 49, 49);
-  margin: 0px;
-  padding: 0px;
+h1{
+  color: #FFD61E;
+  font-family: Arial, Helvetica, sans-serif;
+
 }
 p{
-  font-family: Arial, Helvetica, sans-serif;
-}
-h1 , h2 {
   font-family: Arial, Helvetica, sans-serif;
 }

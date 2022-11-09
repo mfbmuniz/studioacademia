@@ -22,6 +22,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {GradeListarFichasComponent} from "./grade-listar-fichas/grade-listar-fichas.component";
 import { GradeGeralPagamentosComponent } from './grade-geral-pagamentos/grade-geral-pagamentos.component';
 import { GradeAlunoPagamentosComponent } from './grade-aluno-pagamentos/grade-aluno-pagamentos.component';
+import { CommentsComponent } from './comments/comments.component';
 
 
 
@@ -43,7 +44,8 @@ import { GradeAlunoPagamentosComponent } from './grade-aluno-pagamentos/grade-al
     EditarExercicioComponent,
     GradeListarFichasComponent,
     GradeGeralPagamentosComponent,
-    GradeAlunoPagamentosComponent
+    GradeAlunoPagamentosComponent,
+    CommentsComponent
   ],
     imports: [
         CommonModule,
