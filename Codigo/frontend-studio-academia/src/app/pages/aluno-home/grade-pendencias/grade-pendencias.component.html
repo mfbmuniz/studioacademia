@@ -24,7 +24,7 @@
         <tr>
           <th scope="row">{{monthlyPayment.paymentStatus}}</th>
           <td>{{monthlyPayment.dueDate}}</td>
-          <td><input  formControlName="file" type="file" formControlName="file" name="file" id="file" class="form-control"(change)="onFileSelected($event)" enctype="multipart/form-data" ></td>
+          <td><input  formControlName="file" type="file" accept="image/*" formControlName="file" name="file" id="file" class="form-control"(change)="onFileSelected($event)" enctype="multipart/form-data" ></td>
           <td><input type="text" formControlName="message" name="" id="" class="form-control"></td>
           <td><button (click)="onSubmit(i)" type="submit" class="btn btn-warning offset"  style="cursor:pointer;">Enviar</button></td>
         </tr>

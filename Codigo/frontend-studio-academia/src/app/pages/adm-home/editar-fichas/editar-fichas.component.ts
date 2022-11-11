@@ -8,6 +8,7 @@ import {Ficha, Fichas} from 'src/app/Models/ficha';
 import {ActivatedRoute, Router} from '@angular/router';
 import { UserFileService } from 'src/app/services/UserFileService';
 import { pageableObject } from 'src/app/Models/PageableObject';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-editar-fichas',
@@ -29,7 +30,8 @@ export class EditarFichasComponent implements OnInit {
     private userFileSerce : UserFileService,
     private exerciseService : ExerciseService,
     private userFileService: UserFileService,
-    public router: Router) {
+    public router: Router,
+    private toastr: ToastrService,) {
   }
   public userId: any;
   public selectedExercice: string = "-1";
@@ -62,11 +64,11 @@ export class EditarFichasComponent implements OnInit {
     this.userFileService.addExercises(body).subscribe({
       next : (res) =>{
         console.log(res)
-        alert("Exercícios cadastrados com sucesso")
+        this.showSuccessToastr()
       },
-      error(err) {
+      error:(err) =>{
         console.log(err)
-        alert("Não foi possível cadastrar exercícios")
+        this.showErrorToastr()
       },
     })
   }
@@ -211,5 +213,13 @@ listExercise(){
   }
   updateRepetitions(i: number, event: any) {
     this.userExercises[i].repetition = Number(event?.target?.value)
+  }
+
+  showSuccessToastr(){
+    this.toastr.success("Enviado com sucesso", "Sucesso")
+  }
+
+  showErrorToastr(){
+    this.toastr.error("O envio não pode ser feito", "Erro")
   }
 }

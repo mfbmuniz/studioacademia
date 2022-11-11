@@ -9,6 +9,7 @@ import {AuthService} from "../../../services/AuthService";
 import {UserService} from "../../../services/UserService";
 import {ExerciseService} from "../../../services/ExerciseService";
 import {Users} from "../../../Models/user";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-adm-grade-fichas',
@@ -35,7 +36,8 @@ export class AdmGradeFichasComponent implements OnInit {
     private router : Router,
     private userService : UserService,
     private exerciseService : ExerciseService,
-    private formBuilder : FormBuilder){
+    private formBuilder : FormBuilder,
+    private toastr: ToastrService,){
 
     this.routeAc.params.subscribe(params => this.idAluno = params['idAluno'])
 
@@ -96,16 +98,15 @@ export class AdmGradeFichasComponent implements OnInit {
 
   public searchFiles(idUser : String){
 
-    //this.isSearchUserFile = ['userFile', ''].includes(this.searchForm?.value?.typeSearch)
+
 
 
     console.log(this.searchForm, this.isSearchUserFile)
     this.hasValuesToLoad = false
-    // Faz a presquisa q tem q fazer e recarrega a página
-    //let keysearch = this.searchForm.value.keySearch;
+
 
     if(this.isSearchUserFile) {
-      console.log('search userFile', idUser)
+      // console.log('search userFile', idUser)
       this.userFileService.listUserFilesByPageWithSize(0, 10,idUser,''  )
         .subscribe(
           (res: any) => {
@@ -114,7 +115,7 @@ export class AdmGradeFichasComponent implements OnInit {
           },
         );
     }else{
-      console.log('search exercise')
+      // console.log('search exercise')
       this.exerciseService.listByPage(0, 10, '')
         .subscribe(
           (res: any) => {
@@ -148,6 +149,14 @@ export class AdmGradeFichasComponent implements OnInit {
         );
       console.log(nomeFicha)
     }
+  }
+
+  showSuccessToastr(){
+    this.toastr.success("Enviado com sucesso", "Sucesso")
+  }
+
+  showErrorToastr(){
+    this.toastr.error("O envio não pode ser feito", "Erro")
   }
 
 }

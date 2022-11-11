@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Router} from "@angular/router";
 import {UserService} from "../../../services/UserService";
 import {ExerciseService} from "../../../services/ExerciseService";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cadastro-exercicio',
@@ -17,6 +18,7 @@ export class CadastroExercicioComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router : Router,
     private exerciseRegistrationService: ExerciseService,
+    private toastr: ToastrService,
     ) { }
 
 
@@ -44,16 +46,24 @@ export class CadastroExercicioComponent implements OnInit {
           next:(res) => {
             console.log(res)
             this.novoExercicioForm.reset()
-            alert("Exercício cadastrado com êxito")
+            this.showSuccessToastr()
           },
           error: (err) => {
             console.log(err)
-            alert("Não foi possível salvar o exercício")
+            this.showSuccessToastr();
           }
         }
       );
     console.log(novoExercicio)
 
+  }
+
+  showSuccessToastr(){
+    this.toastr.success("Enviado com sucesso", "Sucesso")
+  }
+
+  showErrorToastr(){
+    this.toastr.error("O envio não pode ser feito", "Erro")
   }
 
 }
