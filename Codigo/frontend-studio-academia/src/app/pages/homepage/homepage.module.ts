@@ -9,11 +9,12 @@ import { LoginComponent } from './login/login.component';
 import { CarrosselComponent } from './carrossel/carrossel.component';
 import { MensagemModule } from 'src/app/components/mensagem/mensagem.module';
 import {RouterModule} from "@angular/router";
+import { PlanosComponent } from './planos/planos.component';
 
 
 
 @NgModule({
-  declarations: [HomepageComponent,LoginComponent, CarrosselComponent],
+  declarations: [HomepageComponent,LoginComponent, CarrosselComponent, PlanosComponent],
     imports: [
         CommonModule,
         HomepageRoutingModule,

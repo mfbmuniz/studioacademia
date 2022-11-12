@@ -1,11 +1,10 @@
-<table class="table table-light mt-2">
+<table class="table table-light me-5 d-none d-md-table" >
   <thead>
     <tr class="table-secondary">
       <th scope="col">Tipo</th>
-      <th scope="col">ID Usuario</th>
-      <th scope="col">Nome</th>
+      <th scope="col" >Nome</th>
       <th scope="col">Email</th>
-      <th scope="col">Adicionar Ficha</th>
+      <th scope="col">Ficha</th>
       <th scope="col">Editar</th>
       <th scope="col">Pagamentos</th>
     </tr>
@@ -13,8 +12,7 @@
   <tbody *ngFor="let user of users">
     <tr>
       <th scope="row">{{user?.roles?.[0]?.name }}</th>
-      <td>{{user?.idUser}}</td>
-      <td>{{user?.name}}</td>
+      <td >{{user?.name}}</td>
       <td>{{user?.email}}</td>
       <td><a [routerLink]="['gradeFichas',user?.idUser]"><i class="bi bi-file-earmark-plus-fill"></i></a></td>
       <td>
@@ -25,4 +23,27 @@
     </tr>
   </tbody>
 </table>
+
+<table class="table table-light d-table d-md-none" >
+  <thead>
+    <tr class="table-secondary">
+      <th scope="col" >Nome</th>
+      <th scope="col">Ficha</th>
+      <th scope="col">Editar</th>
+      <th scope="col">Pagos</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let user of users">
+    <tr>
+      <td >{{user?.name}}</td>
+      <td><a [routerLink]="['gradeFichas',user?.idUser]"><i class="bi bi-file-earmark-plus-fill"></i></a></td>
+      <td>
+          <a [routerLink]="['editarAluno',user?.idUser]"><i class="bi bi-person-bounding-box"></i></a>
+          <a (click)="delete(user?.idUser)" ><i class="bi bi-trash" style="cursor:pointer;"></i></a>
+      </td>
+      <td><a [routerLink]="['pagamentos',user?.idUser]"><i class="bi bi-journals"></i></a></td>
+    </tr>
+  </tbody>
+</table>
+
 

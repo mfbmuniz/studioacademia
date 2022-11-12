@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit  {
 
     this._isLogged = false;
     this.user$ = this.authService.getSession()
-    console.log(this.user$.source.value.user.name)
+    //console.log(this.user$.source.value.user.name)
   }
 
   navigateToHome() {

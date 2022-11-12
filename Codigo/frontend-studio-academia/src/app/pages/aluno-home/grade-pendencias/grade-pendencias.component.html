@@ -2,34 +2,36 @@
   <div class="col-2 offset-5">
     <h1>Pendências</h1>
   </div>
-<!--
+  <!--
   <div class="alert alert-danger col-10 offset-1" role="alert">
     A simple primary alert—check it out!
   </div>
 -->
 
 
-  <form enctype="multipart/form-data" action=""  [formGroup]="comprovanteForm" >
-  <table class="table table-light mt-2">
-    <thead>
-      <tr class="table-secondary">
-        <th scope="col">Status</th>
-        <th scope="col">Data</th>
-        <th scope="col">Comprovante</th>
-        <th scope="col">Comentário</th>
-        <th scope="col"> </th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let monthlyPayment of pagamentosPendentes ; let i = index ">
+  <form enctype="multipart/form-data" action="" [formGroup]="comprovanteForm">
+    <table class="table table-light mt-2">
+      <thead>
+        <tr class="table-secondary">
+          <th scope="col">Status</th>
+          <th scope="col">Data</th>
+          <th scope="col">Comprovante</th>
+          <th scope="col">Comentário</th>
+          <th scope="col"> </th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let monthlyPayment of pagamentosPendentes ; let i = index ">
         <tr>
           <th scope="row">{{monthlyPayment.paymentStatus}}</th>
           <td>{{monthlyPayment.dueDate}}</td>
-          <td><input  formControlName="file" type="file" accept="image/*" formControlName="file" name="file" id="file" class="form-control"(change)="onFileSelected($event)" enctype="multipart/form-data" ></td>
+          <td><input formControlName="file" type="file" accept="image/*" formControlName="file" name="file" id="file"
+              class="form-control" (change)="onFileSelected($event)" enctype="multipart/form-data"></td>
           <td><input type="text" formControlName="message" name="" id="" class="form-control"></td>
-          <td><button (click)="onSubmit(i)" type="submit" class="btn btn-warning offset"  style="cursor:pointer;">Enviar</button></td>
+          <td><button (click)="onSubmit(i)" type="submit" class="btn btn-warning offset"
+              style="cursor:pointer;">Enviar</button></td>
         </tr>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
   </form>
 </div>
 
@@ -40,48 +42,48 @@
 
 
 
-  <form enctype="multipart/form-data" action=""  [formGroup]="comprovanteForm" >
-    <select id="type" class="btn btn-outline-secondary dropdown-toggle"  formControlName = "typeSearch" data-bs-toggle="dropdown"
-            aria-expanded="false"(change)="specificSearch($event)">
+  <form enctype="multipart/form-data" action="" [formGroup]="comprovanteForm">
+    <select id="type" class="btn btn-outline-secondary dropdown-toggle" formControlName="typeSearch"
+      data-bs-toggle="dropdown" aria-expanded="false" (change)="specificSearch($event)">
       <option *ngFor="let t of types" [value]="t">{{t}}</option>
     </select>
     <table class="table table-light mt-2">
       <thead>
-      <tr class="table-secondary">
-        <th scope="col">Status</th>
-        <th scope="col">Data</th>
-      </tr>
+        <tr class="table-secondary">
+          <th scope="col">Status</th>
+          <th scope="col">Data</th>
+        </tr>
       </thead>
       <tbody *ngFor="let monthlyPayment of pagamentos; let i = index ">
-      <tr>
-        <th scope="row">{{monthlyPayment.paymentStatus}}</th>
-        <td>{{monthlyPayment.dueDate}}</td>
-      </tr>
+        <tr>
+          <th scope="row">{{monthlyPayment.paymentStatus}}</th>
+          <td>{{monthlyPayment.dueDate}}</td>
+        </tr>
       </tbody>
     </table>
   </form>
 
 
-<div class="row">
-  <div class="col-2 offset-5">
-    <h1>Historico de Finalizados</h1>
+  <div class="row">
+    <div class="col-2 offset-5">
+      <h1>Historico de Finalizados</h1>
+    </div>
+    <form enctype="multipart/form-data" action="" [formGroup]="comprovanteForm">
+      <table class="table table-light mt-2">
+        <thead>
+          <tr class="table-secondary">
+            <th scope="col">Status</th>
+            <th scope="col">Data</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let monthlyPayment of pagamentosPagos; let i = index ">
+          <tr>
+            <th scope="row">{{monthlyPayment.paymentStatus}}</th>
+            <td>{{monthlyPayment.dueDate}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+
+
   </div>
-  <form enctype="multipart/form-data" action=""  [formGroup]="comprovanteForm" >
-    <table class="table table-light mt-2">
-      <thead>
-      <tr class="table-secondary">
-        <th scope="col">Status</th>
-        <th scope="col">Data</th>
-      </tr>
-      </thead>
-      <tbody *ngFor="let monthlyPayment of pagamentosPagos; let i = index ">
-      <tr>
-        <th scope="row">{{monthlyPayment.paymentStatus}}</th>
-        <td>{{monthlyPayment.dueDate}}</td>
-      </tr>
-      </tbody>
-    </table>
-  </form>
-
-
-</div>

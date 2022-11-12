@@ -5,26 +5,25 @@
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
           <li class="nav-item">
             <a routerLink="/aluno" class="nav-link align-middle px-0">
-              <i class="bi bi-house-fill"></i> Home
+              <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
             </a>
           </li>
           <li>
-            <a [routerLink]="['visualizarFichas']" class="nav-link px-0 align-middle">
-              <i class="bi bi-file-earmark-text-fill"></i> Visualizar fichas
+            <a [routerLink]="['visualizarFichas']" class="nav-link align-middle px-0">
+              <i class="fs-4 bi-file-earmark-text-fill"></i> <span class="ms-1 d-none d-sm-inline">Visualizar fichas</span>
             </a>
           </li>
           <li>
             <a [routerLink]="['pagamentos']" class="nav-link px-0 align-middle">
-              <i class="bi bi-file-earmark-text-fill"></i> Visualizar pagamentos
-            </a>
+              <i class="fs-4 bi-credit-card-2-back-fill"></i> <span class="ms-1 d-none d-sm-inline">Visualizar
+                pagamentos</span></a>
           </li>
           <li>
             <a [routerLink]="['comentarios']" class="nav-link px-0 align-middle">
-              Comentários
-            </a>
+              <i class="fs-4 bi-card-heading"></i> <span class="ms-1 d-none d-sm-inline">Visualizar
+                Comentários</span></a>
           </li>
         </ul>
-        <hr>
       </div>
     </div>
     <div class="col py-3">
@@ -32,4 +31,3 @@
     </div>
   </div>
 </div>
-
