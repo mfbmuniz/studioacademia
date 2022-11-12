@@ -1,9 +1,9 @@
-<div class="formulario">
+
 
 
   <div class="row">
 
-    <div class="col-3 offset-5" >
+    <div class="col-5 offset-3 offset-md-5" >
       <h1>{{nomeFicha}} <span><i class="bi bi-pencil-square" style="cursor:pointer;" (click)="wantsToEditUserFileName()"></i></span></h1>
     </div>
 
@@ -17,14 +17,14 @@
   <form action="" class="form-group mt-4" [formGroup]="fichaForm" >
     <div class="row">
 
-      <div class="mt-2">
+      <div>
         <div *ngFor="let userExercise of userExercises; let i=index">
           <div>
 
             <div class="row">
 
 
-              <div class="col-3 offset-1">
+              <div class="col-10 col-md-3 offset-md-1">
 
                 <label for=""><p>Exercicio</p></label>
                 <select id="type" class="form-control" (change)="checkValue(i, $event)">
@@ -36,19 +36,20 @@
 
               </div>
 
-              <div class="col-2">
+              <div class="col-4 col-md-2 ">
                 <label for=""><p>Series</p></label>
                 <input type="number" min="0" class="form-control" [value]="userExercise.series" (change)="updateSeries(i, $event)">
               </div>
 
-              <div class="col-2">
+              <div class="col-4 col-md-2">
                 <label for=""><p>Repetições</p></label>
                 <input type="number" min="0" class="form-control" [value]="userExercise.repetition" (change)="updateRepetitions(i, $event)">
               </div>
 
-              <div class="col-1 offset-2">
+              <div class="col-1">
                 <br>
-                <button class="btn btn-danger mt-1" (click)="removeExercicio(i)"
+                <br>
+                <button class="btn btn-danger" (click)="removeExercicio(i)"
                 data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Tooltip on right">
                   <i class="bi bi-trash3">
                 </i></button>
@@ -59,14 +60,14 @@
         </div>
       </div>
 
-      <div id="botao_Adicionar" class="col-2 offset-10">
+      <div id="botao_Adicionar" class="col-2 offset-6 offset-md-8">
         <br>
         <button class="btn btn-warning" type="submit" (click)="addExercicio()">
           <i class="bi bi-plus-square-dotted"></i>
         </button>
       </div>
 
-      <div class="col-2 offset-10">
+      <div class="col-2 offset-6 offset-md-8">
         <br>
         <button type="button" (click)="returnToList()" class="btn btn-warning mt-2">Voltar</button>
         <br>
@@ -74,6 +75,6 @@
       </div>
     </div>
   </form>
-</div>
 
---(ngSubmit)="editar()"
+
+

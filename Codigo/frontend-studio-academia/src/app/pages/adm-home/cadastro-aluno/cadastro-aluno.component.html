@@ -3,7 +3,7 @@
 
   <div class="row">
 
-    <div class="col-3 offset-4">
+    <div class="col-11 col-md-3 offset-md-4">
       <h1>{{nomeTitulo}}</h1>
     </div>
 
@@ -12,7 +12,7 @@
   <form action="" class="mt-4" [formGroup]="novoAlunoForm">
     <div class="row">
 
-      <div class="col-2 form-group offset-1 mt-1" >
+      <div class="col-11 col-md-2 form-group offset-md-1 " >
         <label for="typeUser">
           <p>Tipo do Usuário</p>
         </label>
@@ -26,7 +26,7 @@
         </app-mensagem>
       </div>
 
-      <div class="col-sm-4 form-group mt-1">
+      <div class="col-11 col-md-4 form-group ">
         <label for="email"><p>E-mail</p></label>
         <input type="email" class="form-control" formControlName="email" placeholder="Informe o E-mail">
 
@@ -39,7 +39,7 @@
         novoAlunoForm.get('email')?.errors?.['email'] " mensagem="E-mail no formato incorreto"></app-mensagem>
       </div>
 
-      <div class="col-2 form-group mt-1" >
+      <div class="col-11 col-md-2 form-group" >
         <label for="senha"><p>Senha</p></label>
         <input type="password" class="form-control" formControlName="password" placeholder="Informe a senha">
 
@@ -49,7 +49,7 @@
         </app-mensagem>
       </div>
 
-      <div class="col-2 form-group mt-1" >
+      <div class="col-11 col-md-2 form-group" >
         <label for="confirmaSenha"><p>Confirme a Senha</p></label>
         <input type="password" class="form-control" formControlName="passwordConfirm" placeholder="Informe a senha">
         <app-mensagem *ngIf="
@@ -58,12 +58,12 @@
         </app-mensagem>
       </div>
 
-      <div class="col-3 mt-1 offset-1">
+      <div class="col-11 col-md-3  offset-md-1">
         <label for="dataNascimento"><p>Data de Nascimento</p></label>
         <input type="date" name=""  class="form-control" formControlName="birthDate">
       </div>
 
-      <div class="col-4 form-group  mt-1">
+      <div class="col-11 col-md-4 form-group  mt-1">
         <label for="nome"><p>Nome</p></label>
         <input type="text" class="form-control" formControlName="name" placeholder="Informe o nome completo" >
         <app-mensagem *ngIf="
@@ -72,7 +72,7 @@
         </app-mensagem>
       </div>
 
-      <div class="col-3 form-group mt-1" >
+      <div class="col-11 col-md-3 form-group mt-1" >
         <label for="cpf"><p>CPF</p></label>
         <input type="text" class="form-control" formControlName="legal_document" placeholder="Informe o CPF">
 
@@ -82,7 +82,7 @@
         </app-mensagem>
       </div>
 
-      <div class="col-1 form-group mt-1 offset-1">
+      <div class="col-11 col-md-1 form-group mt-1 offset-md-1">
         <label for="cpf"><p>Sexo</p></label>
         <select name="" id="sex" class="form-control" formControlName="sex">
           <option value="M">M</option>
@@ -95,12 +95,12 @@
         </app-mensagem>
       </div>
 
-      <div class="col-3 form-group mt-1" >
+      <div class="col-11 col-md-3 form-group mt-1" >
         <label for="tel"><p>Telefone</p></label>
         <input type="tel" class="form-control" formControlName="phone" placeholder="Informe o contato">
       </div>
 
-      <div class="col-sm-2 form-group  mt-1">
+      <div class="col-11 col-md-2 form-group  mt-1">
         <label for="cep"><p>CEP</p></label>
         <input type="tel" class="form-control" formControlName="zipCode" placeholder="Informe o CEP">
 
@@ -110,7 +110,7 @@
         </app-mensagem>
       </div>
 
-      <div class="col-4 form-group mt-1" >
+      <div class="col-11 col-md-4 form-group mt-1" >
         <label for="logradouro"><p>Logradouro</p></label>
         <input type="text" class="form-control" formControlName="street" placeholder="Informe a rua">
         <app-mensagem *ngIf="
@@ -119,7 +119,7 @@
         </app-mensagem>
       </div>
 
-      <div class="col-2 mt-1 offset-1">
+      <div class="col-11 col-md-2  offset-md-1">
         <label for="Numero"><p>Nº</p></label>
         <input type="text" name=""  class="form-control" formControlName="number" placeholder="Informe o número">
 
@@ -129,26 +129,26 @@
         </app-mensagem>
       </div>
 
-      <div class="col-2 mt-1">
+      <div class="col-11 col-md-2 mt-1">
         <label for="complemento"><p>Complemento</p></label>
         <input type="text" name=""  class="form-control" formControlName="complement" placeholder="Aprt">
       </div>
 
-      <div class="col-2 mt-1">
+      <div class="col-11 col-md-2 mt-1">
         <label for="complemento">
           <p>Bairro</p>
         </label>
         <input type="text" name="" class="form-control" formControlName="district" placeholder="">
       </div>
 
-      <div class="col-2 mt-1">
+      <div class=" col-11 col-md-2 mt-1">
         <label for="cidade">
           <p>Cidade</p>
         </label>
         <input type="text" name="" class="form-control" formControlName="city" placeholder="">
       </div>
 
-      <div class="col-2 mt-1">
+      <div class="col-11 col-md-2 mt-1">
         <label for="estado"><p>Estado</p></label>
         <select name="" id="" class="form-control" formControlName="state" placeholder="infome o Estado">
           <option value="AC">Acre</option>
@@ -162,7 +162,7 @@
           <option value="GO">Goiás</option>
           <option value="MA">Maranhão</option>
           <option value="MT">Mato Grosso</option>
-          <option value="MS">Mato Grosso do Sul</option>
+          <option value="md">Mato Grosso do Sul</option>
           <option value="MG">Minas Gerais</option>
           <option value="PA">Pará</option>
           <option value="PB">Paraíba</option>
@@ -193,7 +193,7 @@
             <option *ngFor="let plan of plans" value="{{plan}}">{{plan}}</option>
           </select>
         </div>
-        <div class="col-3 mt-1">
+        <div class="col-11 col-md-3">
           <label for="weekday">
             <p>Dia da semana</p>
           </label>
@@ -202,14 +202,14 @@
           </mat-select>
 
         </div>
-        <div class="col-3 mt-1">
+        <div class="col-11 col-md-3 mt-1">
           <label for="cidade">
             <p>Data de vencimento</p>
           </label>
           <input type="date" name=""  class="form-control" formControlName="dueDate">
         </div>
       </div>
-      <div class="col-4 offset-10">
+      <div class="col-11 col-md-4 offset-md-10">
         <br>
         <button *ngIf="!isEdit" type="button" class="btn btn-warning mt-2" (click)="cadastrar()">Cadastrar</button>
         <button *ngIf="isEdit" type="button" class="btn btn-warning mt-2" (click)="editar()">Editar</button>

@@ -1,7 +1,6 @@
 <table class="table table-light mt-2">
   <thead>
     <tr class="table-secondary">
-      <th scope="col">id</th>
       <th scope="col">Exercício</th>
       <th scope="col">Editar exercício</th>
       <th scope="col">Apagar exercício</th>
@@ -9,7 +8,6 @@
   </thead>
   <tbody *ngFor="let exercicio of exercicios">
     <tr>
-      <th scope="row">{{exercicio.exerciseId}}</th>
       <td>{{exercicio.name}}</td>
       <td><a [routerLink]="['editarExercicio',exercicio.exerciseId]"><i class="bi bi-file-earmark-plus-fill"></i></a></td>
       <td><a (click)="delete(exercicio?.exerciseId)"> <i class="bi bi-trash"style="cursor:pointer;"></i></a></td>

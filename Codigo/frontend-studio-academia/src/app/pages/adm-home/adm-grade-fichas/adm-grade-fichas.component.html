@@ -1,17 +1,17 @@
-<div class="col-2 offset-5">
+<div class="col-10 col-md-2 offset-md-5">
   <h1>Fichas do Aluno:</h1>
 </div>
 <!-- Modal: Start-->
-<div class="col-2 offset-9">
+<div class="col-2 offset-md-9">
   <button type="button" class="btn btn-warning" data-bs-toggle="modal"
   data-bs-target="#FormFicha" data-bs-whatever="@mdo"><i class="bi bi-file-earmark-plus"></i>Adicionar Ficha</button>
 </div>
 
-<div class="modal fade" id="FormFicha" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="FormFicha" tabindex="-1" aria-labelledby="FichaModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title" id="exampleModalLabel">Nova Ficha</h2>
+        <h2 class="modal-title" id="FichaModal">Nova Ficha</h2>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -29,18 +29,14 @@
   </div>
 </div>
 <!-- Modal: Final-->
-
+<!-- Card Ficha -->
 <div *ngFor="let ficha of fichas; let i=index">
-  <div class="col-8 mt-3 offset-3">
+  <div class="col-12 col-md-8 mt-3 offset-md-3">
     <div class="card w-75 mt-3 bg-secondary">
       <div class="card-body">
         <h2 class="card-title">{{ficha?.fileName}}</h2>
         <p class="card-text">{{ficha?.description}}</p>
-
-
-        <a [routerLink]="['/adm/editarFichas', ficha.user.idUser, ficha.userFileId, ficha.fileName]"><i class="bi bi-person-bounding-box"></i></a>
-
-        <a [routerLink]="['/adm/editarFichas', ficha.user.idUser, ficha.userFileId, ficha.fileName]" class="btn btn-warning offset-8">editar</a>
+        <a [routerLink]="['/adm/editarFichas', ficha.user.idUser, ficha.userFileId, ficha.fileName]" class="btn btn-warning offset-md-8">editar</a>
         <button class="btn btn-danger offset-1" (click)="delete(ficha.userFileId)">
           <i class="bi bi-trash3"></i>
         </button>
@@ -48,3 +44,4 @@
     </div>
   </div>
 </div>
+<!--Final:  Card Ficha -->
