@@ -23,6 +23,7 @@ import {GradeListarFichasComponent} from "./grade-listar-fichas/grade-listar-fic
 import { GradeGeralPagamentosComponent } from './grade-geral-pagamentos/grade-geral-pagamentos.component';
 import { GradeAlunoPagamentosComponent } from './grade-aluno-pagamentos/grade-aluno-pagamentos.component';
 import { CommentsComponent } from './comments/comments.component';
+import { CadastroPlanoComponent } from './cadastro-plano/cadastro-plano.component';
 
 
 
@@ -45,7 +46,8 @@ import { CommentsComponent } from './comments/comments.component';
     GradeListarFichasComponent,
     GradeGeralPagamentosComponent,
     GradeAlunoPagamentosComponent,
-    CommentsComponent
+    CommentsComponent,
+    CadastroPlanoComponent
   ],
     imports: [
         CommonModule,

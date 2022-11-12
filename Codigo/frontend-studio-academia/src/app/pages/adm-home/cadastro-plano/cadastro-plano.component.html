@@ -1,0 +1,62 @@
+<div class="offset-1 offset-md-4">
+  <h2>Cadastros de Planos</h2>
+</div>
+
+<form action="" [formGroup]="planForm" (ngSubmit)="cadastrar()">
+  <div class="row">
+
+    <div class="col-10 col-md-2 offset-md-1">
+      <label for="">
+        <p>Código</p>
+      </label>
+      <input type="text" name="planCode" class="form-control" placeholder="Informe o código do Plano"
+        formControlName='planCode'>
+      <app-mensagem *ngIf="planForm.get('planCode')?.errors && planForm.get('planCode')?.touched"
+        mensagem="Campo Obrigatório"></app-mensagem>
+    </div>
+
+    <div class="col-10 col-md-2">
+      <label for="">
+        <p>Nome</p>
+      </label>
+      <input type="text" name="name" class="form-control" placeholder="Informe o nome do Plano" formControlName='name'>
+      <app-mensagem *ngIf="planForm.get('name')?.errors && planForm.get('name')?.touched" mensagem="Campo Obrigatório">
+      </app-mensagem>
+    </div>
+
+    <div class="col-10 col-md-2">
+      <label for="">
+        <p>Valor</p>
+      </label>
+      <input type="number" name="price" class="form-control" placeholder="Informe o valor do Exercício"
+        formControlName='price'>
+      <app-mensagem *ngIf="planForm.get('price')?.errors && planForm.get('price')?.touched"
+        mensagem="Campo Obrigatório"></app-mensagem>
+    </div>
+
+    <div class="col-10 col-md-2">
+      <label for="">
+        <p>dias por semana</p>
+      </label>
+      <input type="number" name="contractedDays" class="form-control" placeholder="Informe o valor do Exercício"
+        formControlName='contractedDays'>
+      <app-mensagem *ngIf="planForm.get('contractedDays')?.errors && planForm.get('contractedDays')?.touched"
+        mensagem="Campo Obrigatório"></app-mensagem>
+    </div>
+
+    <div class="col-10 col-md-8 offset-md-1">
+      <label for="">
+        <p>Descrição</p>
+      </label>
+      <textarea name="description" id=""  class="form-control" cols="40" rows="10" formControlName='description'></textarea>
+      <app-mensagem *ngIf="planForm.get('description')?.errors && planForm.get('description')?.touched"
+        mensagem="Campo Obrigatório"></app-mensagem>
+    </div>
+
+    <div class="offset-md-8">
+      <br>
+      <button type="submit" class="btn btn-warning">Cadastrar</button>
+    </div>
+  </div>
+
+</form>

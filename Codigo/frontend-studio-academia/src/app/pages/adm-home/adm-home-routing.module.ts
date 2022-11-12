@@ -1,3 +1,4 @@
+import { CadastroPlanoComponent } from './cadastro-plano/cadastro-plano.component';
 import { CommentsComponent } from './comments/comments.component';
 import { EditarExercicioComponent } from './editar-exercicio/editar-exercicio.component';
 import { NgModule, Component } from '@angular/core';
@@ -68,6 +69,10 @@ const routes: Routes = [
       {
         path : 'comentarios',
         component : CommentsComponent
+      },
+      {
+        path : 'cadastrarPlanos',
+        component : CadastroPlanoComponent
       },
 
     ]
