@@ -33,18 +33,6 @@ export class GradePlanosComponent implements OnInit {
     })
   }
 
-  editPlan(body: any) {
-    this.planService.edit(body).subscribe({
-      next: (res) =>{
-        console.log(res)
-        this.showSuccessToastr()
-      },
-      error : (err)=>{
-        console.log(err)
-        this.showErrorToastr()
-      }
-    })
-  }
 
 
   deletePlan(planId: number) {
