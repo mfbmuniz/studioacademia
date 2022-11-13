@@ -24,6 +24,8 @@ import { GradeGeralPagamentosComponent } from './grade-geral-pagamentos/grade-ge
 import { GradeAlunoPagamentosComponent } from './grade-aluno-pagamentos/grade-aluno-pagamentos.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CadastroPlanoComponent } from './cadastro-plano/cadastro-plano.component';
+import { GradePlanosComponent } from './grade-planos/grade-planos.component';
+import { EditarPlanoComponent } from './editar-plano/editar-plano.component';
 
 
 
@@ -47,7 +49,9 @@ import { CadastroPlanoComponent } from './cadastro-plano/cadastro-plano.componen
     GradeGeralPagamentosComponent,
     GradeAlunoPagamentosComponent,
     CommentsComponent,
-    CadastroPlanoComponent
+    CadastroPlanoComponent,
+    GradePlanosComponent,
+    EditarPlanoComponent
   ],
     imports: [
         CommonModule,

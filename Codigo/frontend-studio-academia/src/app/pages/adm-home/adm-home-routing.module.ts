@@ -1,3 +1,5 @@
+import { EditarPlanoComponent } from './editar-plano/editar-plano.component';
+import { GradePlanosComponent } from './grade-planos/grade-planos.component';
 import { CadastroPlanoComponent } from './cadastro-plano/cadastro-plano.component';
 import { CommentsComponent } from './comments/comments.component';
 import { EditarExercicioComponent } from './editar-exercicio/editar-exercicio.component';
@@ -74,6 +76,14 @@ const routes: Routes = [
         path : 'cadastrarPlanos',
         component : CadastroPlanoComponent
       },
+      {
+        path : 'visualizarPlanos',
+        component : GradePlanosComponent
+      },
+      {
+        path : 'editarPlano/:planId',
+        component : EditarPlanoComponent
+      }
 
     ]
   },

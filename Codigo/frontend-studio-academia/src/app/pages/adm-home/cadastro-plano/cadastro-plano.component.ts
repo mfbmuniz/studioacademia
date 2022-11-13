@@ -31,7 +31,7 @@ export class CadastroPlanoComponent implements OnInit {
   cadastrar(){
     let body = {
       name : this.planForm.value['name'],
-      price : parseFloat( this.planForm.value['price']),
+      price : this.planForm.value['price'],
       description: this.planForm.value['description'],
       planCode : this.planForm.value['planCode'],
       contractedDays : this.planForm.value['contractedDays'],
