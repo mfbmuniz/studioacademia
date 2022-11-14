@@ -20,8 +20,8 @@
       <th scope="col">{{monthlyPayment?.paymentStatus}}</th>
       <th scope="col">{{monthlyPayment?.monthlyPaymentId}}</th>
       <th scope="col">{{monthlyPayment?.userId}}</th>
-      <th scope="col">{{monthlyPayment?.dueDate}}</th>
-      <th scope="col">{{monthlyPayment?.paymentDate}}</th>
+      <th scope="col">{{monthlyPayment?.dueDate | date:'dd/MM/yyyy'}}</th>
+      <th scope="col">{{monthlyPayment?.paymentDate | date:'dd/MM/yyyy'}}</th>
       <th scope="col"><button type="button" class="btn btn-secondary" data-bs-toggle="modal" (click)="getImage(monthlyPayment.monthlyPaymentId)"
                               data-bs-target="#FormImg" data-bs-whatever="@mdo"><i class="bi bi-file-earmark-plus"></i>Comprovante</button>
         <!-- Modal: Start-->
