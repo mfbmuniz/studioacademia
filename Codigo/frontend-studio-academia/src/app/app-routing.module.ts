@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'aluno',
     canActivate: [AuthGuard],
     loadChildren: ()=> import('./pages/aluno-home/aluno-home.module').then((m)=>m.AlunoHomeModule)
+  },
+  {
+    path: 'nutri',
+    loadChildren: ()=> import('./pages/nutri-home/nutri-home.module').then((m)=>m.NutriHomeModule)
   }
 ];
 
