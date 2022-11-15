@@ -1,6 +1,7 @@
 import { NutriHomeComponent } from './nutri-home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {
@@ -10,7 +11,13 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: NutriHomeComponent
+    component: NutriHomeComponent,
+    children:[
+      {
+        path: '',
+        component : SearchComponent
+      }
+    ]
   },
 ];
 

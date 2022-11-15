@@ -1,0 +1,24 @@
+<table class="table table-light me-5" >
+  <thead>
+    <tr class="table-secondary">
+      <th scope="col" >Nome</th>
+      <th scope="col">Email</th>
+      <th scope="col">Ficha</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let user of users">
+    <div *ngIf="user?.roles?.[0]?.name === 'ALUNO' ">
+      <tr>
+        <td >{{user?.name}}</td>
+        <td>{{user?.email}}</td>
+        <td><a [routerLink]="['gradeFichas',user?.idUser]"><i class="bi bi-file-earmark-plus-fill"></i></a></td>
+        <td>TESTE</td>
+      </tr>
+    </div>
+  </tbody>
+</table>
+
+
+
+
+

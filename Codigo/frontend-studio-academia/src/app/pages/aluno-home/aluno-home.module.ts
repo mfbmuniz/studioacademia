@@ -11,6 +11,8 @@ import { GradePendenciasComponent } from './grade-pendencias/grade-pendencias.co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommentsComponent } from './comments/comments.component';
 import { MensagemModule } from 'src/app/components/mensagem/mensagem.module';
+import { PagAlertComponent } from './pag-alert/pag-alert.component';
+import { AlertModule } from 'src/app/components/alert/alert.module';
 
 
 
@@ -22,7 +24,8 @@ import { MensagemModule } from 'src/app/components/mensagem/mensagem.module';
     AlunoSidebarComponent,
     GradeExerciciosComponent,
     GradePendenciasComponent,
-    CommentsComponent
+    CommentsComponent,
+    PagAlertComponent
   ],
   imports: [
     CommonModule,
@@ -30,6 +33,7 @@ import { MensagemModule } from 'src/app/components/mensagem/mensagem.module';
     FormsModule,
     ReactiveFormsModule,
     MensagemModule,
+    AlertModule
   ],
   exports: [
     AlunoHomeComponent

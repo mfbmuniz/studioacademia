@@ -67,6 +67,9 @@ export class LoginComponent implements OnInit {
       case "ALUNO":
         this.router.navigate(["/aluno"]);
         break;
+      case "NUTRICIONISTA":
+        this.router.navigate(["/nutri"]);
+        break;
       default:
         if (this.router.url !== "/login")
           console.error("User type not allowed");

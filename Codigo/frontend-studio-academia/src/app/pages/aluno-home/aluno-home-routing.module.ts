@@ -5,6 +5,7 @@ import { AlunoHomeComponent } from './aluno-home.component';
 import { GradeFichasComponent } from './grade-fichas/grade-fichas.component';
 import { GradePendenciasComponent } from './grade-pendencias/grade-pendencias.component';
 import { CommentsComponent } from './comments/comments.component';
+import { PagAlertComponent } from './pag-alert/pag-alert.component';
 
 const routes: Routes = [
   {
@@ -13,12 +14,12 @@ const routes: Routes = [
     children:[
 
       {
-        path: 'exercicios/:idFile',
-        component: GradeExerciciosComponent
+        path : '',
+        component: GradeFichasComponent,
       },
       {
-        path: 'visualizarFichas',
-        component: GradeFichasComponent,
+        path: 'exercicios/:idFile',
+        component: GradeExerciciosComponent
       },
       {
         path: 'pagamentos',
