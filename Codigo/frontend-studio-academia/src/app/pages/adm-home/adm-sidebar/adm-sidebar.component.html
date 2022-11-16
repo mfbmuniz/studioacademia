@@ -15,11 +15,16 @@
           </li>
           <li>
             <a [routerLink]="['cadastrarExercicio']" class="nav-link px-0 align-middle">
-              <i class="fs-4 bi-file-earmark-plus-fill"></i><span class="ms-1 d-none d-sm-inline">Cadastrar Exercício</span></a>
+              <i class="fs-4 bi-file-earmark-plus-fill"></i><span class="ms-1 d-none d-sm-inline">Cadastrar
+                Exercício</span></a>
           </li>
           <li>
-            <a [routerLink]="['visualizacaoPagamentos']" class="nav-link px-0 align-middle">
-              <i class="fs-4 bi-credit-card-2-back-fill"></i> <span class="ms-1 d-none d-sm-inline">Visualizar pagamentos</span></a>
+            <div *ngIf="pageableAtrasados?.empty && pageableAnalises?.empty; else notificacaoPagamentos ">
+              <a [routerLink]="['visualizacaoPagamentos']" class="nav-link px-0 align-middle">
+                <i class="fs-4 bi-credit-card-2-back-fill"></i> <span class="ms-1 d-none d-sm-inline">
+                  Visualizarpagamentos</span>
+              </a>
+            </div>
           </li>
           <li>
             <a [routerLink]="['visualizarPlanos']" class="nav-link px-0 align-middle">
@@ -28,7 +33,8 @@
           </li>
           <li>
             <a [routerLink]="['comentarios']" class="nav-link px-0 align-middle">
-              <i class="fs-4 bi-envelope-paper-fill"></i> <span class="ms-1 d-none d-sm-inline"> Visualizar Comentarios </span>
+              <i class="fs-4 bi-envelope-paper-fill"></i> <span class="ms-1 d-none d-sm-inline"> Visualizar Comentarios
+              </span>
             </a>
           </li>
         </ul>
@@ -39,3 +45,13 @@
     </div>
   </div>
 </div>
+
+<ng-template #notificacaoPagamentos>
+
+
+  <a [routerLink]="['visualizacaoPagamentos']" class="nav-link px-0 align-middle">
+    <i class="fs-4 bi-credit-card-2-back-fill position-relative"><span
+        class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+
+      </span></i> <span class="ms-1 d-none d-sm-inline">Visualizar pagamentos</span></a>
+</ng-template>

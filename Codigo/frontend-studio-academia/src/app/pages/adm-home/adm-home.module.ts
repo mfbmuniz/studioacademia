@@ -26,6 +26,8 @@ import { CommentsComponent } from './comments/comments.component';
 import { CadastroPlanoComponent } from './cadastro-plano/cadastro-plano.component';
 import { GradePlanosComponent } from './grade-planos/grade-planos.component';
 import { EditarPlanoComponent } from './editar-plano/editar-plano.component';
+import { PagAlertComponent } from './pag-alert/pag-alert.component';
+import { AlertModule } from 'src/app/components/alert/alert.module';
 
 
 
@@ -51,7 +53,8 @@ import { EditarPlanoComponent } from './editar-plano/editar-plano.component';
     CommentsComponent,
     CadastroPlanoComponent,
     GradePlanosComponent,
-    EditarPlanoComponent
+    EditarPlanoComponent,
+    PagAlertComponent
   ],
     imports: [
         CommonModule,
@@ -60,7 +63,8 @@ import { EditarPlanoComponent } from './editar-plano/editar-plano.component';
         ReactiveFormsModule,
         MensagemModule,
         SidebarModule,
-        MatSelectModule
+        MatSelectModule,
+        AlertModule,
     ],
   exports:[
     AdmHomeComponent

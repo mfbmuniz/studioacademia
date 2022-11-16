@@ -88,9 +88,11 @@ export class MonthlyPaymentService {
 
   }
 
-
+  public pageAllPendencyByKeySearch(page : number, size : number, key : string){
+    return this.http.get(`${environment.apiUrl}/monthly-payment/pageAllWithKeySearch/${page}/size/${size}/paymentStatusRequest/${key}`)
+  }
 
 }
 
 
-///pageAllPendency/{page}/size/{size}")  -> lista tudo pendente de todo mundo
+

@@ -24,6 +24,9 @@ export class GradePendenciasComponent implements OnInit {
   fileToUpload: File | null = null;
   erro : boolean = true
   path : any = null;
+
+
+
   public types = ['PAGO', 'ATRASADO', 'AGUARDANDO_PAGAMENTO', 'EM_ANALISE', 'NAO_RECEBIDO' , 'TODOS']
   actualUser : any
 
@@ -93,10 +96,10 @@ export class GradePendenciasComponent implements OnInit {
 
     console.log('entrei porra')
     if( (!this.erro) && (this.path!=null) ) {
-      console.log(this.path)
-      console.log('index: '+index)
-      console.log('objeto pagamentos : '+this.pagamentosPendentes)
-      console.log('objeto pagamentos no index : '+this.pagamentosPendentes[index])
+      // console.log(this.path)
+      // console.log('index: '+index)
+      // console.log('objeto pagamentos : '+this.pagamentosPendentes)
+      // console.log('objeto pagamentos no index : '+this.pagamentosPendentes[index])
       let body = {
         paymentVoucher: this.path["0"],
         message: this.comprovanteForm.value['message'],

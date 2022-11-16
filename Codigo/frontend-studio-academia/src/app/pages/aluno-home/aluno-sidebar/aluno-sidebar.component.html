@@ -9,9 +9,12 @@
             </a>
           </li>
           <li>
-            <a [routerLink]="['pagamentos']" class="nav-link px-0 align-middle">
-              <i class="fs-4 bi-credit-card-2-back-fill"></i> <span class="ms-1 d-none d-sm-inline">Visualizar
-                pagamentos</span></a>
+            <div *ngIf="pageableAguardandoPagamento$?.empty && pageableNaoRecebido$?.empty && pageableAtrasado$?.empty ; else notificacaoPagamento">
+              <a [routerLink]="['pagamentos']" class="nav-link px-0 align-middle">
+                <i class="fs-4 bi-credit-card-2-back-fill position-relative"></i> <span class="ms-1 d-none d-sm-inline">Visualizar
+                  pagamentos</span>
+              </a>
+            </div>
           </li>
           <li>
             <a [routerLink]="['comentarios']" class="nav-link px-0 align-middle">
@@ -25,3 +28,12 @@
     </div>
   </div>
 </div>
+
+<ng-template #notificacaoPagamento>
+  <a [routerLink]="['pagamentos']" class="nav-link px-0 align-middle">
+    <i class="fs-4 bi-credit-card-2-back-fill position-relative"><span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+
+    </span></i> <span class="ms-1 d-none d-sm-inline">Visualizar
+      pagamentos</span>
+  </a>
+</ng-template>
