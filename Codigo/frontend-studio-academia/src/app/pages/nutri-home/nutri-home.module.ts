@@ -7,6 +7,8 @@ import { NutriSidebarComponent } from './nutri-sidebar/nutri-sidebar.component';
 import { SearchComponent } from './search/search.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GradeAlunosComponent } from './grade-alunos/grade-alunos.component';
+import { AvalicaoFisicaComponent } from './avalicao-fisica/avalicao-fisica.component';
+import { MensagemModule } from 'src/app/components/mensagem/mensagem.module';
 
 
 @NgModule({
@@ -15,12 +17,14 @@ import { GradeAlunosComponent } from './grade-alunos/grade-alunos.component';
     NutriSidebarComponent,
     SearchComponent,
     GradeAlunosComponent,
+    AvalicaoFisicaComponent,
 
   ],
   imports: [
     CommonModule,
     NutriHomeRoutingModule,
     ReactiveFormsModule,
+    MensagemModule,
   ],
   exports : [
     NutriHomeComponent

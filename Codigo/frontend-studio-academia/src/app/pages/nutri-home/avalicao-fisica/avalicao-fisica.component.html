@@ -1,0 +1,506 @@
+<form [formGroup]="physicalForm" (submit)="send()">
+  <div class="row" >
+    <div class="d-grid gap-2 col-10 offset-md-1">
+      <button class="btn btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMedidasGerais" aria-expanded="false" aria-controls="collapseMedidasGerais">
+        <h1>Medidas Gerais</h1>
+      </button>
+    </div>
+    <div class="collapse" id="collapseMedidasGerais">
+      <br>
+      <div class="row">
+        <div class="col-10 col-md-2 offset-md-1">
+          <label for=""><p> Altura</p></label>
+          <input type="number" min="0" class="form-control" formControlName="height">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('height')?.errors?.['required'] && physicalForm.get('height')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-2">
+          <label for=""><p>general_description</p></label>
+          <input type="number" min="0" class="form-control" formControlName="general_description">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('general_description')?.errors?.['required'] && physicalForm.get('general_description')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-2">
+          <label for=""><p>Peso ideal</p></label>
+          <input type="number" min="0" class="form-control" formControlName="ideal_weight">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('ideal_weight')?.errors?.['required'] && physicalForm.get('ideal_weight')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-2">
+          <label for=""><p>Peso atual</p></label>
+          <input type="number" min="0" class="form-control" formControlName="actual_weight">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('actual_weight')?.errors?.['required'] && physicalForm.get('actual_weight')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-2">
+          <label for=""><p>IMC</p></label>
+          <input type="number" min="0" class="form-control" formControlName="IMC">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('IMC')?.errors?.['required'] && physicalForm.get('IMC')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="d-grid gap-2  col-10 offset-md-1">
+      <button class="btn btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMedidasCorporais" aria-expanded="false" aria-controls="collapseMedidasCorporais">
+        <h1>Medidas Corporais</h1>
+      </button>
+    </div>
+
+    <div class="collapse" id="collapseMedidasCorporais">
+      <div class="row">
+        <div class="col-10 col-md-3">
+          <label for=""><p>Braço direito relaxado</p></label>
+          <input type="number" min="0" class="form-control" formControlName="relaxed_right_arm">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('relaxed_right_arm')?.errors?.['required'] && physicalForm.get('relaxed_right_arm')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Braço esquerdo relaxado</p></label>
+          <input type="number" min="0" class="form-control" formControlName="relaxed_left_arm">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('relaxed_left_arm')?.errors?.['required'] && physicalForm.get('relaxed_left_arm')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Braço direito contraído</p></label>
+          <input type="number" min="0" class="form-control" formControlName="contracted_right_arm">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('contracted_right_arm')?.errors?.['required'] && physicalForm.get('contracted_right_arm')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Braço esquerdo contraído</p></label>
+          <input type="number" min="0" class="form-control" formControlName="contracted_left_arm">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('contracted_left_arm')?.errors?.['required'] && physicalForm.get('contracted_left_arm')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Antebraço direito</p></label>
+          <input type="number" min="0" class="form-control" formControlName="right_forearm">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('right_forearm')?.errors?.['required'] && physicalForm.get('right_forearm')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Antebraço esquerdo</p></label>
+          <input type="number" min="0" class="form-control" formControlName="left_forearm">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('left_forearm')?.errors?.['required'] && physicalForm.get('left_forearm')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Punho direito</p></label>
+          <input type="number" min="0" class="form-control" formControlName="right_fist">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('right_fist')?.errors?.['required'] && physicalForm.get('right_fist')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Punho esquerdo</p></label>
+          <input type="number" class="form-control" min="0" formControlName="left_fist">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('left_fist')?.errors?.['required'] && physicalForm.get('left_fist')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Pescoço</p></label>
+          <input type="number" min="0" class="form-control" formControlName="neck">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('neck')?.errors?.['required'] && physicalForm.get('neck')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Peito</p></label>
+          <input type="number" min="0" class="form-control" formControlName="chest">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('chest')?.errors?.['required'] && physicalForm.get('chest')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>abdômen</p></label>
+          <input type="number" min="0" class="form-control" formControlName="abdomen">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('abdomen')?.errors?.['required'] && physicalForm.get('abdomen')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Ombro</p></label>
+          <input type="number" min="0" class="form-control" formControlName="shoulder">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('shoulder')?.errors?.['required'] && physicalForm.get('shoulder')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Quadril</p></label>
+          <input type="number" min="0" class="form-control" formControlName="hip">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('hip')?.errors?.['required'] && physicalForm.get('hip')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Panturrilha direita</p></label>
+          <input type="number" min="0" class="form-control" formControlName="right_calf">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('right_calf')?.errors?.['required'] && physicalForm.get('right_calf')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Panturrilha esquerda</p></label>
+          <input type="number" min="0" class="form-control" formControlName="left_calf">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('left_calf')?.errors?.['required'] && physicalForm.get('left_calf')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>coxa direita</p></label>
+          <input type="number" min="0" class="form-control" formControlName="right_thigh">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('right_thigh')?.errors?.['required'] && physicalForm.get('right_thigh')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>coxa esquerda</p></label>
+          <input type="number" min="0" class="form-control" formControlName="left_thigh">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('left_thigh')?.errors?.['required'] && physicalForm.get('left_thigh')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>coxa proximal direita</p></label>
+          <input type="number" min="0" class="form-control" formControlName="right_proximal_thigh">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('right_proximal_thigh')?.errors?.['required'] && physicalForm.get('right_proximal_thigh')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>coxa proximal esquerda</p></label>
+          <input type="number" min="0" class="form-control" formControlName="left_proximal_thigh">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('left_proximal_thigh')?.errors?.['required'] && physicalForm.get('left_proximal_thigh')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Diâmetro do osso do pulso</p></label>
+          <input type="number" min="0" class="form-control" formControlName="bone_fist_diameter">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('bone_fist_diameter')?.errors?.['required'] && physicalForm.get('bone_fist_diameter')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>fêmur</p></label>
+          <input type="number" min="0" class="form-control" formControlName="femur">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('femur')?.errors?.['required'] && physicalForm.get('femur')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="d-grid gap-2  col-10 offset-md-1">
+      <button class="btn btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMedidasCutaneas" aria-expanded="false" aria-controls="collapseMedidasCutaneas">
+        <h1>medidas Cutaneas</h1>
+      </button>
+    </div>
+
+    <div class="collapse" id="collapseMedidasCutaneas">
+      <div class="row">
+        <div class="col-10 col-md-3">
+          <label for=""><p>Dobra cutânea do bíceps</p></label>
+          <input type="number" min="0" class="form-control" formControlName="skin_folds_biceps">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('skin_folds_biceps')?.errors?.['required'] && physicalForm.get('skin_folds_biceps')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Dobra cutânea do tríceps</p></label>
+          <input type="number" min="0" class="form-control" formControlName="skin_folds_triceps">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('skin_folds_triceps')?.errors?.['required'] && physicalForm.get('skin_folds_triceps')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Dobra cutânea do abdômen</p></label>
+          <input type="number" min="0" class="form-control" formControlName="skin_folds_abdominal">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('skin_folds_abdominal')?.errors?.['required'] && physicalForm.get('skin_folds_abdominal')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Dobra cutânea do suprailíaco</p></label>
+          <input type="number" min="0" class="form-control" formControlName="skin_folds_suprailiac">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('skin_folds_suprailiac')?.errors?.['required'] && physicalForm.get('skin_folds_suprailiac')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Dobra cutânea axilar média</p></label>
+          <input type="number" min="0" class="form-control" formControlName="skin_folds_medium_armpit">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('skin_folds_medium_armpit')?.errors?.['required'] && physicalForm.get('skin_folds_medium_armpit')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Dobra cutânea do peito</p></label>
+          <input type="number" min="0" class="form-control" formControlName="skin_folds_chest">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('skin_folds_chest')?.errors?.['required'] && physicalForm.get('skin_folds_chest')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Dobra cutânea subescapular</p></label>
+          <input type="number" min="0" class="form-control" formControlName="skin_folds_subscapularis">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('skin_folds_subscapularis')?.errors?.['required'] && physicalForm.get('skin_folds_subscapularis')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Dobra cutânea subescapular</p></label>
+          <input type="number" min="0" class="form-control" formControlName="skin_folds_subscapularis">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('skin_folds_subscapularis')?.errors?.['required'] && physicalForm.get('skin_folds_subscapularis')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Dobra cutânea da coxa</p></label>
+          <input type="number" min="0" class="form-control" formControlName="skin_folds_thigh">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('skin_folds_thigh')?.errors?.['required'] && physicalForm.get('skin_folds_thigh')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>pele medial da panturrilha</p></label>
+          <input type="number" min="0" class="form-control" formControlName="skin_medial_calf">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('skin_medial_calf')?.errors?.['required'] && physicalForm.get('skin_medial_calf')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="d-grid gap-2 col-10 offset-md-1">
+      <button class="btn btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMedidasComplementares" aria-expanded="false" aria-controls="collapseMedidasComplementares">
+        <h1>Medidas Complementares</h1>
+      </button>
+    </div>
+
+    <div class="collapse" id="collapseMedidasComplementares">
+      <div class="row">
+        <div class="col-10 col-md-3">
+          <label for=""><p>Gordura corporal</p></label>
+          <input type="number" min="0" class="form-control" formControlName="fat_mass">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('fat_mass')?.errors?.['required'] && physicalForm.get('fat_mass')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Água corporal</p></label>
+          <input type="number" min="0" class="form-control" formControlName="corporal_water">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('corporal_water')?.errors?.['required'] && physicalForm.get('corporal_water')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Massa residual</p></label>
+          <input type="number" min="0" class="form-control" formControlName="residual_weight">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('residual_weight')?.errors?.['required'] && physicalForm.get('residual_weight')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Gordura visceral</p></label>
+          <input type="number" min="0" class="form-control" formControlName="visceral_fat">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('visceral_fat')?.errors?.['required'] && physicalForm.get('visceral_fat')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Massa magra</p></label>
+          <input type="number" min="0" class="form-control" formControlName="lean_mass">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('lean_mass')?.errors?.['required'] && physicalForm.get('lean_mass')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Massa muscular</p></label>
+          <input type="number" min="0" class="form-control" formControlName="muscular_weight">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('muscular_weight')?.errors?.['required'] && physicalForm.get('muscular_weight')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Idade metabólica</p></label>
+          <input type="number" min="0" class="form-control" formControlName="metabolic_age">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('metabolic_age')?.errors?.['required'] && physicalForm.get('metabolic_age')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
+          <label for=""><p>Massa óssea</p></label>
+          <input type="number" min="0" class="form-control" formControlName="bone_weight">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('bone_weight')?.errors?.['required'] && physicalForm.get('bone_weight')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+      </div>
+    </div>
+
+
+
+  <div class="col-10 col-md-6 offset-md-1">
+    <label for=""><p>Descrição</p></label>
+    <br>
+    <textarea formControlName="description" class="form-control" cols="60" rows="5"></textarea>
+  </div>
+
+  <div class="col-3 offset-md-8">
+    <button type="submit" class="btn btn-warning">Enviar</button>
+  </div>
+
+</div>
+</form>
+
+<br>
+<br>
+<br>
+<br>

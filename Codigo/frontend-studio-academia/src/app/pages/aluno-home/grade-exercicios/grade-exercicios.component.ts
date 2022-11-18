@@ -39,7 +39,7 @@ export class GradeExerciciosComponent implements OnInit {
   }
 
   listExerciseUser(fileId : number){
-    console.log("ALOU")
+    // console.log("ALOU")
     this.userFileServise.pegarFichaUser(fileId).subscribe({
       next: (res)=>{
         this.pageable = res
