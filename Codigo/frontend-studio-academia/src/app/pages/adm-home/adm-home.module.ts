@@ -28,6 +28,8 @@ import { GradePlanosComponent } from './grade-planos/grade-planos.component';
 import { EditarPlanoComponent } from './editar-plano/editar-plano.component';
 import { PagAlertComponent } from './pag-alert/pag-alert.component';
 import { AlertModule } from 'src/app/components/alert/alert.module';
+import { GradeAvaliacaoFisicaComponent } from './grade-avaliacao-fisica/grade-avaliacao-fisica.component';
+import { AvaliacaoFisicaComponent } from './avaliacao-fisica/avaliacao-fisica.component';
 
 
 
@@ -54,7 +56,9 @@ import { AlertModule } from 'src/app/components/alert/alert.module';
     CadastroPlanoComponent,
     GradePlanosComponent,
     EditarPlanoComponent,
-    PagAlertComponent
+    PagAlertComponent,
+    GradeAvaliacaoFisicaComponent,
+    AvaliacaoFisicaComponent
   ],
     imports: [
         CommonModule,

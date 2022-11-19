@@ -13,7 +13,7 @@ export class PlanService {
 
   private static API_URLS = {
     CREATE: `${environment.apiUrl}/plans/create`,
-    UPDATE : `${environment.apiUrl}/plans/create`,
+    UPDATE : `${environment.apiUrl}/plans/edit`,
     DELETE : `${environment.apiUrl}/plans/delete/planId`,
     GETPLANBYID : `${environment.apiUrl}/plans/getplanbyid/planId`,
   };

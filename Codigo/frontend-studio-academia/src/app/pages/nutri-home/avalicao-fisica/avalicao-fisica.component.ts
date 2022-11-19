@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { PhysicalAssessmentService } from './../../../services/physical-assessmentService.';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -17,7 +19,9 @@ export class AvalicaoFisicaComponent implements OnInit {
   constructor(
     private formBuilder : FormBuilder,
     private authService : AuthService,
-    private routeAc: ActivatedRoute,) {
+    private routeAc: ActivatedRoute,
+    private PhysicalAssessmentService:PhysicalAssessmentService,
+    private toastr: ToastrService,) {
       this.routeAc.params.subscribe(params => this.idAluno = params['idAluno'])
      }
 
@@ -122,8 +126,25 @@ export class AvalicaoFisicaComponent implements OnInit {
       description    : this.physicalForm.value['description'],
     }
 
-    console.log(body)
+    // console.log(body)
+    this.PhysicalAssessmentService.create(body).subscribe({
+      next:(res)=>{
+        this.showSuccessToastr()
+      },
+      error: (err)=>{
+        console.log(err)
+        this.showErrorToastr()
+      }
+    })
 
+  }
+
+  showSuccessToastr(){
+    this.toastr.success("Enviado com sucesso", "Sucesso")
+  }
+
+  showErrorToastr(){
+    this.toastr.error("O envio não pode ser feito", "Erro")
   }
 
 }

@@ -4,18 +4,23 @@
 
     <select class="btn btn-outline-secondary dropdown-toggle" formControlName="typeSearch" type="button" data-bs-toggle="dropdown"
       aria-expanded="false">
-      <option value="user" [defaultSelected]="true">Usuario</option>
+      <option value="user" [selected]="true" >Usuario</option>
       <option value="exercise">Exercício</option>
+      <option value="physical">Avaliação Física</option>
     </select>
-    <input type="search" formControlName="keySearch" class="form-control" aria-label="Text input with dropdown button">
+    <input type="search" formControlName="keySearch" class="form-control" placeholder="Informe o nome do usuário ou exercício" aria-label="Text input with dropdown button">
     <button type="submit" class="btn btn-warning"><i class="bi bi-search"></i></button>
   </div>
 </form>
 <div *ngIf="hasValuesToLoad && isSearchUser" id="grade-alunos">
   <app-grade-alunos [pageable]="content$"></app-grade-alunos>
 </div>
-<div *ngIf="hasValuesToLoad && !isSearchUser">
+<div *ngIf="hasValuesToLoad && isSearchExercise && !isSearchUser">
   <div class=" col-sm-5 offset-sm-4">
     <app-tabela-exercicios [pageable]="content$"></app-tabela-exercicios>
   </div>
+</div>
+
+<div *ngIf="hasValuesToLoad && this.isSearchPhysicalAssement  && !isSearchUser">
+  <app-grade-avaliacao-fisica [pageable]="content$"></app-grade-avaliacao-fisica>
 </div>

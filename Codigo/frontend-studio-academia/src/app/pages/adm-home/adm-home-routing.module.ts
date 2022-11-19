@@ -16,6 +16,7 @@ import { AdmGradeFichasComponent } from './adm-grade-fichas/adm-grade-fichas.com
 import { EditarFichasComponent } from './editar-fichas/editar-fichas.component';
 import { GradeAlunoPagamentosComponent } from './grade-aluno-pagamentos/grade-aluno-pagamentos.component';
 import { GradeGeralPagamentosComponent } from './grade-geral-pagamentos/grade-geral-pagamentos.component';
+import { AvaliacaoFisicaComponent } from './avaliacao-fisica/avaliacao-fisica.component';
 
 
 const routes: Routes = [
@@ -83,8 +84,11 @@ const routes: Routes = [
       {
         path : 'editarPlano/:planId',
         component : EditarPlanoComponent
-      }
-
+      },
+      {
+        path : 'avaliacaoFisica/:idAvaliacao',
+        component : AvaliacaoFisicaComponent
+      },
     ]
   },
 ];

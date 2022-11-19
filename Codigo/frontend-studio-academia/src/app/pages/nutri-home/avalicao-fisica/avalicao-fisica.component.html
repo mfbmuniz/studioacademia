@@ -285,7 +285,7 @@
 
     <div class="d-grid gap-2  col-10 offset-md-1">
       <button class="btn btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMedidasCutaneas" aria-expanded="false" aria-controls="collapseMedidasCutaneas">
-        <h1>medidas Cutaneas</h1>
+        <h1>medidas Cutâneas</h1>
       </button>
     </div>
 
@@ -347,16 +347,6 @@
 
           <app-mensagem *ngIf="
               physicalForm.get('skin_folds_chest')?.errors?.['required'] && physicalForm.get('skin_folds_chest')?.touched "
-            mensagem="número obrigatório">
-          </app-mensagem>
-        </div>
-
-        <div class="col-10 col-md-3">
-          <label for=""><p>Dobra cutânea subescapular</p></label>
-          <input type="number" min="0" class="form-control" formControlName="skin_folds_subscapularis">
-
-          <app-mensagem *ngIf="
-              physicalForm.get('skin_folds_subscapularis')?.errors?.['required'] && physicalForm.get('skin_folds_subscapularis')?.touched "
             mensagem="número obrigatório">
           </app-mensagem>
         </div>
