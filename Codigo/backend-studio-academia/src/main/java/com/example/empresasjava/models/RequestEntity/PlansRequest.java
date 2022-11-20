@@ -27,7 +27,7 @@ public class PlansRequest {
 
     @NotNull(message = "Campo name não pode ser nulo")
     @NotEmpty(message = "Campo name não pode ser vazio")
-    private BigDecimal price;
+    private String price;
     @NotNull(message = "Campo name não pode ser nulo")
     @NotEmpty(message = "Campo name não pode ser vazio")
     private String description;
@@ -41,7 +41,7 @@ public class PlansRequest {
                 plan.planCode,
                 plan.name,
                 plan.contractedDays,
-                plan.price,
+                Double.parseDouble(plan.getPrice()),
                 plan.description
 
         );

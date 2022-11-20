@@ -1,6 +1,7 @@
 <table class="table table-light me-5 d-none d-md-table" >
   <thead>
     <tr class="table-secondary">
+      <th scope="col">ID</th>
       <th scope="col">Tipo</th>
       <th scope="col" >Nome</th>
       <th scope="col">Email</th>
@@ -11,6 +12,7 @@
   </thead>
   <tbody *ngFor="let user of users">
     <tr>
+      <th scope="row">{{user?.idUser}}</th>
       <th scope="row">{{user?.roles?.[0]?.name }}</th>
       <td >{{user?.name}}</td>
       <td>{{user?.email}}</td>

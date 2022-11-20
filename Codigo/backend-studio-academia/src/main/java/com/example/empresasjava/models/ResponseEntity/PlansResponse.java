@@ -21,12 +21,12 @@ public class PlansResponse {
 
     private String contractedDays;
 
-    private BigDecimal price;
+    private Double price;
 
     private String description;
 
 
-    public PlansResponse(Long planId, String planCode, String name, String contractedDays, BigDecimal price, String description) {
+    public PlansResponse(Long planId, String planCode, String name, String contractedDays, Double price, String description) {
         this.planId = planId;
         this.planCode = planCode;
         this.name = name;
