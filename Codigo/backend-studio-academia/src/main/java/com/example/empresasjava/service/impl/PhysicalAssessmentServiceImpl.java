@@ -33,7 +33,7 @@ public class PhysicalAssessmentServiceImpl implements PhysicalAssessmentService 
             throws NonUniqueResultException, NotFoundException{
 
         Optional<PhysicalAssessment> physicalAssessment = Optional.ofNullable(this.physicalAssessmentRepository.
-                findOneByPhysicalAssessmentId(physicalAssessmentRequest.getPhysicalAssessment_id()));
+                findOneByPhysicalAssessmentId(physicalAssessmentRequest.getPhysicalAssessmentId()));
 
         if(!physicalAssessment .isPresent()){
             return PhysicalAssessmentResponse.fromPhysicalAssessment(this.physicalAssessmentRepository.save(PhysicalAssessmentRequest.toPhysicalAssessment(physicalAssessmentRequest)));
@@ -45,7 +45,8 @@ public class PhysicalAssessmentServiceImpl implements PhysicalAssessmentService 
     @Override
     public PhysicalAssessmentResponse editPhysicalAssessment(PhysicalAssessmentRequest physicalAssessmentRequest)throws  NotFoundException{
 
-        PhysicalAssessment physicalAssessmentTemp = Optional.of(this.physicalAssessmentRepository.findOneByPhysicalAssessmentId(physicalAssessmentRequest.getPhysicalAssessment_id())).
+        PhysicalAssessment physicalAssessmentTemp = Optional.of(this.physicalAssessmentRepository.findOneByPhysicalAssessmentId
+                        (physicalAssessmentRequest.getPhysicalAssessmentId())).
                 orElseThrow(()-> new NonUniqueResultException("Avaliação Inexistente"));
 
         PhysicalAssessment physicalAssessment = PhysicalAssessmentRequest.toPhysicalAssessment(physicalAssessmentRequest);
