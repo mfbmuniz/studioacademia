@@ -1,3 +1,4 @@
+<div *ngIf="physical">
 <div class="d-grid gap-2 col-10 offset-md-1">
   <button class="btn btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMedidasGerais"
     aria-expanded="false" aria-controls="collapseMedidasGerais">
@@ -12,35 +13,35 @@
       <label for="">
         <p> Altura</p>
       </label>
-      <input type="number"  value="12.4"  readonly min="0" class="form-control" formControlName="height">
+      <input type="number"  value={{physical.height}}  readonly min="0" class="form-control" formControlName="height">
     </div>
 
     <div class="col-10 col-md-2">
       <label for="">
         <p>general_description</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="general_description">
+      <input type="number" value={{physical.general_description}}  readonly min="0" class="form-control" formControlName="general_description">
     </div>
 
     <div class="col-10 col-md-2">
       <label for="">
         <p>Peso ideal</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="ideal_weight">
+      <input type="number" value={{physical.ideal_weight}}  readonly min="0" class="form-control" formControlName="ideal_weight">
     </div>
 
     <div class="col-10 col-md-2">
       <label for="">
         <p>Peso atual</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="actual_weight">
+      <input type="number" value={{physical.actual_weight}}  readonly min="0" class="form-control" formControlName="actual_weight">
     </div>
 
     <div class="col-10 col-md-2">
       <label for="">
         <p>IMC</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="IMC">
+      <input type="number" value={{physical.IMC}}  readonly min="0" class="form-control" formControlName="IMC">
     </div>
 
   </div>
@@ -60,140 +61,147 @@
       <label for="">
         <p>Braço direito relaxado</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="relaxed_right_arm">
+      <input type="number" value={{physical.relaxed_right_arm}}   readonly min="0" class="form-control" formControlName="relaxed_right_arm">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Braço esquerdo relaxado</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="relaxed_left_arm">
+      <input type="number" value={{physical.relaxed_left_arm}}  readonly min="0" class="form-control" formControlName="relaxed_left_arm">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Braço direito contraído</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="contracted_right_arm">
+      <input type="number" value={{physical.contracted_right_arm}}  readonly min="0" class="form-control" formControlName="contracted_right_arm">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Braço esquerdo contraído</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="contracted_left_arm">
+      <input type="number" value={{physical.contracted_left_arm}}  readonly min="0" class="form-control" formControlName="contracted_left_arm">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Antebraço direito</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="right_forearm">
+      <input type="number" value={{physical.right_forearm}}  readonly min="0" class="form-control" formControlName="right_forearm">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Antebraço esquerdo</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="left_forearm">
+      <input type="number" value={{physical.left_forearm}} readonly min="0" class="form-control" formControlName="left_forearm">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Punho direito</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="right_fist">
+      <input type="number" value={{physical.right_fist}}  readonly min="0" class="form-control" formControlName="right_fist">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Punho esquerdo</p>
       </label>
-      <input type="number" class="form-control" value="12.4"  readonly min="0" formControlName="left_fist">
+      <input type="number" class="form-control" value={{physical.left_fist}}  readonly min="0" formControlName="left_fist">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Pescoço</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="neck">
+      <input type="number" value={{physical.neck}}  readonly min="0" class="form-control" formControlName="neck">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Peito</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="chest">
+      <input type="number" value={{physical.chest}}  readonly min="0" class="form-control" formControlName="chest">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>abdômen</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="abdomen">
+      <input type="number" value={{physical.abdomen}}  readonly min="0" class="form-control" formControlName="abdomen">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Ombro</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="shoulder">
+      <input type="number" value={{physical.shoulder}}  readonly min="0" class="form-control" formControlName="shoulder">
+    </div>
+
+    <div class="col-10 col-md-3">
+      <label for="">
+        <p>Cintura</p>
+      </label>
+      <input type="number" value={{physical.waist}}  readonly min="0" class="form-control" formControlName="waist">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Quadril</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="hip">
+      <input type="number" value={{physical.hip}}  readonly min="0" class="form-control" formControlName="hip">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Panturrilha direita</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="right_calf">
+      <input type="number" value={{physical.right_calf}}  readonly min="0" class="form-control" formControlName="right_calf">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Panturrilha esquerda</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="left_calf">
+      <input type="number" value={{physical.left_calf}}  readonly min="0" class="form-control" formControlName="left_calf">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>coxa direita</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="right_thigh">
+      <input type="number" value={{physical.right_thigh}}  readonly min="0" class="form-control" formControlName="right_thigh">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>coxa esquerda</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="left_thigh">
+      <input type="number" value={{physical.left_thigh}}  readonly min="0" class="form-control" formControlName="left_thigh">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>coxa proximal direita</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="right_proximal_thigh">
+      <input type="number" value={{physical.right_proximal_thigh}}  readonly min="0" class="form-control" formControlName="right_proximal_thigh">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>coxa proximal esquerda</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="left_proximal_thigh">
+      <input type="number" value={{physical.left_proximal_thigh}}  readonly min="0" class="form-control" formControlName="left_proximal_thigh">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Diâmetro do osso do pulso</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="bone_fist_diameter">
+      <input type="number" value={{physical.bone_fist_diameter}}  readonly min="0" class="form-control" formControlName="bone_fist_diameter">
 
 
     </div>
@@ -202,7 +210,7 @@
       <label for="">
         <p>fêmur</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="femur">
+      <input type="number" value={{physical.femur}}  readonly min="0" class="form-control" formControlName="femur">
     </div>
   </div>
 
@@ -221,63 +229,63 @@
       <label for="">
         <p>Dobra cutânea do bíceps</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="skin_folds_biceps">
+      <input type="number" value={{physical.skin_folds_biceps}}  readonly min="0" class="form-control" formControlName="skin_folds_biceps">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Dobra cutânea do tríceps</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="skin_folds_triceps">
+      <input type="number" value={{physical.skin_folds_triceps}}  readonly min="0" class="form-control" formControlName="skin_folds_triceps">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Dobra cutânea do abdômen</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="skin_folds_abdomen">
+      <input type="number" value={{physical.skin_folds_abdominal}}  readonly min="0" class="form-control" formControlName="skin_folds_abdomen">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Dobra cutânea do suprailíaco</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="skin_folds_suprailiac">
+      <input type="number" value={{physical.skin_folds_suprailiac}}  readonly min="0" class="form-control" formControlName="skin_folds_suprailiac">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Dobra cutânea axilar média</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="skin_folds_medium_armpit">
+      <input type="number" value={{physical.skin_folds_medium_armpit}}  readonly min="0" class="form-control" formControlName="skin_folds_medium_armpit">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Dobra cutânea do peito</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="skin_folds_chest">
+      <input type="number" value={{physical.skin_folds_chest}}  readonly min="0" class="form-control" formControlName="skin_folds_chest">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Dobra cutânea subescapular</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="skin_folds_subscapularis">
+      <input type="number" value={{physical.skin_folds_subscapularis}}  readonly min="0" class="form-control" formControlName="skin_folds_subscapularis">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Dobra cutânea da coxa</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="skin_folds_thigh">
+      <input type="number" value={{physical.skin_folds_thigh}}  readonly min="0" class="form-control" formControlName="skin_folds_thigh">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>pele medial da panturrilha</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="skin_medial_calf">
+      <input type="number" value={{physical.skin_medial_calf}}  readonly min="0" class="form-control" formControlName="skin_medial_calf">
     </div>
   </div>
 </div>
@@ -296,56 +304,56 @@
       <label for="">
         <p>Gordura corporal</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="fat_mass">
+      <input type="number" value={{physical.fat_mass}}  readonly min="0" class="form-control" formControlName="fat_mass">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Água corporal</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="corporal_water">
+      <input type="number" value={{physical.corporal_water}}   readonly min="0" class="form-control" formControlName="corporal_water">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Massa residual</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="residual_weight">
+      <input type="number" value={{physical.residual_weight}}  readonly min="0" class="form-control" formControlName="residual_weight">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Gordura visceral</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="visceral_fat">
+      <input type="number" value={{physical.visceral_fat}}  readonly min="0" class="form-control" formControlName="visceral_fat">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Massa magra</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="lean_mass">
+      <input type="number" value={{physical.lean_mass}}  readonly min="0" class="form-control" formControlName="lean_mass">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Massa muscular</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="muscular_weight">
+      <input type="number" value={{physical.muscular_weight}}   readonly min="0" class="form-control" formControlName="muscular_weight">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Idade metabólica</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="metabolic_age">
+      <input type="number" value={{physical.metabolic_age}}  readonly min="0" class="form-control" formControlName="metabolic_age">
     </div>
 
     <div class="col-10 col-md-3">
       <label for="">
         <p>Massa óssea</p>
       </label>
-      <input type="number" value="12.4"  readonly min="0" class="form-control" formControlName="bone_weight">
+      <input type="number" value={{physical.bone_weight}}  readonly min="0" class="form-control" formControlName="bone_weight">
     </div>
 
   </div>
@@ -355,11 +363,11 @@
 <div class="card offset-md-1"  style="width: 30rem; background-color: rgb(43, 43, 43);">
   <div class="card-body">
     <h2 class="card-title">Descrição</h2>
-    <p class="card-text">Texto Aqui</p>
+    <p class="card-text">{{physical.description}}</p>
   </div>
 </div>
 
-
+</div>
 
 <br>
 <br>

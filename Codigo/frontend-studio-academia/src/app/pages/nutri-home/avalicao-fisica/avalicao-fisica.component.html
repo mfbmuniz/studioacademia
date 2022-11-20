@@ -191,6 +191,16 @@
         </div>
 
         <div class="col-10 col-md-3">
+          <label for=""><p>Cintura</p></label>
+          <input type="number" min="0" class="form-control" formControlName="waist">
+
+          <app-mensagem *ngIf="
+              physicalForm.get('waist')?.errors?.['required'] && physicalForm.get('waist')?.touched "
+            mensagem="número obrigatório">
+          </app-mensagem>
+        </div>
+
+        <div class="col-10 col-md-3">
           <label for=""><p>Quadril</p></label>
           <input type="number" min="0" class="form-control" formControlName="hip">
 
