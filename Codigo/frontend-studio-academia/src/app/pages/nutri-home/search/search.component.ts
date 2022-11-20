@@ -26,7 +26,9 @@ export class SearchComponent implements OnInit {
     console.log(this.searchForm.value)
 
     this.hasValuesToLoad = false
-    let keysearch = this.searchForm.value.key;
+    var keysearch = this.searchForm.value.key;
+    console.log('pegou a keysearch')
+    console.log(keysearch)
     this.userService.listByPage(0, 10, keysearch)
       .subscribe(
         (res: any) => {

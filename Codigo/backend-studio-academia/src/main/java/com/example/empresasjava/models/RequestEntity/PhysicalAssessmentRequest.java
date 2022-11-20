@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 public class PhysicalAssessmentRequest {
 
-    private Long physicalAssessment_id;
+    private Long physicalAssessmentId;
 
     private Long userId;
 

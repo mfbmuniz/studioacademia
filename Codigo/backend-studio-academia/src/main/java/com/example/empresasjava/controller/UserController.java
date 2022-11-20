@@ -27,8 +27,7 @@ public class UserController {
 
     @PostMapping(path = "/create")
     @ApiOperation(value = "Criar novo usuário")
-    //@Secure({RolesEnum.ADMIN})
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','PROFESSOR'})")
     public ResponseEntity<UserDto> createUser(
             @ApiParam(value = "Json da requisição que contem o dado do usuario a ser salvo")
             @Valid @RequestBody UserRequest request) throws NotFoundException {
@@ -38,7 +37,7 @@ public class UserController {
         );
     }
 
-    //todo: trocar rotas de edição para @PatchMapping
+
     @PostMapping(path = "/edit")
     @ApiOperation(value = "Editar usuário existente")
     public ResponseEntity<UserDto> editUser(
@@ -59,7 +58,7 @@ public class UserController {
         );
     }
 
-        @DeleteMapping(path = "/delete")
+    @DeleteMapping(path = "/delete")
     @ApiOperation(value = "Desativa usuário existente")
     public ResponseEntity<UserDto> deleteLoggedUser(){
         return ResponseEntity.ok().body(
@@ -67,7 +66,7 @@ public class UserController {
         );
     }
 
-//    @Secure({RolesEnum.ADMIN})
+
     @GetMapping(path = "/page/{page}/size/{size}")
     @ResponseBody
     @ApiOperation(value = "Lista usuários por página quantidade")
@@ -84,7 +83,7 @@ public class UserController {
 
     }
 
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','NUTRICIONISTA','PROFESSOR'})")
     @GetMapping(path = "page/{page}/size/{size}/name/{name}")
     @ResponseBody
     @ApiOperation(value = "Lista usuários por página quantidade")
@@ -105,7 +104,7 @@ public class UserController {
 
     }
 
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','NUTRICIONISTA','PROFESSOR'})")
     @GetMapping(path = "getuserbyid/userId/{userId}")
     @ResponseBody
     @ApiOperation(value = "Lista usuários por página quantidade")

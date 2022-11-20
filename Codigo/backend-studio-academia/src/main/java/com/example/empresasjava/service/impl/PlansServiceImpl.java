@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.NonUniqueResultException;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -48,7 +49,7 @@ public class PlansServiceImpl implements PlansService {
         plan.setPlanCode(plansRequest.getPlanCode());
         plan.setDescription(plansRequest.getDescription());
         plan.setName(plansRequest.getName());
-        plan.setPrice(plansRequest.getPrice());
+        plan.setPrice(Double.parseDouble(plansRequest.getPrice()));
         plan.setContractedDays(plansRequest.getContractedDays());
 
 

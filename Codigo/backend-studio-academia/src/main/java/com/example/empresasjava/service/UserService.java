@@ -26,4 +26,6 @@ public interface UserService {
     Page<User> listUsersByPageAndName(Pageable pages, String name);
 
     User getUserById(Long userId) throws NotFoundException;
+
+
 }

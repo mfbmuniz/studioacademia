@@ -31,7 +31,7 @@ public class Plans {
     private String contractedDays;
 
     @Column(name = "price")
-    private BigDecimal price;
+    private Double price;
 
     @Column(name = "description")
     private String description;
@@ -45,7 +45,7 @@ public class Plans {
 
     }
 
-    public Plans(String planCode, String name, String contractedDays, BigDecimal price, String description) {
+    public Plans(String planCode, String name, String contractedDays, Double price, String description) {
         this.planCode = planCode;
         this.name = name;
         this.contractedDays = contractedDays;
@@ -54,7 +54,7 @@ public class Plans {
 
     }
 
-    public Plans(Long planId, String planCode, String name, String contractedDays, BigDecimal price, String description) {
+    public Plans(Long planId, String planCode, String name, String contractedDays, Double price, String description) {
         this.planId = planId;
         this.planCode = planCode;
         this.name = name;
@@ -64,7 +64,7 @@ public class Plans {
 
     }
 
-    public Plans(String name, String contractedDays, BigDecimal price, String description) {
+    public Plans(String name, String contractedDays, Double price, String description) {
         this.name = name;
         this.contractedDays = contractedDays;
         this.price = price;
