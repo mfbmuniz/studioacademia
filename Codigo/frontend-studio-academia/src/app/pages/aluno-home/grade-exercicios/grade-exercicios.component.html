@@ -5,15 +5,15 @@
   <div class="accordion  col-sm-6" id="accordionFile">
     <div class="accordion-item">
       <div class="accordion-header" id="headingOne">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-          aria-expanded="false" aria-controls="collapseOne">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#collapseOne"  aria-expanded="false" aria-controls="collapseOne">
           <h3><Strong>{{exercicio.exercises?.name}}</Strong> : série: {{exercicio.series}} Repetições:
             {{exercicio.repetition}} </h3>
         </button>
 
       </div>
       <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-        data-bs-parent="#accordionExample">
+        data-bs-parent="#accordionFile">
         <div class="accordion-body">
           <iframe class="" width="250" height="200" [src]="getUrl(exercicio.exercises?.exerciseUrl)"
             title="YouTube video player" frameborder="0"

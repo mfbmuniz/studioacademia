@@ -48,6 +48,7 @@ export class GradeAlunoPagamentosComponent implements OnInit {
     this.monthlyPaymentService.aprovePayment(idMonthlyRequest, body).subscribe({
       next : (res)=>{
         alert("Pagamento aprovado")
+        location.reload()
       },
       error : (err)=>{
         console.log(err)
@@ -60,6 +61,7 @@ export class GradeAlunoPagamentosComponent implements OnInit {
     this.monthlyPaymentService.reprovePayment(idMonthlyRequest,body).subscribe({
       next : (res)=>{
         alert("Pagamento recusado")
+        location.reload()
       },
       error : (err)=>{
         console.log(err)

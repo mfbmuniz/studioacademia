@@ -132,6 +132,7 @@ export class AvalicaoFisicaComponent implements OnInit {
     this.PhysicalAssessmentService.create(body).subscribe({
       next:(res)=>{
         this.showSuccessToastr()
+        this.physicalForm.reset()
       },
       error: (err)=>{
         console.log(err)

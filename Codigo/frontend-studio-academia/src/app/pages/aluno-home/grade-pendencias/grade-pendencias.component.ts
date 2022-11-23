@@ -61,15 +61,15 @@ export class GradePendenciasComponent implements OnInit {
     const paymentVoucherImage: FormData = new FormData();
     paymentVoucherImage.append('paymentVoucherImage',event.target.files.item(0));
 
-    console.log(event.target.files.item(0));
+    // console.log(event.target.files.item(0));
 
-    console.log("imagem : ");
-    console.log(paymentVoucherImage);
+    // console.log("imagem : ");
+    // console.log(paymentVoucherImage);
 
 
     this.monthlyPaymentService.sendFile(paymentVoucherImage).subscribe({
       next:(res) => {
-        console.log(res)
+        // console.log(res)
         //alert("Comprovante enviado com êxito")
         this.erro=false;
         this.path = res
@@ -80,7 +80,7 @@ export class GradePendenciasComponent implements OnInit {
         this.erro=true;
       }
     })
-    console.log(event)
+    // console.log(event)
 
 
 
@@ -94,7 +94,7 @@ export class GradePendenciasComponent implements OnInit {
 
   public onSubmit(index : any){
 
-    console.log('entrei porra')
+    // console.log('entrei porra')
     if( (!this.erro) && (this.path!=null) ) {
       // console.log(this.path)
       // console.log('index: '+index)
@@ -108,11 +108,12 @@ export class GradePendenciasComponent implements OnInit {
         monthlyPaymentId : this.pagamentosPendentes[index].monthlyPaymentId
 
       }
-
+      console.log(body)
       this.monthlyPaymentService.createRequestForApprove(body).subscribe({
         next: (res) => {
           console.log(res)
           alert("Comprovante enviado com êxito")
+          location.reload()
         },
         error: (err) => {
           console.log(err)

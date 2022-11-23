@@ -6,20 +6,20 @@
 
 </div>
 <div class="row">
-  <div *ngFor="let ficha of fichas$">
-    <div class="col-10 col-md-4  offset-md-1">
-      <div class="card w-75 mt-3 bg-secondary">
+  <div *ngFor="let ficha of fichas$" class="col-8 col-sm-2">
+    <div >
+      <div class="card  mt-3 bg-secondary">
         <div class="card-body">
           <div class="offset-md-3">
             <h2 class="card-title">{{ficha.fileName}}</h2>
           </div>
-          <a [routerLink]="['/aluno/exercicios',ficha?.userFileId]" class="btn btn-warning offset-md-4">Acessar</a>
+          <a [routerLink]="['/aluno/exercicios',ficha?.userFileId]" class="btn btn-warning offset-md-3">Acessar</a>
         </div>
       </div>
     </div>
   </div>
 </div>
-
+<br>
 
 
 <!--

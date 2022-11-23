@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ExerciseService } from 'src/app/services/ExerciseService';
 import {User} from "../../../Models/user";
 import {Exercicio} from "../../../Models/exercicio";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-editar-exercicio',
@@ -20,7 +21,8 @@ export class EditarExercicioComponent implements OnInit {
   constructor(
     private exerciseService : ExerciseService,
     private formBuilder : FormBuilder,
-    private routeAc : ActivatedRoute) {
+    private routeAc : ActivatedRoute,
+    private toastr: ToastrService,) {
       this.routeAc.params.subscribe(params => this.idExercise = params['idExercicio']);
       this.ngBuiltExercise( this.idExercise);
     }
@@ -61,11 +63,11 @@ export class EditarExercicioComponent implements OnInit {
         {
           next:(res) => {
             console.log(res)
-            alert("Exercício alterado com sucesso!")
+            this.showSuccessToastr()
           },
           error: (err) => {
             console.log(err)
-            alert("Não foi pssível editar exercício!")
+            this.showSuccessToastr()
           }
         }
       );
@@ -78,5 +80,14 @@ export class EditarExercicioComponent implements OnInit {
       url : [this.content?.exerciseUrl,Validators.required],
       description : [this.content?.description,Validators.required]
     })
+  }
+
+
+  showSuccessToastr(){
+    this.toastr.success("Enviado com sucesso", "Sucesso")
+  }
+
+  showErrorToastr(){
+    this.toastr.error("O envio não pode ser feito", "Erro")
   }
 }

@@ -57,12 +57,12 @@ export class GradeListarFichasComponent implements OnInit {
           {
             next:(res) => {
               console.log(res)
-              alert("Usuário apagado com êxito")
+              alert("Ficha apagado com êxito")
               this.router.navigateByUrl('adm/home')
             },
             error: (err) => {
               console.log(err)
-              alert("Não foi possível deletar o usuário")
+              alert("Não foi possível deletar a ficha")
             }
           }
         );

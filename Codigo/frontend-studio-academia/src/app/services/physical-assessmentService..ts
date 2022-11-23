@@ -12,7 +12,7 @@ export class PhysicalAssessmentService {
   private static API_URLS = {
     CREATE: `${environment.apiUrl}/physical-assessment/create`,
     UPDATE : `${environment.apiUrl}/physical-assessment/edit`,
-    DELETE : `${environment.apiUrl}/physical-assessment/delete/`,
+    DELETE : `${environment.apiUrl}/physical-assessment/delete`,
   };
 
   create(body : any){
@@ -24,7 +24,7 @@ export class PhysicalAssessmentService {
   }
 
   delete(physicalAssessmentId : number){
-    return this.http.delete(`${PhysicalAssessmentService.API_URLS.DELETE}physicalAssessmentId/${physicalAssessmentId}`)
+    return this.http.delete(`${PhysicalAssessmentService.API_URLS.DELETE}/physicalAssessmentId/${physicalAssessmentId}`)
   }
 
   listPhysicalAssessment(page : number , size : number){

@@ -84,10 +84,12 @@ export class AdmGradeFichasComponent implements OnInit {
       {
         next: (res) => {
           this.router.navigate(['gradeFichas',this.idAluno])
+          this.showSuccessToastr()
           console.log(res)
         },
         error: (err) => {
           console.log(err)
+          this.showErrorToastr()
         },
         complete: () =>{
           this.searchFiles(this.idAluno)
