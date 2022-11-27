@@ -41,10 +41,11 @@ export class AuthGuard implements CanActivate {
       this.router.navigate(["/adm"]);
     }else if (roles.includes("ALUNO") && !this.checked){
       this.router.navigate(["/aluno"]);
+    }else if (roles.includes("NUTRICIONISTA") && !this.checked){
+      this.router.navigate(["/nutri"]);
     }else if (!this.checked){
         if (this.router.url !== "/home")
           console.error("User type not allowed");
-
     }
     this.checked = true;
   }

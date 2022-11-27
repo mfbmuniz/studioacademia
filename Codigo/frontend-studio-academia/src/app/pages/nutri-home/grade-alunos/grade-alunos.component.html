@@ -1,4 +1,4 @@
-<table class="table table-light me-5" >
+<table class="table table-light " >
   <thead>
     <tr class="table-secondary">
       <th scope="col" >Nome</th>
@@ -7,16 +7,17 @@
     </tr>
   </thead>
   <tbody *ngFor="let user of users">
-    <div *ngIf="user?.roles?.[0]?.name === 'ALUNO' ">
-      <tr>
-        <td >{{user?.name}}</td>
-        <td>{{user?.email}}</td>
-        <td><i class="bi bi-file-earmark-plus-fill" data-bs-toggle="modal" data-bs-target="#fileModal"
+
+      <tr *ngIf="user?.roles?.[0]?.name === 'ALUNO' ">
+        <td scope="row">{{user?.name}}</td>
+        <td scope="row">{{user?.email}}</td>
+        <td scope="row"><i class="bi bi-file-earmark-plus-fill" data-bs-toggle="modal" data-bs-target="#fileModal"
           (click)="takeUserId(user.idUser)"></i></td>
       </tr>
-    </div>
+
   </tbody>
 </table>
+
 
 <!-- Modal -->
 <div class="modal fade" id="fileModal" tabindex="-1" aria-labelledby="fileModalLabel" aria-hidden="true">
@@ -31,7 +32,7 @@
           <input type="file" formControlName="PhysicalAssessment" accept=".pdf" name="" id="">
         </div>
         <div class="modal-footer">
-          <a [routerLink]="['/home/avaliacaoFisica',[alunoId]]" routerLinkActive="router-link-active">Informar Manualmente</a>
+          <a [routerLink]="['avaliacaoFisica',alunoId]" routerLinkActive="router-link-active" data-bs-dismiss="modal">Informar Manualmente</a>
           <button type="submit" [disabled]="fileForm.invalid" class="btn btn-warning">enviar</button>
         </div>
       </form>

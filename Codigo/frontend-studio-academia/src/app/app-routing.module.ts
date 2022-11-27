@@ -26,6 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'nutri',
+    canActivate: [AuthGuard],
     loadChildren: ()=> import('./pages/nutri-home/nutri-home.module').then((m)=>m.NutriHomeModule)
   }
 ];

@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit  {
     }else if(this.user$?.roles.includes('ALUNO')){
       this.router.navigate(['aluno'])
     }else if(this.user$?.roles.includes('NUTRICIONISTA')){
-      this.router.navigate(['adm'])
+      this.router.navigate(['nutri'])
     }else if(this.user$?.roles.includes('PROFESSOR')){
       this.router.navigate(['adm'])
     }
