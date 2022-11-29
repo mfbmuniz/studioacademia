@@ -21,14 +21,14 @@ public class Plans {
     private Long planId;
 
 
-    @Column(name = "planCode")
+    @Column(name = "plan_code")
     private String planCode;
 
     @Column(name = "name")
     private String name ;
 
     @Column(name = "contracted_days")
-    private String contractedDays;
+    private Integer contractedDays;
 
     @Column(name = "price")
     private Double price;
@@ -45,7 +45,7 @@ public class Plans {
 
     }
 
-    public Plans(String planCode, String name, String contractedDays, Double price, String description) {
+    public Plans(String planCode, String name, Integer contractedDays, Double price, String description) {
         this.planCode = planCode;
         this.name = name;
         this.contractedDays = contractedDays;
@@ -54,7 +54,7 @@ public class Plans {
 
     }
 
-    public Plans(Long planId, String planCode, String name, String contractedDays, Double price, String description) {
+    public Plans(Long planId, String planCode, String name, Integer contractedDays, Double price, String description) {
         this.planId = planId;
         this.planCode = planCode;
         this.name = name;
@@ -64,7 +64,7 @@ public class Plans {
 
     }
 
-    public Plans(String name, String contractedDays, Double price, String description) {
+    public Plans(String name, Integer contractedDays, Double price, String description) {
         this.name = name;
         this.contractedDays = contractedDays;
         this.price = price;

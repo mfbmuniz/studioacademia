@@ -40,7 +40,7 @@ public class PlansRequest {
 
                 plan.planCode,
                 plan.name,
-                plan.contractedDays,
+                Integer.parseInt(plan.contractedDays),
                 Double.parseDouble(plan.getPrice()),
                 plan.description
 

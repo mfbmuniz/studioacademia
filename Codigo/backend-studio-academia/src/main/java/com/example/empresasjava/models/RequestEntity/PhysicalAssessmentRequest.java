@@ -122,7 +122,7 @@ public class PhysicalAssessmentRequest {
 
             physicalAssessmentRequest.getProfessionalId(),
 
-            physicalAssessmentRequest.getPhysicalAssessmentDate(),
+            new Date(),
 
             physicalAssessmentRequest.getHeight(),
 

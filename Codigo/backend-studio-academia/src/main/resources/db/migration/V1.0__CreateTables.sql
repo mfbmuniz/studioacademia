@@ -17,7 +17,7 @@ CREATE TABLE plans (
                     name VARCHAR(50) NOT NULL,
                     price NUMERIC NOT NULL,
                     description TEXT NOT NULL,
-                    planCode VARCHAR(3) NOT NULL,
+                    plan_code VARCHAR(3) NOT NULL,
                     contracted_days INT NOT NULL,
 
 

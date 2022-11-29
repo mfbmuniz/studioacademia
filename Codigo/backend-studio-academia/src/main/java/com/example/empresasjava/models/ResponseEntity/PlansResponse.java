@@ -19,14 +19,14 @@ public class PlansResponse {
 
     private String name ;
 
-    private String contractedDays;
+    private Integer contractedDays;
 
     private Double price;
 
     private String description;
 
 
-    public PlansResponse(Long planId, String planCode, String name, String contractedDays, Double price, String description) {
+    public PlansResponse(Long planId, String planCode, String name, Integer contractedDays, Double price, String description) {
         this.planId = planId;
         this.planCode = planCode;
         this.name = name;

@@ -50,7 +50,7 @@ public class PlansServiceImpl implements PlansService {
         plan.setDescription(plansRequest.getDescription());
         plan.setName(plansRequest.getName());
         plan.setPrice(Double.parseDouble(plansRequest.getPrice()));
-        plan.setContractedDays(plansRequest.getContractedDays());
+        plan.setContractedDays(Integer.parseInt(plansRequest.getContractedDays()));
 
 
 
