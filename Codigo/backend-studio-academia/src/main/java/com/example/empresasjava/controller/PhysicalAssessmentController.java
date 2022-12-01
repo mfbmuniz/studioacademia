@@ -140,7 +140,7 @@ public class PhysicalAssessmentController {
         );
 
     }
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE , path = "/uploadImage")
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE , path = "/uploadPdf")
     @ApiOperation(value = "upload PDF Avaliacao")
     @PreAuthorize("@authorityChecker.isAllowed({'ALUNO','ADMIN'})")
     public ResponseEntity<HashMap> uploadPdf(
