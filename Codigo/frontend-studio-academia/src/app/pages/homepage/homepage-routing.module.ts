@@ -17,12 +17,13 @@ const routes: Routes = [{
       path: 'login',
       component: LoginComponent
     },
-    {
-      path: 'planos',
-      component: PlanosComponent
-    }
   ]
-}];
+},
+{
+  path: 'planos',
+  component: PlanosComponent
+}
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

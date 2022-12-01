@@ -31,11 +31,18 @@ export class PhysicalAssessmentService {
     return this.http.get(`${environment.apiUrl}/physical-assessment/page/${page}/size/${size}`)
   }
 
-  listPhysicalAssessmentByName(page : number , size : number, idUser : string){
-    return this.http.get(`${environment.apiUrl}/physical-assessment/page/${page}/size/${size}/idUser/${idUser}`)
+  listPhysicalAssessmentByUserId(page : number , size : number, idUser : string){
+    if(idUser.length > 0)
+      return this.http.get(`${environment.apiUrl}/physical-assessment/page/${page}/size/${size}/idUser/${idUser}`)
+    else
+    return this.http.get(`${environment.apiUrl}/physical-assessment/page/${page}/size/${size}`)
   }
 
   listPhysicalAssessmentByProfessional(page : number , size : number, professionalId : string){
     return this.http.get(`${environment.apiUrl}/physical-assessment/page/${page}/size/${size}/professionalId/${professionalId}`)
+  }
+
+  getPhysicalAssessmentById(physicalAssessmentId : string){
+    return this.http.get(`${environment.apiUrl}/physical-assessment/getphysicalassessmentbyid/physicalAssessmentId/${physicalAssessmentId}`)
   }
 }

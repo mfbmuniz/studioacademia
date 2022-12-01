@@ -23,8 +23,8 @@ export class PlanosComponent implements OnInit {
     this.planService.listPlans(page,size).subscribe({
       next: (res)=>{
         this.pageable = res
-        console.log("Planos --->")
-        console.log(this.pageable?.content)
+        this.planos = this.pageable?.content as Plans
+
       },
       error(err) {
           console.log(err)

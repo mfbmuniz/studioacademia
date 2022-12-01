@@ -1,9 +1,9 @@
 export interface Plan {
-  id : number,
+  planId : number,
   name ?:  string,
   price ?: number,
   description ?: string,
-  planConde ?: string,
+  planCode ?: string,
   contractedDays ?: number
 }
 

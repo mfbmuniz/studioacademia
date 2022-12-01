@@ -1,1 +1,23 @@
-<p>A ser desenvolvido</p>
+<div class="row">
+  <div class="col-4 offset-5">
+    <img src="../../../../assets/img/Logo_Base.svg" alt="logo">
+  </div>
+
+</div>
+
+<div class="row">
+  <div *ngFor="let plano of planos" class="col-10 col-md-3">
+    <div class="card mt-3" >
+      <div class="card-body">
+        <h2 class="card-title">{{plano.name}}</h2>
+        <p class="card-text">{{plano.description}}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Valor: {{plano.price}}</li>
+        <li class="list-group-item">Vezes por Semana: {{plano.contractedDays}}</li>
+      </ul>
+    </div>
+   </div>
+</div>
+<br>
+<br>

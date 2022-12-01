@@ -80,7 +80,7 @@ export class EditarPlanoComponent implements OnInit {
 
   private completeFields() {
     this.planForm = this.formBuilder.group({
-      planCode : [this.content?.planConde,Validators.required,],
+      planCode : [this.content?.planCode,Validators.required,],
       name : [this.content?.name,Validators.required],
       price : [this.content?.price,Validators.required],
       description : [this.content?.description,Validators.required],

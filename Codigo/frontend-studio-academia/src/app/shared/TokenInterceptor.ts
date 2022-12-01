@@ -23,7 +23,7 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     let session = this.authService.getSession();
-    console.log("testando", session, this.authService.getSession())
+    // console.log("testando", session, this.authService.getSession())
     if (
       session &&
       Object.keys(session).length > 0 &&

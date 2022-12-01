@@ -2,18 +2,16 @@
   <thead>
     <tr class="table-secondary">
       <th scope="col" >Data</th>
-      <th scope="col" >Nome</th>
-      <th scope="col">Email</th>
+      <th scope="col">ID</th>
       <th scope="col">Formulário</th>
       <th scope="col">Arquivo</th>
     </tr>
   </thead>
   <tbody *ngFor="let physical of dados">
     <tr>
-      <th scope="row">{{physical?.physical_assessment_date | date:'dd/MM/yyyy'}}</th>
-      <th scope="row">{{physical?.userName}}</th>
-      <th>{{physical?.userEmail}}</th>
-      <th><a [routerLink]="['avaliacaoFisica',physical?.physical_assessment_id]"> <i class="bi bi-clipboard2-fill"></i></a></th>
+      <th scope="row">{{physical?.physicalAssessmentDate | date:'dd/MM/yyyy'}}</th>
+      <th scope="row">{{physical?.userId}}</th>
+      <th><a [routerLink]="['avaliacaoFisica',physical?.physicalAssessmentId]"> <i class="bi bi-clipboard2-fill"></i></a></th>
       <th><i class="bi bi-file-earmark-plus"></i></th>
     </tr>
   </tbody>

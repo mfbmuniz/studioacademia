@@ -67,10 +67,11 @@ export class SearchHomeComponent implements OnInit {
           },
         );
     }else if(this.isSearchPhysicalAssement ){
-      this.physicalAssessmentService.listPhysicalAssessmentByName(0, 10, keysearch)
+      this.physicalAssessmentService.listPhysicalAssessmentByUserId(0, 10, keysearch)
       .subscribe(
         (res: any) => {
           this.content$ = res;
+          console.log(this.content$)
           this.hasValuesToLoad = true
         },
       );

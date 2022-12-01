@@ -26,6 +26,7 @@ export class GradePlanosComponent implements OnInit {
       next: (res) => {
         this.pageable$ = res,
         this.planos = this.pageable$?.content as Plans
+
       },
       error: (err) => {
         console.log(err)
@@ -40,6 +41,7 @@ export class GradePlanosComponent implements OnInit {
       next: (res) =>{
         console.log(res)
         this.showSuccessToastr()
+        location.reload()
       },
       error : (err)=>{
         console.log(err)

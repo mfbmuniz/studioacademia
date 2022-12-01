@@ -13,7 +13,7 @@ export class AvaliacaoFisicaComponent implements OnInit {
 
   pageable$ !: PageableObject
   physical !: PhysicalAssessment
-  physicalId !: number
+  physicalId !: string
 
   constructor(
     private physicalAssessmentService:PhysicalAssessmentService,
@@ -23,10 +23,21 @@ export class AvaliacaoFisicaComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    console.log(this.physicalId)
+    this.takePhysicalAssementById(this.physicalId)
   }
 
-  takePhysicalAssementById(id : number){
+  takePhysicalAssementById(id : string){
+    this.physicalAssessmentService.getPhysicalAssessmentById(id).subscribe({
+      next: (res) =>{
 
+        this.physical = res
+        console.log(this.physical)
+      },
+      error(err) {
+          console.log(err)
+      },
+    })
   }
 
 
