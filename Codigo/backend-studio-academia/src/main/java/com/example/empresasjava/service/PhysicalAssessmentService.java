@@ -9,8 +9,10 @@ import com.example.empresasjava.models.ResponseEntity.PlansResponse;
 import javassist.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.NonUniqueResultException;
+import java.io.IOException;
 import java.util.List;
 
 public interface PhysicalAssessmentService {
@@ -32,5 +34,6 @@ public interface PhysicalAssessmentService {
     List<PhysicalAssessment> getSpecificUserPhysicalAssessments(Long idUser)throws  NotFoundException;
 
     List<PhysicalAssessment> getSpecificProfessionalPhysicalAssessments(Long professionalId)throws  NotFoundException;
+    String uploadPdf(MultipartFile pdfPhysicalAssessment)throws NonUniqueResultException, NotFoundException, IOException;
 
 }
