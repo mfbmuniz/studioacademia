@@ -6,6 +6,7 @@ import com.example.empresasjava.models.RequestEntity.PhysicalAssessmentRequest;
 import com.example.empresasjava.models.RequestEntity.PlansRequest;
 import com.example.empresasjava.models.ResponseEntity.PhysicalAssessmentResponse;
 import com.example.empresasjava.models.ResponseEntity.PlansResponse;
+import com.example.empresasjava.models.User;
 import com.example.empresasjava.repository.PhysicalAssessmentRepository;
 import com.example.empresasjava.repository.PlansRepository;
 import com.example.empresasjava.service.PhysicalAssessmentService;
@@ -15,8 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.NonUniqueResultException;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +31,9 @@ public class PhysicalAssessmentServiceImpl implements PhysicalAssessmentService 
 
     @Autowired
     PhysicalAssessmentRepository physicalAssessmentRepository;
+
+    @Autowired
+    private UserServiceImpl userServiceImpl;
 
     @Override
     public PhysicalAssessmentResponse createPhysicalAssessment(PhysicalAssessmentRequest physicalAssessmentRequest)
@@ -95,6 +102,30 @@ public class PhysicalAssessmentServiceImpl implements PhysicalAssessmentService 
     public List<PhysicalAssessment> getSpecificProfessionalPhysicalAssessments(Long professionalId)throws  NotFoundException{
         return this.physicalAssessmentRepository.findAllByProfessionalIdAndDeletedAtIsNullOrderByPhysicalAssessmentId(professionalId);
     }
+    @Override
+    public String uploadPdf(MultipartFile pdfPhysicalAssessment) throws NonUniqueResultException, NotFoundException, IOException {
+        return savePdf(pdfPhysicalAssessment);
+    }
+
+    private String savePdf(MultipartFile pdf){
+
+        try {
+            Date saveDate = new Date();
+
+            User loggedUser = userServiceImpl.getUserByPrincipal();
 
 
+            String path = "c:/studioImages/" +saveDate.getTime() +"_"+loggedUser.getIdUser()+"_.pdf"; // lugar pra salvar a imagem
+
+            //private final Path rootLocation = Paths.get("path");
+            //Files.copy(image.getInputStream(), this.rootLocation.resolve(""+saveDate.toString()+"_"+idUser+".jpg"));
+
+
+
+            File dest = new File(path);
+            pdf.transferTo(dest);
+            return path;
+        }catch (Exception e){e.printStackTrace();return "fail";}
+
+    }
 }

@@ -16,12 +16,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.NonUniqueResultException;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.HashMap;
 
 @RestController
 @CrossOrigin
@@ -136,7 +140,23 @@ public class PhysicalAssessmentController {
         );
 
     }
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE , path = "/uploadPdf")
+    @ApiOperation(value = "upload PDF Avaliacao")
+    @PreAuthorize("@authorityChecker.isAllowed({'ALUNO','ADMIN'})")
+    public ResponseEntity<HashMap> uploadPdf(
+            @ApiParam(value = "pdf da avaliação ")
+            @RequestParam MultipartFile pdfPhysicalAssessment ) throws NotFoundException, IOException {
 
+
+
+        String savedPath = this.physicalAssessmentService.uploadPdf(pdfPhysicalAssessment);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("0", savedPath);
+
+        return ResponseEntity.ok().body(
+                map
+        );
+    }
 
     /*
 
