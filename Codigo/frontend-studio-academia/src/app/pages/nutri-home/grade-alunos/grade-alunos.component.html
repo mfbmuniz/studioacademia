@@ -29,7 +29,7 @@
       </div>
       <form [formGroup]="fileForm" (submit)="send()">
         <div class="modal-body">
-          <input type="file" formControlName="PhysicalAssessment" accept=".pdf" name="" id="">
+          <input type="file" formControlName="PhysicalAssessment" accept=".pdf" (change)="onFileSelected($event)">
         </div>
         <div class="modal-footer">
           <a [routerLink]="['avaliacaoFisica',alunoId]" routerLinkActive="router-link-active" data-bs-dismiss="modal">Informar Manualmente</a>

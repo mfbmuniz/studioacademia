@@ -23,7 +23,7 @@ export class AvalicaoFisicaComponent implements OnInit {
     private PhysicalAssessmentService:PhysicalAssessmentService,
     private toastr: ToastrService,) {
       this.routeAc.params.subscribe(params => this.idAluno = params['idAluno'])
-     }
+    }
 
   ngOnInit(): void {
     this.actualUser = this.authService.getSession().user.id

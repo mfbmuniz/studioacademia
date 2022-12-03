@@ -1,8 +1,10 @@
+import { PhysicalAssessmentService } from './../../../services/physical-assessmentService.';
 import { Component, Input ,OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { pageableObject } from 'src/app/Models/PageableObject';
 import { Users } from 'src/app/Models/user';
 import { AuthService } from 'src/app/services/AuthService';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-grade-alunos',
@@ -19,8 +21,14 @@ export class GradeAlunosComponent implements OnInit {
   alunoId !: String
   actualUser: any;
 
-  constructor(private formBuilder : FormBuilder,
-    private authService : AuthService) { }
+  erro : boolean = true
+  path : any = null;
+
+  constructor(
+    private formBuilder : FormBuilder,
+    private authService : AuthService,
+    private physicalService : PhysicalAssessmentService,
+    private toastr: ToastrService,) { }
 
   ngOnInit(): void {
     this.actualUser = this.authService.getSession().user.id
@@ -31,11 +39,48 @@ export class GradeAlunosComponent implements OnInit {
   }
 
   send() {
-  //  console.log(this.fileForm.value)
-
+    if( (!this.erro) && (this.path!=null) )
+      this.showSuccessToastr()
+    else
+      this.showErrorToastr()
   }
+
+  onFileSelected(event: any) {
+    try {
+
+      const paymentVoucherImage: FormData = new FormData();
+      paymentVoucherImage.append('paymentVoucherImage',event.target.files.item(0));
+
+
+      this.physicalService.uploadFile(paymentVoucherImage).subscribe({
+        next:(res) => {
+
+          this.erro=false;
+          this.path = res
+        },
+        error: (err) => {
+          console.log(err)
+
+          this.erro=true;
+        }
+      })
+    }catch (e) {
+        console.log("erro, catch")
+        console.log(e)
+    }
+
+
+    }
 
   public takeUserId(alunoId ?: String){
     this.alunoId = alunoId as String
+  }
+
+  showSuccessToastr(){
+    this.toastr.success("Enviado com sucesso", "Sucesso")
+  }
+
+  showErrorToastr(){
+    this.toastr.error("O envio não pode ser feito", "Erro")
   }
 }

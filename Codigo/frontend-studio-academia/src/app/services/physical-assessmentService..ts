@@ -13,6 +13,7 @@ export class PhysicalAssessmentService {
     CREATE: `${environment.apiUrl}/physical-assessment/create`,
     UPDATE : `${environment.apiUrl}/physical-assessment/edit`,
     DELETE : `${environment.apiUrl}/physical-assessment/delete`,
+    UPLOAD : `${environment.apiUrl}/physical-assessment/uploadPdf`,
   };
 
   create(body : any){
@@ -44,5 +45,9 @@ export class PhysicalAssessmentService {
 
   getPhysicalAssessmentById(physicalAssessmentId : string){
     return this.http.get(`${environment.apiUrl}/physical-assessment/getphysicalassessmentbyid/physicalAssessmentId/${physicalAssessmentId}`)
+  }
+
+  uploadFile(body : any){
+    return this.http.post(PhysicalAssessmentService.API_URLS.UPLOAD,body)
   }
 }
