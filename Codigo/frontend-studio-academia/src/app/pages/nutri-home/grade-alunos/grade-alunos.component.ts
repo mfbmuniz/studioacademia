@@ -48,11 +48,11 @@ export class GradeAlunosComponent implements OnInit {
   onFileSelected(event: any) {
     try {
 
-      const paymentVoucherImage: FormData = new FormData();
-      paymentVoucherImage.append('paymentVoucherImage',event.target.files.item(0));
+      const pdfPhysicalAssessment : FormData = new FormData();
+      pdfPhysicalAssessment.append('pdfPhysicalAssessment',event.target.files.item(0));
 
 
-      this.physicalService.uploadFile(paymentVoucherImage).subscribe({
+      this.physicalService.uploadFile(pdfPhysicalAssessment).subscribe({
         next:(res) => {
 
           this.erro=false;
