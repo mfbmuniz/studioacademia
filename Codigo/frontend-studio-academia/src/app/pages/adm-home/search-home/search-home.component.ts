@@ -19,11 +19,14 @@ export class SearchHomeComponent implements OnInit {
   pageable !: pageableObject
 
   searchForm !: FormGroup
-  content$ !: {}
+  content$ !: pageableObject
   hasValuesToLoad: boolean = false;
   isSearchUser: boolean = true;
   isSearchExercise: boolean = true;
   isSearchPhysicalAssement: boolean = true;
+
+  currentPage !: number
+  keysearch !: string
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,7 +43,7 @@ export class SearchHomeComponent implements OnInit {
       typeSearch: ['', [Validators.required]],
       keySearch: ['', [Validators.required]],
     })
-
+    this.currentPage = 0;
 
   }
 
@@ -52,19 +55,20 @@ export class SearchHomeComponent implements OnInit {
 
     this.hasValuesToLoad = false
 
-    let keysearch = this.searchForm.value.keySearch;
+    this.keysearch = this.searchForm.value.keySearch;
     if (this.isSearchUser) {
       // console.log('search user')
-      this.userService.listByPage(0, 10, keysearch)
+      this.userService.listByPage(this.currentPage, 10, this.keysearch)
         .subscribe(
           (res: any) => {
             this.content$ = res;
+            console.log(this.content$)
             this.hasValuesToLoad = true
           },
         );
     } else if (this.isSearchExercise) {
 
-      this.exerciseService.listByPage(0, 10, keysearch)
+      this.exerciseService.listByPage(this.currentPage, 10, this.keysearch)
         .subscribe(
           (res: any) => {
             this.content$ = res;
@@ -73,17 +77,17 @@ export class SearchHomeComponent implements OnInit {
         );
     } else if (this.isSearchPhysicalAssement) {
 
-      if (keysearch == '') {
-        this.physicalAssessmentService.listPhysicalAssessmentByUserId(0, 10, keysearch)
+      if (this.keysearch == '') {
+        this.physicalAssessmentService.listPhysicalAssessmentByUserId(this.currentPage, 10, this.keysearch)
           .subscribe(
             (res: any) => {
-              this.content$ = res;
-              console.log(this.content$)
+              this.content$ = res ;
+             // console.log(this.content$)
               this.hasValuesToLoad = true
             },
           );
       } else {
-        this.userService.listByPage(0, 10, keysearch)
+        this.userService.listByPage(this.currentPage, 10, this.keysearch)
           .subscribe(
             (res: any) => {
 
@@ -104,5 +108,31 @@ export class SearchHomeComponent implements OnInit {
     }
 
   }
+
+  nextPage(){
+    if(!this.content$.empty){
+      this.currentPage++;
+      this.search()
+    }
+  }
+
+  goToPage(page : number){
+
+    if(!this.content$.empty || page < this.currentPage || page >=0){
+      this.currentPage=page;
+      this.search()
+    }
+
+  }
+
+  previousPage(){
+    if(this.currentPage !=0){
+      this.currentPage--;
+      this.search()
+    }
+  }
+
+
+
 
 }

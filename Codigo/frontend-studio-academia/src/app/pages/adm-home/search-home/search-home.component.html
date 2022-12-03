@@ -2,25 +2,63 @@
 <form action="" class="mt-4" [formGroup]="searchForm" (ngSubmit)="search()">
   <div class="input-group mb-3">
 
-    <select class="btn btn-outline-secondary dropdown-toggle" formControlName="typeSearch" type="button" data-bs-toggle="dropdown"
-      aria-expanded="false">
-      <option value="user" [selected]="true" >Usuario</option>
+    <select class="btn btn-outline-secondary dropdown-toggle" formControlName="typeSearch" type="button"
+      data-bs-toggle="dropdown" aria-expanded="false">
+      <option value="user" [selected]="true">Usuario</option>
       <option value="exercise">Exercício</option>
       <option value="physical">Avaliação Física</option>
     </select>
-    <input type="search" formControlName="keySearch" class="form-control" placeholder="Informe o nome do usuário ou exercício" aria-label="Text input with dropdown button">
-    <button type="submit" class="btn btn-warning"><i class="bi bi-search"></i></button>
+    <input type="search" formControlName="keySearch" class="form-control"
+      placeholder="Informe o nome do usuário ou exercício" aria-label="Text input with dropdown button">
+    <button type="submit" class="btn btn-warning" (click)="currentPage=0"><i class="bi bi-search"></i></button>
   </div>
 </form>
+
 <div *ngIf="hasValuesToLoad && isSearchUser" id="grade-alunos">
-  <app-grade-alunos [pageable]="content$"></app-grade-alunos>
-</div>
-<div *ngIf="hasValuesToLoad && isSearchExercise && !isSearchUser">
-  <div class=" col-sm-5 offset-sm-4">
-    <app-tabela-exercicios [pageable]="content$"></app-tabela-exercicios>
+  <div *ngIf="!content$.empty;else noResults">
+    <app-grade-alunos [pageable]="content$"></app-grade-alunos>
   </div>
 </div>
 
-<div *ngIf="hasValuesToLoad && this.isSearchPhysicalAssement  && !isSearchUser">
-  <app-grade-avaliacao-fisica [pageable]="content$"></app-grade-avaliacao-fisica>
+<div *ngIf="hasValuesToLoad && isSearchExercise && !isSearchUser" id="Tabela-Exercicios">
+  <div *ngIf="!content$.empty;else noResults">
+    <div class=" col-sm-5 offset-sm-4">
+      <app-tabela-exercicios [pageable]="content$"></app-tabela-exercicios>
+    </div>
+  </div>
 </div>
+
+<div *ngIf="hasValuesToLoad && this.isSearchPhysicalAssement  && !isSearchUser" id="Grade-Avaliacao-Fisica">
+  <div *ngIf="!content$.empty;else noResults">
+    <app-grade-avaliacao-fisica [pageable]="content$"></app-grade-avaliacao-fisica>
+  </div>
+</div>
+
+<div class="col-4 offset-sm-5" *ngIf="hasValuesToLoad">
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" (click)="previousPage()" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link active" aria-current="page"
+          (click)="goToPage(currentPage)">{{currentPage+1}}</a></li>
+      <li class="page-item">
+        <a class="page-link" (click)="nextPage()" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<ng-template #noResults>
+  <div class="col-6 offset-sm-5">
+    <h2>Não há resultados</h2>
+  </div>
+</ng-template>
+
+<br>
+<br>
+<br>
