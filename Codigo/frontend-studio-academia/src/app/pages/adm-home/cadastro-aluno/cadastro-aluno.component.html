@@ -190,7 +190,7 @@
         <div class="col-3 mt-1 offset-1">
           <label for="cpf"><p>Plano</p></label>
           <select class="form-control" formControlName="plan">
-            <option *ngFor="let plan of plans" value="{{plan}}">{{plan}}</option>
+            <option *ngFor="let plan of plans" value="{{plan.planId}}">{{plan.name}}</option>
           </select>
         </div>
         <div class="col-11 col-md-3">

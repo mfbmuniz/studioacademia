@@ -34,7 +34,7 @@ export class TabelaExerciciosComponent implements OnInit {
           {
             next:(res) => {
               console.log(res)
-              alert("Exercício apagado com êxito")
+              this.showSuccessToastr()
               this.router.navigateByUrl('adm/home')
             },
             error: (err) => {
@@ -48,11 +48,11 @@ export class TabelaExerciciosComponent implements OnInit {
   }
 
   showSuccessToastr(){
-    this.toastr.success("Enviado com sucesso", "Sucesso")
+    this.toastr.success("Apagado  com sucesso", "Sucesso")
   }
 
   showErrorToastr(){
-    this.toastr.error("O envio não pode ser feito", "Erro")
+    this.toastr.error("Não foi possível apagar", "Erro")
   }
 
 }

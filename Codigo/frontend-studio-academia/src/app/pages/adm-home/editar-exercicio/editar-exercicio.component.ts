@@ -67,7 +67,7 @@ export class EditarExercicioComponent implements OnInit {
           },
           error: (err) => {
             console.log(err)
-            this.showSuccessToastr()
+            this.showErrorToastr()
           }
         }
       );

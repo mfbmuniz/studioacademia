@@ -103,7 +103,7 @@ export class AdmGradeFichasComponent implements OnInit {
 
 
 
-    console.log(this.searchForm, this.isSearchUserFile)
+    // console.log(this.searchForm, this.isSearchUserFile)
     this.hasValuesToLoad = false
 
 
@@ -137,28 +137,28 @@ export class AdmGradeFichasComponent implements OnInit {
           {
             next:(res) => {
               console.log(res)
-              alert("Usuário apagado com êxito")
+             this.showSuccessToastr()
               this.router.navigateByUrl('adm/home')
             },
             error: (err) => {
               console.log(err)
-              alert("Não foi possível deletar o usuário")
+              alert("Não foi possível deletar a ficha")
             },
             complete: () => {
               this.searchFiles(this.idAluno)
             }
           }
         );
-      console.log(nomeFicha)
+      // console.log(nomeFicha)
     }
   }
 
   showSuccessToastr(){
-    this.toastr.success("Enviado com sucesso", "Sucesso")
+    this.toastr.success("Apagado com sucesso", "Sucesso")
   }
 
   showErrorToastr(){
-    this.toastr.error("O envio não pode ser feito", "Erro")
+    this.toastr.error("Não foi possível apagar", "Erro")
   }
 
 }

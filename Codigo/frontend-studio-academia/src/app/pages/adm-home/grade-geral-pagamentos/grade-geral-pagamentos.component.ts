@@ -26,6 +26,8 @@ export class GradeGeralPagamentosComponent implements OnInit, PipeTransform {
   image!: any
   imageToShow: any;
   isImageLoading: any;
+  currentPage !: number;
+  public types = ['PAGO', 'ATRASADO', 'AGUARDANDO_PAGAMENTO', 'EM_ANALISE', 'NAO_RECEBIDO']
 
 
   constructor(private monthlyPaymentService: MonthlyPaymentService,
@@ -33,13 +35,14 @@ export class GradeGeralPagamentosComponent implements OnInit, PipeTransform {
 
 
   ngOnInit(): void {
+    this.currentPage=0;
     this.listarTodosPagamentosEmAnalise()
   }
 
   sanitize(url:any){
-    console.log('--->')
+    // console.log('--->')
 
-    console.log(url)
+    // console.log(url)
 
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
@@ -50,7 +53,7 @@ export class GradeGeralPagamentosComponent implements OnInit, PipeTransform {
 
 
   listarTodosPagamentosEmAnalise(){
-    this.monthlyPaymentService.listarTodosPagamentosPendentes(0,10).subscribe({
+    this.monthlyPaymentService.listarTodosPagamentosPendentes(this.currentPage,10).subscribe({
       next : (res)=>{
         this.pageable = res
         this.pagamentos = <MonthlyPayments> this.pageable?.content
@@ -127,4 +130,35 @@ export class GradeGeralPagamentosComponent implements OnInit, PipeTransform {
     });
   }
 
+  specificSearch(value: any) {
+
+    let parameter =value?.target?.value ;
+    this.currentPage = 0;
+    this.listarPagamentosEspecificos(this.currentPage,10,parameter)
+  }
+
+  public listarPagamentosEspecificos(page : number, size : number, paymentStatus : string) {
+    this.monthlyPaymentService.pageAllPendencyByKeySearch(page,size,paymentStatus).subscribe((res : any)=>{
+      this.pageable = res
+      this.pagamentos =<MonthlyPayments>this.pageable.content
+   })
+  }
+
+
+
+  nextPage(){
+    if(this.pagamentos.length != 0){
+      this.currentPage++;
+      this.listarTodosPagamentosEmAnalise()
+    }
+  }
+
+
+
+  previousPage(){
+    if(this.currentPage !=0){
+      this.currentPage--;
+      this.listarTodosPagamentosEmAnalise()
+    }
+  }
 }

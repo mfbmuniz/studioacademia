@@ -34,6 +34,7 @@ import { AvaliacaoFisicaComponent } from './avaliacao-fisica/avaliacao-fisica.co
 
 
 
+
 @NgModule({
   declarations: [
     AdmHomeComponent,

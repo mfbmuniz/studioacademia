@@ -1,9 +1,12 @@
+import { Plans } from 'src/app/Models/plan';
 import { ToastrService } from 'ngx-toastr';
 import {Component, Input, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from "../../../services/UserService";
 import {User} from "../../../Models/user";
+import { PlanService } from 'src/app/services/planService';
+import { PageableObject } from 'src/app/Models/PageableObject';
 
 
 @Component({
@@ -19,12 +22,13 @@ export class CadastroAlunoComponent implements OnInit {
   novoAlunoForm !: FormGroup
   isAluno: Boolean = false;
   public types = ['ALUNO', 'PROFESSOR', 'NUTRICIONISTA', 'ADMIN']
-  public plans = []
+  public plans !: Plans
   public selectedPlan = ""
   public weekDays = ['SEGUNDA', 'TERÇA', 'QUARTA', 'QUINTA', 'SEXTA', 'SABADO', 'DOMINGO']
   idUser !: String
   user !: User
   userForm !: any
+  pageable !: PageableObject
 
 
   constructor(
@@ -33,6 +37,7 @@ export class CadastroAlunoComponent implements OnInit {
     private userService: UserService,
     private toastr: ToastrService,
     private routeAc : ActivatedRoute,
+    private planService : PlanService,
   ) {
     this.routeAc.params.subscribe(params => this.idUser = params['idUser']);
 
@@ -49,7 +54,7 @@ export class CadastroAlunoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.listarPlanos()
     this.novoAlunoForm = this.formBuilder.group({
         email :  ['', [Validators.required, Validators.email]],
         password : ['', [Validators.required,Validators.minLength(8)]],
@@ -272,5 +277,17 @@ export class CadastroAlunoComponent implements OnInit {
         }
       );
 
+  }
+
+  listarPlanos(){
+    this.planService.listPlans(0,30).subscribe({
+      next : (res)=>{
+          this.pageable = res
+          this.plans = this.pageable?.content as Plans
+      },
+      error(err) {
+          console.log(err)
+      },
+    })
   }
 }

@@ -109,7 +109,7 @@ export class SearchHomeComponent implements OnInit {
 
   }
 
-  nextPage(){
+  nextPage() : void{
     if(!this.content$.empty){
       this.currentPage++;
       this.search()

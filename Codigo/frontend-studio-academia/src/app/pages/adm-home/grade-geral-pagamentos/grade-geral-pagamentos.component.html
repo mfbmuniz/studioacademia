@@ -2,12 +2,20 @@
 <div class="col-2 offset-5">
   <h1>Pagamentos</h1>
 </div>
+<select id="type" class="btn btn-outline-warning dropdown-toggle" formControlName="typeSearch"
+    data-bs-toggle="dropdown" aria-expanded="false" (change)="specificSearch($event)">
+    <option *ngFor="let t of types" [value]="t">
+      <p>{{t}}</p>
+    </option>
+</select>
+
+<div *ngIf="pagamentos.length !=0;else noResults">
+
 
 <table class="table table-light mt-2">
   <thead>
     <tr class="table-secondary">
       <th scope="col">Status</th>
-      <th scope="col">ID Requisição</th>
       <th scope="col">ID Aluno</th>
       <th scope="col">Data Limite</th>
       <th scope="col">Data Pago</th>
@@ -19,7 +27,6 @@
   <tbody *ngFor="let monthlyPayment of pagamentos">
     <tr>
       <th scope="col">{{monthlyPayment?.paymentStatus}}</th>
-      <th scope="col">{{monthlyPayment?.monthlyPaymentId}}</th>
       <th scope="col">{{monthlyPayment?.userId}}</th>
       <th scope="col">{{monthlyPayment?.dueDate | date:'dd/MM/yyyy'}}</th>
       <th scope="col">{{monthlyPayment?.paymentDate | date:'dd/MM/yyyy'}}</th>
@@ -51,10 +58,30 @@
 
       </th>
       <th scope="col"><button type="button" class="btn btn-warning"
-          (click)="aprove(monthlyPayment?.monthlyPaymentId,monthlyPayment)"><i class="bi bi-check-square"></i></button></th>
+          (click)="aprove(monthlyPayment?.monthlyPaymentId,monthlyPayment)" [disabled]="monthlyPayment?.paymentStatus == 'PAGO'"><i class="bi bi-check-square"></i></button></th>
       <th scope="col"><button type="button" class="btn btn-danger"
-          (click)="reprove(monthlyPayment?.monthlyPaymentId,monthlyPayment)"><i class="bi bi-x-square"></i></button></th>
+          (click)="reprove(monthlyPayment?.monthlyPaymentId,monthlyPayment)" [disabled]="monthlyPayment?.paymentStatus == 'PAGO'"><i class="bi bi-x-square"></i></button></th>
     </tr>
   </tbody>
 </table>
+</div>
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" (click)="previousPage()" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link active" aria-current="page">{{currentPage+1}}</a></li>
+    <li class="page-item">
+      <a class="page-link" (click)="nextPage()" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 
+<ng-template #noResults>
+  <h1>Não há mais pagamentos</h1>
+</ng-template>
+<br>

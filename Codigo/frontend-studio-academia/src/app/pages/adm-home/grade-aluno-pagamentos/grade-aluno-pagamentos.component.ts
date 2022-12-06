@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MonthlyPayments } from 'src/app/Models/monthly-payment';
 import { pageableObject } from 'src/app/Models/PageableObject';
 import { MonthlyPaymentService } from 'src/app/services/monthly-paymentService';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -14,20 +15,24 @@ import { MonthlyPaymentService } from 'src/app/services/monthly-paymentService';
 export class GradeAlunoPagamentosComponent implements OnInit {
 
   pagamentos !: MonthlyPayments
-  idAluno !: string
+  idAluno !: number
   pageable !: pageableObject
   image!: any
   imageToShow: any;
   isImageLoading: any;
+  public types = ['PAGO', 'ATRASADO', 'AGUARDANDO_PAGAMENTO', 'EM_ANALISE', 'NAO_RECEBIDO' , 'TODOS']
 
-  constructor(private monthlyPaymentService : MonthlyPaymentService,
+  constructor(
+    private monthlyPaymentService : MonthlyPaymentService,
     private routeAc : ActivatedRoute,) {
     this.routeAc.params.subscribe(params => this.idAluno = params['idAluno']);
 
    }
 
   ngOnInit(): void {
+
     this.listPayments(this.idAluno)
+
   }
 
   listPayments(idUser : any){
@@ -91,6 +96,32 @@ export class GradeAlunoPagamentosComponent implements OnInit {
         this.imageToShow = null;
         console.log(error);
       });
+  }
+
+  specificSearch(value: any) {
+
+    let parameter =value?.target?.value ;
+
+    if ( value?.target?.value == "TODOS"){
+      this.listarTodosPagamentos(0,10,this.idAluno);
+    }else{
+      this.listarPagamentosEspecificos(0,10,this.idAluno,parameter)
+    }
+  }
+
+  public listarPagamentosEspecificos(page : number, size : number, idUser : number, paymentStatus : String) {
+    this.monthlyPaymentService.listarPagamentoUsuarioPorChaveDeBusca(page,size,idUser,paymentStatus).subscribe((res : any)=>{
+      this.pageable = res
+      this.pagamentos =<MonthlyPayments>this.pageable.content
+    })
+  }
+
+  public listarTodosPagamentos(page : number, size : number, idUser : number) {
+
+    this.monthlyPaymentService.listarPagamentoUsuario(page,size,idUser).subscribe((res : any)=>{
+       this.pageable = res
+       this.pagamentos =<MonthlyPayments>this.pageable.content
+    })
   }
 
 }
