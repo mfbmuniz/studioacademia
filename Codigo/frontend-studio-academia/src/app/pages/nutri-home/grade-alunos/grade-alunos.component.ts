@@ -21,13 +21,14 @@ export class GradeAlunosComponent implements OnInit {
   alunoId !: String
   actualUser: any;
 
+
   erro : boolean = true
   path : any = null;
 
   constructor(
     private formBuilder : FormBuilder,
     private authService : AuthService,
-    private physicalService : PhysicalAssessmentService,
+    private PhysicalAssessmentService:PhysicalAssessmentService,
     private toastr: ToastrService,) { }
 
   ngOnInit(): void {
@@ -38,42 +39,26 @@ export class GradeAlunosComponent implements OnInit {
     })
   }
 
-  send() {
-    if( (!this.erro) && (this.path!=null) )
-      this.showSuccessToastr()
-    else
-      this.showErrorToastr()
-  }
+  send(){
 
-  onFileSelected(event: any) {
-    try {
-
-      const pdfPhysicalAssessment : FormData = new FormData();
-      pdfPhysicalAssessment.append('pdfPhysicalAssessment',event.target.files.item(0));
-
-
-      this.physicalService.uploadFile(pdfPhysicalAssessment).subscribe({
-        next:(res) => {
-
-          this.erro=false;
-          this.path = res
-        },
-        error: (err) => {
-          console.log(err)
-
-          this.erro=true;
-        }
-      })
-    }catch (e) {
-        console.log("erro, catch")
-        console.log(e)
+    let body = {
+      filePath :this.path["0"],
+      userId : this.alunoId,
+      professionalId : this.actualUser,
+      physicalAssessmentDate : new Date
     }
 
+    // console.log(body)
+    this.PhysicalAssessmentService.create(body).subscribe({
+      next:(res)=>{
+        this.showSuccessToastr()
+      },
+      error: (err)=>{
+        console.log(err)
+        this.showErrorToastr()
+      }
+    })
 
-    }
-
-  public takeUserId(alunoId ?: String){
-    this.alunoId = alunoId as String
   }
 
   showSuccessToastr(){
@@ -83,4 +68,40 @@ export class GradeAlunosComponent implements OnInit {
   showErrorToastr(){
     this.toastr.error("O envio não pode ser feito", "Erro")
   }
+
+
+
+  onFileSelected(event: any) {
+    try {
+
+          const pdfPhysicalAssessment : FormData = new FormData();
+          pdfPhysicalAssessment.append('pdfPhysicalAssessment',event.target.files.item(0));
+
+
+          this.PhysicalAssessmentService.uploadFile(pdfPhysicalAssessment).subscribe({
+            next:(res) => {
+
+              this.erro=false;
+              this.path = res
+            },
+            error: (err) => {
+              console.log(err)
+
+              this.erro=true;
+            }
+          })
+
+      }catch (e) {
+          console.log("erro, catch")
+          console.log(e)
+      }
+
+
+    }
+
+  public takeUserId(alunoId ?: String){
+    this.alunoId = alunoId as String
+  }
+
+
 }

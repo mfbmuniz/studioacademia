@@ -94,12 +94,9 @@ export class GradePendenciasComponent implements OnInit {
 
   public onSubmit(index : any){
 
-    // console.log('entrei porra')
+
     if( (!this.erro) && (this.path!=null) ) {
-      // console.log(this.path)
-      // console.log('index: '+index)
-      // console.log('objeto pagamentos : '+this.pagamentosPendentes)
-      // console.log('objeto pagamentos no index : '+this.pagamentosPendentes[index])
+
       let body = {
         paymentVoucher: this.path["0"],
         message: this.comprovanteForm.value['message'],

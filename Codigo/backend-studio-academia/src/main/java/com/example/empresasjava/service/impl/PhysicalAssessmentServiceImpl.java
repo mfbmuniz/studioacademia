@@ -1,5 +1,6 @@
 package com.example.empresasjava.service.impl;
 
+import com.example.empresasjava.models.MonthlyPayment;
 import com.example.empresasjava.models.PhysicalAssessment;
 import com.example.empresasjava.models.Plans;
 import com.example.empresasjava.models.RequestEntity.PhysicalAssessmentRequest;
@@ -12,15 +13,20 @@ import com.example.empresasjava.repository.PlansRepository;
 import com.example.empresasjava.service.PhysicalAssessmentService;
 import com.example.empresasjava.service.PlansService;
 import javassist.NotFoundException;
+import org.flywaydb.core.internal.resource.classpath.ClassPathResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.NonUniqueResultException;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -105,6 +111,25 @@ public class PhysicalAssessmentServiceImpl implements PhysicalAssessmentService 
     @Override
     public String uploadPdf(MultipartFile pdfPhysicalAssessment) throws NonUniqueResultException, NotFoundException, IOException {
         return savePdf(pdfPhysicalAssessment);
+    }
+
+    @Override
+    public @ResponseBody byte[] getPdf(Long physicalAssessmentId) throws NonUniqueResultException, NotFoundException, IOException {
+
+        PhysicalAssessment physicalAssessment = Optional.of(this.physicalAssessmentRepository.findOneByPhysicalAssessmentId(physicalAssessmentId))
+                .orElseThrow(()-> new NonUniqueResultException("Avaliação inexistente"));
+
+        Path pdfPath = Paths.get(physicalAssessment.getFilePath());
+
+        return Files.readAllBytes(pdfPath);
+    }
+
+    @Override
+    public ClassPathResource getPdf2(Long physicalAssessmentId) throws NonUniqueResultException, NotFoundException, IOException {
+        PhysicalAssessment physicalAssessment = Optional.of(this.physicalAssessmentRepository.findOneByPhysicalAssessmentId(physicalAssessmentId))
+                .orElseThrow(()-> new NonUniqueResultException("Avaliação inexistente"));
+
+        return null;//new ClassPathResource( physicalAssessment.getFilePath() );
     }
 
     private String savePdf(MultipartFile pdf){

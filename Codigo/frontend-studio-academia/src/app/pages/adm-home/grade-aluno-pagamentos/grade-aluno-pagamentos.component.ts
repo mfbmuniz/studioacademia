@@ -20,6 +20,8 @@ export class GradeAlunoPagamentosComponent implements OnInit {
   image!: any
   imageToShow: any;
   isImageLoading: any;
+
+
   public types = ['PAGO', 'ATRASADO', 'AGUARDANDO_PAGAMENTO', 'EM_ANALISE', 'NAO_RECEBIDO' , 'TODOS']
 
   constructor(
@@ -30,6 +32,7 @@ export class GradeAlunoPagamentosComponent implements OnInit {
    }
 
   ngOnInit(): void {
+
 
     this.listPayments(this.idAluno)
 

@@ -251,6 +251,7 @@ CREATE TABLE physical_assessment (
                     metabolic_age DECIMAL,
                     bone_weight DECIMAL,
                     description VARCHAR(200),
+                    file_path VARCHAR(200),
 
 
                     created_at TIMESTAMP(0) DEFAULT CURRENT_TIMESTAMP,
