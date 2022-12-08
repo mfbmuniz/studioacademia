@@ -12,7 +12,9 @@ import com.example.empresasjava.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import javassist.NotFoundException;
+import org.flywaydb.core.internal.resource.classpath.ClassPathResource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -142,12 +144,10 @@ public class PhysicalAssessmentController {
     }
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE , path = "/uploadPdf")
     @ApiOperation(value = "upload PDF Avaliacao")
-    @PreAuthorize("@authorityChecker.isAllowed({'ALUNO','ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ALUNO','ADMIN','NUTRICIONISTA','PROFESSOR'})")
     public ResponseEntity<HashMap> uploadPdf(
             @ApiParam(value = "pdf da avaliação ")
             @RequestParam MultipartFile pdfPhysicalAssessment ) throws NotFoundException, IOException {
-
-
 
         String savedPath = this.physicalAssessmentService.uploadPdf(pdfPhysicalAssessment);
         HashMap<String, String> map = new HashMap<>();
@@ -157,6 +157,22 @@ public class PhysicalAssessmentController {
                 map
         );
     }
+    /*@GetMapping(
+            value = "/getPdf/physicalAssessmentId/{physicalAssessmentId}",
+            produces = MediaType.APPLICATION_PDF_VALUE
+    )*/
+
+    @RequestMapping(value = "/getPdf/physicalAssessmentId/{physicalAssessmentId}", method = RequestMethod.GET, produces = "application/pdf")
+    @ApiOperation(value = "get pdf")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    public @ResponseBody byte[] getPdf(
+            @ApiParam("id monthly payment")
+            @PathVariable (value="physicalAssessmentId") Long physicalAssessmentId) throws IOException, NotFoundException {
+
+        return this.physicalAssessmentService.getPdf(physicalAssessmentId);
+
+    }
+
 
     /*
 

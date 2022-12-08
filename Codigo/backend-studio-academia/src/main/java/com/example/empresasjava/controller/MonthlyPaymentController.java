@@ -275,7 +275,7 @@ public class MonthlyPaymentController {
 
     @GetMapping(
             value = "/getImage/idMonthlyPayment/{idMonthlyPayment}",
-            produces = MediaType.IMAGE_JPEG_VALUE
+            produces = MediaType.APPLICATION_PDF_VALUE
     )
     @ApiOperation(value = "get image")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")

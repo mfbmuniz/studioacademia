@@ -163,11 +163,15 @@ public class PhysicalAssessment {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "file_path")
+    private String filePath;
+
     @Column(name = "created_at")
     private Date createdAt;
 
     @Column(name = "deleted_at")
     private Date deletedAt;
+
 
     public PhysicalAssessment() {
     }
@@ -181,7 +185,7 @@ public class PhysicalAssessment {
                               Double skinFoldsMediumArmpit, Double skinFoldsChest, Double skinFoldsSubscapularis, Double skinFoldsThigh,
                               Double skinMedialCalf, Double imc, Double fatMass,
                               Double corporalWater, Double residualWeight, Double visceralFat, Double leanMass, Double muscularWeight, Double metabolicAge,
-                              Double boneWeight, String description) {
+                              Double boneWeight, String description, String filePath) {
         this.userId = userId;
         this.professionalId = professionalId;
         this.physicalAssessmentDate = physicalAssessmentDate;
@@ -230,6 +234,7 @@ public class PhysicalAssessment {
         this.metabolicAge = metabolicAge;
         this.boneWeight = boneWeight;
         this.description =description;
+        this.filePath = filePath;
     }
 
     public PhysicalAssessment(Long physicalAssessmentId, Long userId, Long professionalId, Date physicalAssessmentDate, Double height, Double generalDescription,
@@ -240,7 +245,7 @@ public class PhysicalAssessment {
                               Double femur, Double skinFoldsBiceps, Double skinFoldsTriceps, Double skinFoldsAbdominal, Double skinFoldsSuprailiac,
                               Double skinFoldsMediumArmpit, Double skinFoldsChest, Double skinFoldsSubscapularis, Double skinFoldsThigh,
                               Double skinMedialCalf, Double imc, Double fatMass, Double corporalWater, Double residualWeight, Double visceralFat,
-                              Double leanMass, Double muscularWeight, Double metabolicAge, Double boneWeight, String description) {
+                              Double leanMass, Double muscularWeight, Double metabolicAge, Double boneWeight, String description, String filePath) {
 
         this.physicalAssessmentId = physicalAssessmentId;
         this.userId = userId;
@@ -291,6 +296,7 @@ public class PhysicalAssessment {
         this.metabolicAge = metabolicAge;
         this.boneWeight = boneWeight;
         this.description=description;
+        this.filePath = filePath;
     }
 
 }

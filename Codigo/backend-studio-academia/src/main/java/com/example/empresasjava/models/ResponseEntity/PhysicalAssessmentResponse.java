@@ -112,6 +112,8 @@ public class PhysicalAssessmentResponse {
 
     private String description;
 
+    private String filePath;
+
     public PhysicalAssessmentResponse() {
     }
 
@@ -123,7 +125,7 @@ public class PhysicalAssessmentResponse {
                                       Double femur, Double skinFoldsBiceps, Double skinFoldsTriceps, Double skinFoldsAbdominal, Double skinFoldsSuprailiac,
                                       Double skinFoldsMediumArmpit, Double skinFoldsChest, Double skinFoldsSubscapularis, Double skinFoldsThigh,
                                       Double skinMedialCalf, Double imc, Double fatMass, Double corporalWater, Double residualWeight, Double visceralFat,
-                                      Double leanMass, Double muscularWeight, Double metabolicAge, Double boneWeight, String description) {
+                                      Double leanMass, Double muscularWeight, Double metabolicAge, Double boneWeight, String description, String filePath) {
 
         this.physicalAssessmentId = physicalAssessmentId;
         this.userId = userId;
@@ -174,6 +176,7 @@ public class PhysicalAssessmentResponse {
         this.metabolicAge = metabolicAge;
         this.boneWeight = boneWeight;
         this.description = description;
+        this.filePath = filePath;
     }
 
     public static PhysicalAssessmentResponse fromPhysicalAssessment (PhysicalAssessment physicalAssessment){
@@ -276,7 +279,9 @@ public class PhysicalAssessmentResponse {
 
                 physicalAssessment.getBoneWeight(),
 
-                physicalAssessment.getDescription()
+                physicalAssessment.getDescription(),
+
+                physicalAssessment.getFilePath()
 
 
         );

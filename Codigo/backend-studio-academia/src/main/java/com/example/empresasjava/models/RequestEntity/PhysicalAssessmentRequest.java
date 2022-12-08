@@ -109,6 +109,8 @@ public class PhysicalAssessmentRequest {
 
     private Date deletedAt;
 
+    private String filePath;
+
     private String description;
 
 
@@ -212,7 +214,9 @@ public class PhysicalAssessmentRequest {
 
             physicalAssessmentRequest.getBoneWeight(),
 
-            physicalAssessmentRequest.getDescription()
+            physicalAssessmentRequest.getDescription(),
+
+            physicalAssessmentRequest.getFilePath()
 
         );
     }

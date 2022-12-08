@@ -7,8 +7,10 @@ import com.example.empresasjava.models.RequestEntity.PlansRequest;
 import com.example.empresasjava.models.ResponseEntity.PhysicalAssessmentResponse;
 import com.example.empresasjava.models.ResponseEntity.PlansResponse;
 import javassist.NotFoundException;
+import org.flywaydb.core.internal.resource.classpath.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.NonUniqueResultException;
@@ -35,5 +37,7 @@ public interface PhysicalAssessmentService {
 
     List<PhysicalAssessment> getSpecificProfessionalPhysicalAssessments(Long professionalId)throws  NotFoundException;
     String uploadPdf(MultipartFile pdfPhysicalAssessment)throws NonUniqueResultException, NotFoundException, IOException;
+    public @ResponseBody byte[] getPdf(Long physicalAssessmentId) throws NonUniqueResultException, NotFoundException, IOException;
 
+    public ClassPathResource getPdf2(Long physicalAssessmentId)throws NonUniqueResultException, NotFoundException, IOException;
 }

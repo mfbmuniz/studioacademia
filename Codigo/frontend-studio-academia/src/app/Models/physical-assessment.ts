@@ -52,6 +52,7 @@ export interface PhysicalAssessment {
   metabolicAge?: number,
   boneWeight?: number,
   description?: string,
+  filePath?: string
 }
 
 export type PhysicalAssessments = Array<PhysicalAssessment>

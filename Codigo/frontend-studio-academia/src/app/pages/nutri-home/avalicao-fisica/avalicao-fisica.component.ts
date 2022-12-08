@@ -16,6 +16,9 @@ export class AvalicaoFisicaComponent implements OnInit {
   actualUser: any;
   idAluno: any;
 
+  erro : boolean = true
+  path : any = null;
+
   constructor(
     private formBuilder : FormBuilder,
     private authService : AuthService,
@@ -73,7 +76,6 @@ export class AvalicaoFisicaComponent implements OnInit {
       metabolic_age    : [[""],Validators.required],
       bone_weight    : [[""],Validators.required],
       description    : [[""]]
-
     })
   }
 
@@ -131,6 +133,7 @@ export class AvalicaoFisicaComponent implements OnInit {
       metabolicAge   : this.physicalForm.value['metabolic_age'],
       boneWeight    : this.physicalForm.value['bone_weight'],
       description    : this.physicalForm.value['description'],
+      filePath : this.path["0"],
     }
 
     // console.log(body)
@@ -144,6 +147,34 @@ export class AvalicaoFisicaComponent implements OnInit {
         this.showErrorToastr()
       }
     })
+
+  }
+
+  onFileSelected(event: any) {
+    try {
+
+      const pdfPhysicalAssessment : FormData = new FormData();
+      pdfPhysicalAssessment.append('pdfPhysicalAssessment',event.target.files.item(0));
+
+
+      this.PhysicalAssessmentService.uploadFile(pdfPhysicalAssessment).subscribe({
+        next:(res) => {
+
+          this.erro = false;
+          this.path = res
+        },
+        error: (err) => {
+          console.log(err)
+
+          this.erro=true;
+        }
+      })
+
+    }catch (e) {
+      console.log("erro, catch")
+      console.log(e)
+    }
+
 
   }
 
