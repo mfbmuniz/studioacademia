@@ -5,6 +5,7 @@ import {Users} from "../../../Models/user";
 import {UserService} from "../../../services/UserService";
 import {Router} from "@angular/router";
 import {Fichas} from "../../../Models/ficha";
+import { UserRoleService } from 'src/app/services/UserRoleService';
 
 @Component({
   selector: 'app-grade-alunos',
@@ -16,11 +17,14 @@ export class GradeAlunosComponent implements OnInit {
   @Input() alunos !: Alunos
   @Input() pageable !: pageableObject
   @Input() users !: Users
+  public isAdmin : boolean = false;
 
   constructor(public userService: UserService,
-              public router: Router) { }
+              public router: Router,
+              private userRoleService:UserRoleService,) { }
 
   ngOnInit(): void {
+    this.isAdmin= this.userRoleService.isAdmin();
     this.users = <Users>this.pageable?.content
     this.alunos = <Alunos>this.pageable?.content
   }

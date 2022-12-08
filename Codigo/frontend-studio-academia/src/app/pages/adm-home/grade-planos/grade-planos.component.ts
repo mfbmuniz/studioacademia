@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PageableObject } from 'src/app/Models/PageableObject';
 import { Plans } from 'src/app/Models/plan';
 import { PlanService } from 'src/app/services/planService';
+import { UserRoleService } from 'src/app/services/UserRoleService';
 
 @Component({
   selector: 'app-grade-planos',
@@ -13,10 +14,15 @@ export class GradePlanosComponent implements OnInit {
 
   planos !: Plans
   pageable$ !: PageableObject
+  public isAdmin : boolean = false;
 
-  constructor(private planService: PlanService, private toastr: ToastrService) { }
+  constructor(
+    private planService: PlanService,
+    private toastr: ToastrService,
+    private userRoleService:UserRoleService,) { }
 
   ngOnInit(): void {
+    this.isAdmin= this.userRoleService.isAdmin();
     this.listPlans(0, 10)
   }
 

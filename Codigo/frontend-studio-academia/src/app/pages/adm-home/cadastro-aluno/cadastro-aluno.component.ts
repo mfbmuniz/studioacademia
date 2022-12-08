@@ -7,6 +7,7 @@ import {UserService} from "../../../services/UserService";
 import {User} from "../../../Models/user";
 import { PlanService } from 'src/app/services/planService';
 import { PageableObject } from 'src/app/Models/PageableObject';
+import { UserRoleService } from 'src/app/services/UserRoleService';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class CadastroAlunoComponent implements OnInit {
   user !: User
   userForm !: any
   pageable !: PageableObject
+  public isAdmin : boolean = false;
 
 
   constructor(
@@ -38,22 +40,17 @@ export class CadastroAlunoComponent implements OnInit {
     private toastr: ToastrService,
     private routeAc : ActivatedRoute,
     private planService : PlanService,
+    private userRoleService:UserRoleService,
+
   ) {
     this.routeAc.params.subscribe(params => this.idUser = params['idUser']);
 
-
-
-  }
-
-  showSuccessToastr(){
-    this.toastr.success("Enviado com sucesso", "Sucesso")
-  }
-
-  showErrorToastr(){
-    this.toastr.error("O envio não pode ser feito", "Erro")
   }
 
   ngOnInit(): void {
+
+    this.rolesParaProf(this.userRoleService.isAdmin())
+
     this.listarPlanos()
     this.novoAlunoForm = this.formBuilder.group({
         email :  ['', [Validators.required, Validators.email]],
@@ -200,6 +197,7 @@ export class CadastroAlunoComponent implements OnInit {
           },
           error: (err) => {
             console.log(err)
+            console.log(body)
             this.showErrorToastr()
           }
         }
@@ -289,5 +287,17 @@ export class CadastroAlunoComponent implements OnInit {
           console.log(err)
       },
     })
+  }
+
+  showSuccessToastr(){
+    this.toastr.success("Enviado com sucesso", "Sucesso")
+  }
+
+  showErrorToastr(){
+    this.toastr.error("O envio não pode ser feito", "Erro")
+  }
+  rolesParaProf(isAdm : boolean){
+    if(!isAdm)
+    this.types = ['ALUNO']
   }
 }

@@ -21,8 +21,11 @@ export class AdmSidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAdmin= this.userRoleService.isAdmin();
-    this.notificationAtrasados();
-    this.notificationEmAnalise()
+    if(this.isAdmin){
+      this.notificationAtrasados();
+      this.notificationEmAnalise()
+    }
+
   }
 
   notificationAtrasados(){

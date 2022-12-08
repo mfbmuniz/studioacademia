@@ -17,12 +17,13 @@
           <p>Tipo do Usuário</p>
         </label>
         <select id="type" class="form-control" formControlName = "roles" (change)="checkValue($event)">
-          <option *ngFor="let t of types" [value]="t">{{t}}</option>
+            <option *ngFor="let t of types" [value]="t">{{t}}</option>
         </select>
+
 
         <app-mensagem *ngIf="
         novoAlunoForm.get('roles')?.errors?.['required'] && novoAlunoForm.get('roles')?.touched "
-          mensagem="Senha obrigatório">
+          mensagem="Campo obrigatório">
         </app-mensagem>
       </div>
 
