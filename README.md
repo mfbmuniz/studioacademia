@@ -1,6 +1,8 @@
 # Studio Academia
 
-[Escreva um ou dois  parágrafo resumindo o objetivo do seu projeto.]
+O projeto Studio Academia visa ser um sistema web que colabore com a comunicação entre os três tipos de usuário: Professor, Aluno, Nutricionista. Para isso, há um agrupamento de funcionalidades para atender as necessidades dos consumidores , acessíveis pelo sidebar.
+Dessa forma, o sistema permite a criação de fichas de academia com os exercícios cadastrados e disponibilizá-los aos clientes com vídeos demonstrativos, gerenciar os pagamentos - com envios de comprovante - e envios de avaliação física.  Além de permitir que o aluno dê feedbacks. Com isso, o projeto facilita o acesso e controle a informações e documentos em um só ambiente. 
+
 
 ## Alunos integrantes da equipe
 
