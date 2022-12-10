@@ -20,6 +20,7 @@ export class GradeAvaliacaoFisicaComponent implements OnInit {
   isPdfLoading: any;
   sanitizedUrl:any;
 
+
   constructor(
     private sanitizer:DomSanitizer,
     private physicalAssessmentService : PhysicalAssessmentService,
@@ -61,4 +62,17 @@ export class GradeAvaliacaoFisicaComponent implements OnInit {
   sanitize(filePath: any ) {
     return this.sanitizer.bypassSecurityTrustUrl(filePath);
   }
+
+  testePdf : any
+  getPdf2(physicalAssessmentId: any) {
+    this.testePdf = this.physicalAssessmentService.getPdf(physicalAssessmentId).subscribe(
+      (res)=>{
+        console.log("==>>",res)
+        let file = new Blob([res], { type: 'application/pdf' });
+        var fileURL = URL.createObjectURL(file);
+        window.open(fileURL,'_blank');
+      }
+    );
+  }
 }
+

@@ -9,24 +9,35 @@ import com.example.empresasjava.models.User;
 import com.example.empresasjava.models.dto.UserDto;
 import com.example.empresasjava.service.PhysicalAssessmentService;
 import com.example.empresasjava.service.UserService;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfWriter;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import javassist.NotFoundException;
+import lombok.var;
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.flywaydb.core.internal.resource.classpath.ClassPathResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.persistence.NonUniqueResultException;
 import javax.validation.Valid;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 @RestController
@@ -75,10 +86,10 @@ public class PhysicalAssessmentController {
     @ResponseBody
     @ApiOperation(value = "Lista todas as avaliações")
     public Page<PhysicalAssessment> listPhysicalAssessmentsByPage(
-            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
+            @ApiParam(value = "Página que deseja visualizar iniciando em 0")
             @PathVariable(value="page")
             int page,
-            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @ApiParam(value = "Quantidade de usuários a serem listados por página")
             @PathVariable(value="size")
             int size) throws NotFoundException {
 
@@ -92,10 +103,10 @@ public class PhysicalAssessmentController {
     @ResponseBody
     @ApiOperation(value = "Lista avaliações por id")
     public Page<PhysicalAssessment> listSpecificUserPhysicalAssessmentsByPage(
-            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
+            @ApiParam(value = "Página que deseja visualizar iniciando em 0")
             @PathVariable(value="page")
             int page,
-            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @ApiParam(value = "Quantidade de usuários a serem listados por página")
             @PathVariable(value="size")
             int size,
             @PathVariable(value="idUser")
@@ -113,10 +124,10 @@ public class PhysicalAssessmentController {
     @ResponseBody
     @ApiOperation(value = "Lista avaliações efetuadas por um profissional em especifico")
     public Page<PhysicalAssessment> listSpecificProfessionalPhysicalAssessmentsByPage(
-            @ApiParam(value = "Página que deseja visualizar iniciando em 0", example = "0")
+            @ApiParam(value = "Página que deseja visualizar iniciando em 0")
             @PathVariable(value="page")
             int page,
-            @ApiParam(value = "Quantidade de usuários a serem listados por página", example = "10")
+            @ApiParam(value = "Quantidade de usuários a serem listados por página")
             @PathVariable(value="size")
             int size,
             @PathVariable(value="professionalId")
@@ -157,27 +168,21 @@ public class PhysicalAssessmentController {
                 map
         );
     }
-    /*@GetMapping(
-            value = "/getPdf/physicalAssessmentId/{physicalAssessmentId}",
-            produces = MediaType.APPLICATION_PDF_VALUE
-    )*/
-
-    @RequestMapping(value = "/getPdf/physicalAssessmentId/{physicalAssessmentId}", method = RequestMethod.GET, produces = "application/pdf")
-    @ApiOperation(value = "get pdf")
+    @ApiOperation(value = "get pdf final")
     @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
-    public @ResponseBody byte[] getPdf(
-            @ApiParam("id monthly payment")
-            @PathVariable (value="physicalAssessmentId") Long physicalAssessmentId) throws IOException, NotFoundException {
+    @RequestMapping(value = "/getPdf4/physicalAssessmentId/{physicalAssessmentId}", method = RequestMethod.GET)
+    public byte[] getPdf4(
+            @ApiParam("id monthly payment") @PathVariable (value="physicalAssessmentId")
+            Long physicalAssessmentId) throws NotFoundException, IOException, DocumentException {
 
-        return this.physicalAssessmentService.getPdf(physicalAssessmentId);
+
+        physicalAssessmentService.getPdf(physicalAssessmentId);
+
+        byte[] content = physicalAssessmentService.getPdf(physicalAssessmentId);
+
+
+        return content;
 
     }
 
-
-    /*
-
-    List<PhysicalAssessment> getSpecificUserPhysicalAssessments(Long idUser)throws  NotFoundException;
-
-    List<PhysicalAssessment> getSpecificProfessionalPhysicalAssessments(Long professionalId)throws  NotFoundException;
-     */
 }

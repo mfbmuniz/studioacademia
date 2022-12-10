@@ -53,7 +53,7 @@ export class PhysicalAssessmentService {
   }
 
   getPdf(physicalAssessmentId: any):Observable<Blob>  {
-    return this.http.get(`${environment.apiUrl}/physical-assessment/getPdf/physicalAssessmentId/${physicalAssessmentId}`,{ responseType: 'blob' });
+    return this.http.get(`${environment.apiUrl}/physical-assessment/getPdf4/physicalAssessmentId/${physicalAssessmentId}`,{ responseType: 'blob' });
 
   }
 

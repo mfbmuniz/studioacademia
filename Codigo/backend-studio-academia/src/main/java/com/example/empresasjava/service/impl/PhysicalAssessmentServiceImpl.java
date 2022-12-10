@@ -1,19 +1,18 @@
 package com.example.empresasjava.service.impl;
 
-import com.example.empresasjava.models.MonthlyPayment;
 import com.example.empresasjava.models.PhysicalAssessment;
-import com.example.empresasjava.models.Plans;
 import com.example.empresasjava.models.RequestEntity.PhysicalAssessmentRequest;
-import com.example.empresasjava.models.RequestEntity.PlansRequest;
 import com.example.empresasjava.models.ResponseEntity.PhysicalAssessmentResponse;
-import com.example.empresasjava.models.ResponseEntity.PlansResponse;
 import com.example.empresasjava.models.User;
 import com.example.empresasjava.repository.PhysicalAssessmentRepository;
-import com.example.empresasjava.repository.PlansRepository;
 import com.example.empresasjava.service.PhysicalAssessmentService;
-import com.example.empresasjava.service.PlansService;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfDocument;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfWriter;
 import javassist.NotFoundException;
-import org.flywaydb.core.internal.resource.classpath.ClassPathResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,14 +21,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.NonUniqueResultException;
-import java.io.File;
-import java.io.IOException;
+import javax.xml.xpath.XPath;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import static java.lang.System.out;
 
 
 @Service
@@ -114,23 +115,30 @@ public class PhysicalAssessmentServiceImpl implements PhysicalAssessmentService 
     }
 
     @Override
-    public @ResponseBody byte[] getPdf(Long physicalAssessmentId) throws NonUniqueResultException, NotFoundException, IOException {
+    public byte[] getPdf(Long physicalAssessmentId) throws NonUniqueResultException, NotFoundException, IOException {
 
         PhysicalAssessment physicalAssessment = Optional.of(this.physicalAssessmentRepository.findOneByPhysicalAssessmentId(physicalAssessmentId))
                 .orElseThrow(()-> new NonUniqueResultException("Avaliação inexistente"));
 
-        Path pdfPath = Paths.get(physicalAssessment.getFilePath());
+        String fileNamePdf = physicalAssessment.getFilePath(); //"C:\\studioImages\\1670689850714_4_.pdf";
 
-        return Files.readAllBytes(pdfPath);
+        File file = new File(fileNamePdf);
+
+
+        // retrieve contents of "C:/tmp/report.pdf" that were written in showHelp
+        byte[] contents = Files.readAllBytes(Paths.get(fileNamePdf));
+
+        return contents;
     }
 
     @Override
-    public ClassPathResource getPdf2(Long physicalAssessmentId) throws NonUniqueResultException, NotFoundException, IOException {
-        PhysicalAssessment physicalAssessment = Optional.of(this.physicalAssessmentRepository.findOneByPhysicalAssessmentId(physicalAssessmentId))
-                .orElseThrow(()-> new NonUniqueResultException("Avaliação inexistente"));
-
-        return null;//new ClassPathResource( physicalAssessment.getFilePath() );
+    public ByteArrayInputStream getPdf2(Long physicalAssessmentId) throws NonUniqueResultException, NotFoundException, IOException, DocumentException {
+         return null;
     }
+
+
+
+
 
     private String savePdf(MultipartFile pdf){
 
@@ -140,7 +148,7 @@ public class PhysicalAssessmentServiceImpl implements PhysicalAssessmentService 
             User loggedUser = userServiceImpl.getUserByPrincipal();
 
 
-            String path = "c:/studioImages/" +saveDate.getTime() +"_"+loggedUser.getIdUser()+"_.pdf"; // lugar pra salvar a imagem
+            String path = "C:\\studioImages\\" +saveDate.getTime() +"_"+loggedUser.getIdUser()+"_.pdf"; // lugar pra salvar a imagem
 
             //private final Path rootLocation = Paths.get("path");
             //Files.copy(image.getInputStream(), this.rootLocation.resolve(""+saveDate.toString()+"_"+idUser+".jpg"));

@@ -216,9 +216,17 @@ public class PhysicalAssessmentRequest {
 
             physicalAssessmentRequest.getDescription(),
 
-            physicalAssessmentRequest.getFilePath()
+            generatePath(physicalAssessmentRequest.getFilePath())
 
         );
+    }
+
+    private static String generatePath(String filePath) {
+        String path = filePath.replace("\\", "\\\\");
+
+
+        int a=0;
+        return path;
     }
 
 }
