@@ -1,4 +1,4 @@
-<div class="col-3 offset-1 offset-md-5 ">
+<!-- <div class="col-3 offset-1 offset-md-5 ">
   <h1>Comentários</h1>
 </div>
 <br>
@@ -14,7 +14,45 @@
       </div>
     </div>
   </div>
+</div> -->
+<table class="table table-light me-5 d-none d-md-table" >
+  <thead>
+    <tr class="table-secondary">
+      <th scope="col">ID</th>
+      <th scope="col">Título</th>
+      <th scope="col" >Visualizar</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let comments of messages">
+    <tr>
+      <th scope="row" *ngIf="comments?.userId; else anonimo">{{comments?.userId}}</th>
+      <th scope="row">{{comments?.title}}</th>
+      <th>
+      <button type="button" data-bs-toggle="modal" data-bs-target="#modal" (click)="getContent(comments?.title,comments?.messageContent)">
+        <i class="bi bi-journals" ></i>
+      </button>
+    </th>
+  </tbody>
+</table>
+<!-- Modal -->
+<div class="modal" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="modalLabel">{{title}}</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{conteudo}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
+<ng-template #anonimo><th scope="row">Anônimo</th></ng-template>
+
 
 <!--
   <div class="row">

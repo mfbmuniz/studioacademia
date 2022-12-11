@@ -1,6 +1,6 @@
 export interface Comments {
-  idUser ?: number,
-  messageContent ?: Text,
+  userId ?: number,
+  messageContent ?: string,
   title ?: string,
 }
 

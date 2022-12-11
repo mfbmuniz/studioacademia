@@ -13,6 +13,9 @@ export class CommentsComponent implements OnInit {
   messages !: Messages
   pageable !: pageableObject
 
+  title !: string
+  conteudo !: string
+
   constructor(private messageService : MessageService) { }
 
   ngOnInit(): void {
@@ -29,5 +32,12 @@ export class CommentsComponent implements OnInit {
         console.log(err)
       }
     })
+  }
+
+
+
+  getContent(title :string | undefined,content :string | undefined) {
+    this.conteudo = content as string
+    this.title = title as  string
   }
 }
