@@ -14,6 +14,7 @@ import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,9 @@ public class PhysicalAssessmentServiceImpl implements PhysicalAssessmentService 
 
     @Autowired
     private UserServiceImpl userServiceImpl;
+
+    @Value("${systemRootPhysical}")
+    private String systemRootPhysical;
 
     @Override
     public PhysicalAssessmentResponse createPhysicalAssessment(PhysicalAssessmentRequest physicalAssessmentRequest)
@@ -148,7 +152,7 @@ public class PhysicalAssessmentServiceImpl implements PhysicalAssessmentService 
             User loggedUser = userServiceImpl.getUserByPrincipal();
 
 
-            String path = "C:\\studioImages\\" +saveDate.getTime() +"_"+loggedUser.getIdUser()+"_.pdf"; // lugar pra salvar a imagem
+            String path = systemRootPhysical +saveDate.getTime() +"_"+loggedUser.getIdUser()+"_.pdf"; // lugar pra salvar a imagem
 
             //private final Path rootLocation = Paths.get("path");
             //Files.copy(image.getInputStream(), this.rootLocation.resolve(""+saveDate.toString()+"_"+idUser+".jpg"));

@@ -30,7 +30,7 @@ public class ExerciseController {
 
     @PostMapping(path = "/create")
     @ApiOperation(value = "Criar novo exercicio")
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','PROFESSOR'})")
     public ResponseEntity<ExerciseDto> createExercise(
             @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
             @Valid @RequestBody ExerciseRequest request) throws NotFoundException {
@@ -43,7 +43,7 @@ public class ExerciseController {
 
     @PostMapping(path = "/edit/{id}")
     @ApiOperation(value = "editar  exercicio")
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','PROFESSOR'})")
     public ResponseEntity<ExerciseDto> editExercise(
             @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
             @Valid @RequestBody ExerciseRequest request,
@@ -58,7 +58,7 @@ public class ExerciseController {
 
     @DeleteMapping(path = "/delete/id/{id}")
     @ApiOperation(value = "deletar o e exercicio")
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','PROFESSOR'})")
     public ResponseEntity<ExerciseDto> deleteExercise(
             @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
             @PathVariable(value="id") final Long id) throws NotFoundException {
@@ -70,7 +70,7 @@ public class ExerciseController {
         );
     }
 
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','PROFESSOR'})")
     @GetMapping(path = "/page/{page}/size/{size}")
     @ResponseBody
     @ApiOperation(value = "Lista usuários por página quantidade")
@@ -87,7 +87,7 @@ public class ExerciseController {
 
     }
 
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','PROFESSOR'})")
     @GetMapping(path = "page/{page}/size/{size}/name/{name}")
     @ResponseBody
     @ApiOperation(value = "Lista usuários por página quantidade")
@@ -109,7 +109,7 @@ public class ExerciseController {
     }
 
 
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','PROFESSOR'})")
     @GetMapping(path = "getexercisebyid/exerciseId/{exerciseId}")
     @ResponseBody
     @ApiOperation(value = "Lista usuários por página quantidade")
@@ -123,7 +123,7 @@ public class ExerciseController {
 
     }
 
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','PROFESSOR'})")
     @GetMapping(path = "/getexercisesdropdown")
     @ResponseBody
     @ApiOperation(value = "Lista usuários por página quantidade")

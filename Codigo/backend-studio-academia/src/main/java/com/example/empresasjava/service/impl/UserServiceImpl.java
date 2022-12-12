@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto create(UserRequest user) throws NonUniqueResultException, NotFoundException {
 
-        Optional<User> usr = Optional.ofNullable(this.userRepository.findOneByEmail(user.getEmail()));
+        Optional<User> usr = Optional.ofNullable(this.userRepository.findOneByEmailAndDeletedAtIsNull(user.getEmail()));
 
         if(!usr.isPresent()){
             List<Role> roles = Optional.of(this.roleService.findAllByNameIn(user.getRoles()))
@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return Optional.ofNullable(this.userRepository.findOneByEmail(email));
+        return Optional.ofNullable(this.userRepository.findOneByEmailAndDeletedAtIsNull(email));
     }
 
     @Override
@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto editUser(UserRequest userRequest) throws NotFoundException {
 
-        User user = this.userRepository.findOneByEmail(userRequest.getEmail());
+        User user = this.userRepository.findOneByEmailAndDeletedAtIsNull(userRequest.getEmail());
         if (user == null){
             user = this.userRepository.findOneByIdUser(userRequest.getIdUser());
         }
@@ -143,7 +143,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto deleteUser(String email) {
-        User user = this.userRepository.findOneByEmail(email);
+        User user = this.userRepository.findOneByEmailAndDeletedAtIsNull(email);
 
         user.setDeletedAt(new Date());
         return UserDto.fromUser(this.userRepository.save(user));
@@ -161,7 +161,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByPrincipal() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return this.userRepository.findOneByEmail(((UserDetails)principal).getUsername());
+        return this.userRepository.findOneByEmailAndDeletedAtIsNull(((UserDetails)principal).getUsername());
 
     }
 

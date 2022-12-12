@@ -38,7 +38,7 @@ public class UserFileController {
 
     @PostMapping(path = "/create")
     @ApiOperation(value = "Criar nova ficha vazia para um usuário")
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','PROFESSOR'})")
     public ResponseEntity<UserFileResponse> createFile(
             @ApiParam(value = "Json da requisição que contem o dado do usuario a ser salvo")
             @Valid @RequestBody UserFileRequest request) throws NotFoundException {
@@ -52,7 +52,7 @@ public class UserFileController {
     }
     @PostMapping(path = "/edit")
     @ApiOperation(value = "edita ficha de usuario")
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','PROFESSOR'})")
     public ResponseEntity<UserFileResponse> editUserFile(
             @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
             @Valid @RequestBody UserFileRequest request) throws NotFoundException {
@@ -67,7 +67,7 @@ public class UserFileController {
 
     @DeleteMapping(path = "/deleteFile/{idFile}")
     @ApiOperation(value = "ficha de usuario")
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','PROFESSOR'})")
     public ResponseEntity<UserFileResponse> deleteUserFile(
             @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
             @PathVariable(value="idFile") final Long id) throws NotFoundException {
@@ -83,7 +83,7 @@ public class UserFileController {
 
     @PostMapping(path = "/addExercises")
     @ApiOperation(value = "adiciona exercicios na ficha")
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','PROFESSOR'})")
     public ResponseEntity<UserExerciseListResponse> addExercices(
             @ApiParam(value = "Json da requisição que contem o dado do usuario a ser salvo")
             @Valid @RequestBody UserExerciseListRequest request) throws NotFoundException {
@@ -95,7 +95,7 @@ public class UserFileController {
     }
     @DeleteMapping(path = "/deleteExercise")
     @ApiOperation(value = "ficha de usuario")
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','PROFESSOR'})")
     public ResponseEntity<UserExerciseResponse> deleteUserExercise(
             @ApiParam(value = "Json da requisição que contem o dado do exercicio a ser salvo")
             @Valid @RequestBody UserExerciseRequest request) throws NotFoundException {
@@ -109,7 +109,7 @@ public class UserFileController {
     }
     @PostMapping(path = "/editExercises/{idFile}/{idExercise}")
     @ApiOperation(value = "adiciona exercicios na ficha")
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','PROFESSOR'})")
     public ResponseEntity<UserExerciseResponse> editExercices(
             @ApiParam(value = "Json da requisição que contem o dado do usuario a ser salvo")
             @Valid @RequestBody UserExerciseRequest request,
@@ -123,7 +123,7 @@ public class UserFileController {
     }
 
     //fichas do usuario
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','ALUNO'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','ALUNO','PROFESSOR'})")
     @GetMapping(path = "/page/{page}/size/{size}/iduser/{idUser}")
     @ResponseBody
     @ApiOperation(value = "Lista fichas do usuario por página quantidade")
@@ -181,7 +181,7 @@ public class UserFileController {
 //
 //    }
 //
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','ALUNO'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','ALUNO','PROFESSOR'})")
     @GetMapping(path = "/pageExercisesInFile/{page}/size/{size}/fileId/{fileId}")
     @ResponseBody
     @ApiOperation(value = "Lista usuários por página quantidade")
@@ -205,7 +205,7 @@ public class UserFileController {
    }
 
     //fichas do usuario
-    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','ALUNO'})")
+    @PreAuthorize("@authorityChecker.isAllowed({'ADMIN','ALUNO','PROFESSOR'})")
     @GetMapping(path = "/getUserFileExercise/fileId/{idFile}")
     @ResponseBody
     @ApiOperation(value = "Lista fichas do usuario por página quantidade")

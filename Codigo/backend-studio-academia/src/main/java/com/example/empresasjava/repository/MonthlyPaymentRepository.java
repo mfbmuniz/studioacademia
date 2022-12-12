@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Date;
 
 public interface MonthlyPaymentRepository extends JpaRepository<MonthlyPayment,Long> {
-    MonthlyPayment findByUserIdAndDueDate(Long userId, Date dueDate);
+    MonthlyPayment findOneByUserIdAndDueDate(Long userId, Date dueDate);
 
     MonthlyPayment findOneByMonthlyPaymentId(Long id);
 

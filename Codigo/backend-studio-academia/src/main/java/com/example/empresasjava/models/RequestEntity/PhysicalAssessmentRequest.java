@@ -216,6 +216,8 @@ public class PhysicalAssessmentRequest {
 
             physicalAssessmentRequest.getDescription(),
 
+            //physicalAssessmentRequest.getFilePath()
+
             generatePath(physicalAssessmentRequest.getFilePath())
 
         );

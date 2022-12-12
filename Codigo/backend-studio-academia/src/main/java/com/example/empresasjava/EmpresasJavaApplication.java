@@ -50,7 +50,7 @@ public class EmpresasJavaApplication {
 	@Transactional
 	public void createFirstAdminUser() throws NotFoundException {
 
-		User admin = this.userRepository.findOneByEmail("admin@admin.com");
+		User admin = this.userRepository.findOneByEmailAndDeletedAtIsNull("admin@admin.com");
 
 		Role admRole = this.roleRepository.findByName(RolesEnum.ADMIN.getCode());
 

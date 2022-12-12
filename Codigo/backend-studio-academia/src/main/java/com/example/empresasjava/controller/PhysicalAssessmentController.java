@@ -180,7 +180,6 @@ public class PhysicalAssessmentController {
 
         byte[] content = physicalAssessmentService.getPdf(physicalAssessmentId);
 
-
         return content;
 
     }

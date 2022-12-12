@@ -26,7 +26,10 @@ export class UserRoleService {
     }
 
     isAdmin() {
-        return this.roles ? this.roles.includes("ADMIN") : false;
+      console.log(this.roles)
+      console.log(this.roles.includes("ADMIN"))
+
+      return this.roles ? this.roles.includes("ADMIN") : false;
     }
 
 }

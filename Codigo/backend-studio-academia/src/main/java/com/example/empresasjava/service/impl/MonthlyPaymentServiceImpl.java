@@ -10,6 +10,7 @@ import com.example.empresasjava.repository.UserRepository;
 import com.example.empresasjava.service.MonthlyPaymentService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -44,11 +45,8 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
     @Autowired
     private UserServiceImpl userServiceImpl;
 
-
-
-
-
-
+    @Value("${systemRoot}")
+    private String systemPath;
 
     @Override
     public MonthlyPaymentResponse create(){
@@ -108,7 +106,7 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND, 0);
 
-            MonthlyPayment monthlyPayment = this.monthlyPaymentRepository.findByUserIdAndDueDate(request.getUserId(), c.getTime());
+            MonthlyPayment monthlyPayment = this.monthlyPaymentRepository.findOneByUserIdAndDueDate(request.getUserId(), c.getTime());
             monthlyPayment.setPaymentStatus(MonthlyPaymentStatusEnum.EM_ANALISE.getCode());
             monthlyPayment.setPaymentVoucher(request.getPaymentVoucher());
             monthlyPayment.setMessage(request.getMessage());
@@ -124,11 +122,7 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
 
             User loggedUser = userServiceImpl.getUserByPrincipal();
 
-
-
-
-
-            String path = "c:/studioImages/" +saveDate.getTime() +"_"+loggedUser.getIdUser()+"_.jpg"; // lugar pra salvar a imagem
+            String path = systemPath +saveDate.getTime() +"_"+loggedUser.getIdUser()+"_.jpg"; // lugar pra salvar a imagem
 
             //private final Path rootLocation = Paths.get("path");
             //Files.copy(image.getInputStream(), this.rootLocation.resolve(""+saveDate.toString()+"_"+idUser+".jpg"));
@@ -159,7 +153,7 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND, 0);
 
-        MonthlyPayment monthlyPayment = this.monthlyPaymentRepository.findByUserIdAndDueDate(request.getUserId(), c.getTime());
+        MonthlyPayment monthlyPayment = this.monthlyPaymentRepository.findOneByUserIdAndDueDate(request.getUserId(), c.getTime());
         monthlyPayment.setPaymentStatus(monthlyPayment.getPaymentStatus());
         monthlyPayment.setPaymentVoucher(request.getPaymentVoucher());
         monthlyPayment.setMessage(request.getMessage());
@@ -211,7 +205,7 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND, 0);
 
-        MonthlyPayment monthlyPayment = this.monthlyPaymentRepository.findByUserIdAndDueDate(request.getUserId(), c.getTime());
+        MonthlyPayment monthlyPayment = this.monthlyPaymentRepository.findOneByUserIdAndDueDate(request.getUserId(), c.getTime());
         monthlyPayment.setPaymentStatus((MonthlyPaymentStatusEnum.PAGO.getCode()));
         monthlyPayment.setPaymentVoucher(monthlyPayment.getPaymentVoucher());
         monthlyPayment.setMessage(monthlyPayment.getMessage());
@@ -229,7 +223,7 @@ public class MonthlyPaymentServiceImpl implements MonthlyPaymentService {
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND, 0);
 
-        MonthlyPayment monthlyPayment = this.monthlyPaymentRepository.findByUserIdAndDueDate(request.getUserId(), c.getTime());
+        MonthlyPayment monthlyPayment = this.monthlyPaymentRepository.findOneByUserIdAndDueDate(request.getUserId(), c.getTime());
         monthlyPayment.setPaymentStatus((MonthlyPaymentStatusEnum.NAO_RECEBIDO.getCode()));
         monthlyPayment.setPaymentVoucher(monthlyPayment.getPaymentVoucher());
         monthlyPayment.setMessage(monthlyPayment.getMessage());
