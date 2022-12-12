@@ -176,7 +176,7 @@ public class PhysicalAssessmentController {
             Long physicalAssessmentId) throws NotFoundException, IOException, DocumentException {
 
 
-        physicalAssessmentService.getPdf(physicalAssessmentId);
+        //physicalAssessmentService.getPdf(physicalAssessmentId);
 
         byte[] content = physicalAssessmentService.getPdf(physicalAssessmentId);
 

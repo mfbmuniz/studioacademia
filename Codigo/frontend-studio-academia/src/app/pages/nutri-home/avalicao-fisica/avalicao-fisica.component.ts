@@ -84,6 +84,7 @@ export class AvalicaoFisicaComponent implements OnInit {
 
   send(){
 
+    console.log('send entrou')
     let body = {
       userId : this.idAluno,
       professionalId : this.actualUser,
@@ -133,10 +134,10 @@ export class AvalicaoFisicaComponent implements OnInit {
       metabolicAge   : this.physicalForm.value['metabolic_age'],
       boneWeight    : this.physicalForm.value['bone_weight'],
       description    : this.physicalForm.value['description'],
-      filePath : this.path["0"],
+      //filePath : this.path["0"],
     }
-
-    // console.log(body)
+    console.log('send body')
+     console.log(body)
     this.PhysicalAssessmentService.create(body).subscribe({
       next:(res)=>{
         this.showSuccessToastr()

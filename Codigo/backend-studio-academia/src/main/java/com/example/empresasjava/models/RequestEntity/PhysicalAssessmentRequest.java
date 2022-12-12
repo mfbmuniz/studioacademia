@@ -218,7 +218,7 @@ public class PhysicalAssessmentRequest {
 
             //physicalAssessmentRequest.getFilePath()
 
-            generatePath(physicalAssessmentRequest.getFilePath())
+            physicalAssessmentRequest.getFilePath() == null ? physicalAssessmentRequest.getFilePath(): generatePath(physicalAssessmentRequest.getFilePath())
 
         );
     }
