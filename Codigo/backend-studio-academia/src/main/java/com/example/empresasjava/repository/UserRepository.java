@@ -1,5 +1,6 @@
 package com.example.empresasjava.repository;
 
+import com.example.empresasjava.models.Address;
 import com.example.empresasjava.models.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +14,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User,Long > {
     User findOneByEmailAndDeletedAtIsNull(String email);
     User findOneByIdUser(Long idUser);
+
     Page<User> findAllByDeletedAtIsNullOrderByName(Pageable page);
     Page<User> findAllByNameIgnoreCaseAndDeletedAtIsNull(Pageable page, String name);
 
